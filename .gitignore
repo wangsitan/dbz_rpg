@@ -1,0 +1,9 @@
+# kate backup
+*~
+
+# npp backup
+*.bak
+
+# jetbrains dir
+.idea/
+
