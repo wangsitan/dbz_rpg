@@ -1173,7 +1173,7 @@ class Scene_Db_Battle_Anime < Scene_Base
     end
     Graphics.fadeout(fadetime)
     if $game_variables[96] == 0
-      $scene = Scene_Db_Battle.new ($battle_escape,$battle_bgm,$battle_ready_bgm)
+      $scene = Scene_Db_Battle.new($battle_escape,$battle_bgm,$battle_ready_bgm)
     else
 
       #戦闘関係のフラグ初期化
@@ -23417,7 +23417,7 @@ class Scene_Db_Battle_Anime < Scene_Base
         @attack_num =1
       end
       if @attack_count > 0
-        create_enemy_card (@enenum,false)
+        create_enemy_card(@enenum,false)
         ryuhakakuritu_keisan @enenum,$battleenemy[@enenum]
       end
     end
