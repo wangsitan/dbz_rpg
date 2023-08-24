@@ -1,0 +1,24 @@
+
+AllCops:
+    #TargetRubyVersion: 2.0  # at least 2.0. RMVX use ruby-1.8.1, which is not supported here
+    DisabledByDefault: true  # Lint/Syntax is always enabled
+
+
+Layout/IndentationWidth:
+    Enabled: true
+    AutoCorrect: true
+    Width: 4
+    AllowedPatterns: []
+
+Layout/IndentationConsistency:
+    Enabled: true
+    AutoCorrect: true
+    EnforcedStyle: normal
+
+Layout/CommentIndentation:
+    Enabled: true
+    AutoCorrect: true
+    AllowForAlignment: true
+
+
+
