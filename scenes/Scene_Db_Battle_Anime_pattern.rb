@@ -4686,7 +4686,7 @@ module Scene_Db_Battle_Anime_pattern
           @ray_color = 0
         elsif @battle_anime_frame <= 60
 
-          @battle_anime_frame <= 180
+          #@battle_anime_frame <= 180
           rect = Rect.new(0, 384,96,112)
           @back_window.contents.blt(266,118,picture,rect)
 
@@ -57765,7 +57765,7 @@ module Scene_Db_Battle_Anime_pattern
         end
       when 171..260
         #ray_y = 6
-        @effect_anime_frame*RAY_SPEED
+        #@effect_anime_frame*RAY_SPEED
         back_x += (@battle_anime_frame-141)/2
         ray_x +=  (@battle_anime_frame-141)/2 - @effect_anime_frame*RAY_SPEED
         picture = Cache.picture("Z3_必殺技_超カメハメ波(セル完全体)")
