@@ -1,5 +1,5 @@
 module Scene_Db_Battle_Anime_pattern
-    #=== copied from class def
+    #=== copied from class
     #include Share
     #include Db_Battle_Anime_test_Setup
 
@@ -30,7 +30,7 @@ module Scene_Db_Battle_Anime_pattern
     #--------------------------------------------------------------------------
     # ● 戦闘アニメパターン
     #--------------------------------------------------------------------------
-    def anime_pattern n
+    def anime_pattern(n)
         if @battle_anime_frame == 0 #移動量初期化
             @ax = 0
             @ay = 0
@@ -72,13 +72,13 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
         when 2 #両端まで見合い
             if @battle_anime_frame == 0 #初期化
-                if @attackcourse == 0
+                if @attackDir == 0
                     battle_anime_change 0,5
                     battle_anime_change 1,8
                     @chax = STANDARD_ENEX
@@ -108,7 +108,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 3 #ぶつかって斜めへ
@@ -133,7 +133,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -175,7 +175,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 5 #中央へ移動：攻撃・防御上下に揺れて中心まで移動
@@ -217,7 +217,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 6 #攻撃側後ろへ前へ
@@ -248,7 +248,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = 0
                 @ay = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 7 #中央へ移動：両者上から下へ行動
@@ -274,7 +274,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = 0
                 @ay = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 8 #中央へ移動：両者斜めから(攻撃上、防御下)
@@ -287,7 +287,7 @@ module Scene_Db_Battle_Anime_pattern
                 @chay = STANDARD_CHAY
                 @enex = STANDARD_ENEX
                 @eney = STANDARD_ENEY
-                if @attackcourse == 0
+                if @attackDir == 0
                     @chay = STANDARD_CHAY - 64#- 32
                     @eney = STANDARD_ENEY + 64#+ 32
                 else
@@ -306,7 +306,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 9 #3回ぶつかる
@@ -389,7 +389,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 10 #1回だけぶつかる
@@ -422,7 +422,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 11 #中央へ移動：両者斜め上から登場味方左上、敵右上
@@ -441,7 +441,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = 20
                 @gy = 14
             when 24
-                if @attackcourse == 0
+                if @attackDir == 0
                     @chay= STANDARD_CHAY
                 else
                     @eney= STANDARD_ENEY
@@ -522,7 +522,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 13 #中央へ移動：両者小さいので2回ぶつかり左右から中央へ
@@ -536,7 +536,7 @@ module Scene_Db_Battle_Anime_pattern
                 @chay = STANDARD_CHAY
                 @enex = STANDARD_ENEX
                 @eney = STANDARD_ENEY
-                if @attackcourse == 0
+                if @attackDir == 0
                     @chay = STANDARD_CHAY - 88#- 32
                     @eney = STANDARD_ENEY + 12#+ 32
                 else
@@ -685,7 +685,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 14 #通常攻撃：攻撃、防御後ろへ行き連打
@@ -766,7 +766,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = 0
                 @ay = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 15 #中央へ移動：両者小さいので中央に行き通常の状態でセンターへ移動
@@ -794,7 +794,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ax = 0
                 @ay = 0
                 #回避エフェクト(攻撃)
-                if @attackcourse == 0
+                if @attackDir == 0
                     ray_y = STANDARD_CHAY + 24
                     ray_x = CENTER_CHAX + 8
                 else
@@ -812,7 +812,7 @@ module Scene_Db_Battle_Anime_pattern
                 #  @effect_anime_pattern = 118
                 #end
                 #移動後(攻撃)
-                if @attackcourse == 0
+                if @attackDir == 0
                     battle_anime_change 0,0
                     @chax = CENTER_CHAX
                     @chay = STANDARD_CHAY
@@ -824,7 +824,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
 
                 #回避エフェクト(防御)
-                if @attackcourse == 0
+                if @attackDir == 0
                     ray_y = STANDARD_ENEY + 24
                     ray_x = CENTER_ENEX + 24
                 else
@@ -842,7 +842,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gy = 0
                 @effect_anime_pattern = 0
                 #移動後(防御)
-                if @attackcourse == 0
+                if @attackDir == 0
                     battle_anime_change 1,0
                     @enex = CENTER_ENEX
                     @eney = STANDARD_ENEY
@@ -860,7 +860,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 16 #通常攻撃：その場で連打(早め)
@@ -918,7 +918,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = 0
                 @ay = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 17 #通常攻撃：その場で連打(早め)　し、一度斜めへ行ってから再度攻撃
@@ -1024,7 +1024,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
        when 18 #けん制：カーブしながら両者小さいのでぶつかる
@@ -1040,7 +1040,7 @@ module Scene_Db_Battle_Anime_pattern
                @chay = STANDARD_CHAY - 48
                @enex = STANDARD_ENEX
                @eney = STANDARD_ENEY - 48
-           #        if @attackcourse == 0
+           #        if @attackDir == 0
            #          @chay = STANDARD_CHAY - 88#- 32
            #          @eney = STANDARD_ENEY + 12#+ 32
            #        else
@@ -1122,13 +1122,13 @@ module Scene_Db_Battle_Anime_pattern
                @ay = 0
                @gx = 0
                @gy = 0
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
 
         when 19 #通常攻撃：両者消えながら連打
 
-            if @attackcourse == 0
+            if @attackDir == 0
                 tyouseix = 192
             else
                 tyouseix = -192
@@ -1339,7 +1339,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -1357,7 +1357,7 @@ module Scene_Db_Battle_Anime_pattern
                 @chay = STANDARD_CHAY
                 @enex = STANDARD_ENEX
                 @eney = STANDARD_ENEY
-                if @attackcourse == 0
+                if @attackDir == 0
                     @chay = STANDARD_CHAY + 48
                     @eney = STANDARD_ENEY - 144
                 else
@@ -1490,20 +1490,20 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         #攻撃系は10010xから開始する
         when 100101 #消えながら近づき攻撃
 
-            if @attackcourse == 0
+            if @attackDir == 0
                 tyouseix = -192
             else
                 tyouseix = 192
             end
 
             #回避エフェクト
-            if @attackcourse == 0
+            if @attackDir == 0
                 ray_y = STANDARD_CHAY + 24
                 ray_x = CENTER_CHAX + 8
             else
@@ -1525,20 +1525,20 @@ module Scene_Db_Battle_Anime_pattern
                 #@back_window.contents.blt(idoux[0]+kaihityouseix-mikatatyouseix,idouy[0]+kaihityouseiy,picture,rect)
                 #@back_window.contents.blt(idoux[0]+kaihityouseix,idouy[0]+kaihityouseiy,picture,rect)
                 if @battle_anime_frame % 4 == 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         put_kaihianime "a",idoux[0]+kaihityouseix-mikatatyouseix,idouy[0]+kaihityouseiy
                     else
                         put_kaihianime "a",idoux[0]+kaihityouseix,idouy[0]+kaihityouseiy
                     end
                 end
-                if @attackcourse == 0
+                if @attackDir == 0
                     @chay = -200
                 else
                     @eney = -200
                 end
             when 1..12
                 if @battle_anime_frame % 4 == 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         put_kaihianime "a",idoux[0]+kaihityouseix-mikatatyouseix,idouy[0]+kaihityouseiy
                     else
                         put_kaihianime "a",idoux[0]+kaihityouseix,idouy[0]+kaihityouseiy
@@ -1554,7 +1554,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 end
                 if @battle_anime_frame % 4 == 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         put_kaihianime "a",idoux[1]+kaihityouseix-mikatatyouseix,idouy[1]+kaihityouseiy
                     else
                         put_kaihianime "a",idoux[1]+kaihityouseix,idouy[1]+kaihityouseiy
@@ -1569,7 +1569,7 @@ module Scene_Db_Battle_Anime_pattern
                     @gy = 0
                     Audio.se_play("Audio/SE/" + "Z3 打撃")
                     battle_anime_change 1,1
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chax = idoux[1]-mikatatyouseix
                         @chay = idouy[1]
                     else
@@ -1585,14 +1585,14 @@ module Scene_Db_Battle_Anime_pattern
                 when 0
                     battle_anime_change 1,0
                     Audio.se_play("Audio/SE/" + "Z3 避ける")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chay = -200
                     else
                         @eney = -200
                     end
                 end
                 if @battle_anime_frame % 4 == 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         put_kaihianime "a",idoux[1]+kaihityouseix-mikatatyouseix,idouy[1]+kaihityouseiy
                     else
                         put_kaihianime "a",idoux[1]+kaihityouseix,idouy[1]+kaihityouseiy
@@ -1610,7 +1610,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 end
                 if @battle_anime_frame % 4 == 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         put_kaihianime "a",idoux[2]+kaihityouseix-mikatatyouseix,idouy[2]+kaihityouseiy
                     else
                         put_kaihianime "a",idoux[2]+kaihityouseix,idouy[2]+kaihityouseiy
@@ -1625,7 +1625,7 @@ module Scene_Db_Battle_Anime_pattern
                     @gy = 0
                     Audio.se_play("Audio/SE/" + "Z3 打撃")
                     battle_anime_change 1,4
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chax = idoux[2]-mikatatyouseix
                         @chay = idouy[2]
                     else
@@ -1640,14 +1640,14 @@ module Scene_Db_Battle_Anime_pattern
                 when 0
                     battle_anime_change 1,0
                     Audio.se_play("Audio/SE/" + "Z3 避ける")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chay = -200
                     else
                         @eney = -200
                     end
                 end
                 if @battle_anime_frame % 4 == 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         put_kaihianime "a",idoux[2]+kaihityouseix-mikatatyouseix,idouy[2]+kaihityouseiy
                     else
                         put_kaihianime "a",idoux[2]+kaihityouseix,idouy[2]+kaihityouseiy
@@ -1662,14 +1662,14 @@ module Scene_Db_Battle_Anime_pattern
                 when 0..8
                     @gx = -8
                     #Audio.se_play("Audio/SE/" + "Z3 避ける")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                     #@chay = -200
                     else
                         #@eney = -200
                     end
                 end
                 if @battle_anime_frame % 4 == 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         put_kaihianime "a",idoux[3]+kaihityouseix-mikatatyouseix,idouy[3]+kaihityouseiy
                     else
                         put_kaihianime "a",idoux[3]+kaihityouseix,idouy[3]+kaihityouseiy
@@ -1681,7 +1681,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 when 0
                     @gx = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chax = idoux[3]-mikatatyouseix
                         @chay = idouy[3]
                     else
@@ -1695,14 +1695,14 @@ module Scene_Db_Battle_Anime_pattern
 
                 when 0
                     Audio.se_play("Audio/SE/" + "Z3 避ける")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chay = -200
                     else
                         @eney = -200
                     end
                 end
                 if @battle_anime_frame % 4 == 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         put_kaihianime "a",idoux[3]+kaihityouseix-mikatatyouseix,idouy[3]+kaihityouseiy
                     else
                         put_kaihianime "a",idoux[3]+kaihityouseix,idouy[3]+kaihityouseiy
@@ -1716,14 +1716,14 @@ module Scene_Db_Battle_Anime_pattern
 
                 when 0
                     #Audio.se_play("Audio/SE/" + "Z3 避ける")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                     #@chay = -200
                     else
                         #@eney = -200
                     end
                 end
                 if @battle_anime_frame % 4 == 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         put_kaihianime "a",idoux[0]+kaihityouseix-mikatatyouseix,idouy[0]+kaihityouseiy
                     else
                         put_kaihianime "a",idoux[0]+kaihityouseix,idouy[0]+kaihityouseiy
@@ -1734,14 +1734,14 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                if @attackcourse == 0
+                if @attackDir == 0
                     @chax = idoux[0]-mikatatyouseix
                     @chay = idouy[0]
                 else
                     @enex = idoux[0]
                     @eney = idouy[0]
                 end
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 100102 #攻撃側後ろに溜めて
@@ -1772,7 +1772,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = 0
                 @ay = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 100103 #中央上下中央で各3回攻撃
@@ -1959,7 +1959,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = 0
                 @ay = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 100104 #連打3回
@@ -2146,7 +2146,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = 0
                 @ay = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 100105 #Z2 連打
@@ -2216,7 +2216,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = 0
                 @ay = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 100106 #Z1 連打けん制
@@ -2633,7 +2633,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = 0
                 @ay = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 20 #回避
@@ -2653,7 +2653,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -2673,7 +2673,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 12
                 @gx = -18
 
-                if @attackcourse == 1 && $cha_bigsize_on[@chanum.to_i] == true || @attackcourse == 0 && $data_enemies[@enedatenum].element_ranks[23] == 1
+                if @attackDir == 1 && $cha_bigsize_on[@chanum.to_i] == true || @attackDir == 0 && $data_enemies[@enedatenum].element_ranks[23] == 1
                     @gx = 0 if @battle_anime_frame >= 8
                 end
                 @effect_anime_pattern = 121
@@ -2684,7 +2684,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gx = 0
                 @gy = 0
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -2776,8 +2776,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 1,0
 
                 #@ene_set_action = 545
-                #p @attackcourse,@ene_set_action
-                if @attackcourse == 1 && @ene_set_action == 545
+                #p @attackDir,@ene_set_action
+                if @attackDir == 1 && @ene_set_action == 545
                     Audio.se_play("Audio/SE/" + "DB3 SE061")
                     @output_battle_damage_flag = true
                 else
@@ -2954,7 +2954,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0 #初期化
                     @output_anime_type = 0
                     #上から左下へ移動
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chax = 200 #味方側開始基準x
                         @chay = -200 #味方側開始基準y
                         @enex = 0 #敵側開始基準x
@@ -2973,7 +2973,7 @@ module Scene_Db_Battle_Anime_pattern
                     @output_anime_type = 1
                     @ax = 0
                     @ay = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chax = STANDARD_CHAX
                         @chay = STANDARD_CHAY
                     else
@@ -2984,7 +2984,7 @@ module Scene_Db_Battle_Anime_pattern
                     #中心へ
                     @ax = 20
                 elsif @battle_anime_frame == 47
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chax= TEC_CENTER_CHAX
                     else
                         @enex= TEC_CENTER_CHAX
@@ -3002,7 +3002,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0 #初期化
                     @output_anime_type = 0
                     #上から左下へ移動
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chax = STANDARD_CHAX
                         @chay = STANDARD_CHAY
                         @eney = -200
@@ -3024,7 +3024,7 @@ module Scene_Db_Battle_Anime_pattern
                     @output_anime_type = 1
                     @ax = 0
                     @ay = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chax = TEC_CENTER_CHAX
                     #@chay = STANDARD_CHAY
                     else
@@ -3035,7 +3035,7 @@ module Scene_Db_Battle_Anime_pattern
                     #中心へ
                     @ay = 20
                 elsif @battle_anime_frame == 78
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chay= STANDARD_CHAY
                     else
                         @eney= STANDARD_ENEY
@@ -3051,7 +3051,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 3 #右からカーブして左から出てくる
                 if @battle_anime_frame == 0 #初期化
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         battle_anime_change 0,5
                         #battle_anime_change 1,8
                         @chax = STANDARD_ENEX
@@ -3080,7 +3080,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                     @ax = 0
                     @ay = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chax = STANDARD_CHAX
                         @chay = STANDARD_CHAY-34
                     else
@@ -3092,7 +3092,7 @@ module Scene_Db_Battle_Anime_pattern
                     @ax = 20
                     @ay = 2
                 elsif @battle_anime_frame == 68
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chax= TEC_CENTER_CHAX
                         @chay = STANDARD_CHAY
                     else
@@ -3112,7 +3112,7 @@ module Scene_Db_Battle_Anime_pattern
                 case @battle_anime_frame
 
                 when 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         battle_anime_change 0,0
                         #battle_anime_change 1,8
                         @chax = TEC_CENTER_CHAX + 460
@@ -3137,7 +3137,7 @@ module Scene_Db_Battle_Anime_pattern
                     @output_anime_type = 1
                     @ax = 0
                     @ay = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chax = TEC_CENTER_CHAX
                         @chay = 120-400
                     else
@@ -3148,7 +3148,7 @@ module Scene_Db_Battle_Anime_pattern
                     #中心へ
                     @ay = 20
                 when 78
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chay= STANDARD_CHAY
                     else
                         @eney= STANDARD_ENEY
@@ -3166,7 +3166,7 @@ module Scene_Db_Battle_Anime_pattern
                 case @battle_anime_frame
 
                 when 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         battle_anime_change 0,0
                         #battle_anime_change 1,8
                         @chax = TEC_CENTER_CHAX - 460
@@ -3191,7 +3191,7 @@ module Scene_Db_Battle_Anime_pattern
                     @output_anime_type = 1
                     @ax = 0
                     @ay = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chax = TEC_CENTER_CHAX
                         @chay = 120-400
                     else
@@ -3202,7 +3202,7 @@ module Scene_Db_Battle_Anime_pattern
                     #中心へ
                     @ay = 20
                 when 78
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chay= STANDARD_CHAY
                     else
                         @eney= STANDARD_ENEY
@@ -3221,7 +3221,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 when 0
                     @output_anime_type = 1
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         battle_anime_change 0,0
                         #battle_anime_change 1,8
                         @chax = -214
@@ -3261,7 +3261,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 when 0
                     @output_anime_type = 1
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         battle_anime_change 0,0
                         #battle_anime_change 1,8
                         @chax = 640 + 106
@@ -3826,8 +3826,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 1,0
                 @output_battle_damage_flag = true
                 #@ene_set_action = 545
-                #p @attackcourse,@ene_set_action
-                if @attackcourse == 1 && @ene_set_action == 545
+                #p @attackDir,@ene_set_action
+                if @attackDir == 1 && @ene_set_action == 545
                     Audio.se_play("Audio/SE/" + "DB3 SE061")
                 else
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
@@ -3988,7 +3988,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gy -= 400 if @battle_anime_frame == sframe
                 picture = Cache.picture("Z3_戦闘_必殺技_お菓子")
                 rect = Rect.new(0, 0, 44, 44) #発動側
-                if @attackcourse == 0
+                if @attackDir == 0
                     ray_x = CENTER_ENEX
                     ray_y = STANDARD_ENEY
                 else
@@ -4097,7 +4097,7 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,1
             elsif @battle_anime_frame == 60
                 Audio.se_play("Audio/SE/" + "Z1 衝撃波")    # 効果音を再生する
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4110,7 +4110,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 61 && @battle_anime_frame <= 119
                 back_anime_pattern 1
             elsif @battle_anime_frame == 120
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 102 #エネルギー波
@@ -4128,7 +4128,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 45
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4141,7 +4141,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 72
                 @effect_anime_pattern = 31
             elsif @battle_anime_frame == 73
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 105 #カメハメ波
@@ -4162,7 +4162,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 100
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4175,7 +4175,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 101 && @battle_anime_frame <= 127
                 @effect_anime_pattern = 32
             elsif @battle_anime_frame == 128
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 106 #界王拳
@@ -4208,7 +4208,7 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern 1
                 @effect_anime_pattern = 49
             when 195
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 107 #界王拳・カメハメ波
@@ -4241,7 +4241,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             when 230
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4254,7 +4254,7 @@ module Scene_Db_Battle_Anime_pattern
             when 231..257
                 @effect_anime_pattern = 48
             when 258
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 118 #元気弾
@@ -4288,7 +4288,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             when 360
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4303,7 +4303,7 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern 1
                 @effect_anime_pattern = 40
             when 411
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 131 #魔光砲(ピッコロ)
@@ -4319,7 +4319,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 45
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4332,7 +4332,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 72
                 @effect_anime_pattern = 31
             elsif @battle_anime_frame == 73
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 133 #目から怪光線
@@ -4356,7 +4356,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 86
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4369,7 +4369,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 87 && @battle_anime_frame <= 113
                 @effect_anime_pattern = 35
             elsif @battle_anime_frame == 114
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 134 #口から怪光線
@@ -4392,7 +4392,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 86
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4405,7 +4405,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 87 && @battle_anime_frame <= 113
                 @effect_anime_pattern = 32
             elsif @battle_anime_frame == 114
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -4430,7 +4430,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 126
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4443,7 +4443,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 127 && @battle_anime_frame <= 153
                 @effect_anime_pattern = 33
             elsif @battle_anime_frame == 154
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -4471,7 +4471,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 216
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4484,7 +4484,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 217 && @battle_anime_frame <= 243
                 @effect_anime_pattern = 36
             elsif @battle_anime_frame == 244
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 146 #魔光砲(悟飯)
@@ -4503,7 +4503,7 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_frame = 0
                     @effect_anime_type = 0
                 elsif  @battle_anime_frame == 45
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -4516,7 +4516,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 72
                     @effect_anime_pattern = 31
                 elsif @battle_anime_frame == 73
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -4553,7 +4553,7 @@ module Scene_Db_Battle_Anime_pattern
                     @back_window.contents.blt(266,118,picture,rect)
                     @effect_anime_pattern = 5
                 elsif  @battle_anime_frame == 241
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX-30
@@ -4567,7 +4567,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 242 && @battle_anime_frame <= 268
                     @effect_anime_pattern = 48
                 elsif @battle_anime_frame == 269
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -4592,7 +4592,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 126
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4605,7 +4605,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 127 && @battle_anime_frame <= 153
                 @effect_anime_pattern = 32
             elsif @battle_anime_frame == 154
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 151 #大猿変身
@@ -4681,7 +4681,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 end
             elsif @battle_anime_frame == 391
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -4698,7 +4698,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 45
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4711,7 +4711,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 72
                 @effect_anime_pattern = 31
             elsif @battle_anime_frame == 73
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 162 #カメハメ波(クリリン)
@@ -4731,7 +4731,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 100
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4744,7 +4744,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 101 && @battle_anime_frame <= 127
                 @effect_anime_pattern = 32
             elsif @battle_anime_frame == 128
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 163 #拡散エネルギー波
@@ -4769,7 +4769,7 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_frame = 0
                     @effect_anime_type = 0
                 elsif  @battle_anime_frame == 126
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @chay = -120 #キャラ画面範囲外へ
                     else
                         @eney = -200 #キャラ画面範囲外へ
@@ -4781,7 +4781,7 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_pattern = 0
 
                 elsif @battle_anime_frame == 160
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         battle_anime_change 0,5
                         @chay = +120 #キャラ画面範囲内へ
                     else
@@ -4792,7 +4792,7 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_stop
                     Audio.se_play("Audio/SE/" + "Z1 ブン")    # 効果音を再生する
                 elsif @battle_anime_frame == 244
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -4805,7 +4805,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame == 245
                     @effect_anime_pattern = 37
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -4815,7 +4815,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 246 && @battle_anime_frame <= 270
                     @effect_anime_pattern = 37
                 elsif @battle_anime_frame == 271
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -4824,7 +4824,7 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_frame = 27
                     @effect_anime_pattern = 37
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -4834,7 +4834,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 37
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -4857,7 +4857,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 170
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4870,7 +4870,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 171 && @battle_anime_frame <= 217
                 @effect_anime_pattern = 38
             elsif @battle_anime_frame == 218
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 171 #狼牙風風拳
@@ -4906,7 +4906,7 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern 1
                 @effect_anime_pattern = 39
             elsif @battle_anime_frame == 164
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 172 #カメハメ波(ヤムチャ)
@@ -4926,7 +4926,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 100
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4939,7 +4939,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 101 && @battle_anime_frame <= 127
                 @effect_anime_pattern = 32
             elsif @battle_anime_frame == 128
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 173 #繰気弾
@@ -4973,7 +4973,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -4986,7 +4986,7 @@ module Scene_Db_Battle_Anime_pattern
             when 153..202
                 @effect_anime_pattern = 40
             when 203
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 181 #エネルギー波(テンシンハン)
@@ -5002,7 +5002,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 45
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -5015,7 +5015,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 72
                 @effect_anime_pattern = 31
             elsif @battle_anime_frame == 73
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 182 #四身の拳
@@ -5038,7 +5038,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             when 192
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -5051,7 +5051,7 @@ module Scene_Db_Battle_Anime_pattern
             when 193..218
                 @effect_anime_pattern = 41
             when 219
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 183 #気功砲
@@ -5063,7 +5063,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 160
                 back_anime_pattern 7
             elsif  @battle_anime_frame == 161
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -5076,7 +5076,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 162 && @battle_anime_frame <= 222
                 back_anime_pattern 1
             elsif @battle_anime_frame == 223
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 184 #四身の拳・気功砲
@@ -5099,7 +5099,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             when 272
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -5112,7 +5112,7 @@ module Scene_Db_Battle_Anime_pattern
             when 273..298
                 back_anime_pattern 9
             when 299
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 191 #どとんぱ
@@ -5129,7 +5129,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 70 && @battle_anime_frame <= 99
                 @effect_anime_pattern = 2
             elsif @battle_anime_frame == 100
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -5142,7 +5142,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 101 && @battle_anime_frame <= 127
                 @effect_anime_pattern = 31
             elsif @battle_anime_frame == 128
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 192 #超能力チャオズ
@@ -5157,7 +5157,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -5170,7 +5170,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 127 && @battle_anime_frame <= 153
                 back_anime_pattern 9
             elsif @battle_anime_frame == 154
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -5217,7 +5217,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = -2 if @battle_anime_frame == 95
                 @gx = 0 if @battle_anime_frame == 97
             when 134
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 202 #ビーム
@@ -5238,7 +5238,7 @@ module Scene_Db_Battle_Anime_pattern
             when 70..99
                 @effect_anime_pattern = 2
             when 100
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -5251,7 +5251,7 @@ module Scene_Db_Battle_Anime_pattern
             when 101..127
                 @effect_anime_pattern = 31
             when 128
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 203 #気功スラッガー
@@ -5280,7 +5280,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 126
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -5293,7 +5293,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 127 && @battle_anime_frame <= 153
                 @effect_anime_pattern = 32
             elsif @battle_anime_frame == 154
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
        when 204 #超気功スラッガー
@@ -5332,7 +5332,7 @@ module Scene_Db_Battle_Anime_pattern
            when 231..257
                @effect_anime_pattern = 48
            when 258
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
         when 325 #残像拳
@@ -5438,7 +5438,7 @@ module Scene_Db_Battle_Anime_pattern
             when 915
                 @battle_anime_frame = 1300
             when 1301
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 326 #カメハメ波(亀仙人)
@@ -5466,7 +5466,7 @@ module Scene_Db_Battle_Anime_pattern
             when 101..127
                 @effect_anime_pattern = 32
             when 128
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 328 #萬國驚天掌
@@ -5500,7 +5500,7 @@ module Scene_Db_Battle_Anime_pattern
             when 200..226
                 @effect_anime_pattern = 44
             when 227
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 329 #MAXパワーかめはめは
@@ -5538,7 +5538,7 @@ module Scene_Db_Battle_Anime_pattern
             when 231..257
                 @effect_anime_pattern = 48
             when 258
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 801 #師弟の絆
@@ -5651,7 +5651,7 @@ module Scene_Db_Battle_Anime_pattern
             when 412..438
                 @effect_anime_pattern = 83
             when 439
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 804 #ダブル衝撃波
@@ -5684,7 +5684,7 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_pattern = 51
                 when 130
                     Audio.se_play("Audio/SE/" + "Z1 衝撃波")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -5698,7 +5698,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 131..189
                     back_anime_pattern 1
                 when 190
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -5708,7 +5708,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 0
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 衝撃波")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -5722,7 +5722,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1..59
                     back_anime_pattern 1
                 when 60
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -5824,7 +5824,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 36
                 back_anime_pattern 20
             when 420
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 806 #カメハメ乱舞
@@ -5888,7 +5888,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..328
                 @effect_anime_pattern = 62
             when 329
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 807 #操気円斬
@@ -6091,7 +6091,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 38
                 back_anime_pattern 30
             when 618
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 808 #願いを込めた元気弾
@@ -6204,7 +6204,7 @@ module Scene_Db_Battle_Anime_pattern
                     ray_x = 640
                     ray_y = 228
                 when 534
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -6249,7 +6249,7 @@ module Scene_Db_Battle_Anime_pattern
             when 161..187
                 @effect_anime_pattern = 81
             when 188
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 810 #超能力きこうほう
@@ -6288,7 +6288,7 @@ module Scene_Db_Battle_Anime_pattern
             when 182..208
                 back_anime_pattern 9
             when 209
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 811 #狼鶴相打陣
@@ -6339,7 +6339,7 @@ module Scene_Db_Battle_Anime_pattern
                     @battle_anime_frame = -1 if @battle_anime_frame == 18
                 end
             else
-                #anime_pattern_fromat
+                #anime_pattern_init
                 #back_anime_pattern 54
                 @output_anime_type = 1
                 battle_anime_change 0,0
@@ -6510,7 +6510,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..326
                 @effect_anime_pattern = 48
             when 327
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 839 #この世で一番強いヤツ
@@ -6857,7 +6857,7 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern 1
                 @effect_anime_pattern = 40
             when 1069
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 848 #もしもヤムチャに
@@ -6908,7 +6908,7 @@ module Scene_Db_Battle_Anime_pattern
                     @battle_anime_frame = -1 if @battle_anime_frame == 18
                 end
             else
-                #anime_pattern_fromat
+                #anime_pattern_init
                 #back_anime_pattern 54
                 @output_anime_type = 1
                 battle_anime_change 0,0
@@ -7008,7 +7008,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 247..273
                     @effect_anime_pattern = 32
                 when 274
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -7135,7 +7135,7 @@ module Scene_Db_Battle_Anime_pattern
             when 412..438
                 @effect_anime_pattern = 83
             when 439
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 919 #ダブルアイビーム
@@ -7186,7 +7186,7 @@ module Scene_Db_Battle_Anime_pattern
             when 130..156
                 @effect_anime_pattern = 371
             when 157
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 401 #痺れ液
@@ -7207,7 +7207,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             when 75
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7220,7 +7220,7 @@ module Scene_Db_Battle_Anime_pattern
             when 76..102
                 @effect_anime_pattern = 44
             when 103
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 403 #溶解液
@@ -7241,7 +7241,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             when 75
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7254,7 +7254,7 @@ module Scene_Db_Battle_Anime_pattern
             when 76..102
                 @effect_anime_pattern = 44
             when 103
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 404 #自爆
@@ -7300,7 +7300,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 121
                 @eney = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 405 #エネルギー波(パンプキン系)
@@ -7321,7 +7321,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             when 82
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7334,7 +7334,7 @@ module Scene_Db_Battle_Anime_pattern
             when 83..109
                 @effect_anime_pattern = 42
             when 110
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 406 #貫光線(パンプキン系)
@@ -7356,7 +7356,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             when 82
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7369,7 +7369,7 @@ module Scene_Db_Battle_Anime_pattern
             when 83..109
                 @effect_anime_pattern = 45
             when 110
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 484 #大猿変身
@@ -7445,7 +7445,7 @@ module Scene_Db_Battle_Anime_pattern
                 @back_window.contents.blt(266,118,picture,rect)
                 @effect_anime_pattern = 5
             elsif  @battle_anime_frame == 371
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX-30
@@ -7459,7 +7459,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 372 && @battle_anime_frame <= 398
                 @effect_anime_pattern = 48
             elsif @battle_anime_frame == 399
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 407 #エネルギー波(ジンジャー系)
@@ -7478,7 +7478,7 @@ module Scene_Db_Battle_Anime_pattern
                 if $btl_progress >= 2
                     @tec_output_back_no = 0
                 end
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7491,7 +7491,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 72
                 @effect_anime_pattern = 31
             elsif @battle_anime_frame == 73
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 408 #強力エネルギー波(ジンジャー・ニッキー系)
@@ -7522,7 +7522,7 @@ module Scene_Db_Battle_Anime_pattern
                 if $btl_progress >= 2
                     @tec_output_back_no = 0
                 end
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7535,7 +7535,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 127 && @battle_anime_frame <= 153
                 @effect_anime_pattern = 32
             elsif @battle_anime_frame == 154
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 409 #刀攻撃(ジンジャー系)
@@ -7576,7 +7576,7 @@ module Scene_Db_Battle_Anime_pattern
                     @tec_output_back = false
                     @tec_output_back_no = 0
                 end
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7590,7 +7590,7 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern 1
                 @effect_anime_pattern = 46
             when 209
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 410 #エネルギー波(ラディッツ)
@@ -7615,7 +7615,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             when 162
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7628,7 +7628,7 @@ module Scene_Db_Battle_Anime_pattern
             when 163..189
                 @effect_anime_pattern = 42
             when 190
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 411 #強力エネルギー波(ラディッツ)
@@ -7653,7 +7653,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             when 162
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7666,7 +7666,7 @@ module Scene_Db_Battle_Anime_pattern
             when 163..189
                 @effect_anime_pattern = 43
             when 190
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 412 #エネルギー波(ナッパ)
@@ -7696,7 +7696,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
                 @ray_color = 0
             when 122
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7709,7 +7709,7 @@ module Scene_Db_Battle_Anime_pattern
             when 123..149
                 @effect_anime_pattern = 42
             when 150
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 413 #爆発波
@@ -7728,7 +7728,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 14
                     battle_anime_change 0,5
                 when 101
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -7741,7 +7741,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 102..162
                     back_anime_pattern 1
                 when 163
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -7749,7 +7749,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -7762,7 +7762,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 61
                     back_anime_pattern 1
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -7794,7 +7794,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
                 @ray_color = 4
             when 122
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7807,7 +7807,7 @@ module Scene_Db_Battle_Anime_pattern
             when 123..149
                 @effect_anime_pattern = 47
             when 150
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 416 #エネルギー波(ベジータ)
@@ -7824,7 +7824,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 45
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7837,7 +7837,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 72
                 @effect_anime_pattern = 43
             elsif @battle_anime_frame == 73
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 418 #気円斬(ベジータ)
@@ -7859,7 +7859,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 170
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7872,7 +7872,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 171 && @battle_anime_frame <= 197
                 @effect_anime_pattern = 38
             elsif @battle_anime_frame == 198
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 419 #爆発波(ベジータ)
@@ -7895,7 +7895,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 2
                     battle_anime_change 0,6
                 when 181
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -7908,14 +7908,14 @@ module Scene_Db_Battle_Anime_pattern
                 when 182..242
                     back_anime_pattern 1
                 when 243
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
 
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -7928,7 +7928,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 61
                     back_anime_pattern 1
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -7956,7 +7956,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 146
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -7969,7 +7969,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 147 && @battle_anime_frame <= 173
                 @effect_anime_pattern = 48
             elsif @battle_anime_frame == 174
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 473 #大猿変身
@@ -8113,7 +8113,7 @@ module Scene_Db_Battle_Anime_pattern
                     @eney = -200 #キャラ画面範囲外へ
                 end
             elsif @battle_anime_frame == 661
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -8140,7 +8140,7 @@ module Scene_Db_Battle_Anime_pattern
                   @back_window.contents.blt(266,118,picture,rect)
                   @effect_anime_pattern = 5
               when 181
-                  if @attackcourse == 0
+                  if @attackDir == 0
                       @output_anime_type = 0
                       @chay = -200 #キャラ画面範囲外へ
                       @enex = CENTER_ENEX-30
@@ -8154,7 +8154,7 @@ module Scene_Db_Battle_Anime_pattern
               when 182..208
                   @effect_anime_pattern = 48
               when 209
-                  anime_pattern_fromat
+                  anime_pattern_init
                   return @battle_anime_result + 1
               end
         when 424 #エネルギー波(サンショ系)
@@ -8173,7 +8173,7 @@ module Scene_Db_Battle_Anime_pattern
                 if $btl_progress >= 2
                     @tec_output_back_no = 0
                 end
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -8186,7 +8186,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 72
                 @effect_anime_pattern = 31
             elsif @battle_anime_frame == 73
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 425 #強力エネルギー波(サンショ系)
@@ -8213,7 +8213,7 @@ module Scene_Db_Battle_Anime_pattern
                 if $btl_progress >= 2
                     @tec_output_back_no = 0
                 end
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -8226,7 +8226,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 127 && @battle_anime_frame <= 153
                 @effect_anime_pattern = 47
             elsif @battle_anime_frame == 154
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 426 #エネルギー弾(ガーリック)
@@ -8251,7 +8251,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -8264,7 +8264,7 @@ module Scene_Db_Battle_Anime_pattern
             when 62..88
                 @effect_anime_pattern = 40
             when 89
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 428 #強力エネルギー波(ガーリック)
@@ -8291,7 +8291,7 @@ module Scene_Db_Battle_Anime_pattern
                 if $btl_progress >= 2
                     @tec_output_back_no = 0
                 end
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -8304,7 +8304,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 127 && @battle_anime_frame <= 153
                 @effect_anime_pattern = 32
             elsif @battle_anime_frame == 154
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 429 #エネルギー波(ガーリック巨大化)
@@ -8332,7 +8332,7 @@ module Scene_Db_Battle_Anime_pattern
                 if $btl_progress >= 2
                     @tec_output_back_no = 0
                 end
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -8345,7 +8345,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 87 && @battle_anime_frame <= 113
                 @effect_anime_pattern = 43
             elsif @battle_anime_frame == 114
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 430 #ブラックホール波
@@ -8390,7 +8390,7 @@ module Scene_Db_Battle_Anime_pattern
                     if $btl_progress >= 2
                         @tec_output_back_no = 0
                     end
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -8403,7 +8403,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 102..162
                     back_anime_pattern 1
                 when 163
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -8411,7 +8411,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -8424,7 +8424,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 61
                     back_anime_pattern 1
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -8526,7 +8526,7 @@ module Scene_Db_Battle_Anime_pattern
 
             when 321
                 @eney = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 561 #エビ氷結攻撃(全体)
@@ -8587,7 +8587,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 310..336
                     @effect_anime_pattern = 44
                 when 337
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -8599,7 +8599,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1..27
                     @effect_anime_pattern = 44
                 when 28
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -8641,7 +8641,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 44
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 563 #皮伸び攻撃(ミソカッツン
@@ -8730,7 +8730,7 @@ module Scene_Db_Battle_Anime_pattern
                 @eney += 16
             when 354
                 #@eney = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 564 #エネルギー波(ミソカッツン)
@@ -8746,7 +8746,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 45
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -8759,7 +8759,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 72
                 @effect_anime_pattern = 31
             elsif @battle_anime_frame == 73
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 565 #強力エネルギー波(ミソカッツン)
@@ -8787,7 +8787,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             elsif  @battle_anime_frame == 126
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -8800,7 +8800,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 127 && @battle_anime_frame <= 153
                 @effect_anime_pattern = 47
             elsif @battle_anime_frame == 154
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 686 #エネルギー波(Drウィロー)
@@ -8827,7 +8827,7 @@ module Scene_Db_Battle_Anime_pattern
             when 181
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -200 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX-30
@@ -8841,7 +8841,7 @@ module Scene_Db_Battle_Anime_pattern
             when 182..208
                 @effect_anime_pattern = 43
             when 209
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 687 #フォトンストライク(Drウィロー)
@@ -8869,7 +8869,7 @@ module Scene_Db_Battle_Anime_pattern
             when 181
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -200 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX-30
@@ -8883,7 +8883,7 @@ module Scene_Db_Battle_Anime_pattern
             when 182..208
                 @effect_anime_pattern = 98
             when 209
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 688 #口からエネルギー波(Drウィロー)
@@ -8914,7 +8914,7 @@ module Scene_Db_Battle_Anime_pattern
             when 181
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -200 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX-30
@@ -8928,7 +8928,7 @@ module Scene_Db_Battle_Anime_pattern
             when 182..208
                 @effect_anime_pattern = 48
             when 209
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 689 #ウィロー)ギガンティックボマー
@@ -8989,7 +8989,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -200 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX-30
@@ -9016,7 +9016,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 @back_window.contents.blt(640-16*(@battle_anime_frame-sframe),40,picture,rect)
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 690 #プラネットゲイザー
@@ -9050,7 +9050,7 @@ module Scene_Db_Battle_Anime_pattern
                         @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_OFF,color)
                     end
                 when 181
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -9074,7 +9074,7 @@ module Scene_Db_Battle_Anime_pattern
                         Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
                     end
                 when 243
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -9093,7 +9093,7 @@ module Scene_Db_Battle_Anime_pattern
                         @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_OFF,color)
                     end
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -9115,7 +9115,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 61 && @battle_anime_frame <= 119
                 back_anime_pattern 1
             elsif @battle_anime_frame == 120
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1102 #エネルギー波(悟空)
@@ -9137,7 +9137,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 202
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1105 #カメハメ波(悟空)
@@ -9172,7 +9172,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 81 && @battle_anime_frame <= 110
                 @effect_anime_pattern = 204
             elsif @battle_anime_frame == 111
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1106 #界王拳
@@ -9234,7 +9234,7 @@ module Scene_Db_Battle_Anime_pattern
                 #back_anime_pattern 1
                 @effect_anime_pattern = 205
             when 160
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1107 #界王拳・カメハメ波
@@ -9308,7 +9308,7 @@ module Scene_Db_Battle_Anime_pattern
             when 191..217
                 @effect_anime_pattern = 207
             when 218
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1118 #元気弾
@@ -9348,7 +9348,7 @@ module Scene_Db_Battle_Anime_pattern
             when 161..187
                 @effect_anime_pattern = 209
             when 188
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1119 #超元気弾
@@ -9389,7 +9389,7 @@ module Scene_Db_Battle_Anime_pattern
             when 161..187
                 @effect_anime_pattern = 211
             when 188
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1120 #超元気弾(イベント用)
@@ -9563,7 +9563,7 @@ module Scene_Db_Battle_Anime_pattern
                 @back_window.contents.blt(0+(@battle_anime_frame-sframe)*RAY_SPEED/2,-220+(@battle_anime_frame-sframe)*RAY_SPEED/6,picture,rect)
 
             when 751
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -9585,7 +9585,7 @@ module Scene_Db_Battle_Anime_pattern
             end
             case @battle_anime_frame
             when 0 #初期化
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                 else
@@ -9628,7 +9628,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
                 @effect_anime_frame = 0
                 @effect_anime_pattern = 0
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @enex = CENTER_ENEX
                     @eney = STANDARD_ENEY
@@ -9649,7 +9649,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 @effect_anime_pattern = 48
             when 240
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1131 #魔光砲(ピッコロ)
@@ -9671,7 +9671,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 202
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1133 #目から怪光線(ピッコロ)
@@ -9693,7 +9693,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 213
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1134 #口から怪光線(ピッコロ)
@@ -9715,7 +9715,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 202
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1135 #爆裂魔光砲
@@ -9766,7 +9766,7 @@ module Scene_Db_Battle_Anime_pattern
             when 140..166
                 @effect_anime_pattern = 207
             when 167
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1136 #魔貫光殺砲
@@ -9806,7 +9806,7 @@ module Scene_Db_Battle_Anime_pattern
             when 151..177
                 @effect_anime_pattern = 215
             when 178
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1146 #魔光砲(ゴハン)
@@ -9828,7 +9828,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 202
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1147 #魔閃光
@@ -9862,7 +9862,7 @@ module Scene_Db_Battle_Anime_pattern
             when 140..166
                 @effect_anime_pattern = 204
             when 167
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1148 #カメハメ波(悟飯)
@@ -9893,7 +9893,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 81 && @battle_anime_frame <= 110
                 @effect_anime_pattern = 204
             elsif @battle_anime_frame == 111
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1152 #爆裂ラッシュ
@@ -10178,7 +10178,7 @@ module Scene_Db_Battle_Anime_pattern
                     @battle_anime_frame = 1166
                 end
             when 1167
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1162 #カメハメ波(クリリン)
@@ -10209,7 +10209,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 81 && @battle_anime_frame <= 110
                 @effect_anime_pattern = 204
             elsif @battle_anime_frame == 111
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1163 #拡散エネルギー波
@@ -10252,7 +10252,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 191..217
                     @effect_anime_pattern = 217
                 when 218
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -10262,7 +10262,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 217
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -10272,7 +10272,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 217
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -10311,7 +10311,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 81 && @battle_anime_frame <= 110
                 @effect_anime_pattern = 219
             elsif @battle_anime_frame == 111
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1173 #繰気弾(ヤムチャ)
@@ -10360,7 +10360,7 @@ module Scene_Db_Battle_Anime_pattern
             when 210..236
                 @effect_anime_pattern = 221
             when 237
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1182 #四身の拳
@@ -10390,7 +10390,7 @@ module Scene_Db_Battle_Anime_pattern
             when 237..266
                 @effect_anime_pattern = 223
             when 267
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1183 #気功砲
@@ -10425,7 +10425,7 @@ module Scene_Db_Battle_Anime_pattern
             when 140..190
                 back_anime_pattern 1
             when 191
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1184 #四身の拳・気功砲
@@ -10457,7 +10457,7 @@ module Scene_Db_Battle_Anime_pattern
             when 237..266
                 back_anime_pattern 9
             when 267
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1191 #どどんぱ
@@ -10479,7 +10479,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 72
                 @effect_anime_pattern = 226
             elsif @battle_anime_frame == 73
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1192 #超能力
@@ -10516,7 +10516,7 @@ module Scene_Db_Battle_Anime_pattern
             when 120..146
                 back_anime_pattern 9
             when 147
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1202 #ビーム
@@ -10538,7 +10538,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 72
                 @effect_anime_pattern = 226
             elsif @battle_anime_frame == 73
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1203 #気功スラッガー
@@ -10569,7 +10569,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 81 && @battle_anime_frame <= 110
                 @effect_anime_pattern = 204
             elsif @battle_anime_frame == 111
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1204  #超気功スラッガー
@@ -10642,7 +10642,7 @@ module Scene_Db_Battle_Anime_pattern
             when 191..217
                 @effect_anime_pattern = 207
             when 218
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1221 #(ベジータ)エネルギー波
@@ -10672,12 +10672,12 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 72
                 @effect_anime_pattern = 226
             elsif @battle_anime_frame == 73
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1223 #爆発波
             @ray_color = 3
-            if @attackcourse == 0
+            if @attackDir == 0
                 back_x = 210
                 back_y = 32
                 ray_x = 326
@@ -10723,7 +10723,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 191..217
                     @effect_anime_pattern = 230
                 when 218
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -10733,7 +10733,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 230
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -10743,12 +10743,12 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 230
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
         when 1224 #(ベジータ)ギャリック砲
-            if @attackcourse == 0
+            if @attackDir == 0
                 if $btl_progress >= 2
 
                     back_x = 220
@@ -10801,7 +10801,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1242 #口から怪光線(若者)
@@ -10823,7 +10823,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 202
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1243 #強力エネルギー波(若者)
@@ -10861,7 +10861,7 @@ module Scene_Db_Battle_Anime_pattern
             when 140..166
                 @effect_anime_pattern = 207
             when 167
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1244 #ナメック戦士(若者)
@@ -11093,7 +11093,7 @@ module Scene_Db_Battle_Anime_pattern
             when 711..737
                 @effect_anime_pattern = 48
             when 738
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1245 #魔貫光殺砲(若者)
@@ -11155,11 +11155,11 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 134
                 @effect_anime_pattern = 255
             when 248
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1248 #(バーダック)強力エネルギーは
-            if @attackcourse == 0
+            if @attackDir == 0
                 back_x = 218
                 back_y = 32
                 ray_x = 350
@@ -11209,13 +11209,13 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1249 #爆発波(バーダック)
             @ray_color = 3
 
-            if @attackcourse == 0
+            if @attackDir == 0
                 ray_x = 326
                 ray_y = 96
                 if $btl_progress >= 2
@@ -11259,7 +11259,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 2
                     battle_anime_change 0,5
                 when 181
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -11275,14 +11275,14 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     back_anime_pattern 1
                 when 243
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
 
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -11298,12 +11298,12 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin = true
                     @chr_cutin_mirror_flag = true
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
         when 1251 #(バーダック)ファイナルリベンジャー
-            if @attackcourse == 0
+            if @attackDir == 0
                 ray_x = 300
                 ray_y = 162
                 if $btl_progress >= 2
@@ -11512,11 +11512,11 @@ module Scene_Db_Battle_Anime_pattern
                 @gy = 0
                 @enex = CENTER_ENEX
                 @eney = STANDARD_ENEY
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1252 #(バーダック)スピリッツキャノン
-            if @attackcourse == 0
+            if @attackDir == 0
                 back_x = 200
                 back_y = 32
                 ray_x = 300
@@ -11616,11 +11616,11 @@ module Scene_Db_Battle_Anime_pattern
             when 262..288
                 @effect_anime_pattern = 207
             when 289
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1269 #惑星戦士たちとの戦い(イベント用)
-            if @attackcourse == 0
+            if @attackDir == 0
                 back_x = 200
                 back_y = 32
                 ray_x = 300
@@ -11910,11 +11910,11 @@ module Scene_Db_Battle_Anime_pattern
                 #@gy = 0
                 #@enex = CENTER_ENEX
                 #@eney = STANDARD_ENEY
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1270 #フリーザとの戦い(イベント用)
-            if @attackcourse == 0
+            if @attackDir == 0
                 back_x = 200
                 back_y = 32
                 ray_x = 300
@@ -12171,7 +12171,7 @@ module Scene_Db_Battle_Anime_pattern
 
 
             when 1451
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1326 #カメハメ波(亀仙人)
@@ -12202,7 +12202,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 81 && @battle_anime_frame <= 110
                 @effect_anime_pattern = 204
             elsif @battle_anime_frame == 111
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1328 #萬國驚天掌
@@ -12251,7 +12251,7 @@ module Scene_Db_Battle_Anime_pattern
             when 140..166
                 @effect_anime_pattern = 44
             when 167
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1329 #MAXパワーカメハメ波
@@ -12324,7 +12324,7 @@ module Scene_Db_Battle_Anime_pattern
             when 191..217
                 @effect_anime_pattern = 207
             when 218
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1349 #エネルギーボール
@@ -12439,7 +12439,7 @@ module Scene_Db_Battle_Anime_pattern
                 rect = Rect.new(128*3, 0,128,128)
                 @back_window.contents.blt(@enex-8,-128+6*(@battle_anime_frame-sframe),picture,rect)
             when 613
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1351 #大猿変身
@@ -12560,7 +12560,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 391
                 @chay = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1359 #ヒステリックサイヤンレディ
@@ -12652,7 +12652,7 @@ module Scene_Db_Battle_Anime_pattern
                 @enex += 24
             when 209
                 @chay = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1368 #アングリーアタック
@@ -12751,7 +12751,7 @@ module Scene_Db_Battle_Anime_pattern
                 @chax += 16
             when 494
                 @chay = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1376 #マッシブカタパルト
@@ -12832,7 +12832,7 @@ module Scene_Db_Battle_Anime_pattern
             when 266
                 @tec_kyouda_se = true
                 @chay = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1801 #師弟の絆
@@ -12959,7 +12959,7 @@ module Scene_Db_Battle_Anime_pattern
             when 416..442
                 @effect_anime_pattern = 247
             when 443
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
        when 1803 #サイヤンアタック(ゴクウ＆バーダック)
@@ -13139,7 +13139,7 @@ module Scene_Db_Battle_Anime_pattern
                    #p CENTER_ENEX,@enex
                    #@enex = CENTER_ENEX
                    @gx = 0
-                   anime_pattern_fromat
+                   anime_pattern_init
                    return @battle_anime_result + 1
                end
            else
@@ -13215,7 +13215,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 121..179
                     back_anime_pattern 1
                 when 180
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -13231,7 +13231,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1..59
                     back_anime_pattern 1
                 when 60
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -13421,7 +13421,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 255#215
                 back_anime_pattern 20
             when 390
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1806 #カメハメ乱舞
@@ -13505,7 +13505,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..328
                 @effect_anime_pattern = 66
             when 329
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
        when 1807 #操気円斬
@@ -13711,7 +13711,7 @@ module Scene_Db_Battle_Anime_pattern
                end
                back_anime_pattern 30
            when 638
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
        when 1808 #願いを込めた元気弾
@@ -13832,7 +13832,7 @@ module Scene_Db_Battle_Anime_pattern
                    ray_y = 228
                    @effect_anime_pattern = 69
                when 304
-                   anime_pattern_fromat
+                   anime_pattern_init
                    return @battle_anime_result + 1
                end
            end
@@ -13885,7 +13885,7 @@ module Scene_Db_Battle_Anime_pattern
            when 106..129
                @effect_anime_pattern = 245
            when 130
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
        when 1810 #超能力きこうほう
@@ -13945,7 +13945,7 @@ module Scene_Db_Battle_Anime_pattern
            when 200..250
                back_anime_pattern 9
            when 251
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
        when 1811 #狼鶴相打陣
@@ -13991,7 +13991,7 @@ module Scene_Db_Battle_Anime_pattern
                    @battle_anime_frame = -1 if @battle_anime_frame == 18
                end
            else
-               #anime_pattern_fromat
+               #anime_pattern_init
                #back_anime_pattern 54
                @output_anime_type = 1
                battle_anime_change 0,0
@@ -14279,7 +14279,7 @@ module Scene_Db_Battle_Anime_pattern
                when 681..703
                    @effect_anime_pattern = 251
                when 704
-                   anime_pattern_fromat
+                   anime_pattern_init
                    return @battle_anime_result + 1
                end
            else
@@ -14393,7 +14393,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..328
                 @effect_anime_pattern = 282
             when 329
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
        when 1822 #気の開放
@@ -14536,7 +14536,7 @@ module Scene_Db_Battle_Anime_pattern
 
            when 329
                #back_anime_pattern 117,@chax,STANDARD_CHAY+32
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
        when 1828 #答えは8だ
@@ -14677,7 +14677,7 @@ module Scene_Db_Battle_Anime_pattern
                @chay = -160
                @tec_kyouda_se = true
                #Audio.se_play("Audio/SE/" + "ZG 打撃4")
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
 
@@ -14827,7 +14827,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..326
                 @effect_anime_pattern = 48
             when 327
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1832 #サイヤンアタックトーマパンブーキン
@@ -14966,7 +14966,7 @@ module Scene_Db_Battle_Anime_pattern
 
             when 389
                 #back_anime_pattern 117,@chax,STANDARD_CHAY+32
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1833 #アウトサイダーショット(バーダック＆トーマ)
@@ -15072,7 +15072,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1834 #サイヤンアタックセリパトテッポ
@@ -15221,7 +15221,7 @@ module Scene_Db_Battle_Anime_pattern
 
             when 389
                 #back_anime_pattern 117,@chax,STANDARD_CHAY+32
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
        when 1835 #アウトサイダーショット(バーダック＆セリパ)
@@ -15327,7 +15327,7 @@ module Scene_Db_Battle_Anime_pattern
                ray_y = 110
                @effect_anime_pattern = 240
            when 306
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
         when 1836 #アウトサイダーショット(バーダック＆トテッポ)
@@ -15433,7 +15433,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1837 #アウトサイダーショット(バーダック＆パンブーキン)
@@ -15539,7 +15539,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -15908,7 +15908,7 @@ module Scene_Db_Battle_Anime_pattern
             when 807..832
                 @effect_anime_pattern = 209
             when 833
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1842 #強襲サイヤ人
@@ -16020,7 +16020,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 201..226
                     @effect_anime_pattern = 240
                 when 227
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -16035,7 +16035,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1..26
                     @effect_anime_pattern = 240
                 when 27
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -16083,7 +16083,7 @@ module Scene_Db_Battle_Anime_pattern
                    @battle_anime_frame = -1 if @battle_anime_frame == 18
                end
            else
-               #anime_pattern_fromat
+               #anime_pattern_init
                #back_anime_pattern 54
                @output_anime_type = 1
                battle_anime_change 0,0
@@ -16290,7 +16290,7 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern 116,338,STANDARD_CHAY+10
                 back_anime_pattern 118,338-16,STANDARD_CHAY-10
             when 577
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
        when 1851 #ありがとうピッコロさん！
@@ -16382,7 +16382,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 206..235
                     @effect_anime_pattern = 202
                 when 236
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -16526,7 +16526,7 @@ module Scene_Db_Battle_Anime_pattern
             when 416..442
                 @effect_anime_pattern = 247
             when 443
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1856 #油断してやがったな
@@ -16644,7 +16644,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 280..306
                     @effect_anime_pattern = 234
                 when 307
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -16738,7 +16738,7 @@ module Scene_Db_Battle_Anime_pattern
                  when 206..235
                      @effect_anime_pattern = 202
                  when 236
-                     anime_pattern_fromat
+                     anime_pattern_init
                      return @battle_anime_result + 1
                  end
              end
@@ -16882,7 +16882,7 @@ module Scene_Db_Battle_Anime_pattern
             when 416..442
                 @effect_anime_pattern = 247
             when 443
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
        when 1859 #何故か息の合う
@@ -16973,7 +16973,7 @@ module Scene_Db_Battle_Anime_pattern
                @chay = -160
                @tec_kyouda_se = true
                #Audio.se_play("Audio/SE/" + "ZG 打撃4")
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
 
@@ -17080,7 +17080,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1866 #アウトサイダーショット(トーマとトテッポ)
@@ -17186,7 +17186,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1867 #アウトサイダーショット(セリパとパンブーキン)
@@ -17292,7 +17292,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1868 #アウトサイダーショット(トテッポとパンブーキン)
@@ -17398,7 +17398,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -17650,7 +17650,7 @@ module Scene_Db_Battle_Anime_pattern
             when 531
                 #back_anime_pattern 117,@chax,STANDARD_CHAY+32
                 @chay = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -17813,7 +17813,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 226
             when 378
                 @chay = - 200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -18114,7 +18114,7 @@ module Scene_Db_Battle_Anime_pattern
             when 896
                 @chay = - 200
                 @tec_kyouda_se = true
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1909 #地球丸ごと超決戦
@@ -18298,7 +18298,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..326
                 @effect_anime_pattern = 48
             when 327
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1919 #ダブルアイビーム(ピッコロ、天津飯)
@@ -18382,7 +18382,7 @@ module Scene_Db_Battle_Anime_pattern
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾") #ダメージ表示用
                 @back_window.contents.blt(-128+(@battle_anime_frame-sframe)*RAY_SPEED,120,picture,rect)
             when 160
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1976 #決死の超元気玉
@@ -18603,7 +18603,7 @@ module Scene_Db_Battle_Anime_pattern
                      rect = Rect.new(0, 0,640,250)
                      @back_window.contents.blt(0,-250+(@battle_anime_frame-sframe)*RAY_SPEED/6,picture,rect)
                  when 821
-                     anime_pattern_fromat
+                     anime_pattern_init
                      return @battle_anime_result + 1
                  end
              end
@@ -18639,7 +18639,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -18694,7 +18694,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 191..217
                     @effect_anime_pattern = 230
                 when 218
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -18704,7 +18704,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 230
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -18714,7 +18714,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 230
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -18765,7 +18765,7 @@ module Scene_Db_Battle_Anime_pattern
             when 170..196
                 @effect_anime_pattern = 232
             when 197
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1437 #(ドドリア系)エネルギー波
@@ -18787,7 +18787,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1438 #(ドドリア系)口から怪光線
@@ -18837,7 +18837,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1439 #爆発波(ドドリア)
@@ -18894,7 +18894,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 191..217
                     @effect_anime_pattern = 230
                 when 218
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -18904,7 +18904,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 230
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -18914,7 +18914,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 230
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -18937,7 +18937,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1441 #(ザーボン系)スーパーエネルギー波
@@ -18973,7 +18973,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1442 #爆発波(ザーボン)
@@ -19017,7 +19017,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 191..217
                     @effect_anime_pattern = 230
                 when 218
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -19027,7 +19027,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 230
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -19037,7 +19037,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 230
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -19060,7 +19060,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1444 #(ザーボン系)スーパーエネルギー波
@@ -19108,7 +19108,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1445 #(ギニュー)エネルギー波
@@ -19130,7 +19130,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1446 #(ギニュー)スーパーエネルギー波
@@ -19176,7 +19176,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1447 #爆発波(ギニュー)
@@ -19229,7 +19229,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 191..217
                     @effect_anime_pattern = 230
                 when 218
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -19239,7 +19239,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 230
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -19249,7 +19249,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 230
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -19272,7 +19272,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1450 #クラッシャーボール(ジース)
@@ -19330,7 +19330,7 @@ module Scene_Db_Battle_Anime_pattern
             when 210..236
                 @effect_anime_pattern = 221
             when 237
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1451 #(バータ)エネルギー波
@@ -19352,7 +19352,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1452 #スピードアタック(バータ)
@@ -19405,7 +19405,7 @@ module Scene_Db_Battle_Anime_pattern
                 #back_anime_pattern 1
                 @effect_anime_pattern = 205
             when 160
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1453 #(リクーム)エネルギー波
@@ -19427,7 +19427,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1454 #(リクーム系)連続エネルギー波
@@ -19482,7 +19482,7 @@ module Scene_Db_Battle_Anime_pattern
             when 170..196
                 @effect_anime_pattern = 232
             when 197
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1455 #(リクーム)イレイザーガン
@@ -19534,7 +19534,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1456 #(グルド)エネルギー波
@@ -19556,7 +19556,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1457 #(グルド)タイムストップ
@@ -19593,7 +19593,7 @@ module Scene_Db_Battle_Anime_pattern
             when 120..146
                 back_anime_pattern 9
             when 147
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1458 #(フリーザ)エネルギー波
@@ -19615,7 +19615,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1459 #爆発波(フリーザ)
@@ -19659,7 +19659,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 191..217
                     @effect_anime_pattern = 230
                 when 218
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -19669,7 +19669,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 230
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -19679,7 +19679,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 230
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -19717,7 +19717,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1461 #(フリーザ1)エネルギー波
@@ -19739,7 +19739,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1462 #爆発波(フリーザ1)
@@ -19783,7 +19783,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 191..217
                     @effect_anime_pattern = 230
                 when 218
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -19793,7 +19793,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 230
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -19803,7 +19803,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 230
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -19841,7 +19841,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1464 #(フリーザ2)エネルギー波
@@ -19863,7 +19863,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1465 #爆発波(フリーザ2)
@@ -19907,7 +19907,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 191..217
                     @effect_anime_pattern = 230
                 when 218
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -19917,7 +19917,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 230
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -19927,7 +19927,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 230
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -19965,7 +19965,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1467 #(フリーザ3)エネルギー波
@@ -19991,7 +19991,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1468 #爆発波(フリーザ3)
@@ -20041,7 +20041,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 191..217
                     @effect_anime_pattern = 230
                 when 218
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -20051,7 +20051,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 230
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -20061,7 +20061,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 230
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -20109,7 +20109,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 240
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -20221,7 +20221,7 @@ module Scene_Db_Battle_Anime_pattern
                 #ray_y = 136
                 @effect_anime_pattern = 294
             when 456
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1794 #俺に殺されるべきなんだ
@@ -20310,7 +20310,7 @@ module Scene_Db_Battle_Anime_pattern
                 #@effect_anime_pattern = 266
                 @effect_anime_pattern = 48
             when 337
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1795 #スーパーギャリック砲
@@ -20393,7 +20393,7 @@ module Scene_Db_Battle_Anime_pattern
                 #@effect_anime_pattern = 266
                 @effect_anime_pattern = 48
             when 337
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1474 #(ターレス)エネルギー波
@@ -20417,7 +20417,7 @@ module Scene_Db_Battle_Anime_pattern
             when 46..75
                 @effect_anime_pattern = 228
             when 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1475 #爆発波(ターレス)
@@ -20452,7 +20452,7 @@ module Scene_Db_Battle_Anime_pattern
                     @output_anime_type = 1
                     battle_anime_change 0,4
                 when 181
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -20467,14 +20467,14 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     back_anime_pattern 1
                 when 243
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
 
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -20490,7 +20490,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin = true
                     @chr_cutin_mirror_flag = true
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -20538,7 +20538,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1477 #(ターレス)メテオバースト
@@ -20680,7 +20680,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 235
             when 401
                 @eney = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1744 #大猿変身(ターレス)
@@ -20827,7 +20827,7 @@ module Scene_Db_Battle_Anime_pattern
                     @eney = -200 #キャラ画面範囲外へ
                 end
             elsif @battle_anime_frame == 661
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -20853,7 +20853,7 @@ module Scene_Db_Battle_Anime_pattern
             when 46..75
                 @effect_anime_pattern = 228
             when 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1479 #爆発波(スラッグ)
@@ -20888,7 +20888,7 @@ module Scene_Db_Battle_Anime_pattern
                     @output_anime_type = 1
                     battle_anime_change 0,4
                 when 181
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -20903,7 +20903,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     back_anime_pattern 1
                 when 243
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -20911,7 +20911,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -20927,7 +20927,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin = true
                     @chr_cutin_mirror_flag = true
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -20978,7 +20978,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 240
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1481 #(スラッグ)メテオバースト
@@ -21100,7 +21100,7 @@ module Scene_Db_Battle_Anime_pattern
             when 336
                 @gx  = 0
                 @chax = CENTER_CHAX
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1745 #スラッグ巨大化
@@ -21190,7 +21190,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 200
                 #@eney = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1482 #(ジース,バータ)パープルコメットクラッシュ
@@ -21259,7 +21259,7 @@ module Scene_Db_Battle_Anime_pattern
             when 346..372
                 @effect_anime_pattern = 242
             when 373
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1726 #気円斬(アモンド)
@@ -21310,7 +21310,7 @@ module Scene_Db_Battle_Anime_pattern
             when 182..211
                 @effect_anime_pattern = 219
             when 212
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1727 #プラネットボム(アモンド)
@@ -21356,7 +21356,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     back_anime_pattern 1
                 when 243
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -21364,7 +21364,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -21380,7 +21380,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin = true
                     @chr_cutin_mirror_flag = true
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -21506,7 +21506,7 @@ module Scene_Db_Battle_Anime_pattern
                 @chay = STANDARD_CHAY
                 battle_anime_change 1,0
             when 391
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1733 #爆発波(ダイーズ)
@@ -21545,7 +21545,7 @@ module Scene_Db_Battle_Anime_pattern
                     @output_anime_type = 1
                     battle_anime_change 0,4
                 when 181
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -21560,7 +21560,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     back_anime_pattern 1
                 when 243
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -21568,7 +21568,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -21584,7 +21584,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin = true
                     @chr_cutin_mirror_flag = true
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -21630,7 +21630,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 204
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1740 #ダブルエネルギー波(レズン、ラカセイ
@@ -21723,7 +21723,7 @@ module Scene_Db_Battle_Anime_pattern
             when 111..136
                 @effect_anime_pattern = 339
             when 137
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1747 #エビルクエーサー アンギラ
@@ -21768,7 +21768,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1748 #手が伸びる＆エビルクエーサー アンギラ
@@ -21869,7 +21869,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 120
                 @effect_anime_pattern = 234
             when 295
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1751 #エビルグラビティ ドロダボ
@@ -21914,7 +21914,7 @@ module Scene_Db_Battle_Anime_pattern
             when 160..186
                 @effect_anime_pattern = 234
             when 187
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1754 #エビルコメット(メダマッチャ)
@@ -22004,7 +22004,7 @@ module Scene_Db_Battle_Anime_pattern
                     ray_y = 160
                     @effect_anime_pattern = 340
                 when 338
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -22022,7 +22022,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin = true
                     @chr_cutin_mirror_flag = true
                 when 28
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -22125,7 +22125,7 @@ module Scene_Db_Battle_Anime_pattern
 
             when 367
                 #@eney = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1758 #エビルインパクト ゼエウン
@@ -22184,7 +22184,7 @@ module Scene_Db_Battle_Anime_pattern
 
             when 187
                 @eney = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1761 #腕伸びるカエル攻撃 アンギラ、メダマッチャ
@@ -22460,7 +22460,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 120
                 @effect_anime_pattern = 234
             when 625
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -22607,7 +22607,7 @@ module Scene_Db_Battle_Anime_pattern
             when 322..348
                 @effect_anime_pattern = 209
             when 349
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2119 #超元気弾
@@ -22732,7 +22732,7 @@ module Scene_Db_Battle_Anime_pattern
             when 352..378
                 @effect_anime_pattern = 211
             when 379
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2127 #瞬間移動かめはめは
@@ -22881,7 +22881,7 @@ module Scene_Db_Battle_Anime_pattern
             when 821
                 @eney = STANDARD_ENEY
                 @chay = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2129 #超サイヤ人変身
@@ -23148,7 +23148,7 @@ module Scene_Db_Battle_Anime_pattern
 
             when 606
 
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -23189,7 +23189,7 @@ module Scene_Db_Battle_Anime_pattern
                     rect = Rect.new(0, 0, 160, 292)
                     @back_window.contents.blt(248,-32,picture,rect)
                 when 181
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -23204,14 +23204,14 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     back_anime_pattern 1
                 when 243
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
                 @tec_output_back = false
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -23227,7 +23227,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin = true
                     @chr_cutin_mirror_flag = true
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -23288,7 +23288,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 134
                 @effect_anime_pattern = 255
             when 288
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2139 #激烈光弾
@@ -23364,7 +23364,7 @@ module Scene_Db_Battle_Anime_pattern
             when 290..316
                 @effect_anime_pattern = 265
             when 317
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2140 #魔空包囲弾
@@ -23677,7 +23677,7 @@ module Scene_Db_Battle_Anime_pattern
 
             #@effect_anime_pattern = 207
             when 672
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -23755,7 +23755,7 @@ module Scene_Db_Battle_Anime_pattern
             when 221..246
                 @effect_anime_pattern = 33
             when 247
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2153 #激烈ませんこう
@@ -23857,7 +23857,7 @@ module Scene_Db_Battle_Anime_pattern
             when 430..456
                 @effect_anime_pattern = 265
             when 457
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2154 #スーパーかめはめ波(悟飯)
@@ -23925,7 +23925,7 @@ module Scene_Db_Battle_Anime_pattern
                 #@effect_anime_pattern = 265
                 @effect_anime_pattern = 48
             when 427
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2163 #拡散エネルギー波
@@ -24054,7 +24054,7 @@ module Scene_Db_Battle_Anime_pattern
                     ray_x = 354
                     ray_y = 0 #+ 8*(@battle_anime_frame-211)
                 when 235
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -24062,7 +24062,7 @@ module Scene_Db_Battle_Anime_pattern
                 case @battle_anime_frame
                   when 0
                       Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
-                      if @attackcourse == 0
+                      if @attackDir == 0
                           @output_anime_type = 0
                           @chay = -120 #キャラ画面範囲外へ
                           @enex = CENTER_ENEX
@@ -24078,7 +24078,7 @@ module Scene_Db_Battle_Anime_pattern
                     ray_x = 354
                     ray_y = 0
                 when 20
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -24223,7 +24223,7 @@ module Scene_Db_Battle_Anime_pattern
             when 251..281
                 @effect_anime_pattern = 260
             when 282
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2165 #気円烈斬
@@ -24520,7 +24520,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 562..592
                     @effect_anime_pattern = 260
                 when 593
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -24537,7 +24537,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1..31
                     @effect_anime_pattern = 260
                 when 32
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -24688,7 +24688,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 136
                 @effect_anime_pattern = 262
             when 298
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2174 #超繰気弾
@@ -24789,7 +24789,7 @@ module Scene_Db_Battle_Anime_pattern
                     #ray_y = 136
                     @effect_anime_pattern = 294
                 when 486
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -24808,7 +24808,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1..25
                     @effect_anime_pattern = 294
                 when 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -24971,7 +24971,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 96
                 @effect_anime_pattern = 207
             when 588
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2182 #四身の拳
@@ -25043,7 +25043,7 @@ module Scene_Db_Battle_Anime_pattern
             when 351..381
                 @effect_anime_pattern = 223
             when 382
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2183 #気功砲
@@ -25099,7 +25099,7 @@ module Scene_Db_Battle_Anime_pattern
                 #ray_y = 136
                 back_anime_pattern 1
             when 291
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2184 #四身の拳気功砲
@@ -25208,7 +25208,7 @@ module Scene_Db_Battle_Anime_pattern
                 #ray_y = 136
                 back_anime_pattern 9
             when 541
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2185 #新気功砲
@@ -25271,7 +25271,7 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == 370 || @battle_anime_frame == 410 || @battle_anime_frame == 450 || @battle_anime_frame == 490
                 end
             when 551
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -25303,7 +25303,7 @@ module Scene_Db_Battle_Anime_pattern
             #back_anime_pattern 9
 
             when 147
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2194 #超能力(全体)
@@ -25360,7 +25360,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 231..257
                 #back_anime_pattern 9
                 when 258
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -25371,7 +25371,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1..27
 
                 when 28
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -25436,7 +25436,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 297
             #back_anime_pattern 9
             when 348
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2207 #芭蕉扇
@@ -25531,7 +25531,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 501..560
                     @eney += 24
                 when 561
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -25572,14 +25572,14 @@ module Scene_Db_Battle_Anime_pattern
                 when 160..210
                     @eney += 24
                 when 211
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
 
         when 2223 #爆発波
             @ray_color = 3
-            if @attackcourse == 0
+            if @attackDir == 0
                 back_x = 228
                 back_y = 88
                 ray_x = 326
@@ -25630,7 +25630,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 221..281
                     back_anime_pattern 1
                 when 282
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -25645,7 +25645,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1..60
                     back_anime_pattern 1
                 when 61
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -25748,7 +25748,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
 
             when 337
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2230 #ファイナルフラッシュ
@@ -25851,7 +25851,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 265
 
             when 377
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2246 #ミスティックフラッシャー(若者)
@@ -26029,7 +26029,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 398
 
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2255 #(バーダック)スーパーファイナルリベンジャー
@@ -26359,7 +26359,7 @@ module Scene_Db_Battle_Anime_pattern
             when 612..638
                 @effect_anime_pattern = 207
             when 639
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2272 #剣攻撃
@@ -26367,7 +26367,7 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z3 剣攻撃")    # 効果音を再生する
                 @output_anime_type = 1
 
-                if @attackcourse == 1 && @enedatenum == 144
+                if @attackDir == 1 && @enedatenum == 144
                     battle_anime_change 0,4
                 else
                     battle_anime_change 0,2
@@ -26389,12 +26389,12 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
             #@effect_anime_pattern = 202
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
        when 2273 #爆発波(トランクス)
            @ray_color = 3
-           if @attackcourse == 0
+           if @attackDir == 0
                back_x = 228
                back_y = 88
                ray_x = 326
@@ -26446,7 +26446,7 @@ module Scene_Db_Battle_Anime_pattern
                when 221..281
                    back_anime_pattern 1
                when 282
-                   anime_pattern_fromat
+                   anime_pattern_init
                    return @battle_anime_result + 1
                end
            elsif @all_attack_count >= 2
@@ -26461,7 +26461,7 @@ module Scene_Db_Battle_Anime_pattern
                when 1..60
                    back_anime_pattern 1
                when 61
-                   anime_pattern_fromat
+                   anime_pattern_init
                    return @battle_anime_result + 1
                end
            end
@@ -26511,7 +26511,7 @@ module Scene_Db_Battle_Anime_pattern
             when 140..166
                 @effect_anime_pattern = 207
             when 167
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2276 #バーニングアタック
@@ -26623,7 +26623,7 @@ module Scene_Db_Battle_Anime_pattern
                     end
 
                 when 338
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -26724,7 +26724,7 @@ module Scene_Db_Battle_Anime_pattern
                     end
 
                 when 398
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -27078,7 +27078,7 @@ module Scene_Db_Battle_Anime_pattern
             when 700
 
                 @chay = -160
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             when 1001..1020
                 Audio.se_play("Audio/SE/" + "Z1 飛ぶ") if @battle_anime_frame == 1001
@@ -27202,7 +27202,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 1,19
                 end
             when 495
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
          when 2281 #フィニッシュバスター
@@ -27262,7 +27262,7 @@ module Scene_Db_Battle_Anime_pattern
              when 240..266
                  @effect_anime_pattern = 265
              when 267
-                 anime_pattern_fromat
+                 anime_pattern_init
                  return @battle_anime_result + 1
              end
         when 2294 #気円斬
@@ -27312,7 +27312,7 @@ module Scene_Db_Battle_Anime_pattern
             when 161..191
                 @effect_anime_pattern = 260
             when 192
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2298 #エネルギーウェイブ(18号)
@@ -27490,7 +27490,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 240
 
             when 428
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -27671,7 +27671,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 271
 
             when 368
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -27711,7 +27711,7 @@ module Scene_Db_Battle_Anime_pattern
             when 81..111
                 @effect_anime_pattern = 274
             when 112
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2315 #ヘルズフラッシュ
@@ -27892,7 +27892,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 265
 
             when 338
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -27957,7 +27957,7 @@ module Scene_Db_Battle_Anime_pattern
                 rect = Rect.new(0, 0, 16, 16)
                 @back_window.contents.blt(CENTER_ENEX+106,STANDARD_ENEY-0,picture,rect)
             when 331
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2329 #MAXパワーカメハメ波
@@ -28031,7 +28031,7 @@ module Scene_Db_Battle_Anime_pattern
             when 291..317
                 @effect_anime_pattern = 207
             when 318
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2330 #魔封波
@@ -28188,7 +28188,7 @@ module Scene_Db_Battle_Anime_pattern
                 @eney += 16
             when 598
                 Audio.bgs_stop
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2336 #魔光砲(未来ゴハン)
@@ -28211,7 +28211,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 202
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2337 #魔閃光(未来ゴハン)
@@ -28247,12 +28247,12 @@ module Scene_Db_Battle_Anime_pattern
             when 140..166
                 @effect_anime_pattern = 204
             when 167
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2338 #超爆力波
             @ray_color = 3
-            if @attackcourse == 0
+            if @attackDir == 0
                 back_x = 228
                 back_y = 88
                 ray_x = 326
@@ -28303,7 +28303,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 221..281
                     back_anime_pattern 1
                 when 282
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -28318,7 +28318,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1..60
                     back_anime_pattern 1
                 when 61
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -28385,7 +28385,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 134
                 @effect_anime_pattern = 255
             when 248
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2341 #スーパーカメハメ波(未来悟飯)
@@ -28396,7 +28396,7 @@ module Scene_Db_Battle_Anime_pattern
             ray_y = back_y +90
             case @battle_anime_frame
             when 0 #初期化
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                 else
@@ -28453,7 +28453,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
                 @effect_anime_frame = 0
                 @effect_anime_pattern = 0
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @enex = CENTER_ENEX
                     @eney = STANDARD_ENEY
@@ -28474,7 +28474,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 @effect_anime_pattern = 48
             when 240
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2342 #爆裂乱舞
@@ -28683,7 +28683,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 @effect_anime_pattern = 265
             when 764
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2350 #フルパワーフレイムバレット
@@ -28800,7 +28800,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 98
                 @effect_anime_pattern = 266
             when 426
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
           when 2360 #ハンティングアロー
@@ -28868,7 +28868,7 @@ module Scene_Db_Battle_Anime_pattern
                   ray_y = 98
                   @effect_anime_pattern = 266
               when 376
-                  anime_pattern_fromat
+                  anime_pattern_init
                   return @battle_anime_result + 1
               end
         when 2369 #アングリーキャノン
@@ -28960,7 +28960,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
 
             when 337
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2377 #マッシブキャノン
@@ -29028,7 +29028,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 98
                 @effect_anime_pattern = 266
             when 376
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2388 #ダイナマイトキック(イベント用
@@ -29076,7 +29076,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 32
                 @effect_anime_pattern = 124
             elsif @battle_anime_frame == 261
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2812 #地球人ストライク
@@ -29377,7 +29377,7 @@ module Scene_Db_Battle_Anime_pattern
             when 722..760
                 back_anime_pattern 9
             when 761
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2816 #ノンステップバイオレンス
@@ -29524,7 +29524,7 @@ module Scene_Db_Battle_Anime_pattern
             when 411..437
                 @effect_anime_pattern = 299
             when 438
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2818 #ヘルズスパイラル
@@ -29623,7 +29623,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 1
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 when 298
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -29640,7 +29640,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 1
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 when 68
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -29718,7 +29718,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 291..319
                     @effect_anime_pattern = 301
                 when 320
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -29733,7 +29733,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1..29
                     @effect_anime_pattern = 301
                 when 30
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -29829,7 +29829,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2823 #眠れる力
@@ -29959,7 +29959,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_x = 138
                 ray_y = 156
             when 479
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2825 #アウトサイダーショット(ピ＆バ)
@@ -30067,7 +30067,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2826 #ダブルませんこう(ゴ＆ト)
@@ -30162,7 +30162,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 306
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2827 #ダブルまかんこうさっぽう(ピッコロ＆未来ゴハン)
@@ -30276,7 +30276,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 134
                 @effect_anime_pattern = 308
             when 309
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -30417,7 +30417,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 401..429
                     @effect_anime_pattern = 319
                 when 430
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -30434,7 +30434,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1..29
                     @effect_anime_pattern = 319
                 when 30
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -31081,7 +31081,7 @@ module Scene_Db_Battle_Anime_pattern
             when 2001
 
                 @chay = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2839 #この世で一番強いヤツZ3
@@ -31568,7 +31568,7 @@ module Scene_Db_Battle_Anime_pattern
             when 967..992
                 @effect_anime_pattern = 209
             when 993
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2840 #メタルクラッシュ(超ゴ＆超ベ)
@@ -31753,7 +31753,7 @@ module Scene_Db_Battle_Anime_pattern
                 @enex = TEC_CENTER_CHAX + 48
                 @effect_anime_pattern = 317
             when 604
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
       when 2841 #あっち行ってけろ
@@ -31854,7 +31854,7 @@ module Scene_Db_Battle_Anime_pattern
           when 171..197
               @effect_anime_pattern = 226
           when 198
-              anime_pattern_fromat
+              anime_pattern_init
               return @battle_anime_result + 1
           end
         when 2843 #アウトサイダーショット(ピ＆17号)
@@ -32030,7 +32030,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -32176,7 +32176,7 @@ module Scene_Db_Battle_Anime_pattern
             when 251..277
                 @effect_anime_pattern = 207
             when 278
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2845 #うごきをとめろ
@@ -32390,7 +32390,7 @@ module Scene_Db_Battle_Anime_pattern
             when 611..637
                 @effect_anime_pattern = 207
             when 638
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2846 #ダブル残像拳(全パターンで流用)
@@ -32541,7 +32541,7 @@ module Scene_Db_Battle_Anime_pattern
                     end
                 when 231
                     @tec_kyouda_se = true
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -32607,7 +32607,7 @@ module Scene_Db_Battle_Anime_pattern
                     end
                 when 110
                     @tec_kyouda_se = true
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -32765,7 +32765,7 @@ module Scene_Db_Battle_Anime_pattern
             when 416..442
                 @effect_anime_pattern = 247
             when 443
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2854 #お母さんをいじめるなーっ！
@@ -33113,7 +33113,7 @@ module Scene_Db_Battle_Anime_pattern
                         @battle_anime_frame = 1166
                     end
                 when 1167
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -33221,7 +33221,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2860 #ダブルまかんこうさっぽう(ピッコロ＆若者)
@@ -33327,7 +33327,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 134
                 @effect_anime_pattern = 308
             when 309
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2861 #大師匠と孫弟子
@@ -33481,7 +33481,7 @@ module Scene_Db_Battle_Anime_pattern
             when 416..442
                 @effect_anime_pattern = 247
             when 443
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2862 #ダブルスラッシュ
@@ -33713,7 +33713,7 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波2") if @battle_anime_frame == start_frame
                 @effect_anime_pattern = 260
             when 557
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
        when 2863 #ギャリックかめはめは(ヤムチャとベジータ)
@@ -33995,7 +33995,7 @@ module Scene_Db_Battle_Anime_pattern
                when 681..703
                    @effect_anime_pattern = 251
                when 704
-                   anime_pattern_fromat
+                   anime_pattern_init
                    return @battle_anime_result + 1
                end
            else
@@ -34165,7 +34165,7 @@ module Scene_Db_Battle_Anime_pattern
                 #@effect_anime_pattern = 265
                 @effect_anime_pattern = 48
             when 427
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2869 #ダブルまかんこうさっぽう(未来悟飯＆若者)
@@ -34277,7 +34277,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 134
                 @effect_anime_pattern = 308
             when 309
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2870 #母さんは俺が守る
@@ -34576,12 +34576,12 @@ module Scene_Db_Battle_Anime_pattern
 
                     @effect_anime_pattern = 265
                 when 1034
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
 
             #when 1167
-            #  anime_pattern_fromat
+            #  anime_pattern_init
             #  return @battle_anime_result + 1
             #end
             else
@@ -34679,7 +34679,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 306
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2872 #トリプルませんこう(悟飯&未来悟飯＆トランクス)
@@ -34821,7 +34821,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..328
                 @effect_anime_pattern = 282
             when 329
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2873 #トリプル魔貫光殺法(ピッコロ&未来悟飯＆若者)
@@ -34971,7 +34971,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 134
                 @effect_anime_pattern = 345
             when 309
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2874 #アウトサイダーショット(ピ＆18号)
@@ -35144,7 +35144,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2875 #アウトサイダーショット(ピ＆16号)
@@ -35317,7 +35317,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2876 #アウトサイダーショット(未来悟飯＆18号)
@@ -35491,7 +35491,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -35666,7 +35666,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2878 #アウトサイダーショット(未来悟飯＆16号)
@@ -35840,7 +35840,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2879 #アウトサイダーショット(未来悟飯＆ベジータ)
@@ -35946,7 +35946,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2880 #超爆力魔波(未来悟飯＆ピッコロ)
@@ -36049,7 +36049,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 1
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 when 332
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -36057,7 +36057,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -36074,7 +36074,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -36244,7 +36244,7 @@ module Scene_Db_Battle_Anime_pattern
             when 416..442
                 @effect_anime_pattern = 356
             when 443
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2882 #ダブルアタック(チャオズとトランクス)
@@ -36413,7 +36413,7 @@ module Scene_Db_Battle_Anime_pattern
             when 416..442
                 @effect_anime_pattern = 356
             when 443
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2883 #悟飯ちゃんを巻き込む出ねえ
@@ -36609,7 +36609,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 298
                 @tec_kyouda_se = true
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2884 #悟空さを巻き込む出ねえ
@@ -36807,7 +36807,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 298
                 @tec_kyouda_se = true
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2885 #バーダック一味
@@ -36988,7 +36988,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..326
                 @effect_anime_pattern = 353
             when 327
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2886 #ダブルかめはめ波(亀仙人＆悟空)
@@ -37092,7 +37092,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2887 #ダブルかめはめ波(亀仙人＆悟飯)
@@ -37196,7 +37196,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2888 #ダブルかめはめ波(亀仙人＆クリリン)
@@ -37298,7 +37298,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2889 #ダブルかめはめ波(亀仙人＆ヤムチャ)
@@ -37400,7 +37400,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2890 #ダブルかめはめ波(亀仙人＆未来悟飯)
@@ -37504,7 +37504,7 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2891 #かめはめ乱舞(親子)
@@ -37619,7 +37619,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..328
                 @effect_anime_pattern = 353
             when 329
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2892 #アンドロイドストライク(18号＆17号)
@@ -37976,7 +37976,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 353
             when 646
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2893 #あの時の借りを返すよ！(天津飯と18号)
@@ -38359,7 +38359,7 @@ module Scene_Db_Battle_Anime_pattern
                     end
 
                 when 9999
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -38745,7 +38745,7 @@ module Scene_Db_Battle_Anime_pattern
                       end
 
                 when 9999
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -39130,7 +39130,7 @@ module Scene_Db_Battle_Anime_pattern
                       end
 
                 when 9999
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -39520,7 +39520,7 @@ module Scene_Db_Battle_Anime_pattern
                     end
 
                 when 9999
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -39909,7 +39909,7 @@ module Scene_Db_Battle_Anime_pattern
                        end
 
                  when 9999
-                     anime_pattern_fromat
+                     anime_pattern_init
                      return @battle_anime_result + 1
                  end
             else
@@ -40297,7 +40297,7 @@ module Scene_Db_Battle_Anime_pattern
                        end
 
                  when 9999
-                     anime_pattern_fromat
+                     anime_pattern_init
                      return @battle_anime_result + 1
                  end
             else
@@ -40464,7 +40464,7 @@ module Scene_Db_Battle_Anime_pattern
                       end
 
                 when 9999
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -40631,7 +40631,7 @@ module Scene_Db_Battle_Anime_pattern
                     end
 
                 when 9999
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -41022,7 +41022,7 @@ module Scene_Db_Battle_Anime_pattern
                        @eney += 24
                    end
                when 9999
-                   anime_pattern_fromat
+                   anime_pattern_init
                    return @battle_anime_result + 1
                end
            else
@@ -41415,7 +41415,7 @@ module Scene_Db_Battle_Anime_pattern
                        @eney += 24
                    end
                when 9999
-                   anime_pattern_fromat
+                   anime_pattern_init
                    return @battle_anime_result + 1
                end
            else
@@ -41901,7 +41901,7 @@ module Scene_Db_Battle_Anime_pattern
                #@effect_anime_pattern = 265
                @effect_anime_pattern = 365
            when 823
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
        when 2907 #俺たちに不可能はない(超悟空、超ベジータ)
@@ -42253,7 +42253,7 @@ module Scene_Db_Battle_Anime_pattern
                    ray_y = STANDARD_CHAY + 24
 
                when 788
-                   anime_pattern_fromat
+                   anime_pattern_init
                    return @battle_anime_result + 1
                end
            else
@@ -42417,7 +42417,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 369
             when 416
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2910 #やっぱり息の合う
@@ -42585,7 +42585,7 @@ module Scene_Db_Battle_Anime_pattern
                 @back_window.contents.blt(640-tmpframe*16 ,98,picture,rect)
 
             when 362
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2911 #足元がお留守だぜ！
@@ -42870,7 +42870,7 @@ module Scene_Db_Battle_Anime_pattern
                 @back_window.contents.blt(640-tmpframe*16 ,98,picture,rect)
 
             when 717
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -43055,7 +43055,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..326
                 @effect_anime_pattern = 48
             when 327
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2913 #新狼鶴相打陣
@@ -43334,7 +43334,7 @@ module Scene_Db_Battle_Anime_pattern
                 @back_window.contents.blt(306 ,66,picture,rect)
             when 1021
                 @chay = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -43516,7 +43516,7 @@ module Scene_Db_Battle_Anime_pattern
                     rect = Rect.new(126, 0, 126, 126)
                     @back_window.contents.blt(-126 + 12 * tmpfra ,soukisy + tmpfra * soukiy ,picture,rect)
                 when 334
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -43535,7 +43535,7 @@ module Scene_Db_Battle_Anime_pattern
                         @kienrand = rand(3) + 1
                     end while @soukirand == @kienrand
 
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -43583,7 +43583,7 @@ module Scene_Db_Battle_Anime_pattern
                     rect = Rect.new(126, 0, 126, 126)
                     @back_window.contents.blt(-126 + 12 * tmpfra ,soukisy + tmpfra * soukiy ,picture,rect)
                 when 33
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -43824,7 +43824,7 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern 1
             when 561
                 @chay = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -43899,7 +43899,7 @@ module Scene_Db_Battle_Anime_pattern
                @back_window.contents.blt(-16+(@battle_anime_frame-sframe)*RAY_SPEED,STANDARD_CHAY - 30,picture,rect)
                @back_window.contents.blt(-16+(@battle_anime_frame-sframe)*RAY_SPEED,STANDARD_CHAY - 4,picture,rect)
            when 128
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
        when 2920 #超能力きこうほう改
@@ -43993,7 +43993,7 @@ module Scene_Db_Battle_Anime_pattern
                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == sframe+30 || @battle_anime_frame == sframe+70 || @battle_anime_frame == sframe+110 || @battle_anime_frame == sframe+150
                end
            when 562
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
         when 2921 #激烈魔閃光弾
@@ -44195,7 +44195,7 @@ module Scene_Db_Battle_Anime_pattern
             when 662..687
                 @effect_anime_pattern = 48
             when 688
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -44333,7 +44333,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..327
                 @effect_anime_pattern = 48
             when 328
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2923 #ファイナルかめはめ波
@@ -44522,7 +44522,7 @@ module Scene_Db_Battle_Anime_pattern
             when 512..537
                 @effect_anime_pattern = 365
             when 538
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -45074,7 +45074,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1128..1153
                     @effect_anime_pattern = 48
                 when 1154
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
 
@@ -45460,7 +45460,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 888..913
                     @effect_anime_pattern = 48
                 when 914
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
 
@@ -45744,7 +45744,7 @@ module Scene_Db_Battle_Anime_pattern
                         end
                     end
                 when 427
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -45822,7 +45822,7 @@ module Scene_Db_Battle_Anime_pattern
                         end
                     end
                 when 155
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -45928,7 +45928,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 1
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 when 332
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -45936,7 +45936,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -45953,7 +45953,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -46060,7 +46060,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 1
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 when 332
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -46068,7 +46068,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -46085,7 +46085,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -46190,7 +46190,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 1
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 when 332
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -46198,7 +46198,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -46215,7 +46215,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -46320,7 +46320,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 1
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 when 332
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -46328,7 +46328,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -46345,7 +46345,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -46451,7 +46451,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 1
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 when 332
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -46459,7 +46459,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -46476,7 +46476,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -46581,7 +46581,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 1
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 when 332
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -46589,7 +46589,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -46606,7 +46606,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -46712,7 +46712,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 1
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 when 332
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -46720,7 +46720,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -46737,7 +46737,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -46843,7 +46843,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 1
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 when 332
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -46851,7 +46851,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -46868,7 +46868,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -46974,7 +46974,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 1
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 when 332
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -46982,7 +46982,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -46999,7 +46999,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color) if @battle_anime_frame % 20 == 0
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -47176,7 +47176,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..326
                 @effect_anime_pattern = 353
             when 327
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2937 #ロイヤルガード(トランクス)
@@ -47371,7 +47371,7 @@ module Scene_Db_Battle_Anime_pattern
             when 302..326
                 @effect_anime_pattern = 353
             when 327
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2939 #親子乱舞(悟飯)
@@ -47773,7 +47773,7 @@ module Scene_Db_Battle_Anime_pattern
             when 622..647
                 @effect_anime_pattern = 48
             when 648
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2940 #親子乱舞(F悟飯)
@@ -48178,7 +48178,7 @@ module Scene_Db_Battle_Anime_pattern
             when 622..647
                 @effect_anime_pattern = 48
             when 648
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2941 #信じる心
@@ -48318,7 +48318,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_x = 138
                 ray_y = 156
             when 379
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2942 #月を破壊する者
@@ -48476,7 +48476,7 @@ module Scene_Db_Battle_Anime_pattern
                 picture = Cache.picture("Z3_戦闘_必殺技_エネルギー波_半円(緑)")
                 @back_window.contents.blt(ray_x,ray_y+50+2,picture,rect)
             when 538
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2943 #フルパワーアウトサイダーショット(バーダックとトーマ)
@@ -48587,7 +48587,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2944 #フルパワーアウトサイダーショット(バーダックとセリパ)
@@ -48698,7 +48698,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2945 #フルパワーアウトサイダーショット(バーダックとトテッポ)
@@ -48809,7 +48809,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2946 #フルパワーアウトサイダーショット(バーダックとパンブーキン)
@@ -48920,7 +48920,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2947 #フルパワーアウトサイダーショット(トーマとセリパ)
@@ -49031,7 +49031,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2948 #フルパワーアウトサイダーショット(トーマとトテッポ)
@@ -49142,7 +49142,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2949 #フルパワーアウトサイダーショット(トーマとパンブーキン)
@@ -49253,7 +49253,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2950 #フルパワーアウトサイダーショット(セリパとトテッポ)
@@ -49364,7 +49364,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2951 #フルパワーアウトサイダーショット(セリパとパンブーキン)
@@ -49475,7 +49475,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2952 #フルパワーアウトサイダーショット(トテッポとパンブーキン)
@@ -49586,7 +49586,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2953 #フルパワーアウトサイダーショット(ピッコロと18号)
@@ -49774,7 +49774,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2954 #フルパワーアウトサイダーショット(ピッコロと17号)
@@ -49962,7 +49962,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2955 #フルパワーアウトサイダーショット(ピッコロと16号)
@@ -50150,7 +50150,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2956 #フルパワーアウトサイダーショット(未来悟飯と18号)
@@ -50338,7 +50338,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2957 #フルパワーアウトサイダーショット(未来悟飯と17号)
@@ -50526,7 +50526,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2958 #フルパワーアウトサイダーショット(未来悟飯と16号)
@@ -50714,7 +50714,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2959 #フルパワーアウトサイダーショット(未来悟飯とベジータ)
@@ -50825,7 +50825,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2960 #師弟アタック改(ピッコロ、未来悟飯)
@@ -51364,7 +51364,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 134
                 @effect_anime_pattern = 255
             when 1148
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -51919,7 +51919,7 @@ module Scene_Db_Battle_Anime_pattern
             when 1061..1087
                 @effect_anime_pattern = 48
             when 1088
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -52116,7 +52116,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 298
                 @tec_kyouda_se = true
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -52313,7 +52313,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 298
                 @tec_kyouda_se = true
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2966 #悟空さに近寄るでねえ！(チチ&17号)
@@ -52509,7 +52509,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 298
                 @tec_kyouda_se = true
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2967 #悟空さに近寄るでねえ！(チチ&16号)
@@ -52705,7 +52705,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 298
                 @tec_kyouda_se = true
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2968 #大丈夫かチチ
@@ -52943,12 +52943,12 @@ module Scene_Db_Battle_Anime_pattern
                 when 1091
                     @eney = STANDARD_ENEY
                     @chay = -200
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
 
             #when 1167
-            #  anime_pattern_fromat
+            #  anime_pattern_init
             #  return @battle_anime_result + 1
             #end
             else
@@ -53377,7 +53377,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 882..908
                     @effect_anime_pattern = 207
                 when 909
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -53879,7 +53879,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1012..1038
                     @effect_anime_pattern = 207
                 when 1039
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -53994,7 +53994,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2972 #フルパワーアウトサイダーショット(未来悟飯とセリパ)
@@ -54105,7 +54105,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2973 #フルパワーアウトサイダーショット(未来悟飯とトテッポ)
@@ -54216,7 +54216,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2974 #フルパワーアウトサイダーショット(未来悟飯とパンブーキン)
@@ -54327,7 +54327,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 110
                 @effect_anime_pattern = 48
             when 306
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2976 #決死の超元気玉
@@ -54550,7 +54550,7 @@ module Scene_Db_Battle_Anime_pattern
                      rect = Rect.new(0, 0,640,250)
                      @back_window.contents.blt(0,-250+(@battle_anime_frame-sframe)*RAY_SPEED/6,picture,rect)
                  when 821
-                     anime_pattern_fromat
+                     anime_pattern_init
                      return @battle_anime_result + 1
                  end
              end
@@ -54751,7 +54751,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 48
             when 757
                 @chay = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2979 #スーパーどどはめは
@@ -54880,14 +54880,14 @@ module Scene_Db_Battle_Anime_pattern
             when 302..328
                 @effect_anime_pattern = 48
             when 329
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2431 #(敵汎用)エネルギー波
             enerugi_anime_no = 1
             ray_big = false
             ray_color = 3
-            if @attackcourse == 0
+            if @attackDir == 0
                 case $partyc[@chanum]
 
                 when 21 # 18号
@@ -55161,10 +55161,10 @@ module Scene_Db_Battle_Anime_pattern
                 set_chr_display_out
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
-                @effect_anime_pattern = 234 if $cha_bigsize_on[@chanum] == true && @attackcourse == 0 || ray_big == true
+                @effect_anime_pattern = 234 if $cha_bigsize_on[@chanum] == true && @attackDir == 0 || ray_big == true
                 ray_y = 136
             elsif @battle_anime_frame == 76
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2492 #超能力
@@ -55201,7 +55201,7 @@ module Scene_Db_Battle_Anime_pattern
                 #back_anime_pattern 9
 
                 when 147
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -55212,7 +55212,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 1..27
 
                 when 28
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -55352,11 +55352,11 @@ module Scene_Db_Battle_Anime_pattern
             when 141..165
                 @effect_anime_pattern = 260
             when 166
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
          when 2494 #連続エネルギー波
-             if @attackcourse == 0
+             if @attackDir == 0
                  back_x = 228
                  back_y = 88
                  ray_x = 304
@@ -55377,11 +55377,11 @@ module Scene_Db_Battle_Anime_pattern
 
                      battle_anime_change 0,2
 
-                     if $partyc[@chanum] == 27 && @attackcourse == 0 || $partyc[@chanum] == 28 && @attackcourse == 0 || $partyc[@chanum] == 29 && @attackcourse == 0 || $partyc[@chanum] == 30 && @attackcourse == 0
+                     if $partyc[@chanum] == 27 && @attackDir == 0 || $partyc[@chanum] == 28 && @attackDir == 0 || $partyc[@chanum] == 29 && @attackDir == 0 || $partyc[@chanum] == 30 && @attackDir == 0
                          @output_anime_type = 1
                          battle_anime_change 0,1
                      end
-                     if @enedatenum == 172 && @attackcourse == 1
+                     if @enedatenum == 172 && @attackDir == 1
                          @output_anime_type = 1
                          battle_anime_change 0,10
                      end
@@ -55406,8 +55406,8 @@ module Scene_Db_Battle_Anime_pattern
                      elsif @battle_anime_frame <= hatudoukaisi + hatudougofra*2
                          @effect_anime_frame = 0 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1
                          battle_anime_change 0,1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1
-                         @effect_anime_frame = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1 && @enedatenum == 172 && @attackcourse == 1
-                         battle_anime_change 0,1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1 && @enedatenum == 172 && @attackcourse == 1
+                         @effect_anime_frame = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1 && @enedatenum == 172 && @attackDir == 1
+                         battle_anime_change 0,1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1 && @enedatenum == 172 && @attackDir == 1
                          ray_y = 78
                          if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*1
                              @ax = -2
@@ -55423,13 +55423,13 @@ module Scene_Db_Battle_Anime_pattern
                          battle_anime_change 0,2 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2
 
                          if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2
-                             if $partyc[@chanum] == 27 && @attackcourse == 0 || $partyc[@chanum] == 28 && @attackcourse == 0 || $partyc[@chanum] == 29 && @attackcourse == 0 || $partyc[@chanum] == 30 && @attackcourse == 0
+                             if $partyc[@chanum] == 27 && @attackDir == 0 || $partyc[@chanum] == 28 && @attackDir == 0 || $partyc[@chanum] == 29 && @attackDir == 0 || $partyc[@chanum] == 30 && @attackDir == 0
                                  @output_anime_type = 1
                                  battle_anime_change 0,1
                              end
                          end
-                         @effect_anime_frame = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2 && @enedatenum == 172 && @attackcourse == 1
-                         battle_anime_change 0,10 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2 && @enedatenum == 172 && @attackcourse == 1
+                         @effect_anime_frame = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2 && @enedatenum == 172 && @attackDir == 1
+                         battle_anime_change 0,10 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2 && @enedatenum == 172 && @attackDir == 1
                          ray_y = 138
                          if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*2
                              @ax = -2
@@ -55473,7 +55473,7 @@ module Scene_Db_Battle_Anime_pattern
                      #back_anime_pattern 9
                      @effect_anime_pattern = 202
                  when 110
-                     anime_pattern_fromat
+                     anime_pattern_init
                      return @battle_anime_result + 1
                  end
              elsif @all_attack_count >= 2
@@ -55484,7 +55484,7 @@ module Scene_Db_Battle_Anime_pattern
                  when 1..29
                      @effect_anime_pattern = 202
                  when 30
-                     anime_pattern_fromat
+                     anime_pattern_init
                      return @battle_anime_result + 1
                  end
              end
@@ -55545,7 +55545,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 4 if @enedatenum == 121 #クウラ(最終形態)
                 @effect_anime_type = 4 if @enedatenum == 238 || @enedatenum == 252 #チルド
             when 208
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2498 #爆発波(クウラ,セル完全体,合体13号,ターレス系,スラッグ系)
@@ -55602,7 +55602,7 @@ module Scene_Db_Battle_Anime_pattern
                         battle_anime_change 0,3
                     end
                 when 211
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -55617,7 +55617,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin_mirror_flag = true
                     back_anime_pattern 1
                 when 273
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -55625,7 +55625,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ゴー") if @enedatenum == 152
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -55641,13 +55641,13 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin = true
                     @chr_cutin_mirror_flag = true
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
         when 2499 #強力エネルギー波
             ray_color = 3
-            if @attackcourse == 0
+            if @attackDir == 0
                 kitamenasi = true
                 ray_big = true
                 back_x = 228
@@ -55883,7 +55883,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             end
             if ray_big == true && @battle_anime_frame >= 140
-                if @attackcourse == 0
+                if @attackDir == 0
                     ray_x -= -40
                     ray_y -= 18
                 else
@@ -55897,7 +55897,7 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,0
                 if kitamenasi == false
 
-                    if @attackcourse != 0
+                    if @attackDir != 0
                         case @enedatenum #敵キャラによってSEを変える
                         when 177,178,179,180
                             Audio.se_play("Audio/SE/" + "Z1 気を溜める5")    # 効果音を再生する
@@ -55911,10 +55911,10 @@ module Scene_Db_Battle_Anime_pattern
                 else
                     Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
                     battle_anime_change 0,1
-                    battle_anime_change 0,2 if @enedatenum == 145 && @attackcourse == 1 #ザンギャ
+                    battle_anime_change 0,2 if @enedatenum == 145 && @attackDir == 1 #ザンギャ
                     battle_anime_change 0,4 if @enedatenum == 191 || @enedatenum == 192 #ザーボン系
                     battle_anime_change 0,3 if @enedatenum == 195 || @enedatenum == 196 #ドドリア系
-                    @ax = 2 if @enedatenum == 126 && @attackcourse == 1
+                    @ax = 2 if @enedatenum == 126 && @attackDir == 1
                 end
 
                 @ray_color = ray_color
@@ -55924,7 +55924,7 @@ module Scene_Db_Battle_Anime_pattern
                 @genkityuushin_x = ray_x +48
                 @genkityuushin_y = ray_y +32
 
-                if $cha_bigsize_on[@chanum] == true && @attackcourse == 0
+                if $cha_bigsize_on[@chanum] == true && @attackDir == 0
                     @genkityuushin_x -= 44
                     @genkityuushin_y += 4
                 end
@@ -56014,8 +56014,8 @@ module Scene_Db_Battle_Anime_pattern
                 #@output_anime_type = 1
                 Audio.se_stop
                 battle_anime_change 0,1
-                battle_anime_change 0,2 if @enedatenum == 143 && @attackcourse == 1  #ボージャックフルパワー
-                battle_anime_change 0,2 if @enedatenum == 145 && @attackcourse == 1 #ザンギャ
+                battle_anime_change 0,2 if @enedatenum == 143 && @attackDir == 1  #ボージャックフルパワー
+                battle_anime_change 0,2 if @enedatenum == 145 && @attackDir == 1 #ザンギャ
                 battle_anime_change 0,3 if @enedatenum == 238 || @enedatenum == 252 #チルド
                 @ax = 2 if @enedatenum == 121
             when 130
@@ -56024,8 +56024,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_stop
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
                 battle_anime_change 0,1
-                battle_anime_change 0,2 if @enedatenum == 143 && @attackcourse == 1 #ボージャックフルパワー
-                battle_anime_change 0,2 if @enedatenum == 145 && @attackcourse == 1 #ザンギャ
+                battle_anime_change 0,2 if @enedatenum == 143 && @attackDir == 1 #ボージャックフルパワー
+                battle_anime_change 0,2 if @enedatenum == 145 && @attackDir == 1 #ザンギャ
                 battle_anime_change 0,3 if @enedatenum == 238 || @enedatenum == 252 #チルド
                 if ray_big == true
                     @effect_anime_pattern = 239
@@ -56049,9 +56049,9 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_pattern = 234
                 end
 
-                @effect_anime_pattern = 240 if $cha_bigsize_on[@chanum] == true && @attackcourse == 0
+                @effect_anime_pattern = 240 if $cha_bigsize_on[@chanum] == true && @attackDir == 0
             when 216
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2501 #マシーナリーレイン
@@ -56286,7 +56286,7 @@ module Scene_Db_Battle_Anime_pattern
                 @tec_output_back = false
                 back_anime_pattern 1
             when 502
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2503 #ネイズバインドウェーブ
@@ -56330,7 +56330,7 @@ module Scene_Db_Battle_Anime_pattern
             when 140..166
                 @effect_anime_pattern = 44
             when 167
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2505 #ドーレテリブルラッシュ
@@ -56515,7 +56515,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = -12
                 @effect_anime_pattern = 234
             when 506
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2510 #ドレインライフ
@@ -56631,7 +56631,7 @@ module Scene_Db_Battle_Anime_pattern
                 @battle_anime_frame = 2000
             when 2001
                 @eney = -160
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2519 #アクセルダンス
@@ -56846,7 +56846,7 @@ module Scene_Db_Battle_Anime_pattern
                 @tec_output_back_no = 1
                 @back_window.contents.fill_rect(0,0,640,378,color) if @battle_anime_frame % 6 == 0
             when 580
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2552 #サウザーブレードスラッシュ
@@ -56960,7 +56960,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
 
             when 320
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2530 #カメハメ波(セル1)
@@ -57013,7 +57013,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 81 && @battle_anime_frame <= 107
                 @effect_anime_pattern = 204
             elsif @battle_anime_frame == 108
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2531 #魔貫光殺砲(セル1)
@@ -57083,7 +57083,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 134
                 @effect_anime_pattern = 255
             when 248
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2532 #太陽拳(セル1)
@@ -57146,7 +57146,7 @@ module Scene_Db_Battle_Anime_pattern
                         @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_OFF,color)
                     end
                 when 152
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -57165,7 +57165,7 @@ module Scene_Db_Battle_Anime_pattern
                         @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_OFF,color)
                     end
                 when 42
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -57248,7 +57248,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 265
 
             when 337
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2544 #スーパーカメハメ波(セル)
@@ -57261,7 +57261,7 @@ module Scene_Db_Battle_Anime_pattern
             ray_y = 0
             case @battle_anime_frame
             when 0 #初期化
-                #  if @attackcourse == 0
+                #  if @attackDir == 0
                 #    @output_anime_type = 0
                 #    @chay = -120 #キャラ画面範囲外へ
                 #  else
@@ -57323,7 +57323,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
                 @effect_anime_frame = 0
                 @effect_anime_pattern = 0
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @enex = CENTER_ENEX
                     @eney = STANDARD_ENEY
@@ -57344,7 +57344,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 @effect_anime_pattern = 48
             when 290
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2570 #痺れ液
@@ -57368,7 +57368,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
             when 75
                 @tec_output_back_no = 0
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -57381,7 +57381,7 @@ module Scene_Db_Battle_Anime_pattern
             when 76..102
                 @effect_anime_pattern = 44
             when 103
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2573 #サイレントアサシン13
@@ -57553,7 +57553,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
 
             when 223
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2574 #デッドリィアサルト
@@ -57659,7 +57659,7 @@ module Scene_Db_Battle_Anime_pattern
             #@tec_output_back = false
             #back_anime_pattern 1
             when 264
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2575 #13号)SSデッドリィボンバー
@@ -57755,7 +57755,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 battle_anime_change 1,16 if @battle_anime_frame == sframe + 19
             when 284
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2579 #合体13号)SSデッドリィボンバー
@@ -57800,7 +57800,7 @@ module Scene_Db_Battle_Anime_pattern
                 rect = Rect.new(5*128, 0,128,128)
                 @back_window.contents.blt(640-16*(@battle_anime_frame-sframe),STANDARD_CHAY - 16,picture,rect)
             when 199
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2580 #合体13号)フルパワーSSデッドリィボンバー
@@ -57992,7 +57992,7 @@ module Scene_Db_Battle_Anime_pattern
                 rect = Rect.new(5*128, 0,128,128)
                 @back_window.contents.blt(640-16*(@battle_anime_frame-sframe),STANDARD_CHAY - 16,picture,rect)
             when 559
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2583 #14号)アンドロイドチャージ14
@@ -58139,7 +58139,7 @@ module Scene_Db_Battle_Anime_pattern
             when 276
                 @tec_kyouda_se = true
                 @eney = - 200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2586 #15号)アンドロイドストライク15
@@ -58327,7 +58327,7 @@ module Scene_Db_Battle_Anime_pattern
             when 335
                 @tec_kyouda_se = true
                 @eney = - 200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2595 #ボーフル)ギャラテクティックタイラント
@@ -58436,7 +58436,7 @@ module Scene_Db_Battle_Anime_pattern
                 @gx  = 0
                 #@chax = CENTER_CHAX
                 @eney = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2596 #ギャラクティックバスター
@@ -58518,7 +58518,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_pattern = 265
 
             when 337
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2601 #ゴクア)ギャラクティックアタック
@@ -58622,7 +58622,7 @@ module Scene_Db_Battle_Anime_pattern
 
             when 321
                 @eney = - 200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2605 #ザンギャ)スカイザッパー
@@ -58743,7 +58743,7 @@ module Scene_Db_Battle_Anime_pattern
             when 410..436
                 @effect_anime_pattern = 232
             when 437
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2606 #ザンギャビドーブージン単体超能力
@@ -58777,7 +58777,7 @@ module Scene_Db_Battle_Anime_pattern
             #back_anime_pattern 9
 
             when 147
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2612 #ビドー)ギャラクティッククラッシュ
@@ -58886,7 +58886,7 @@ module Scene_Db_Battle_Anime_pattern
             when 450..476
                 @effect_anime_pattern = 240
             when 477
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2618 #ブージン)合体超能力
@@ -59207,7 +59207,7 @@ module Scene_Db_Battle_Anime_pattern
             when 416
                 @tec_kyouda_se = true
                 @eney = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2624 #ブロ超)イレイザーキャノン
@@ -59364,7 +59364,7 @@ module Scene_Db_Battle_Anime_pattern
 
             when 387
                 @eney = - 200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2630 #ブロフル)イレイザーブロウ
@@ -59410,7 +59410,7 @@ module Scene_Db_Battle_Anime_pattern
             when 131
                 #battle_anime_change 0,19 #演出上例外的に移動しないで残す
                 @eney = - 200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2631 #ブロフル)イレイザーキャノン
@@ -59487,7 +59487,7 @@ module Scene_Db_Battle_Anime_pattern
 
             when 260
                 @eney = - 200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2632 #ブロフル)スローイングブラスター
@@ -59565,7 +59565,7 @@ module Scene_Db_Battle_Anime_pattern
 
             when 260
                 @eney = - 200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2633 #ブロフル)オメガブラスター
@@ -59691,7 +59691,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 631
                 @eney = - 200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2635 #アラレ)ウンチ攻撃
@@ -59732,7 +59732,7 @@ module Scene_Db_Battle_Anime_pattern
                 @back_window.contents.blt(back_x,back_y,picture,rect)
             #@effect_anime_pattern = 228
             when 226
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2636 #キーン
@@ -59958,7 +59958,7 @@ module Scene_Db_Battle_Anime_pattern
                     @battle_anime_frame = 200 if @battle_anime_frame == eframe
                 when 3101
                     @eney = -200
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -60000,7 +60000,7 @@ module Scene_Db_Battle_Anime_pattern
                     end
                 when 32
                     @eney = -200
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -60104,7 +60104,7 @@ module Scene_Db_Battle_Anime_pattern
                 @back_window.contents.blt(back_x,back_y,picture,rect)
             #@effect_anime_pattern = 228
             when 226
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2638 #ブンブン
@@ -60226,7 +60226,7 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern 1
             when 381
                 @eney = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2639 #アラレ)んちゃ砲
@@ -60280,7 +60280,7 @@ module Scene_Db_Battle_Anime_pattern
             when 196..220
                 @effect_anime_pattern = 226
             when 221
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2640 #プロレスごっこ
@@ -60502,7 +60502,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 621
                 @eney = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2645 #ミストカメハメ波
@@ -60564,7 +60564,7 @@ module Scene_Db_Battle_Anime_pattern
             when 231..255
                 @effect_anime_pattern = 204
             when 256
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2646 #ミストまこうほう
@@ -60629,7 +60629,7 @@ module Scene_Db_Battle_Anime_pattern
             when 290..316
                 @effect_anime_pattern = 207
             when 317
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2647 #ミストませんこう
@@ -60683,7 +60683,7 @@ module Scene_Db_Battle_Anime_pattern
             when 290..316
                 @effect_anime_pattern = 204
             when 317
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2648 #ミストギャリック砲
@@ -60740,7 +60740,7 @@ module Scene_Db_Battle_Anime_pattern
             when 310..336
                 @effect_anime_pattern = 234
             when 337
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2649 #ミスト剣攻撃
@@ -60788,7 +60788,7 @@ module Scene_Db_Battle_Anime_pattern
             when 196..225
             #@effect_anime_pattern = 202
             when 226
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2653 #アービー系)パワードレイン
@@ -60860,7 +60860,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,2
                 end
             when 239
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2669 #ゴッドガ)テイルザンバー
@@ -60871,7 +60871,7 @@ module Scene_Db_Battle_Anime_pattern
             ray_big = true
             @ray_color = 3
             if ray_big == true && @battle_anime_frame >= 140
-                if @attackcourse == 0
+                if @attackDir == 0
                     ray_x -= -40
                     ray_y -= 18
                 else
@@ -61007,7 +61007,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y += 50
                 @effect_anime_pattern = 262
             when 216
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2670 #ゴッドガ)ガードンクラッシャー
@@ -61087,7 +61087,7 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "ZG 光線1") if @battle_anime_frame == 216
                 @effect_anime_pattern = 207
             when 241
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2675 #ライチ)ビッグスマッシャー
@@ -61120,7 +61120,7 @@ module Scene_Db_Battle_Anime_pattern
             when 170..193
                 @effect_anime_pattern = 265
             when 197
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2678 #ライチ)イレイサーショック
@@ -61196,7 +61196,7 @@ module Scene_Db_Battle_Anime_pattern
                 #Audio.se_play("Audio/SE/" + "ZG 光線1") if @battle_anime_frame == 216
                 @effect_anime_pattern = 265
             when 491
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2683 #ハッチ)リベンジャーチャージ
@@ -61241,7 +61241,7 @@ module Scene_Db_Battle_Anime_pattern
                 rect = Rect.new(0, 0,268,304)
                 @back_window.contents.blt(back_x,back_y,picture,rect)
             when 521
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2684 #ハッチ)リベンジャーカノン
@@ -61323,7 +61323,7 @@ module Scene_Db_Battle_Anime_pattern
                     #Audio.se_play("Audio/SE/" + "ZG 光線1") if @battle_anime_frame == 216
                     @effect_anime_pattern = 265
                 when 831
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -61336,7 +61336,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 0
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -61346,7 +61346,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 265
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -61499,7 +61499,7 @@ module Scene_Db_Battle_Anime_pattern
            when 431
                @eney = -200
                @tec_kyouda_se = true
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
       when 2698 #ビネガー)ラッシュ
@@ -61709,7 +61709,7 @@ module Scene_Db_Battle_Anime_pattern
           when 418
               @eney = -200
               @tec_kyouda_se = true
-              anime_pattern_fromat
+              anime_pattern_init
               return @battle_anime_result + 1
           end
        when 2702 #タード)ラッシュ
@@ -61847,7 +61847,7 @@ module Scene_Db_Battle_Anime_pattern
            when 360
                @eney = -200
                @tec_kyouda_se = true
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
       when 2706 #ゾルト)ラッシュ
@@ -61922,7 +61922,7 @@ module Scene_Db_Battle_Anime_pattern
           when 511
               @eney = -200
               @tec_kyouda_se = true
-              anime_pattern_fromat
+              anime_pattern_init
               return @battle_anime_result + 1
           end
         when 2707 #タード&ゾルト)ダブルアタック
@@ -62074,7 +62074,7 @@ module Scene_Db_Battle_Anime_pattern
                 @tec_output_back_no = 0
                 @effect_anime_pattern = 207
             when 628
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
        when 1708 #刀攻撃強(ジンジャー系)
@@ -62116,7 +62116,7 @@ module Scene_Db_Battle_Anime_pattern
                    @tec_output_back = false
                    @tec_output_back_no = 0
                end
-               if @attackcourse == 0
+               if @attackDir == 0
                    @output_anime_type = 0
                    @chay = -200 #キャラ画面範囲外へ
                    @enex = CENTER_ENEX
@@ -62208,7 +62208,7 @@ module Scene_Db_Battle_Anime_pattern
 
            when 409
                @eney = -200
-               anime_pattern_fromat
+               anime_pattern_init
                return @battle_anime_result + 1
            end
 
@@ -62251,7 +62251,7 @@ module Scene_Db_Battle_Anime_pattern
                     @tec_output_back = false
                     @tec_output_back_no = 0
                 end
-                if @attackcourse == 0
+                if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -200 #キャラ画面範囲外へ
                     @enex = CENTER_ENEX
@@ -62363,7 +62363,7 @@ module Scene_Db_Battle_Anime_pattern
 
             when 409
                 @eney = -200
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 1710 #連続強力エネルギー波(サンショ系)
@@ -62430,7 +62430,7 @@ module Scene_Db_Battle_Anime_pattern
                     if $btl_progress >= 2
                         @tec_output_back_no = 0
                     end
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -62443,7 +62443,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 319 && @battle_anime_frame <= 345
                     @effect_anime_pattern = 47
                 elsif @battle_anime_frame == 346
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -62452,7 +62452,7 @@ module Scene_Db_Battle_Anime_pattern
                     if $btl_progress >= 2
                         @tec_output_back_no = 0
                     end
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -200 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -62465,7 +62465,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 26
                     @effect_anime_pattern = 47
                 elsif @battle_anime_frame == 27
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
 
@@ -62528,7 +62528,7 @@ module Scene_Db_Battle_Anime_pattern
                         @tec_output_back = false
                         @tec_output_back_no = 0
                     end
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -62542,7 +62542,7 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern 9
 
                 when 263
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -62550,7 +62550,7 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame == 0
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")    # 効果音を再生する
                     Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @output_anime_type = 0
                         @chay = -120 #キャラ画面範囲外へ
                         @enex = CENTER_ENEX
@@ -62563,7 +62563,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 61
                     back_anime_pattern 9
                 elsif @battle_anime_frame == 62
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -62640,7 +62640,7 @@ module Scene_Db_Battle_Anime_pattern
             when 501
                 @eney = -200
                 Audio.se_stop
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2714 #メタルクウラコア エネルギー波
@@ -62668,10 +62668,10 @@ module Scene_Db_Battle_Anime_pattern
                 set_chr_display_out
             when 146..173
                 @effect_anime_pattern = 234
-                #@effect_anime_pattern = 228 if $cha_bigsize_on[@chanum] == true && @attackcourse == 1
+                #@effect_anime_pattern = 228 if $cha_bigsize_on[@chanum] == true && @attackDir == 1
                 ray_y = 136
             when 174
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -62803,7 +62803,7 @@ module Scene_Db_Battle_Anime_pattern
             #  @effect_anime_pattern = 234
             #end
             when 276
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2716 #エネルギー吸収
@@ -62847,7 +62847,7 @@ module Scene_Db_Battle_Anime_pattern
                     ray_x = 780
                     @effect_anime_pattern = 329
                 when 233
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -62869,7 +62869,7 @@ module Scene_Db_Battle_Anime_pattern
                     ray_x = 780
                     @effect_anime_pattern = 329
                 when 72
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -63010,7 +63010,7 @@ module Scene_Db_Battle_Anime_pattern
                     ray_y = -200
                     @effect_anime_pattern = 326
                 when 335
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -63032,7 +63032,7 @@ module Scene_Db_Battle_Anime_pattern
                     ray_y = -200
                     @effect_anime_pattern = 326
                 when 47
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -63152,7 +63152,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
 
             when 340
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
 
@@ -63203,7 +63203,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 191..217
                     @effect_anime_pattern = 230
                 when 218
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -63214,7 +63214,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 230
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -63224,7 +63224,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
                     @effect_anime_pattern = 230
                 elsif @battle_anime_frame == 26
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -63272,7 +63272,7 @@ module Scene_Db_Battle_Anime_pattern
                 #back_anime_pattern 1
                 @effect_anime_pattern = 350
             when 160
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2775 #サンダーフラッシュ パイクーハン
@@ -63335,7 +63335,7 @@ module Scene_Db_Battle_Anime_pattern
                 #back_anime_pattern 1
                 @effect_anime_pattern = 265
             when 290
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2779 #カメハメ波(ブウ)
@@ -63373,7 +63373,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 81 && @battle_anime_frame <= 107
                 @effect_anime_pattern = 204
             elsif @battle_anime_frame == 108
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2780 #巻きつき攻撃(ブウ)
@@ -63513,7 +63513,7 @@ module Scene_Db_Battle_Anime_pattern
                 @chay = 120
                 @eney = -200
                 battle_anime_change 1,17
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2781 #お菓子光線(ブウ)
@@ -63545,7 +63545,7 @@ module Scene_Db_Battle_Anime_pattern
                 ray_y = 124
                 @effect_anime_pattern = 352
             when 65
-                anime_pattern_fromat
+                anime_pattern_init
                 #Audio.se_play("Audio/SE/" + "Z3 稲妻")
                 return @battle_anime_result + 1
             end
@@ -63625,7 +63625,7 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 ゴー") if @battle_anime_frame == sframe
                     back_anime_pattern 1
                 when 398
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             elsif @all_attack_count >= 2
@@ -63638,7 +63638,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@effect_anime_frame = 27
                     @effect_anime_pattern = 0
                     @output_anime_type = 0
-                    if @attackcourse == 0
+                    if @attackDir == 0
                         @enex = CENTER_ENEX
                         @eney = STANDARD_ENEY
                     else
@@ -63648,7 +63648,7 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 47
                     back_anime_pattern 1
                 elsif @battle_anime_frame == 48
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -63881,7 +63881,7 @@ module Scene_Db_Battle_Anime_pattern
             when 441
                 battle_anime_change 0,4
                 @tec_kyouda_se = true
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2789 #イグナイトビジョン(オゾット／オゾット変身)
@@ -63962,7 +63962,7 @@ module Scene_Db_Battle_Anime_pattern
                         @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_OFF,color)
                     end
                 when 182
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             else
@@ -63983,7 +63983,7 @@ module Scene_Db_Battle_Anime_pattern
                         @back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_OFF,color)
                     end
                 when 42
-                    anime_pattern_fromat
+                    anime_pattern_init
                     return @battle_anime_result + 1
                 end
             end
@@ -64141,7 +64141,7 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 ゴー") if @battle_anime_frame == sframe
                 @effect_anime_pattern = 353
             when 507
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2793 #オゾット(カオスバースト)
@@ -64215,7 +64215,7 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 ゴー") if @battle_anime_frame == sframe
                 @effect_anime_pattern = 48 #353
             when 427
-                anime_pattern_fromat
+                anime_pattern_init
                 return @battle_anime_result + 1
             end
         end
@@ -64233,6 +64233,6 @@ module Scene_Db_Battle_Anime_pattern
         end
         return @battle_anime_result
 
-    end
+    end  # end of func
 
-end
+end  # end of module

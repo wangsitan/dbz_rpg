@@ -1,3 +1,4 @@
+console
 
 @modules
 Vocab
@@ -99,6 +100,8 @@ Scene_Battle
 Scene_Gameover
 Scene_Db_Status
 Scene_Db_Battle
+Scene_Db_Battle_Anime_attack_start
+Scene_Db_Battle_Anime_effect_pattern
 Scene_Db_Battle_Anime_pattern
 Scene_Db_Battle_Anime
 Scene_Db_Tactics_Menu
