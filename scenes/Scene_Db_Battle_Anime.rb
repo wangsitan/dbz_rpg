@@ -2106,7 +2106,7 @@ class Scene_Db_Battle_Anime < Scene_Base
         return ok_atk
     end
 
-    def chr_battle_anime_end
+    def func_attack_anime_end()
         @battle_anime_frame = 0
         @anime_frame_format = false
         @battle_anime_result = 0
@@ -2164,7 +2164,7 @@ class Scene_Db_Battle_Anime < Scene_Base
     #--------------------------------------------------------------------------
     # ● カットイン表示
     #--------------------------------------------------------------------------
-    def output_cutin attackpattern = 0
+    def output_cutin(attackPattern=0)
         # 必殺技カットイン
 
         if @chr_cutin_flag == false
@@ -2246,7 +2246,7 @@ class Scene_Db_Battle_Anime < Scene_Base
     #--------------------------------------------------------------------------
     # ● 背景・色表示
     #--------------------------------------------------------------------------
-    def output_back attackpattern = 0
+    def output_back(attackPattern=0)
         # @back_window.contents.clear
 
         if @all_attack_count <= 1
@@ -2768,7 +2768,7 @@ class Scene_Db_Battle_Anime < Scene_Base
         end
 
         # フェード時に非表示が気になるのでここでも表示させる
-        output_cutin attackpattern
+        output_cutin(attackPattern)
         # ステータス背景色
         # color = set_skn_color 0
         # @back_window.contents.fill_rect(0,356,680,150,color)

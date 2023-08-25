@@ -40,7 +40,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
     $game_variables[40] = 2
     create_window
     @chara_pattern = $game_variables[121] #ゴクウたちか、トランクスたちかなど
-    
+
     #シナリオ進行度によってファイル名の頭文字を変える
     if $game_variables[40] == 0
       Audio.bgm_play("Audio/BGM/" + "Z1 修行")    # 効果音を再生する
@@ -142,7 +142,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
   end
   #--------------------------------------------------------------------------
   # ● ウインドウ開放
-  #--------------------------------------------------------------------------   
+  #--------------------------------------------------------------------------
   def dispose_window
     @main_window.dispose
     @main_window = nil
@@ -150,10 +150,10 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
     @msg_window = nil
     @card_window.dispose
     @card_window = nil
-  end 
+  end
   #--------------------------------------------------------------------------
   # ● メッセージウインドウ作成
-  #--------------------------------------------------------------------------   
+  #--------------------------------------------------------------------------
   def create_window
     # メインウインドウ
     @main_window = Window_Base.new(-16,-16,672,512)
@@ -172,17 +172,17 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
   end
   #--------------------------------------------------------------------------
   # ● 画面更新
-  #--------------------------------------------------------------------------  
+  #--------------------------------------------------------------------------
   def pre_update
     @main_window.contents.clear
     @card_window.contents.clear
     @msg_window.contents.clear
-    
+
     color = set_skn_color 0
     @main_window.contents.fill_rect(0,0,656,496,color)
     color = Color.new(0,0,0,255)
     @main_window.contents.fill_rect(BTL_WIN_X,BTL_WIN_Y,224,128,color)
-    
+
     output_character      #キャラクター表示
     output_msg            #メッセージ表示
     output_battle_card    #バトルカード表示
@@ -193,22 +193,22 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
   end
   #--------------------------------------------------------------------------
   # ● フレーム更新
-  #--------------------------------------------------------------------------   
+  #--------------------------------------------------------------------------
   def update
     super
-    
+
     pre_update
     @msg_window.update
     @card_window.update
     @main_window.update
-    
+
 
     #if $training_chara_num == nil && @window_state == 1 #キャラクター選択
     #  chara_select
     #end
     if Input.trigger?(Input::B)
       case @window_state
-      
+
       when 3
         @card_select[@card_select_num[0]] = false
         @card_select_num[0] = nil
@@ -224,9 +224,9 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
         @window_state -= 1
         @training_select_chara=[nil,nil]
       end
-        
-      
-    end  
+
+
+    end
 
     if Input.trigger?(Input::C)
       Audio.se_play("Audio/SE/" + $BGM_CursorOn) if @btl_anime_no == 0 && @window_state != 7 # 効果音を再生する
@@ -264,10 +264,10 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
       elsif @window_state == 15
         @window_state += 1
       end
-      
-      
+
+
     end
-    
+
     if Input.trigger?(Input::DOWN)
 
     end
@@ -275,7 +275,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
 
     end
     if Input.trigger?(Input::RIGHT)
-      
+
       if @window_state == 2 || @window_state == 3 #カード選択
         Audio.se_play("Audio/SE/" + $BGM_CursorMove)    # 効果音を再生する
         @battle_card_cursor_state = chk_select_cursor_control(@battle_card_cursor_state,1,0,$Cardmaxnum+1)
@@ -298,12 +298,12 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
       #if @training_count.max != 0 #修行を途中で止めたときのみ経験値を計算
         get_exp
       #end
-      
+
       if @old_card != nil
         create_card 0,@old_card
         #Graphics.wait(50)
       end
-      
+
       $training_chara_num = nil
       #Audio.se_play("Audio/se/" + "Z1 出る")# 効果音を再生する
       Graphics.fadeout(20)
@@ -312,7 +312,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
       #$game_player.reserve_transfer($game_variables[13], $game_variables[1], $game_variables[2], 0) # 場所移動
     end
   end
-  
+
   #--------------------------------------------------------------------------
   # ● メッセージウインドウの表示
   #--------------------------------------------------------------------------
@@ -321,16 +321,16 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
     rect = Rect.new(0 , 48, 64, 64)
     btl_reset_flag = false #回数など初期化フラグ
     case @btl_anime_no
-    
+
     when 1 #現れる
       anime_frame = 50
       #@btl_anime_count = anime_frame if @btl_anime_count == 0
-      
+
       if @btl_anime_count % 2 == 0 && @btl_anime_count >= 20
         @main_window.contents.blt(BTL_WIN_X+BTL_CHA_PULS_X,BTL_WIN_Y+BTL_CHA_PULS_Y,picture,rect)
         @main_window.contents.blt(BTL_WIN_X+BTL_CHA2_PULS_X,BTL_WIN_Y+BTL_CHA_PULS_Y,picture,rect)
       end
-    
+
     when 2 #戦う
       anime_frame = 260
       #@btl_anime_count = anime_frame if @btl_anime_count == 0
@@ -338,14 +338,14 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
       chara1 = set_battle_character_name @training_chara[@training_select_chara[1]],0
       #p chara0 , $top_file_name ,$data_actors[@training_chara[0]].name
       #p chara1
-      anime_pattern = 0
+      animePattern = 0
       case @btl_anime_count
       when 0,28,44,60,76,92,108,116,132,148,164,180,196,212
         @btl_chara[0].bitmap = Cache.picture(chara0)
-        @btl_chara[0].src_rect = Rect.new(0 , 96*anime_pattern, 96, 96)
+        @btl_chara[0].src_rect = Rect.new(0 , 96*animePattern, 96, 96)
         @btl_chara[0].visible = true
         @btl_chara[1].bitmap = Cache.picture(chara1)
-        @btl_chara[1].src_rect = Rect.new(0 , 96*anime_pattern, 96, 96)
+        @btl_chara[1].src_rect = Rect.new(0 , 96*animePattern, 96, 96)
         @btl_chara[1].visible = true
         @btl_clash.visible = false
       when 20,156
@@ -382,13 +382,13 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
         @btl_clash.visible = false
       end
     end
-    
+
     if @btl_anime_count == anime_frame
       @btl_anime_count = 0
       case @window_state
-      
+
       when 6
-        
+
         if @btl_anime_chg_count == 0
           @btl_anime_no = 2
         elsif @btl_anime_chg_count == 1
@@ -401,7 +401,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
     else
       @btl_anime_count += 1
     end
-    
+
     if btl_reset_flag == true
       @btl_anime_no = 0
       @btl_anime_chg_count = 0
@@ -416,7 +416,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
 
     # メッセージ表示
     case @window_state
-    
+
     when 0
       @msg_window.contents.draw_text(0,0, 600, 20, "カードの中から　流派の　ペアを　作り")
       @msg_window.contents.draw_text(0,25, 600, 20, "組み手を　行う　二人を　選ぼう！")
@@ -432,11 +432,11 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
       end
       #@msg_window.contents.draw_text(0,50, 600, 20, "沢山クリアすれば　それだけ　経験値が　沢山貰えるぞ！")
     when 6
-      
+
       if @chara_pattern == 0
         #ゴクウとピッコロ
         if @training_chara[@training_select_chara[0]] == 3 && @training_chara[@training_select_chara[1]] == 4 || @training_chara[@training_select_chara[0]] == 4 && @training_chara[@training_select_chara[1]] == 3
-          @old_msg[0] = "悟空「ピッコロ！　おめえ　腕を上げたな」" 
+          @old_msg[0] = "悟空「ピッコロ！　おめえ　腕を上げたな」"
           @old_msg[1] = "ピッコロ「てめえだけ　強くなるのは　しゃくだからな！」"
 
         #ゴクウとゴハン
@@ -462,7 +462,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
         #ゴクウとゴハン
         if @training_chara[@training_select_chara[0]] == 3 && @training_chara[@training_select_chara[1]] == 5
           @old_msg[0] = "悟空「オメーの力は　そんなもんじゃないはずだ　悟飯！」"
-          @old_msg[1] = "悟飯「さすが　お父さんだ…　でも　僕も負けないよ！」" 
+          @old_msg[1] = "悟飯「さすが　お父さんだ…　でも　僕も負けないよ！」"
         #ゴハンとゴクウ
         elsif @training_chara[@training_select_chara[0]] == 5 && @training_chara[@training_select_chara[1]] == 3
           @old_msg[0] = "悟飯「この動き…　お父さんの狙いは！！」"
@@ -472,7 +472,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
         #クリリンとヤムチャ
         if @training_chara[@training_select_chara[0]] == 6 && @training_chara[@training_select_chara[1]] == 7
           @old_msg[0] = "クリリン「手かげんなしで　お願いしますよ　ヤムチャさん！」"
-          @old_msg[1] = "ヤムチャ「ああ　本気でやろうぜ　クリリン！」" 
+          @old_msg[1] = "ヤムチャ「ああ　本気でやろうぜ　クリリン！」"
         #クリリンとテンシンハン
         elsif @training_chara[@training_select_chara[0]] == 6 && @training_chara[@training_select_chara[1]] == 8
           @old_msg[0] = "クリリン「この動きは　武天老師さまの！？」"
@@ -484,45 +484,45 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
         #ヤムチャとクリリン
         elsif @training_chara[@training_select_chara[0]] == 7 && @training_chara[@training_select_chara[1]] == 6
           @old_msg[0] = "ヤムチャ「クリリン　ずいぶん強くなったな！」"
-          @old_msg[1] = "クリリン「ヤムチャさんだって！！」" 
+          @old_msg[1] = "クリリン「ヤムチャさんだって！！」"
         #ヤムチャとテンシンハン
         elsif @training_chara[@training_select_chara[0]] == 7 && @training_chara[@training_select_chara[1]] == 8
           @old_msg[0] = "ヤムチャ「今の　実力ならば！　この技で！！」"
-          @old_msg[1] = "テンシンハン「何っ！！　いつの間に　ここまでの実力を！！」" 
+          @old_msg[1] = "テンシンハン「何っ！！　いつの間に　ここまでの実力を！！」"
         #ヤムチャとチャオズ
         elsif @training_chara[@training_select_chara[0]] == 7 && @training_chara[@training_select_chara[1]] == 9
           @old_msg[0] = "ヤムチャ「手加減しないぜ　チャオズ！！」"
-          @old_msg[1] = "チャオズ「僕だって！！」" 
+          @old_msg[1] = "チャオズ「僕だって！！」"
         #テンシンハンとクリリン
         elsif @training_chara[@training_select_chara[0]] == 8 && @training_chara[@training_select_chara[1]] == 6
           @old_msg[0] = "テンシンハン「この動きに　ついてこれるかな　クリリン！」"
-          @old_msg[1] = "クリリン「初めてみたぞ！　何だこの動きは！？」" 
+          @old_msg[1] = "クリリン「初めてみたぞ！　何だこの動きは！？」"
         #テンシンハンとヤムチャ
         elsif @training_chara[@training_select_chara[0]] == 8 && @training_chara[@training_select_chara[1]] == 7
           @old_msg[0] = "テンシンハン「本気でやり合うのは　あの日　以来だな！」"
-          @old_msg[1] = "ヤムチャ「今度は　負けないぜ　テンシンハン！！」" 
+          @old_msg[1] = "ヤムチャ「今度は　負けないぜ　テンシンハン！！」"
         #テンシンハンとチャオズ
         elsif @training_chara[@training_select_chara[0]] == 8 && @training_chara[@training_select_chara[1]] == 9
           @old_msg[0] = "テンシンハン「本気で行くぞ　チャオズ！」"
-          @old_msg[1] = "チャオズ「僕もだよ　テンさん！！」" 
+          @old_msg[1] = "チャオズ「僕もだよ　テンさん！！」"
         #チャオズとクリリン
         elsif @training_chara[@training_select_chara[0]] == 9 && @training_chara[@training_select_chara[1]] == 6
           @old_msg[0] = "チャオズ「１６＋２７は！？」"
-          @old_msg[1] = "クリリン「４３！！　　９－１は！？」" 
+          @old_msg[1] = "クリリン「４３！！　　９－１は！？」"
         #チャオズとヤムチャ
         elsif @training_chara[@training_select_chara[0]] == 9 && @training_chara[@training_select_chara[1]] == 7
           @old_msg[0] = "チャオズ「足元が　お留守になってるよ！」"
-          @old_msg[1] = "ヤムチャ「何でお前が　それを！！」" 
+          @old_msg[1] = "ヤムチャ「何でお前が　それを！！」"
         #チャオズとテンシンハン
         elsif @training_chara[@training_select_chara[0]] == 9 && @training_chara[@training_select_chara[1]] == 8
           @old_msg[0] = "チャオズ「テンさん　僕と勝負だ！」"
-          @old_msg[1] = "テンシンハン「ああ　本気で来い　チャオズ！！」" 
+          @old_msg[1] = "テンシンハン「ああ　本気で来い　チャオズ！！」"
         end
       end
       @msg_window.contents.draw_text(0,0, 630, 20, @old_msg[0])
       @msg_window.contents.draw_text(0,50, 630, 20, @old_msg[1])
     when 15
-      
+
       if @chara_pattern == 0
         @msg_window.contents.draw_text(0,0, 630, 20, "悟空「ふう…　このくらいで　ちょっと　休憩しねえか？」")
         @msg_window.contents.draw_text(0,50, 630, 20, "ピッコロ「いいだろう…」")
@@ -541,12 +541,12 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
       end
 
     end
-    
+
   end
 
   #--------------------------------------------------------------------------
   # ● 流派チェック
-  #--------------------------------------------------------------------------  
+  #--------------------------------------------------------------------------
   def chk_card_ryuha
     if $cardi[@card_select_num[0]] != $cardi[@card_select_num[1]] || $cardi[@card_select_num[0]] == 0 || $cardi[@card_select_num[1]] == 0
       return false
@@ -556,18 +556,18 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
   end
   #--------------------------------------------------------------------------
   # ● バトルカード表示
-  #--------------------------------------------------------------------------  
+  #--------------------------------------------------------------------------
   def output_battle_card
       # バトルカード表示
       picture = Cache.picture("カード関係")
-      
+
       for a in 1..7 do
         @card_ryuha_blink_count += 1 if a != 7
         cardup_y = 0
         if @card_select[a-1] == true
           cardup_y = Cardup
         end
-        
+
         if @window_state != 7 || @card_chg_count % 2 != 0 || @card_select[a-1] == false
           recta = set_card_frame 0
           rectb = set_card_frame 2,$carda[a-1] # 攻撃
@@ -581,9 +581,9 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
           else
             if @card_ryuha_blink_count >= 40
               @card_ryuha_blink_count = 0
-            end 
+            end
           end
-            
+
           @card_window.contents.blt(Cardoutputkizyun + Cardsize * (a-1),24-cardup_y,picture,recta)
           @card_window.contents.blt(Cardoutputkizyun + 2 + Cardsize * (a-1)+$output_card_tyousei_x,26+$output_card_tyousei_y-cardup_y,picture,rectb)
           @card_window.contents.blt(Cardoutputkizyun + 30 + Cardsize * (a-1),86-cardup_y,picture,rectc)
@@ -594,7 +594,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
         end
       end
       @card_chg_count += 1 if @window_state == 7
-      
+
       if @card_chg_count == 40
         @card_chg_count = 0
         create_card 0,@card_select_num[0]
@@ -614,8 +614,8 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
   # ● カーソル表示
   #--------------------------------------------------------------------------
   def output_cursor
-    
-    
+
+
     # メニューカーソル表示
     $cursor_blink_count += 1
     picture = Cache.picture("アイコン")
@@ -624,50 +624,50 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
       @card_window.contents.blt(80 + Cardsize * @battle_card_cursor_state,8,picture,rect)
     elsif @window_state <= 6
       @main_window.contents.blt(CHARA_WIN_X + 52+@chara_win_x_chousei + 64 * @chara_cursor_state,CHARA_WIN_Y-10,picture,rect)
-      
+
       if @window_state >= 5
         rect = set_tate_cursor_blink 0
         for a in 0..@training_select_chara.size-1 do
           if @training_select_chara[a] != nil
-            
+
             @main_window.contents.blt(CHARA_WIN_X + 52 + @chara_win_x_chousei + 64 * @training_select_chara[a],CHARA_WIN_Y-10,picture,rect)
           end
         end
       end
     end
-    
-    
-    
+
+
+
   end
   #--------------------------------------------------------------------------
   # ● カーソル数値の最適化
-  #--------------------------------------------------------------------------   
+  #--------------------------------------------------------------------------
   # x:対象の値 ,n:チェック種類 ,min左最小 ,max右最大
   # n:0:その場 1:右へ 2:左へ
   # rubyの使用が参照渡しのようなので年のためxをyへ格納する
   def chk_select_cursor_control(x,n,min,max,z=0)
-    
+
     y = x
     if n == 1 then #右ならx+1 左ならx-1
       y += 1
     elsif n == 2 then
       y -= 1
     end
-    
-    
+
+
     if y > max then #xがmaxより大きければ一番左へminより小さければ右へ
-      y = min 
+      y = min
     elsif x < min then
       y = max
     end
     while y <= max do
 
       if y > max then
-        y = min 
+        y = min
       elsif y < min then
         y = max
-      end 
-      
+      end
+
       #チェック方法
       if z == 0
         if @card_select[y] == false then
@@ -678,24 +678,24 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
           return y
         end
       end
-      
+
       if n <= 1 then
         y += 1
       elsif n == 2 then
         y -= 1
       end
-      
+
       if y > max then
-        y = min 
+        y = min
       elsif y < min then
         y = max
       end
-    
+
     end
   end
   #--------------------------------------------------------------------------
   # ● 修行するキャラクターの選択
-  #-------------------------------------------------------------------------- 
+  #--------------------------------------------------------------------------
   def chara_select
     @window_state = 1
     #Graphics.wait(60)
@@ -706,7 +706,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
   #--------------------------------------------------------------------------
   # ● カード生成
   #引数[n:キャラかトレーニング用か]
-  #-------------------------------------------------------------------------- 
+  #--------------------------------------------------------------------------
   def create_card n,card_no = 0
 
     if n == 0 #味方
@@ -721,22 +721,22 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
   #--------------------------------------------------------------------------
   # ● 経験値計算
   #
-  #-------------------------------------------------------------------------- 
+  #--------------------------------------------------------------------------
   def get_exp
-    
+
     for a in 0..@training_chara.size-1 do
       exp = 0
-      
+
       exp = $game_actors[@training_chara[a]].level * 250
-      
+
       @total_exp = exp*@training_count[a]
       if $game_variables[40] == 0
-        
+
       elsif $game_variables[40] == 1
         @total_exp = @total_exp*2
       elsif $game_variables[40] >= 2
         @total_exp = @total_exp*3
-        
+
         if @chara_pattern == 0 #ゴクウ、ピッコロ、ゴハン
           @total_exp += 25000
         elsif @chara_pattern == 1 #ベジータ(超)、トランクス(超)
@@ -747,7 +747,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
           @total_exp += 450000
         end
       end
-      
+
       @msg_window.contents.clear
       Audio.se_play(@exp_se)
       text = $game_actors[@training_chara[a]].name + "は経験値" + @total_exp.to_s + "を得た！"
@@ -761,14 +761,14 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
         input_loop_run
         Graphics.wait(5)
       end
-      
+
       old_level = $game_actors[@training_chara[a]].level
       $game_actors[@training_chara[a]].change_exp($game_actors[@training_chara[a]].exp + @total_exp.to_i,false)
       if old_level != $game_actors[@training_chara[a]].level
         #Audio.se_play("Audio/SE/" +$BGM_levelup_se)
         run_common_event 188 #レベルアップSEを鳴らす(MEを使うかをコモンイベントで定義)
         @msg_window.contents.clear
-        text = $game_actors[@training_chara[a]].name + "はレベル" + $game_actors[@training_chara[a]].level.to_s + "になった！" 
+        text = $game_actors[@training_chara[a]].name + "はレベル" + $game_actors[@training_chara[a]].level.to_s + "になった！"
         @msg_window.contents.draw_text( 0, 0, 600, 20, text)
         @msg_window.update
         if $game_variables[38] == 0
@@ -779,10 +779,10 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
           Graphics.wait(5)
         end
       end
-      
+
       #熟練度も増やす
-      
-      
+
+
       if @chara_pattern == 0 #ゴクウ、ピッコロ、ゴハン
         get_tecp = 3
       elsif @chara_pattern == 1 #ベジータ(超)、トランクス(超)
@@ -794,7 +794,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
       else
         get_tecp = 3
       end
-      
+
       get_tecp += @training_count[a] / 2
       text = "全ての必殺技　使用回数が　" + get_tecp.to_s + "　回分　増加した！"
       @msg_window.contents.clear
@@ -809,16 +809,16 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
         #@msg_cursor.visible = false
         Graphics.wait(5)
       end
-      
+
       #必殺技回数追加
       for x in 0..$game_actors[@training_chara[a]].skills.size - 1
-        
+
         target_tec = $game_actors[@training_chara[a]].skills[x].id
         #指定の必殺技がnullだったら0をセット(エラー回避)
         set_cha_tec_null_to_zero target_tec
-        
+
         $cha_skill_level[target_tec] += get_tecp
-        
+
         #最大値を超えたら最大値にあわせる
         $cha_skill_level[target_tec] = $cha_skill_level_max if $cha_skill_level[target_tec] > $cha_skill_level_max
 
@@ -828,7 +828,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
   #--------------------------------------------------------------------------
   # ● 修行回数表示
   #
-  #-------------------------------------------------------------------------- 
+  #--------------------------------------------------------------------------
   def output_training_count
     color = set_skn_color 1
     picture = Cache.picture("数字英語")
@@ -841,11 +841,11 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
       end
     end
   end
-  
+
   #--------------------------------------------------------------------------
   # ● キャラクター表示
   #
-  #-------------------------------------------------------------------------- 
+  #--------------------------------------------------------------------------
   def output_character
     #picture = Cache.picture($top_file_name + "顔味方")
     for a in 1..@training_chara.size do
@@ -870,7 +870,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
   end
   #--------------------------------------------------------------------------
   # ● 決定ボタンが押されるまでループ
-  #-------------------------------------------------------------------------- 
+  #--------------------------------------------------------------------------
   def input_loop_run
 
     Graphics.update
@@ -879,7 +879,7 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
     $cursor_blink_count += $msg_cursor_blink
     @msg_cursor.src_rect = set_tate_cursor_blink
     Input.update
-      if Input.trigger?(Input::C) 
+      if Input.trigger?(Input::C)
         result = true
       end
       input_fast_fps
