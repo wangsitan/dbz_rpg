@@ -3595,7 +3595,7 @@ class Scene_Db_Battle_Anime < Scene_Base
     # ● 背景アニメパターン
     # mirror_pattern:強制的に逆のモードにする
     #--------------------------------------------------------------------------
-    def back_anime_pattern n, back_x = 0, back_y = 0, mirror_pattern = @attackDir
+    def back_anime_pattern(n, back_x=0, back_y=0, mirror_pattern=@attackDir)
         case n
 
         when 1 # 衝撃波系横

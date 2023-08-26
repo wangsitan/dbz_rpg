@@ -562,7 +562,7 @@ module Scene_Db_Battle_Anime_attack_start
                             end
                         end  # end of case attackPattern==1
                     else  # skill
-                        p($btl_progress, attackPattern)
+                        #p($btl_progress, attackPattern)
                         case $btl_progress  # 0,1,2 for Z1,Z2,Z3
                         # 必殺技
                         when 0  # Z1
