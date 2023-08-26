@@ -6,19 +6,39 @@ AllCops:
 
 Layout/IndentationWidth:
     Enabled: true
-    AutoCorrect: true
+    #AutoCorrect: true
     Width: 4
     AllowedPatterns: []
 
 Layout/IndentationConsistency:
     Enabled: true
-    AutoCorrect: true
+    #AutoCorrect: true
     EnforcedStyle: normal
 
 Layout/CommentIndentation:
     Enabled: true
-    AutoCorrect: true
+    #AutoCorrect: true
     AllowForAlignment: true
 
+#Layout/ClosingParenthesisIndentation:
+#    Enabled: true
 
+Layout/SpaceAfterComma:
+    Enabled: true
+
+#Layout/SpaceAfterMethodName:
+#    Enabled: true
+
+
+# 这个认为函数定义处没有小括号才是好的，不可设置。
+#Style/DefWithParentheses
+#Style/EmptyLambdaParameter
+
+Style/MethodCallWithArgsParentheses:
+    Enabled: true
+    AllowParenthesesInMultilineCall: true
+    AllowParenthesesInChaining: true
+    AllowParenthesesInCamelCaseMethod: true
+    AllowParenthesesInStringInterpolation: true
+    EnforcedStyle: require_parentheses
 
