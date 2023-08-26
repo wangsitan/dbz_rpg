@@ -4,6 +4,7 @@ class Scene_Db_Battle_Anime < Scene_Base
     include Scene_Db_Battle_Anime_attack_start
     include Scene_Db_Battle_Anime_effect_pattern
     include Scene_Db_Battle_Anime_pattern
+    include Scene_Db_Battle_Anime_pattern_11
 
     # キャラクターステータス表示位置
     # character status
@@ -11,27 +12,11 @@ class Scene_Db_Battle_Anime < Scene_Base
     Chasteystr = 340
     Chastexend = 672
     Chasteyend = 156
-    STANDARD_CHAX = -70
-    STANDARD_CHAY = 120
-    STANDARD_ENEX = 602
-    STANDARD_ENEY = STANDARD_CHAY
-    STANDARD_BACKX = 0
-    STANDARD_BACKY = 256
-    CENTER_CHAX = 240
-    CENTER_ENEX = 304
-    TEC_CENTER_CHAX = 266
-    RAY_SPEED = 14
-    ENE_STOP_TEC = 102 # 超能力の技ID
-    ENE_STOP_TEC2 = 720 # 超能力の技ID
-    STOP_TURN = 1 # 超能力でストップするターン
-    FLASH_Y_SIZE_CUTIN_ON = 296
-    FLASH_Y_SIZE_CUTIN_OFF = 356
-    FASTFADEFRAME = 5 # RとBでスキップ時のフェードフレーム数
 
     #--------------------------------------------------------------------------
     # ● オブジェクト初期化
     #--------------------------------------------------------------------------
-    def initialize(anime_event = false)
+    def initialize(anime_event=false)
         # エラー処理用変数初期化
         $err_run_process = "戦闘アニメシーン"
         $err_run_process_d = ""
@@ -3501,7 +3486,8 @@ class Scene_Db_Battle_Anime < Scene_Base
     # ● 攻撃アニメ変更
     #--------------------------------------------------------------------------
     # 引数：aord:攻撃か防御か n:戦闘アニメNo
-    def battle_anime_change aord, n
+    # aord: 0 for attack, 1 for defense ?
+    def battle_anime_change(aord, n)
         if aord == 0
             if @attackDir == 0 then
                 if $cha_bigsize_on[@chanum.to_i] != true

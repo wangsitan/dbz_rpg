@@ -1,31 +1,4 @@
 module Scene_Db_Battle_Anime_pattern
-    #=== copied from class
-    #include Share
-    #include Db_Battle_Anime_test_Setup
-
-    #キャラクターステータス表示位置
-    # character status
-    Chastexstr = -16
-    Chasteystr = 340
-    Chastexend = 672
-    Chasteyend = 156
-    STANDARD_CHAX = -70
-    STANDARD_CHAY = 120
-    STANDARD_ENEX = 602
-    STANDARD_ENEY = STANDARD_CHAY
-    STANDARD_BACKX = 0
-    STANDARD_BACKY = 256
-    CENTER_CHAX = 240
-    CENTER_ENEX = 304
-    TEC_CENTER_CHAX = 266
-    RAY_SPEED = 14
-    ENE_STOP_TEC = 102  #超能力の技ID
-    ENE_STOP_TEC2 = 720  #超能力の技ID
-    STOP_TURN = 1       #超能力でストップするターン
-    FLASH_Y_SIZE_CUTIN_ON = 296
-    FLASH_Y_SIZE_CUTIN_OFF = 356
-    FASTFADEFRAME = 5 #RとBでスキップ時のフェードフレーム数
-    #===
 
     #--------------------------------------------------------------------------
     # ● 戦闘アニメパターン
@@ -38,6 +11,9 @@ module Scene_Db_Battle_Anime_pattern
             @gy = 0
             @bx = 0
             @by = 0
+
+            # 0: 上から左下へ移動 ?
+            # 1: 中心へ行く準備 ?
             @output_anime_type = 0
         end
 
@@ -723,8 +699,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ax = 8
                 @gx = -8
 
-                ray_y = 480/2-90
-                ray_x = @enex
+                @ray_y = 480/2-90
+                @ray_x = @enex
                 case @battle_anime_frame
 
                 when 9
@@ -795,14 +771,14 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 #回避エフェクト(攻撃)
                 if @attackDir == 0
-                    ray_y = STANDARD_CHAY + 24
-                    ray_x = CENTER_CHAX + 8
+                    @ray_y = STANDARD_CHAY + 24
+                    @ray_x = CENTER_CHAX + 8
                 else
-                    ray_y = STANDARD_ENEY + 24
-                    ray_x = CENTER_ENEX + 24
+                    @ray_y = STANDARD_ENEY + 24
+                    @ray_x = CENTER_ENEX + 24
                 end
                 if @battle_anime_frame % 4 == 0
-                    put_kaihianime "a",ray_x,ray_y
+                    put_kaihianime "a",@ray_x,@ray_y
                 end
             when 37..53
                 @gy = -600
@@ -825,15 +801,15 @@ module Scene_Db_Battle_Anime_pattern
 
                 #回避エフェクト(防御)
                 if @attackDir == 0
-                    ray_y = STANDARD_ENEY + 24
-                    ray_x = CENTER_ENEX + 24
+                    @ray_y = STANDARD_ENEY + 24
+                    @ray_x = CENTER_ENEX + 24
                 else
-                    ray_y = STANDARD_CHAY + 24
-                    ray_x = CENTER_CHAX + 8
+                    @ray_y = STANDARD_CHAY + 24
+                    @ray_x = CENTER_CHAX + 8
                 end
 
                 if @battle_anime_frame % 4 == 0
-                    put_kaihianime "g",ray_x,ray_y
+                    put_kaihianime "g",@ray_x,@ray_y
                 end
             when 54
                 @ax = 0
@@ -875,8 +851,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gy = 0
             when 1..13
-                ray_y = 480/2-90
-                ray_x = @enex
+                @ray_y = 480/2-90
+                @ray_x = @enex
                 case @battle_anime_frame
 
                 when 1
@@ -933,8 +909,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ay = 0
                 @gy = 0
             when 1..13
-                ray_y = 480/2-90
-                ray_x = @enex
+                @ray_y = 480/2-90
+                @ray_x = @enex
                 case @battle_anime_frame
 
                 when 1
@@ -976,8 +952,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 1,0
             when 15..20
                 sframe = 15
-                ray_y = STANDARD_ENEY + 32
-                ray_x = CENTER_ENEX + 16
+                @ray_y = STANDARD_ENEY + 32
+                @ray_x = CENTER_ENEX + 16
 
                 case (@battle_anime_frame - sframe)
 
@@ -1029,8 +1005,8 @@ module Scene_Db_Battle_Anime_pattern
             end
        when 18 #けん制：カーブしながら両者小さいのでぶつかる
 
-           ray_y = STANDARD_ENEY - 34
-           ray_x = CENTER_ENEX - 10
+           @ray_y = STANDARD_ENEY - 34
+           @ray_x = CENTER_ENEX - 10
            case @battle_anime_frame
 
            when 0 #初期化
@@ -1134,8 +1110,8 @@ module Scene_Db_Battle_Anime_pattern
                 tyouseix = -192
             end
 
-            ray_y = @eney + 34
-            ray_x = @enex - 10
+            @ray_y = @eney + 34
+            @ray_x = @enex - 10
 
             mikatatyouseix = 72
             kaihityouseiy = 26
@@ -1346,8 +1322,8 @@ module Scene_Db_Battle_Anime_pattern
         #けん制や移動系は10000xから開始する
         when 100001 #小さいのでけん制しあう
             #番号使いつくしたので桁を変える
-            ray_y = STANDARD_ENEY + 22
-            ray_x = CENTER_ENEX - 10
+            @ray_y = STANDARD_ENEY + 22
+            @ray_x = CENTER_ENEX - 10
             case @battle_anime_frame
 
             when 0 #初期化
@@ -1504,11 +1480,11 @@ module Scene_Db_Battle_Anime_pattern
 
             #回避エフェクト
             if @attackDir == 0
-                ray_y = STANDARD_CHAY + 24
-                ray_x = CENTER_CHAX + 8
+                @ray_y = STANDARD_CHAY + 24
+                @ray_x = CENTER_CHAX + 8
             else
-                ray_y = STANDARD_ENEY + 24
-                ray_x = CENTER_ENEX + 24
+                @ray_y = STANDARD_ENEY + 24
+                @ray_x = CENTER_ENEX + 24
             end
 
             mikatatyouseix = 72
@@ -2939,9 +2915,8 @@ module Scene_Db_Battle_Anime_pattern
                 output_battle_anime @output_anime_type,@output_anime_type_y
                 return @battle_anime_result + 1
             end
-        when 31 #必殺技移動(上から左下右へ)
-            #@battle_anime_frame_length
 
+        when 31  #必殺技移動(上から左下右へ)
             if @tmp_tec_move[1] != nil
                 @tec_move[1] = @tmp_tec_move[1]
             end
@@ -3849,8 +3824,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 77 #ヒットキャラ揺れる(巻きつく)
-            ray_x = 244
-            ray_y = 154
+            @ray_x = 244
+            @ray_y = 154
             if @battle_anime_frame == 0 #初期化
                 @output_battle_damage_flag = true
                 battle_anime_change 1,17
@@ -3989,13 +3964,13 @@ module Scene_Db_Battle_Anime_pattern
                 picture = Cache.picture("Z3_戦闘_必殺技_お菓子")
                 rect = Rect.new(0, 0, 44, 44) #発動側
                 if @attackDir == 0
-                    ray_x = CENTER_ENEX
-                    ray_y = STANDARD_ENEY
+                    @ray_x = CENTER_ENEX
+                    @ray_y = STANDARD_ENEY
                 else
-                    ray_x = CENTER_CHAX
-                    ray_y = STANDARD_ENEY
+                    @ray_x = CENTER_CHAX
+                    @ray_y = STANDARD_ENEY
                 end
-                @back_window.contents.blt(ray_x + 16,ray_y + 16,picture,rect)
+                @back_window.contents.blt(@ray_x + 16,@ray_y + 16,picture,rect)
             when 191
                 @ax = 0
                 @ay = 0
@@ -5177,8 +5152,8 @@ module Scene_Db_Battle_Anime_pattern
         when 193 #サイコアタック
             back_x = 218
             back_y = 60
-            ray_x = 325
-            ray_y = 138
+            @ray_x = 325
+            @ray_y = 138
             case @battle_anime_frame
             when 0 #初期化
                 @output_anime_type = 1
@@ -5221,8 +5196,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 202 #ビーム
-            ray_x = 252
-            ray_y = 90
+            @ray_x = 252
+            @ray_y = 90
 
             case @battle_anime_frame
             when 0 #初期化
@@ -5257,8 +5232,8 @@ module Scene_Db_Battle_Anime_pattern
         when 203 #気功スラッガー
             back_x = 236
             back_y = 100
-            ray_x = 254
-            ray_y = 110
+            @ray_x = 254
+            @ray_y = 110
             if @battle_anime_frame == 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める3")    # 効果音を再生する
                 @output_anime_type = 1
@@ -5297,8 +5272,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
        when 204 #超気功スラッガー
-           ray_x = 254
-           ray_y = 110
+           @ray_x = 254
+           @ray_y = 110
            case @battle_anime_frame
            when 0 #初期化
                Audio.se_play("Audio/SE/" + "Z1 気を溜める7")    # 効果音を再生する
@@ -5442,8 +5417,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 326 #カメハメ波(亀仙人)
-            ray_x = 238
-            ray_y = 124
+            @ray_x = 238
+            @ray_y = 124
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
@@ -5504,8 +5479,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 329 #MAXパワーかめはめは
-            ray_x = 238
-            ray_y = 124
+            @ray_x = 238
+            @ray_y = 124
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める7")    # 効果音を再生する
@@ -5894,11 +5869,11 @@ module Scene_Db_Battle_Anime_pattern
         when 807 #操気円斬
             @ray_color = 0
             if @battle_anime_frame > 450
-                ray_x = 252-96
-                ray_y = 120
+                @ray_x = 252-96
+                @ray_y = 120
             else
-                ray_x = 324
-                ray_y = 66
+                @ray_x = 324
+                @ray_y = 66
             end
             back_x = 330
             back_y = 70
@@ -6197,12 +6172,12 @@ module Scene_Db_Battle_Anime_pattern
                     set_chr_display_out
                     @effect_anime_type = 0
                     @effect_anime_frame = 0
-                    ray_x = 640
-                    ray_y = 228
+                    @ray_x = 640
+                    @ray_y = 228
                     @effect_anime_pattern = 69
                 when 512..533
-                    ray_x = 640
-                    ray_y = 228
+                    @ray_x = 640
+                    @ray_y = 228
                 when 534
                     anime_pattern_init
                     return @battle_anime_result + 1
@@ -7091,8 +7066,8 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
             when 252..293
                 @effect_anime_pattern = 125
-                ray_x = 350
-                ray_y = 158
+                @ray_x = 350
+                @ray_y = 158
                 @chay = STANDARD_CHAY
                 @output_anime_type = 1
                 Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == 252
@@ -7987,13 +7962,13 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern 5
                 battle_anime_change 0,9
                 @effect_anime_pattern = 21
-                ray_x = 234
-                ray_y = 100
+                @ray_x = 234
+                @ray_y = 100
             elsif @battle_anime_frame >= 82 && @battle_anime_frame <= 102
                 back_anime_pattern 5
                 battle_anime_change 0,9
-                ray_x = 234
-                ray_y = 100 - (@battle_anime_frame-82)
+                @ray_x = 234
+                @ray_y = 100 - (@battle_anime_frame-82)
             #elsif @battle_anime_frame == 81
             #Audio.se_stop
             #Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
@@ -8001,21 +7976,21 @@ module Scene_Db_Battle_Anime_pattern
             #back_anime_pattern 5
             elsif @battle_anime_frame >= 103 && @battle_anime_frame <= 184
                 back_anime_pattern 5
-                ray_x = 234
-                ray_y = 80
+                @ray_x = 234
+                @ray_y = 80
             elsif @battle_anime_frame >= 185 && @battle_anime_frame <= 209
                 battle_anime_change 0,10
-                ray_x = 226
-                ray_y = 88
+                @ray_x = 226
+                @ray_y = 88
             elsif @battle_anime_frame == 210
                 Audio.se_play("Audio/SE/" + "Z1 繰気弾")    # 効果音を再生する
                 battle_anime_change 0,11
-                ray_x = 226
-                ray_y = 88
+                @ray_x = 226
+                @ray_y = 88
                 @effect_anime_pattern = 21
             elsif @battle_anime_frame >= 211 && @battle_anime_frame <= 305
-                ray_x = 226 - (@battle_anime_frame-211)*4
-                ray_y = 88 - (@battle_anime_frame-211)*4
+                @ray_x = 226 - (@battle_anime_frame-211)*4
+                @ray_y = 88 - (@battle_anime_frame-211)*4
 
                 if @battle_anime_frame >= 265
                     back_anime_pattern 11
@@ -8030,18 +8005,18 @@ module Scene_Db_Battle_Anime_pattern
                 @eney = -200 #キャラ画面範囲外へ
             elsif @battle_anime_frame >= 308 && @battle_anime_frame <= 374
                 @effect_anime_pattern = 21
-                ray_x = 256
-                ray_y = 240 - (@battle_anime_frame-308)*2
+                @ray_x = 256
+                @ray_y = 240 - (@battle_anime_frame-308)*2
                 if @battle_anime_frame == 374
-                    #p ray_y #108
+                    #p @ray_y #108
                 end
             elsif @battle_anime_frame == 375
-                ray_x = 256
-                ray_y = 108
+                @ray_x = 256
+                @ray_y = 108
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める(元気弾)")    # 効果音を再生する
             elsif @battle_anime_frame >= 375 && @battle_anime_frame <= 439
-                ray_x = 256
-                ray_y = 108
+                @ray_x = 256
+                @ray_y = 108
 
                 if @battle_anime_frame <= 383
                     color = Color.new(255,255,255,260)
@@ -8532,8 +8507,8 @@ module Scene_Db_Battle_Anime_pattern
         when 561 #エビ氷結攻撃(全体)
             back_x = 234
             back_y = 70
-            ray_x = 246
-            ray_y = 120
+            @ray_x = 246
+            @ray_y = 120
             if @all_attack_count == 1
                 case @battle_anime_frame
                 when 0 #初期化
@@ -8574,8 +8549,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_stop
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
                 when 261..298
-                    ray_x = 252
-                    ray_y = 120
+                    @ray_x = 252
+                    @ray_y = 120
                 #back_anime_pattern 101,back_x,back_y
                 when 299
                     #battle_anime_change 0,1
@@ -8606,8 +8581,8 @@ module Scene_Db_Battle_Anime_pattern
         when 562 #エビ氷結攻撃
             back_x = 234
             back_y = 70
-            ray_x = 238
-            ray_y = 128
+            @ray_x = 238
+            @ray_y = 128
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 怪しい気")    # 効果音を再生する
@@ -8765,8 +8740,8 @@ module Scene_Db_Battle_Anime_pattern
         when 565 #強力エネルギー波(ミソカッツン)
             back_x = 234
             back_y = 60
-            ray_x = 250
-            ray_y = 104
+            @ray_x = 250
+            @ray_y = 104
             if @battle_anime_frame == 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める2")    # 効果音を再生する
                 @output_anime_type = 1
@@ -8805,8 +8780,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 686 #エネルギー波(Drウィロー)
             @ray_color = 0
-            ray_x = 212
-            ray_y = 102
+            @ray_x = 212
+            @ray_y = 102
             case @battle_anime_frame
             when 0..120
                 if @battle_anime_frame == 0
@@ -8846,8 +8821,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 687 #フォトンストライク(Drウィロー)
             @ray_color = 0
-            ray_x = 212
-            ray_y = 104
+            @ray_x = 212
+            @ray_y = 104
             case @battle_anime_frame
             when 0..120
                 if @battle_anime_frame == 0
@@ -8888,8 +8863,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 688 #口からエネルギー波(Drウィロー)
             @ray_color = 0
-            ray_x = 254
-            ray_y = 136
+            @ray_x = 254
+            @ray_y = 136
             case @battle_anime_frame
             when 0..120
                 if @battle_anime_frame == 0
@@ -8933,8 +8908,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 689 #ウィロー)ギガンティックボマー
             @ray_color = 0
-            ray_x = 700
-            ray_y = 640
+            @ray_x = 700
+            @ray_y = 640
             case @battle_anime_frame
             when 0..120
                 back_anime_pattern 15
@@ -9126,8 +9101,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 201
-                ray_x = 300
-                ray_y = 96
+                @ray_x = 300
+                @ray_y = 96
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -9157,11 +9132,11 @@ module Scene_Db_Battle_Anime_pattern
                 @ax = -2 if @battle_anime_frame == 50 && $btl_progress >= 2
                 @ax = 0 if @battle_anime_frame == 53 && $btl_progress >= 2
                 @effect_anime_pattern = 203
-                ray_x = 340
+                @ray_x = 340
                 if $super_saiyazin_flag[1] == true || $btl_progress == 2 #悟空がスーパーサイヤ人か判定
-                    ray_y = 132 #スーパーサイヤ人
+                    @ray_y = 132 #スーパーサイヤ人
                 else
-                    ray_y = 124 #通常
+                    @ray_y = 124 #通常
                 end
             elsif @battle_anime_frame == 76
                 @effect_anime_pattern = 0
@@ -9239,19 +9214,19 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 1107 #界王拳・カメハメ波
 
-            ray_x = 340
+            @ray_x = 340
 
 
             if $btl_progress >= 2
                 backhai_no = 201
                 back_x = 228
                 back_y = 88
-                ray_y = 108
+                @ray_y = 108
             else
                 backhai_no = 102
                 back_x = 198
                 back_y = 32
-                ray_y = 92
+                @ray_y = 92
             end
             case @battle_anime_frame
             when 0 #初期化
@@ -9314,8 +9289,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1118 #元気弾
             back_x = 190
             back_y = 36
-            ray_x = 340
-            ray_y = 112
+            @ray_x = 340
+            @ray_y = 112
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める_元気弾")    # 効果音を再生する
@@ -9354,8 +9329,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1119 #超元気弾
             back_x = 180
             back_y = 0
-            ray_x = 340
-            ray_y = 112
+            @ray_x = 340
+            @ray_y = 112
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める_元気弾")    # 効果音を再生する
@@ -9399,8 +9374,8 @@ module Scene_Db_Battle_Anime_pattern
 
             backhai_no = 201
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
 
             case @battle_anime_frame
             when 0..0
@@ -9512,7 +9487,7 @@ module Scene_Db_Battle_Anime_pattern
                 @enex = CENTER_ENEX
                 battle_anime_change 1,0
             when 374..398#281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 0
                 @effect_anime_pattern = 48
             when 399..420
@@ -9571,8 +9546,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 0
             back_x = 164
             back_y = 122
-            ray_x = back_x +82
-            ray_y = back_y +60
+            @ray_x = back_x +82
+            @ray_y = back_y +60
 
             if $game_variables[171] == 1 && $btl_progress == 2
                 picture = Cache.picture("Z3_必殺技_超カメハメ波(悟空_ボロボロ)")
@@ -9613,9 +9588,9 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_frame = 0
                 end
             when 121..210
-                ray_y = 6
+                @ray_y = 6
                 back_x -= (@battle_anime_frame-121)/2
-                ray_x -=  (@battle_anime_frame-121)/2
+                @ray_x -=  (@battle_anime_frame-121)/2
                 rect = Rect.new(0, 0,104,180)
                 @back_window.contents.blt(back_x,back_y,picture,rect)
                 back_anime_pattern 106
@@ -9660,8 +9635,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 1
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 201
-                ray_x = 300
-                ray_y = 96
+                @ray_x = 300
+                @ray_y = 96
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -9682,8 +9657,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 1
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 212
-                ray_x = 300
-                ray_y = 78
+                @ray_x = 300
+                @ray_y = 78
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -9704,8 +9679,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 1
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 201
-                ray_x = 300
-                ray_y = 96
+                @ray_x = 300
+                @ray_y = 96
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -9720,8 +9695,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 1135 #爆裂魔光砲
 
-            ray_x = 340
-            ray_y = 96
+            @ray_x = 340
+            @ray_y = 96
             if $btl_progress == 2
                 backhai_no = 201
                 back_x = 228
@@ -9772,8 +9747,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1136 #魔貫光殺砲
             back_x = 190
             back_y = 32
-            ray_x = 340
-            ray_y = 130
+            @ray_x = 340
+            @ray_y = 130
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める_元気弾")    # 効果音を再生する
@@ -9817,8 +9792,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 201
-                ray_x = 290
-                ray_y = 108
+                @ray_x = 290
+                @ray_y = 108
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -9834,8 +9809,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1147 #魔閃光
             back_x = 198
             back_y = 34
-            ray_x = 325
-            ray_y = 138
+            @ray_x = 325
+            @ray_y = 138
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
@@ -9865,44 +9840,16 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
-        when 1148 #カメハメ波(悟飯)
-            if @battle_anime_frame == 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
-                #Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
-                @output_anime_type = 1
-                battle_anime_change 0,11
-                @ray_color = 0
-            elsif @battle_anime_frame >= 41 && @battle_anime_frame <= 45
-                battle_anime_change 0,12
-            elsif @battle_anime_frame == 46
-                Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
-            elsif @battle_anime_frame >= 47 && @battle_anime_frame <= 75
-                @effect_anime_pattern = 203
-                ray_x = 340
-                ray_y = 142
-                @ax = 2 if @battle_anime_frame == 47 && $btl_progress >= 2
-                @ax = -2 if @battle_anime_frame == 50 && $btl_progress >= 2
-                @ax = 0 if @battle_anime_frame == 53 && $btl_progress >= 2
-            elsif @battle_anime_frame == 76
-                @effect_anime_pattern = 0
-                @effect_anime_frame = 0
-                @effect_anime_type = 0
-            elsif  @battle_anime_frame == 80
-                set_chr_display_out
-            elsif @battle_anime_frame >= 81 && @battle_anime_frame <= 110
-                @effect_anime_pattern = 204
-            elsif @battle_anime_frame == 111
-                anime_pattern_init
-                return @battle_anime_result + 1
+
+        when 1148  # カメハメ波(悟飯)
+            ret = anime_pattern_1148()
+            if ret != nil
+                return ret
             end
-        when 1152 #爆裂ラッシュ
-            #back_x = 198
-            #back_y = 34
-            #ray_x = 280
-            #ray_y = 138
-            ray_x = 330
-            ray_y = STANDARD_CHAY - 2
+
+        when 1152  # 爆裂ラッシュ
+            @ray_x = 330
+            @ray_y = STANDARD_CHAY - 2
 
             if $btl_progress == 2
                 backhai_no = 201
@@ -9913,8 +9860,9 @@ module Scene_Db_Battle_Anime_pattern
                 back_x = 198
                 back_y = 34
             end
+
             case @battle_anime_frame
-            when 0 #初期化
+            when 0  # init
                 if $btl_progress == 2
                     Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
                     @ray_color = 3
@@ -9922,35 +9870,21 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
                     @ray_color = 0
                 end
-            #@output_anime_type = 1
-            #battle_anime_change 0,4
-
             when 1..89
-                #back_x = 220
-                #back_y = 32
-                back_anime_pattern backhai_no,back_x,back_y
+                back_anime_pattern(backhai_no, back_x, back_y)
             when 90
-                Audio.se_stop
+                Audio.se_stop()
                 Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
                 @chay = -120
-                #back_x = 220
-                #back_y = 32
-                back_anime_pattern backhai_no,back_x,back_y
+                back_anime_pattern(backhai_no, back_x, back_y)
             when 91..130
-                #back_x = 220
-                #back_y = 32
-                back_anime_pattern backhai_no,back_x,back_y
+                back_anime_pattern(backhai_no, back_x, back_y)
                 if @battle_anime_frame % 4 == 0
                     picture = Cache.picture("戦闘アニメ") #ダメージ表示用
-                    rect = Rect.new(0, 48,64,64)
+                    rect = Rect.new(0, 48, 64, 64)
                     @back_window.contents.blt(@chax-6,144+2,picture,rect)
-
-                else
-
                 end
-
             when 131
-                #set_chr_display_out
                 Audio.se_play("Audio/SE/" + "Z1 逃げる")    # 効果音を再生する
                 @enex = CENTER_ENEX
                 @eney = STANDARD_ENEY
@@ -9959,7 +9893,6 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
                 battle_anime_change 0,16
                 @ax = 20
-            #set_chr_display_out
             when 140..1166
                 hit_efe_x = 346
                 hit_efe_y = 154
@@ -9972,16 +9905,16 @@ module Scene_Db_Battle_Anime_pattern
                     @gx = -8
                     battle_anime_change 1,16
                     @effect_anime_pattern = 123
-                    ray_x = hit_efe_x
-                    ray_y = hit_efe_y
+                    @ray_x = hit_efe_x
+                    @ray_y = hit_efe_y
                 when 158..159
                     @gx = 8
-                    ray_x = hit_efe_x
-                    ray_y = hit_efe_y
+                    @ray_x = hit_efe_x
+                    @ray_y = hit_efe_y
                 when 160..163
                     @gx = 0
-                    ray_x = hit_efe_x
-                    ray_y = hit_efe_y
+                    @ray_x = hit_efe_x
+                    @ray_y = hit_efe_y
                 when 164
                     @effect_anime_pattern = 0
                     @effect_anime_frame = 0
@@ -10009,8 +9942,8 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 1,17
                     Audio.se_play("Audio/SE/" + "ZG 打撃2") if @battle_anime_frame == 184
                     @effect_anime_pattern = 123 if @battle_anime_frame == 184
-                    ray_x = hit_efe_x
-                    ray_y = hit_efe_y
+                    @ray_x = hit_efe_x
+                    @ray_y = hit_efe_y
                     #p @battle_anime_frame
                     @effect_anime_pattern = 0 if @battle_anime_frame == 200
                 when 201..215
@@ -10044,8 +9977,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                 when 242..246
                     @effect_anime_pattern = 123
-                    ray_x = hit_efe_x
-                    ray_y = hit_efe_y
+                    @ray_x = hit_efe_x
+                    @ray_y = hit_efe_y
 
                 when 247
                     @effect_anime_frame = 0
@@ -10055,8 +9988,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                 when 248..250
                     @effect_anime_pattern = 123
-                    ray_x = hit_efe_x
-                    ray_y = hit_efe_y - 14
+                    @ray_x = hit_efe_x
+                    @ray_y = hit_efe_y - 14
                 when 251
                     #@gx = -4
                     @effect_anime_frame = 0
@@ -10065,8 +9998,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                 when 252..254
                     @effect_anime_pattern = 123
-                    ray_x = hit_efe_x
-                    ray_y = hit_efe_y
+                    @ray_x = hit_efe_x
+                    @ray_y = hit_efe_y
                 when 255
                     @effect_anime_frame = 0
                     @effect_anime_pattern = 0
@@ -10075,8 +10008,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                 when 256..258
                     @effect_anime_pattern = 123
-                    ray_x = hit_efe_x
-                    ray_y = hit_efe_y - 14
+                    @ray_x = hit_efe_x
+                    @ray_y = hit_efe_y - 14
                 when 259
                     @effect_anime_frame = 0
                     @effect_anime_pattern = 0
@@ -10085,8 +10018,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                 when 260..262
                     @effect_anime_pattern = 123
-                    ray_x = hit_efe_x
-                    ray_y = hit_efe_y
+                    @ray_x = hit_efe_x
+                    @ray_y = hit_efe_y
                 when 263
                     @effect_anime_frame = 0
                     @effect_anime_pattern = 0
@@ -10095,8 +10028,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                 when 264..266
                     @effect_anime_pattern = 123
-                    ray_x = hit_efe_x
-                    ray_y = hit_efe_y - 14
+                    @ray_x = hit_efe_x
+                    @ray_y = hit_efe_y - 14
                 when 267
                     @effect_anime_frame = 0
                     @effect_anime_pattern = 0
@@ -10105,8 +10038,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                 when 268..270
                     @effect_anime_pattern = 123
-                    ray_x = hit_efe_x
-                    ray_y = hit_efe_y
+                    @ray_x = hit_efe_x
+                    @ray_y = hit_efe_y
                 when 271
                     @effect_anime_frame = 0
                     @effect_anime_pattern = 0
@@ -10115,8 +10048,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                 when 272..274
                     @effect_anime_pattern = 123
-                    ray_x = hit_efe_x
-                    ray_y = hit_efe_y - 14
+                    @ray_x = hit_efe_x
+                    @ray_y = hit_efe_y - 14
                     @gx = 0
                     battle_anime_change 0,0
                     @ax = -24
@@ -10158,7 +10091,6 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,18
                     battle_anime_change 0,19 if $game_switches[445] == true
                     #短髪の場合は変更
-
                     @ay = 0
                     @ray_spd_up_flag = true
                 when 341..399
@@ -10171,16 +10103,17 @@ module Scene_Db_Battle_Anime_pattern
                     set_chr_display_out
                     battle_anime_change 1,16
                 when 401..430
-                    ray_x = 330
-                    ray_y = -600
+                    @ray_x = 330
+                    @ray_y = -600
                     @effect_anime_pattern = 258
                 when 431
                     @battle_anime_frame = 1166
                 end
             when 1167
-                anime_pattern_init
+                anime_pattern_init()
                 return @battle_anime_result + 1
             end
+
         when 1162 #カメハメ波(クリリン)
             if @battle_anime_frame == 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
@@ -10195,8 +10128,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
             elsif @battle_anime_frame >= 47 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 203
-                ray_x = 340
-                ray_y = 142
+                @ray_x = 340
+                @ray_y = 142
                 @ax = 2 if @battle_anime_frame == 47 && $btl_progress >= 2
                 @ax = -2 if @battle_anime_frame == 50 && $btl_progress >= 2
                 @ax = 0 if @battle_anime_frame == 53 && $btl_progress >= 2
@@ -10217,8 +10150,8 @@ module Scene_Db_Battle_Anime_pattern
             if @all_attack_count == 1
                 back_x = 198
                 back_y = 32
-                ray_x = 340
-                ray_y = 122
+                @ray_x = 340
+                @ray_y = 122
                 case @battle_anime_frame
                 when 0 #初期化
                     Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
@@ -10300,8 +10233,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 気円斬")    # 効果音を再生する
             elsif @battle_anime_frame >= 47 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 218
-                ray_x = 340
-                ray_y = 150
+                @ray_x = 340
+                @ray_y = 150
             elsif @battle_anime_frame == 76
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -10317,8 +10250,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1173 #繰気弾(ヤムチャ)
             back_x = 204
             back_y = 32
-            ray_x = 325
-            ray_y = 120
+            @ray_x = 325
+            @ray_y = 120
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
@@ -10366,8 +10299,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1182 #四身の拳
             #back_x = 222
             #back_y = 60
-            ray_x = CENTER_CHAX
-            ray_y = STANDARD_CHAY
+            @ray_x = CENTER_CHAX
+            @ray_y = STANDARD_CHAY
             case @battle_anime_frame
             when 0 #初期化
                 @output_anime_type = 1
@@ -10396,8 +10329,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1183 #気功砲
             back_x = 222
             back_y = 60
-            ray_x = 325
-            ray_y = 138
+            @ray_x = 325
+            @ray_y = 138
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
@@ -10431,8 +10364,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1184 #四身の拳・気功砲
             #back_x = 222
             #back_y = 60
-            ray_x = CENTER_CHAX
-            ray_y = STANDARD_CHAY
+            @ray_x = CENTER_CHAX
+            @ray_y = STANDARD_CHAY
             case @battle_anime_frame
             when 0 #初期化
                 @output_anime_type = 1
@@ -10468,8 +10401,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 225
-                ray_x = 328
-                ray_y = 148
+                @ray_x = 328
+                @ray_y = 148
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -10485,8 +10418,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1192 #超能力
             back_x = 218
             back_y = 60
-            ray_x = 325
-            ray_y = 138
+            @ray_x = 325
+            @ray_y = 138
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
@@ -10527,8 +10460,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 225
-                ray_x = 328
-                ray_y = 128
+                @ray_x = 328
+                @ray_y = 128
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -10558,8 +10491,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ax = -2 if @battle_anime_frame == 50 && $btl_progress >= 2
                 @ax = 0 if @battle_anime_frame == 53 && $btl_progress >= 2
                 @effect_anime_pattern = 203
-                ray_x = 340
-                ray_y = 140
+                @ray_x = 340
+                @ray_y = 140
             elsif @battle_anime_frame == 76
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -10574,18 +10507,18 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 1204  #超気功スラッガー
 
-            ray_x = 340
+            @ray_x = 340
 
             if $btl_progress == 2
                 backhai_no = 201
                 back_x = 224
                 back_y = 88
-                ray_y = 96
+                @ray_y = 96
             else
                 backhai_no = 102
                 back_x = 194
                 back_y = 32
-                ray_y = 90
+                @ray_y = 90
             end
             case @battle_anime_frame
             when 0 #初期化
@@ -10656,12 +10589,12 @@ module Scene_Db_Battle_Anime_pattern
 
                 if $partyc[@chanum] != 32 && $partyc[@chanum] != 16
                     #ベジータ
-                    ray_x = 352
-                    ray_y = 134
+                    @ray_x = 352
+                    @ray_y = 134
                 else
                     #バーダック
-                    ray_x = 358
-                    ray_y = 132
+                    @ray_x = 358
+                    @ray_y = 132
                 end
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
@@ -10680,13 +10613,13 @@ module Scene_Db_Battle_Anime_pattern
             if @attackDir == 0
                 back_x = 210
                 back_y = 32
-                ray_x = 326
-                ray_y = 96
+                @ray_x = 326
+                @ray_y = 96
             else
                 back_x = 210+24
                 back_y = 32
-                ray_x = 326-64
-                ray_y = 96
+                @ray_x = 326-64
+                @ray_y = 96
             end
             if @all_attack_count == 1
 
@@ -10759,13 +10692,13 @@ module Scene_Db_Battle_Anime_pattern
                     back_y = 32
                     backhai_no = 102
                 end
-                ray_x = 350
-                ray_y = 124
+                @ray_x = 350
+                @ray_y = 124
             else
                 back_x = 190+24
                 back_y = 32
-                ray_x = 350-128
-                ray_y = 124
+                @ray_x = 350-128
+                @ray_y = 124
                 backhai_no = 102
             end
             case @battle_anime_frame
@@ -10812,8 +10745,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 1
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 201
-                ray_x = 300
-                ray_y = 96
+                @ray_x = 300
+                @ray_y = 96
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -10829,11 +10762,11 @@ module Scene_Db_Battle_Anime_pattern
         when 1243 #強力エネルギー波(若者)
             back_x = 214
             back_y = 32
-            ray_x = 340
+            @ray_x = 340
             if $btl_progress >= 2
-                ray_y = 94
+                @ray_y = 94
             else
-                ray_y = 88
+                @ray_y = 88
             end
             case @battle_anime_frame
             when 0 #初期化
@@ -10867,8 +10800,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1244 #ナメック戦士(若者)
             back_x = 214
             back_y = 32
-            ray_x = 340
-            ray_y = 94
+            @ray_x = 340
+            @ray_y = 94
             if $btl_progress >= 2
                 back_x = 224
                 back_y = 86
@@ -11099,8 +11032,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1245 #魔貫光殺砲(若者)
             back_x = 180
             back_y = 0
-            ray_x = 358
-            ray_y = 124
+            @ray_x = 358
+            @ray_y = 124
 
             color = Color.new(255,255,255,260)
 
@@ -11152,7 +11085,7 @@ module Scene_Db_Battle_Anime_pattern
 
             #@chr_cutin = true
             when 222..247
-                ray_y = 134
+                @ray_y = 134
                 @effect_anime_pattern = 255
             when 248
                 anime_pattern_init
@@ -11162,8 +11095,8 @@ module Scene_Db_Battle_Anime_pattern
             if @attackDir == 0
                 back_x = 218
                 back_y = 32
-                ray_x = 350
-                ray_y = 124
+                @ray_x = 350
+                @ray_y = 124
                 if $btl_progress >= 2
                     back_x = 232
                     back_y = 86
@@ -11176,8 +11109,8 @@ module Scene_Db_Battle_Anime_pattern
             else
                 back_x = 190+24
                 back_y = 32
-                ray_x = 350-128
-                ray_y = 124
+                @ray_x = 350-128
+                @ray_y = 124
             end
             case @battle_anime_frame
             when 0 #初期化
@@ -11197,8 +11130,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,1
                 @effect_anime_pattern = 233
                 #back_anime_pattern 101,back_x,back_y
-                ray_x = 358
-                ray_y = 118
+                @ray_x = 358
+                @ray_y = 118
             when 149
                 #battle_anime_change 0,1
                 @effect_anime_pattern = 0
@@ -11216,8 +11149,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 3
 
             if @attackDir == 0
-                ray_x = 326
-                ray_y = 96
+                @ray_x = 326
+                @ray_y = 96
                 if $btl_progress >= 2
                     back_x = 232
                     back_y = 86
@@ -11232,8 +11165,8 @@ module Scene_Db_Battle_Anime_pattern
             else
                 back_x = 210+24
                 back_y = 32
-                ray_x = 326-64
-                ray_y = 96
+                @ray_x = 326-64
+                @ray_y = 96
             end
             if @all_attack_count == 1
                 case @battle_anime_frame
@@ -11304,8 +11237,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 1251 #(バーダック)ファイナルリベンジャー
             if @attackDir == 0
-                ray_x = 300
-                ray_y = 162
+                @ray_x = 300
+                @ray_y = 162
                 if $btl_progress >= 2
                     back_x = 232
                     back_y = 86
@@ -11318,8 +11251,8 @@ module Scene_Db_Battle_Anime_pattern
             else
                 back_x = 190+24
                 back_y = 32
-                ray_x = 350-128
-                ray_y = 124
+                @ray_x = 350-128
+                @ray_y = 124
             end
             case @battle_anime_frame
             when 0 #初期化
@@ -11344,8 +11277,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ax = 20
                 @ay = -2
             #back_anime_pattern 102,back_x,back_y
-            #ray_x = 300
-            #ray_y = 156
+            #@ray_x = 300
+            #@ray_y = 156
             #@effect_anime_pattern = 235
             when 121..126
 
@@ -11370,8 +11303,8 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = -20
                 @effect_anime_pattern = 121
             #back_anime_pattern 101,back_x,back_y
-            #ray_x = 330
-            #ray_y = 96
+            #@ray_x = 330
+            #@ray_y = 96
             when 148..150
                 battle_anime_change 1,0
                 @gx = 20
@@ -11480,31 +11413,31 @@ module Scene_Db_Battle_Anime_pattern
                 @gx = -20
                 @gy = 2
                 @effect_anime_frame = 0
-                ray_x = 240
-                ray_y = 104
+                @ray_x = 240
+                @ray_y = 104
             when 321..339
                 if @battle_anime_frame == 321
                     @chay = -120
                     Audio.se_play("Audio/SE/" + "Z1 大猿")    # 効果音を再生する
                 end
                 @effect_anime_pattern = 238
-                ray_x = 190 + (@effect_anime_frame*20)
-                ray_y = 104 + (@effect_anime_frame*2)
+                @ray_x = 190 + (@effect_anime_frame*20)
+                @ray_y = 104 + (@effect_anime_frame*2)
             when 340
                 set_chr_display_out
                 @gx = 0
                 @gy = 0
                 @ax = 0
                 @ay = 0
-                ray_x = STANDARD_CHAX-40
-                ray_y = STANDARD_CHAY-26
+                @ray_x = STANDARD_CHAX-40
+                @ray_y = STANDARD_CHAY-26
                 @effect_anime_frame = 0
                 battle_anime_change 1,16
                 @enex = (CENTER_ENEX - 150)
                 @eney = (STANDARD_ENEY - 20)
             when 341..355
-                ray_x = STANDARD_CHAX-40 + (@effect_anime_frame*20)
-                ray_y = STANDARD_CHAY-26 + (@effect_anime_frame*2)
+                @ray_x = STANDARD_CHAX-40 + (@effect_anime_frame*20)
+                @ray_y = STANDARD_CHAY-26 + (@effect_anime_frame*2)
                 @gx = -10
                 @gy = 2
             when 356
@@ -11519,13 +11452,13 @@ module Scene_Db_Battle_Anime_pattern
             if @attackDir == 0
                 back_x = 200
                 back_y = 32
-                ray_x = 300
-                ray_y = 162
+                @ray_x = 300
+                @ray_y = 162
             else
                 back_x = 190+24
                 back_y = 32
-                ray_x = 350-128
-                ray_y = 124
+                @ray_x = 350-128
+                @ray_y = 124
             end
             barcut_x = 180
             barcut_y = 64
@@ -11542,8 +11475,8 @@ module Scene_Db_Battle_Anime_pattern
                     picture = Cache.picture("Z2_必殺技_スピリッツキャノン(バーダック)スカウター有り")
                     rect = Rect.new(0, 26,274,228)
                     @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
-                    ray_x = 202
-                    ray_y = 236
+                    @ray_x = 202
+                    @ray_y = 236
                     @effect_anime_pattern = 235
                 end
             when 1..60
@@ -11554,37 +11487,37 @@ module Scene_Db_Battle_Anime_pattern
                     picture = Cache.picture("Z2_必殺技_スピリッツキャノン(バーダック)スカウター有り")
                     rect = Rect.new(0, 26,274,228)
                     @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
-                    ray_x = 202
-                    ray_y = 236
+                    @ray_x = 202
+                    @ray_y = 236
                     @effect_anime_pattern = 235
                 end
             when 61..120
                 if $game_switches[504] == false || $partyc[@chanum] == 32
                     back_anime_pattern 102,back_x,back_y
-                    ray_x = 300
-                    ray_y = 156
+                    @ray_x = 300
+                    @ray_y = 156
                     @effect_anime_pattern = 235
                 else
                     picture = Cache.picture("Z2_必殺技_スピリッツキャノン(バーダック)スカウター有り")
                     rect = Rect.new(0, 26,274,228)
                     @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
                     @chr_cutin = true if @battle_anime_frame == 120
-                    ray_x = 186
-                    ray_y = 220
+                    @ray_x = 186
+                    @ray_y = 220
                     @effect_anime_pattern = 289
                 end
             when 121..170
                 @chax = TEC_CENTER_CHAX
 
-                ray_x = 276
-                ray_y = 140
+                @ray_x = 276
+                @ray_y = 140
                 battle_anime_change 0,6
                 @effect_anime_pattern = 235
             when 171
                 Audio.se_stop
                 battle_anime_change 0,2
-                ray_x = -360
-                ray_y = -96
+                @ray_x = -360
+                @ray_y = -96
             when 172
                 #@ray_color = 0
                 Audio.se_stop
@@ -11593,18 +11526,18 @@ module Scene_Db_Battle_Anime_pattern
                 #battle_anime_change 0,1
                 @effect_anime_pattern = 206
                 @effect_anime_frame = 0
-                ray_x = -360
-                ray_y = -96
+                @ray_x = -360
+                @ray_y = -96
             #back_anime_pattern 101,back_x,back_y
 
             when 173..210
                 #back_anime_pattern 101,back_x,back_y
                 @effect_anime_pattern = 206
-                ray_x = 360
+                @ray_x = 360
                 if $btl_progress >= 2
-                    ray_y = 96
+                    @ray_y = 96
                 else
-                    ray_y = 92
+                    @ray_y = 92
                 end
             when 211
                 #battle_anime_change 0,1
@@ -11623,13 +11556,13 @@ module Scene_Db_Battle_Anime_pattern
             if @attackDir == 0
                 back_x = 200
                 back_y = 32
-                ray_x = 300
-                ray_y = 162
+                @ray_x = 300
+                @ray_y = 162
             else
                 back_x = 190+24
                 back_y = 32
-                ray_x = 350-128
-                ray_y = 124
+                @ray_x = 350-128
+                @ray_y = 124
             end
             wake_color = Color.new(188,188,188,256)
             case @battle_anime_frame
@@ -11688,8 +11621,8 @@ module Scene_Db_Battle_Anime_pattern
                 rect = Rect.new(0, 96*1,96,96)
                 picture = Cache.picture("Z2_戦闘_必殺技_敵_惑星戦士2")
                 @back_window.contents.blt(TEC_CENTER_CHAX+0,STANDARD_ENEY,picture,rect)
-                ray_x = 312
-                ray_y = 142
+                @ray_x = 312
+                @ray_y = 142
                 @effect_anime_pattern = 284
             when 261
                 @effect_anime_pattern = 285
@@ -11812,14 +11745,14 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 @effect_anime_type = 0 if @effect_anime_type == 4
 
-                ray_x = 206
-                ray_y = 104
+                @ray_x = 206
+                @ray_y = 104
             when 851..940
                 s_frame = 851
                 x_plus = (@battle_anime_frame - s_frame)*4
                 @effect_anime_type = 0 if @effect_anime_type == 4
-                ray_x = 206 + x_plus * 2
-                ray_y = 104
+                @ray_x = 206 + x_plus * 2
+                @ray_y = 104
                 rect = Rect.new(0, 96*2,96,96)
                 picture = Cache.picture("Z2_戦闘_必殺技_敵_惑星戦士3")
                 @back_window.contents.blt(STANDARD_CHAX-40+x_plus,STANDARD_ENEY,picture,rect)
@@ -11862,8 +11795,8 @@ module Scene_Db_Battle_Anime_pattern
                 rect = Rect.new(0, 96*1,96,96)
                 picture = Cache.picture("Z2_戦闘_必殺技_敵_惑星戦士1")
                 @back_window.contents.blt(TEC_CENTER_CHAX+0,STANDARD_ENEY,picture,rect)
-                ray_x = 324
-                ray_y = 146
+                @ray_x = 324
+                @ray_y = 146
                 @effect_anime_pattern = 284
             when 1241..1284
                 if @battle_anime_frame == 1241
@@ -11876,8 +11809,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 @effect_anime_type = 0 if @effect_anime_type == 4
 
-                ray_x = 206
-                ray_y = 104
+                @ray_x = 206
+                @ray_y = 104
                 @back_anime_frame += 1 if @back_anime_frame <= 43
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー波_小_敵_青") #ダメージ表示用
                 rect = Rect.new(0, 48,400,48)
@@ -11895,8 +11828,8 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_pattern = explosion_eff
                     @chax = STANDARD_CHAX-24
                 end
-                ray_x = 206
-                ray_y = 104
+                @ray_x = 206
+                @ray_y = 104
                 @effect_anime_type = 0 if @effect_anime_type == 4
                 rect = Rect.new(0, 96*4,96,96)
                 picture = Cache.picture("Z2_戦闘_必殺技_敵_惑星戦士3")
@@ -11917,13 +11850,13 @@ module Scene_Db_Battle_Anime_pattern
             if @attackDir == 0
                 back_x = 200
                 back_y = 32
-                ray_x = 300
-                ray_y = 162
+                @ray_x = 300
+                @ray_y = 162
             else
                 back_x = 190+24
                 back_y = 32
-                ray_x = 350-128
-                ray_y = 124
+                @ray_x = 350-128
+                @ray_y = 124
             end
             barcut_x = 180
             barcut_y = 64
@@ -11941,8 +11874,8 @@ module Scene_Db_Battle_Anime_pattern
                     picture = Cache.picture("Z2_必殺技_スピリッツキャノン(バーダック)")
                     rect = Rect.new(0, 26,274,228)
                     @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
-                    ray_x = 202
-                    ray_y = 236
+                    @ray_x = 202
+                    @ray_y = 236
                     @effect_anime_pattern = 235
                 end
             when 1..60
@@ -11953,37 +11886,37 @@ module Scene_Db_Battle_Anime_pattern
                     picture = Cache.picture("Z2_必殺技_スピリッツキャノン(バーダック)")
                     rect = Rect.new(0, 26,274,228)
                     @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
-                    ray_x = 202
-                    ray_y = 236
+                    @ray_x = 202
+                    @ray_y = 236
                     @effect_anime_pattern = 235
                 end
             when 61..120
                 if $game_switches[504] == false
                     back_anime_pattern 102,back_x,back_y
-                    ray_x = 300
-                    ray_y = 156
+                    @ray_x = 300
+                    @ray_y = 156
                     @effect_anime_pattern = 235
                 else
                     picture = Cache.picture("Z2_必殺技_スピリッツキャノン(バーダック)")
                     rect = Rect.new(0, 26,274,228)
                     @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
                     @chr_cutin = true if @battle_anime_frame == 120
-                    ray_x = 186
-                    ray_y = 220
+                    @ray_x = 186
+                    @ray_y = 220
                     @effect_anime_pattern = 289
                 end
             when 121..170
                 @chax = TEC_CENTER_CHAX
 
-                ray_x = 276
-                ray_y = 140
+                @ray_x = 276
+                @ray_y = 140
                 battle_anime_change 0,6
                 @effect_anime_pattern = 235
             when 171
                 Audio.se_stop
                 battle_anime_change 0,2
-                ray_x = -360
-                ray_y = -96
+                @ray_x = -360
+                @ray_y = -96
             when 172
                 #@ray_color = 0
                 Audio.se_stop
@@ -11992,15 +11925,15 @@ module Scene_Db_Battle_Anime_pattern
                 #battle_anime_change 0,1
                 @effect_anime_pattern = 206
                 @effect_anime_frame = 0
-                ray_x = -360
-                ray_y = -96
+                @ray_x = -360
+                @ray_y = -96
             #back_anime_pattern 101,back_x,back_y
 
             when 173..210
                 #back_anime_pattern 101,back_x,back_y
                 @effect_anime_pattern = 206
-                ray_x = 360
-                ray_y = 92
+                @ray_x = 360
+                @ray_y = 92
             when 211
                 #battle_anime_change 0,1
                 @effect_anime_pattern = 0
@@ -12191,8 +12124,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ax = -2 if @battle_anime_frame == 50 && $btl_progress >= 2
                 @ax = 0 if @battle_anime_frame == 53 && $btl_progress >= 2
                 @effect_anime_pattern = 203
-                ray_x = 340
-                ray_y = 140
+                @ray_x = 340
+                @ray_y = 140
             elsif @battle_anime_frame == 76
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -12208,8 +12141,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1328 #萬國驚天掌
 
 
-            ray_x = 340
-            ray_y = 150
+            @ray_x = 340
+            @ray_y = 150
             if $btl_progress == 2
                 backhai_no = 201
                 back_x = 218
@@ -12256,18 +12189,18 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 1329 #MAXパワーカメハメ波
 
-            ray_x = 340
+            @ray_x = 340
 
             if $btl_progress == 2
                 backhai_no = 201
                 back_x = 218
                 back_y = 88
-                ray_y = 96
+                @ray_y = 96
             else
                 backhai_no = 102
                 back_x = 184
                 back_y = 32
-                ray_y = 90
+                @ray_y = 90
             end
             case @battle_anime_frame
             when 0 #初期化
@@ -12329,8 +12262,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 1349 #エネルギーボール
 
-            ray_x = 340
-            ray_y = 96
+            @ray_x = 340
+            @ray_y = 96
             @ray_color = 3
             if $btl_progress == 2
                 backhai_no = 201
@@ -12567,10 +12500,10 @@ module Scene_Db_Battle_Anime_pattern
             #back_x = 228
             back_x = 216
             back_y = 88
-            ray_x = 320-90
-            ray_y = 246-198
-            #ray_x = 228
-            #ray_y = 134
+            @ray_x = 320-90
+            @ray_y = 246-198
+            #@ray_x = 228
+            #@ray_y = 134
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
 
@@ -12657,8 +12590,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 1368 #アングリーアタック
 
-            ray_x = 340
-            ray_y = 96
+            @ray_x = 340
+            @ray_y = 96
             @ray_color = 3
             if $btl_progress == 2
                 backhai_no = 201
@@ -12756,8 +12689,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 1376 #マッシブカタパルト
 
-            ray_x = 340
-            ray_y = 96
+            @ray_x = 340
+            @ray_y = 96
             @ray_color = 3
             if $btl_progress == 2
                 backhai_no = 201
@@ -12839,11 +12772,11 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 204
             back_y = -18
             if @battle_anime_frame <= 500
-                ray_x = 325
-                ray_y = 70
+                @ray_x = 325
+                @ray_y = 70
             else
-                ray_x = 340
-                ray_y = 200
+                @ray_x = 340
+                @ray_y = 200
           end
             #@tec_back_small = true
             case @battle_anime_frame
@@ -12965,8 +12898,8 @@ module Scene_Db_Battle_Anime_pattern
        when 1803 #サイヤンアタック(ゴクウ＆バーダック)
            back_x = 200
            back_y = 32
-           ray_x = 300
-           ray_y = 162
+           @ray_x = 300
+           @ray_y = 162
 
            if @btl_ani_tokusyu_flag == false && ($partyc[@chanum.to_i] == 16 || $partyc[@chanum.to_i] == 32)
                #@btl_ani_cha_chg_no = 3
@@ -13089,19 +13022,19 @@ module Scene_Db_Battle_Anime_pattern
                    @effect_anime_pattern = 237
                when 361..420
                    back_anime_pattern 102,back_x,back_y
-                   ray_x = 300
-                   ray_y = 156
+                   @ray_x = 300
+                   @ray_y = 156
                    @effect_anime_pattern = 235
                when 421..470
-                   ray_x = 276
-                   ray_y = 140
+                   @ray_x = 276
+                   @ray_y = 140
                    battle_anime_change 0,6
                    @effect_anime_pattern = 235
                when 471
                    Audio.se_stop
                    battle_anime_change 0,2
-                   ray_x = -360
-                   ray_y = -96
+                   @ray_x = -360
+                   @ray_y = -96
                when 472
                    #@ray_color = 0
                    Audio.se_stop
@@ -13110,18 +13043,18 @@ module Scene_Db_Battle_Anime_pattern
                    #battle_anime_change 0,1
                    @effect_anime_pattern = 206
                    @effect_anime_frame = 0
-                   ray_x = -360
-                   ray_y = -96
+                   @ray_x = -360
+                   @ray_y = -96
                #back_anime_pattern 101,back_x,back_y
 
                when 473..510
                    #back_anime_pattern 101,back_x,back_y
                    @effect_anime_pattern = 206
-                   ray_x = 360
+                   @ray_x = 360
                    if $btl_progress >= 2
-                       ray_y = 96
+                       @ray_y = 96
                    else
-                       ray_y = 90
+                       @ray_y = 90
                    end
                when 511
                    #battle_anime_change 0,1
@@ -13147,8 +13080,8 @@ module Scene_Db_Battle_Anime_pattern
                @battle_anime_frame = -1 # 効果音を再生する
            end
         when 1804 #ダブル衝撃破
-            ray_x = 328
-            ray_y = 148
+            @ray_x = 328
+            @ray_y = 148
             @ray_color = 0
             idougo = 212+24
             idouryou = 8
@@ -13236,8 +13169,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
             end
         when 1805 #捨て身の攻撃
-            ray_x = 300
-            ray_y = 96
+            @ray_x = 300
+            @ray_y = 96
             #@scombo_cha_anime_frame = 0
             #@scombo_cha1_anime_type = 0
             #@scombo_cha2_anime_type = 0
@@ -13402,8 +13335,8 @@ module Scene_Db_Battle_Anime_pattern
             when 301..360
                 #@effect_anime_pattern = 57
                 back_anime_pattern 111
-                ray_x = 192
-                ray_y = 120
+                @ray_x = 192
+                @ray_y = 120
                 @effect_anime_pattern = 272#214
             when 361
                 @effect_anime_pattern = 0
@@ -13417,7 +13350,7 @@ module Scene_Db_Battle_Anime_pattern
                 @back_anime_frame = 0
                 Audio.se_play("Audio/SE/" + "Z1 飛ぶ")    # 効果音を再生する
             when 363..389
-                ray_y = 140
+                @ray_y = 140
                 @effect_anime_pattern = 255#215
                 back_anime_pattern 20
             when 390
@@ -13425,8 +13358,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 1806 #カメハメ乱舞
-            ray_x = 302
-            ray_y = 64
+            @ray_x = 302
+            @ray_y = 64
             @ray_color = 0
             case @battle_anime_frame
 
@@ -13519,11 +13452,11 @@ module Scene_Db_Battle_Anime_pattern
                back_y = -18
            end
            if @battle_anime_frame <= 500
-               ray_x = 325
-               ray_y = 70
+               @ray_x = 325
+               @ray_y = 70
            else
-               ray_x = 340
-               ray_y = 200
+               @ray_x = 340
+               @ray_y = 200
          end
            @ray_color = 0
            case @battle_anime_frame
@@ -13717,8 +13650,8 @@ module Scene_Db_Battle_Anime_pattern
        when 1808 #願いを込めた元気弾
            back_x = 190
            back_y = 36
-           ray_x = 340
-           ray_y = 112
+           @ray_x = 340
+           @ray_y = 112
            @ray_color = 0
            if @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] == 5
                #@btl_ani_cha_chg_no = 3
@@ -13812,14 +13745,14 @@ module Scene_Db_Battle_Anime_pattern
                    @effect_anime_frame = 0
                    Audio.se_play("Audio/SE/" + "Z1 吹っ飛ぶ")    # 効果音を再生する
                    battle_anime_change 0,5
-                   ray_x = CENTER_ENEX-92
-                   ray_y = 112
+                   @ray_x = CENTER_ENEX-92
+                   @ray_y = 112
                    @effect_anime_pattern = 69
                    @ax = 8
                when 255..279
                    #@output_anime_type = 0
-                   ray_x = CENTER_ENEX-92
-                   ray_y = 112
+                   @ray_x = CENTER_ENEX-92
+                   @ray_y = 112
                    battle_anime_change 0,6
                when 280
                    @effect_anime_pattern = 0
@@ -13828,8 +13761,8 @@ module Scene_Db_Battle_Anime_pattern
                    set_chr_display_out
                    @effect_anime_type = 0
                    #@effect_anime_frame = 0
-                   ray_x = 640
-                   ray_y = 228
+                   @ray_x = 640
+                   @ray_y = 228
                    @effect_anime_pattern = 69
                when 304
                    anime_pattern_init
@@ -13837,8 +13770,8 @@ module Scene_Db_Battle_Anime_pattern
                end
            end
        when 1809 #ダブルどどんぱ
-           ray_x = 328
-           ray_y = 148
+           @ray_x = 328
+           @ray_y = 148
            @ray_color = 0
            case @battle_anime_frame
 
@@ -13889,8 +13822,8 @@ module Scene_Db_Battle_Anime_pattern
                return @battle_anime_result + 1
            end
        when 1810 #超能力きこうほう
-           ray_x = 328
-           ray_y = 148
+           @ray_x = 328
+           @ray_y = 148
            case @battle_anime_frame
 
            when 0
@@ -14001,8 +13934,8 @@ module Scene_Db_Battle_Anime_pattern
        when 1813 #ギャリックかめはめは(ゴクウとベジータ)
            back_x = 200
            back_y = 32
-           ray_x = 300
-           ray_y = 162
+           @ray_x = 300
+           @ray_y = 162
            wake_color = Color.new(188,188,188,256)
            if @btl_ani_tokusyu_flag == false && ($partyc[@chanum.to_i] == 12 || $partyc[@chanum.to_i] == 19)
                #@btl_ani_cha_chg_no = 3
@@ -14030,8 +13963,8 @@ module Scene_Db_Battle_Anime_pattern
                    back_x = 198
                    back_y = 32
                end
-               ray_x = 340
-               ray_y = 96
+               @ray_x = 340
+               @ray_y = 96
                case @battle_anime_frame
                when 0 #初期化
                    if $btl_progress == 2
@@ -14057,7 +13990,7 @@ module Scene_Db_Battle_Anime_pattern
 
                    back_x -= 12*(@battle_anime_frame-140)
                    @ax = -12
-                   #ray_x -= 2*(@battle_anime_frame-140)
+                   #@ray_x -= 2*(@battle_anime_frame-140)
                    back_anime_pattern backhai_no,back_x,back_y
                    if @battle_anime_frame > 161
                        #CENTER_ENEX = 304
@@ -14287,8 +14220,8 @@ module Scene_Db_Battle_Anime_pattern
                @battle_anime_frame = -1 # 効果音を再生する
            end
         when 1814 #どどはめは
-            ray_x = 302
-            ray_y = 64
+            @ray_x = 302
+            @ray_y = 64
             @ray_color = 0
             idougo = 212+24
             idouryou = 8
@@ -14407,11 +14340,11 @@ module Scene_Db_Battle_Anime_pattern
                back_y = 60
            end
            if @battle_anime_frame <= 500
-               ray_x = 325
-               ray_y = 70
+               @ray_x = 325
+               @ray_y = 70
            else
-               ray_x = 340
-               ray_y = 200
+               @ray_x = 340
+               @ray_y = 200
            end
            case @battle_anime_frame
 
@@ -14550,11 +14483,11 @@ module Scene_Db_Battle_Anime_pattern
                back_y = 60
            end
            if @battle_anime_frame <= 500
-               ray_x = 325
-               ray_y = 70
+               @ray_x = 325
+               @ray_y = 70
            else
-               ray_x = 340
-               ray_y = 200
+               @ray_x = 340
+               @ray_y = 200
            end
            case @battle_anime_frame
 
@@ -14686,8 +14619,8 @@ module Scene_Db_Battle_Anime_pattern
             idouryou = 8
             back_x = 190
             back_y = 36
-            ray_x = 346
-            ray_y = 84
+            @ray_x = 346
+            @ray_y = 84
             @ray_color = 0
             case @battle_anime_frame
 
@@ -14841,11 +14774,11 @@ module Scene_Db_Battle_Anime_pattern
                 back_y = 60
             end
             if @battle_anime_frame <= 300
-                ray_x = 325
-                ray_y = 70
+                @ray_x = 325
+                @ray_y = 70
             else
-                ray_x = 348
-                ray_y = 96
+                @ray_x = 348
+                @ray_y = 96
             end
             case @battle_anime_frame
 
@@ -14979,8 +14912,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_x = 218
                 back_y = 60
             end
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             tcha1 = 16
             tcha1s = 32 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 7 #超サイヤ人のフラグNo
@@ -15069,7 +15002,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 240
             when 306
                 anime_pattern_init
@@ -15086,11 +15019,11 @@ module Scene_Db_Battle_Anime_pattern
                 back_y = 60
             end
             if @battle_anime_frame <= 300
-                ray_x = 330
-                ray_y = 70
+                @ray_x = 330
+                @ray_y = 70
             else
-                ray_x = 348
-                ray_y = 96
+                @ray_x = 348
+                @ray_y = 96
             end
             case @battle_anime_frame
 
@@ -15234,8 +15167,8 @@ module Scene_Db_Battle_Anime_pattern
                back_x = 218
                back_y = 60
            end
-           ray_x = 340
-           ray_y = 200
+           @ray_x = 340
+           @ray_y = 200
            tcha1 = 16
            tcha1s = 32 #超サイヤ人のときのキャラNo
            tcha1s_flagno = 7 #超サイヤ人のフラグNo
@@ -15324,7 +15257,7 @@ module Scene_Db_Battle_Anime_pattern
            when 280
                set_chr_display_out
            when 281..305
-               ray_y = 110
+               @ray_y = 110
                @effect_anime_pattern = 240
            when 306
                anime_pattern_init
@@ -15340,8 +15273,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_x = 218
                 back_y = 60
             end
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             tcha1 = 16
             tcha1s = 32 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 7 #超サイヤ人のフラグNo
@@ -15430,7 +15363,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 240
             when 306
                 anime_pattern_init
@@ -15446,8 +15379,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_x = 218
                 back_y = 60
             end
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             tcha1 = 16
             tcha1s = 32 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 7 #超サイヤ人のフラグNo
@@ -15536,7 +15469,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 240
             when 306
                 anime_pattern_init
@@ -15548,8 +15481,8 @@ module Scene_Db_Battle_Anime_pattern
             idouryou = 8
             back_x = 190
             back_y = 36
-            ray_x = 340
-            ray_y = 112
+            @ray_x = 340
+            @ray_y = 112
             @ray_color = 0
             case @battle_anime_frame
 
@@ -15744,8 +15677,8 @@ module Scene_Db_Battle_Anime_pattern
                 idoux = 12
                 @effect_anime_pattern = 237
                 @ray_color = 1
-                ray_x = STANDARD_CHAX+idoux*27 + 58
-                ray_y = STANDARD_CHAY-8 + 24
+                @ray_x = STANDARD_CHAX+idoux*27 + 58
+                @ray_y = STANDARD_CHAY-8 + 24
                 back_anime_pattern 116,STANDARD_CHAX+idoux*27,STANDARD_CHAY-30 + 24
                 back_anime_pattern 117,192,176
             when 421
@@ -15753,16 +15686,16 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 1
                 #Audio.se_stop
                 #Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
-                ray_x = STANDARD_CHAX+idoux*27 + 58
-                ray_y = STANDARD_CHAY-8 + 24
+                @ray_x = STANDARD_CHAX+idoux*27 + 58
+                @ray_y = STANDARD_CHAY-8 + 24
                 back_anime_pattern 116,STANDARD_CHAX+idoux*27,STANDARD_CHAY-30 + 24
                 back_anime_pattern 117,192,176
             when 422..425
                 sframe = 422
                 @ray_color = 1
                 idoux = 12
-                ray_x = STANDARD_CHAX+idoux*27 + 58 + 2*(@battle_anime_frame - sframe + 1)
-                ray_y = STANDARD_CHAY-8 + 24
+                @ray_x = STANDARD_CHAX+idoux*27 + 58 + 2*(@battle_anime_frame - sframe + 1)
+                @ray_y = STANDARD_CHAY-8 + 24
                 back_anime_pattern 116,STANDARD_CHAX+idoux*27,STANDARD_CHAY-30 + 24
                 back_anime_pattern 117,192,176
             when 426..435
@@ -15912,8 +15845,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 1842 #強襲サイヤ人
-            ray_x = 328
-            ray_y = 120
+            @ray_x = 328
+            @ray_y = 120
             @ray_color = 3
             idougo = 212+24
             idouryou = 12
@@ -16091,8 +16024,8 @@ module Scene_Db_Battle_Anime_pattern
                @btl_ani_tokusyu_flag = true
              end
         when 1850 #打て！悟飯
-            ray_x = 302
-            ray_y = 64
+            @ray_x = 302
+            @ray_y = 64
             @ray_color = 0
             idougo = 212+24
             idouryou = 8
@@ -16276,8 +16209,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "DB3 エネルギー波2") if @battle_anime_frame == 448
                 battle_anime_change 0,3
                 @effect_anime_pattern = 256
-                ray_x = @chax + 64
-                ray_y = @chay - 18
+                @ray_x = @chax + 64
+                @ray_y = @chay - 18
             when 550
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -16286,7 +16219,7 @@ module Scene_Db_Battle_Anime_pattern
             when 551..576
                 #@ray_color = 3
                 @effect_anime_pattern = 265
-                ray_y = 102
+                @ray_y = 102
                 back_anime_pattern 116,338,STANDARD_CHAY+10
                 back_anime_pattern 118,338-16,STANDARD_CHAY-10
             when 577
@@ -16370,8 +16303,8 @@ module Scene_Db_Battle_Anime_pattern
                 when 161..200
                     back_anime_pattern 116,CENTER_CHAX + 40,STANDARD_CHAY
                     @effect_anime_pattern = 201
-                    ray_x = 300 + 40
-                    ray_y = 96
+                    @ray_x = 300 + 40
+                    @ray_y = 96
                 when 201
                     @effect_anime_pattern = 0
                     @effect_anime_frame = 0
@@ -16390,11 +16323,11 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 204
             back_y = -18
             if @battle_anime_frame <= 500
-                ray_x = 325
-                ray_y = 70
+                @ray_x = 325
+                @ray_y = 70
             else
-                ray_x = 340
-                ray_y = 200
+                @ray_x = 340
+                @ray_y = 200
           end
             #@tec_back_small = true
             case @battle_anime_frame
@@ -16484,8 +16417,8 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
             when 252..293
                 @effect_anime_pattern = 125
-                ray_x = 350
-                ray_y = 158
+                @ray_x = 350
+                @ray_y = 158
                 @chay = STANDARD_CHAY
                 @output_anime_type = 1
                 Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == 252
@@ -16539,8 +16472,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_y = 32
                 backhai_no = 102
             end
-            ray_x = 350
-            ray_y = 124
+            @ray_x = 350
+            @ray_y = 124
 
             if @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] == 12 || @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] == 19
                 #@btl_ani_cha_chg_no = 3
@@ -16726,8 +16659,8 @@ module Scene_Db_Battle_Anime_pattern
                  when 161..200
                      back_anime_pattern 116,CENTER_CHAX + 40,STANDARD_CHAY
                      @effect_anime_pattern = 201
-                     ray_x = 300 + 40
-                     ray_y = 96
+                     @ray_x = 300 + 40
+                     @ray_y = 96
                  when 201
                      @effect_anime_pattern = 0
                      @effect_anime_frame = 0
@@ -16746,11 +16679,11 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 204
             back_y = -18
             if @battle_anime_frame <= 500
-                ray_x = 325
-                ray_y = 70
+                @ray_x = 325
+                @ray_y = 70
             else
-                ray_x = 340
-                ray_y = 200
+                @ray_x = 340
+                @ray_y = 200
           end
             #@tec_back_small = true
             case @battle_anime_frame
@@ -16840,8 +16773,8 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
             when 252..293
                 @effect_anime_pattern = 125
-                ray_x = 350
-                ray_y = 158
+                @ray_x = 350
+                @ray_y = 158
                 @chay = STANDARD_CHAY
                 @output_anime_type = 1
                 Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == 252
@@ -16896,11 +16829,11 @@ module Scene_Db_Battle_Anime_pattern
                back_y = 60
            end
            if @battle_anime_frame <= 500
-               ray_x = 325
-               ray_y = 70
+               @ray_x = 325
+               @ray_y = 70
            else
-               ray_x = 340
-               ray_y = 200
+               @ray_x = 340
+               @ray_y = 200
            end
            case @battle_anime_frame
 
@@ -16987,8 +16920,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_x = 218
                 back_y = 60
             end
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             tcha1 = 27
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -17077,7 +17010,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 240
             when 306
                 anime_pattern_init
@@ -17093,8 +17026,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_x = 218
                 back_y = 60
             end
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             tcha1 = 27
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -17183,7 +17116,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 240
             when 306
                 anime_pattern_init
@@ -17199,8 +17132,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_x = 218
                 back_y = 60
             end
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             tcha1 = 28
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -17289,7 +17222,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 240
             when 306
                 anime_pattern_init
@@ -17305,8 +17238,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_x = 218
                 back_y = 60
             end
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             tcha1 = 29
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -17395,7 +17328,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 240
             when 306
                 anime_pattern_init
@@ -17415,15 +17348,15 @@ module Scene_Db_Battle_Anime_pattern
                 back_y = 60
             end
             #if @battle_anime_frame <= 500
-            #ray_x = 325
-            #ray_y = 70
+            #@ray_x = 325
+            #@ray_y = 70
             #else
-            #ray_x = 340
-            #ray_y = 200
+            #@ray_x = 340
+            #@ray_y = 200
             #end
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
 
             case @battle_anime_frame
 
@@ -17552,7 +17485,7 @@ module Scene_Db_Battle_Anime_pattern
             when 353#280
                 set_chr_display_out
             when 354..378#281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 0
                 @effect_anime_pattern = 48
 
@@ -17641,11 +17574,11 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_pattern = 225
                 end
                 if $btl_progress >= 2
-                    ray_x = 330
-                    ray_y = 136
+                    @ray_x = 330
+                    @ray_y = 136
                 else
-                    ray_x = 334
-                    ray_y = 132
+                    @ray_x = 334
+                    @ray_y = 132
                 end
             when 531
                 #back_anime_pattern 117,@chax,STANDARD_CHAY+32
@@ -17655,8 +17588,8 @@ module Scene_Db_Battle_Anime_pattern
             end
 
         when 1905 #オレを半殺しにしろ
-            ray_x = 0
-            ray_y = 118
+            @ray_x = 0
+            @ray_y = 118
             @ray_color = 0
             idougo = 212+24
             idouryou = 8
@@ -17666,14 +17599,14 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 201
                 back_x = 234 - 176
                 back_y = -18 + 54+ 50
-                ray_x = 182 + 9 * 8
-                ray_y = 142
+                @ray_x = 182 + 9 * 8
+                @ray_y = 142
             else
                 backhai_no = 105
                 back_x = 218 - 160
                 back_y = 60
-                ray_x = 174 + 9 * 8
-                ray_y = 148
+                @ray_x = 174 + 9 * 8
+                @ray_y = 148
                 #@chax-144 - 50,STANDARD_CHAY - 56
             end
 
@@ -17818,8 +17751,8 @@ module Scene_Db_Battle_Anime_pattern
             end
 
         when 1906 #超サイヤ人だ孫悟空
-            ray_x = 0
-            ray_y = 118
+            @ray_x = 0
+            @ray_y = 118
             #@ray_color = 0
             idougo = 212+24
             idouryou = 8
@@ -17834,16 +17767,16 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no3 = 102
                 back_x = 218 - 156
                 back_y = 60
-            #ray_x = 182 + 9 * 8
-            #ray_y = 142
+            #@ray_x = 182 + 9 * 8
+            #@ray_y = 142
             else
                 backhai_no = 105
                 backhai_no2 = 101
                 backhai_no3 = 102
                 back_x = 218 - 156
                 back_y = 60
-                #ray_x = 174 + 9 * 8
-                #ray_y = 148
+                #@ray_x = 174 + 9 * 8
+                #@ray_y = 148
                 #@chax-144 - 50,STANDARD_CHAY - 56
             end
 
@@ -18015,20 +17948,20 @@ module Scene_Db_Battle_Anime_pattern
                 case @battle_anime_frame - sframe
 
                 when 0..60
-                    ray_x = 148
-                    ray_y = 108
+                    @ray_x = 148
+                    @ray_y = 108
                     tmpx = 24 * (@battle_anime_frame - sframe)
                     tmpy = 0 * (@battle_anime_frame - sframe)
                 when 61..360
-                    ray_x = -200
-                    ray_y = 108
+                    @ray_x = -200
+                    @ray_y = 108
                     tmpx = 36 * (@battle_anime_frame - sframe - 60)
                     tmpy = 0 * (@battle_anime_frame - sframe - 60)
                 end
 
-                ray_x += tmpx + shake_x
-                ray_y += tmpy + shake_y
-                back_anime_pattern 213,ray_x-152,ray_y-138
+                @ray_x += tmpx + shake_x
+                @ray_y += tmpy + shake_y
+                back_anime_pattern 213,@ray_x-152,@ray_y-138
             when 781
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -18048,14 +17981,14 @@ module Scene_Db_Battle_Anime_pattern
                 shake_dot = 8
                 shake_x,shake_y= pic_shake_cal shake_dot
 
-                ray_x = -200
-                ray_y = 108
+                @ray_x = -200
+                @ray_y = 108
                 tmpx = 24 * (@battle_anime_frame - sframe)
                 tmpy = 0 * (@battle_anime_frame - sframe)
 
-                ray_x += tmpx + shake_x
-                ray_y += tmpy + shake_y
-                back_anime_pattern 213,ray_x-152,ray_y-138
+                @ray_x += tmpx + shake_x
+                @ray_y += tmpy + shake_y
+                back_anime_pattern 213,@ray_x-152,@ray_y-138
             when 805..864
                 sframe = 805
                 if @battle_anime_frame == sframe
@@ -18077,12 +18010,12 @@ module Scene_Db_Battle_Anime_pattern
                 shake_dot = 16
                 shake_x,shake_y= pic_shake_cal shake_dot
 
-                ray_x = 136
-                ray_y = 108
+                @ray_x = 136
+                @ray_y = 108
 
-                ray_x += shake_x
-                ray_y += shake_y
-                back_anime_pattern 213,ray_x-152,ray_y-138
+                @ray_x += shake_x
+                @ray_y += shake_y
+                back_anime_pattern 213,@ray_x-152,@ray_y-138
                 @enex = CENTER_ENEX + shake_x
                 @eney = STANDARD_ENEY + shake_y
             when 865..895
@@ -18101,14 +18034,14 @@ module Scene_Db_Battle_Anime_pattern
                 shake_dot = 16
                 shake_x,shake_y= pic_shake_cal shake_dot
 
-                ray_x = 152
-                ray_y = 108
+                @ray_x = 152
+                @ray_y = 108
                 tmpx = 72 * (@battle_anime_frame - sframe)
                 tmpy = 0 * (@battle_anime_frame - sframe)
 
-                ray_x += tmpx + shake_x
-                ray_y += tmpy + shake_y
-                back_anime_pattern 213,ray_x-152,ray_y-138
+                @ray_x += tmpx + shake_x
+                @ray_y += tmpy + shake_y
+                back_anime_pattern 213,@ray_x-152,@ray_y-138
                 @enex = CENTER_ENEX
                 @eney = STANDARD_ENEY
             when 896
@@ -18122,8 +18055,8 @@ module Scene_Db_Battle_Anime_pattern
             idouryou = 8
             back_x = 190
             back_y = 36
-            ray_x = 346
-            ray_y = 84
+            @ray_x = 346
+            @ray_y = 84
             @ray_color = 0
             case @battle_anime_frame
 
@@ -18311,8 +18244,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_x = 218
                 back_y = 60
             end
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
 
             case @battle_anime_frame
 
@@ -18392,8 +18325,8 @@ module Scene_Db_Battle_Anime_pattern
 
             backhai_no = 201
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
 
             if @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] != 3
                 #@btl_ani_cha_chg_no = 5
@@ -18529,7 +18462,7 @@ module Scene_Db_Battle_Anime_pattern
                      @enex = CENTER_ENEX
                      battle_anime_change 1,0
                  when 374..398#281..305
-                     ray_y = 110
+                     @ray_y = 110
                      @ray_color = 0
                      @effect_anime_pattern = 48
                  when 399..420
@@ -18611,17 +18544,17 @@ module Scene_Db_Battle_Anime_pattern
             case @enedatenum #敵キャラによって光線の位置を変える
 
             when 37..39,62 #アプール系
-                ray_x = 312
-                ray_y = 142
+                @ray_x = 312
+                @ray_y = 142
             when 63 #惑星戦士3
-                ray_x = 308
-                ray_y = 144
+                @ray_x = 308
+                @ray_y = 144
             when 64 #惑星戦士4
-                ray_x = 316
-                ray_y = 142
+                @ray_x = 316
+                @ray_y = 142
             else
-                ray_x = 328
-                ray_y = 148
+                @ray_x = 328
+                @ray_y = 148
             end
             if @battle_anime_frame == 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
@@ -18657,8 +18590,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 270
-            ray_y = 96
+            @ray_x = 270
+            @ray_y = 96
             if @all_attack_count == 1
 
                 case @battle_anime_frame
@@ -18730,8 +18663,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 224
-            ray_y = 110
+            @ray_x = 224
+            @ray_y = 110
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + se_name)    # 効果音を再生する
@@ -18776,8 +18709,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 4
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 227
-                ray_x = 324
-                ray_y = 154
+                @ray_x = 324
+                @ray_y = 154
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -18791,8 +18724,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 1438 #(ドドリア系)口から怪光線
-            ray_x = 238
-            ray_y = 128
+            @ray_x = 238
+            @ray_y = 128
             if $btl_progress >= 2
                 back_x = 248
                 back_y = 86
@@ -18852,8 +18785,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 270
-            ray_y = 96
+            @ray_x = 270
+            @ray_y = 96
             if @all_attack_count == 1
 
                 case @battle_anime_frame
@@ -18926,8 +18859,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 227
-                ray_x = 328
-                ray_y = 148
+                @ray_x = 328
+                @ray_y = 148
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -18943,8 +18876,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1441 #(ザーボン系)スーパーエネルギー波
             back_x = 233
             back_y = 36
-            ray_x = 232
-            ray_y = 122
+            @ray_x = 232
+            @ray_y = 122
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
@@ -18980,8 +18913,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 3
             back_x = 233
             back_y = 36
-            ray_x = 270
-            ray_y = 96
+            @ray_x = 270
+            @ray_y = 96
             if @all_attack_count == 1
 
                 case @battle_anime_frame
@@ -19049,8 +18982,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 227
-                ray_x = 328
-                ray_y = 142
+                @ray_x = 328
+                @ray_y = 142
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -19064,8 +18997,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 1444 #(ザーボン系)スーパーエネルギー波
-            ray_x = 214
-            ray_y = 116
+            @ray_x = 214
+            @ray_y = 116
 
             if $btl_progress >= 2
                 back_x = 250
@@ -19119,8 +19052,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 227
-                ray_x = 316
-                ray_y = 144
+                @ray_x = 316
+                @ray_y = 144
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -19146,8 +19079,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 218
-            ray_y = 114
+            @ray_x = 218
+            @ray_y = 114
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + se_name)    # 効果音を再生する
@@ -19192,8 +19125,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 270
-            ray_y = 96
+            @ray_x = 270
+            @ray_y = 96
             if @all_attack_count == 1
 
                 case @battle_anime_frame
@@ -19261,8 +19194,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 227
-                ray_x = 316
-                ray_y = 144
+                @ray_x = 316
+                @ray_y = 144
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -19287,8 +19220,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 210
-            ray_y = 120
+            @ray_x = 210
+            @ray_y = 120
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + se_name)
@@ -19341,8 +19274,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 1
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 227
-                ray_x = 308
-                ray_y = 144
+                @ray_x = 308
+                @ray_y = 144
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -19416,8 +19349,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 4
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 227
-                ray_x = 316
-                ray_y = 140
+                @ray_x = 316
+                @ray_y = 140
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -19443,8 +19376,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 226
-            ray_y = 104
+            @ray_x = 226
+            @ray_y = 104
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + se_name)
@@ -19498,8 +19431,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 220
-            ray_y = 116
+            @ray_x = 220
+            @ray_y = 116
             case @battle_anime_frame
             when 0 #初期化
                 if $btl_progress >= 2
@@ -19545,8 +19478,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 227
-                ray_x = 336
-                ray_y = 160
+                @ray_x = 336
+                @ray_y = 160
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -19562,8 +19495,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1457 #(グルド)タイムストップ
             back_x = 260
             back_y = 60
-            ray_x = 325
-            ray_y = 138
+            @ray_x = 325
+            @ray_y = 138
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
@@ -19604,8 +19537,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 227
-                ray_x = 312
-                ray_y = 144
+                @ray_x = 312
+                @ray_y = 144
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -19622,8 +19555,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 3
             back_x = 230
             back_y = 32
-            ray_x = 270
-            ray_y = 96
+            @ray_x = 270
+            @ray_y = 96
             if @all_attack_count == 1
 
                 case @battle_anime_frame
@@ -19686,8 +19619,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1460 #(フリーザ)スーパーエネルギー波
             back_x = 230
             back_y = 32
-            ray_x = 218
-            ray_y = 130
+            @ray_x = 218
+            @ray_y = 130
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
@@ -19728,8 +19661,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 227
-                ray_x = 300
-                ray_y = 142
+                @ray_x = 300
+                @ray_y = 142
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -19746,8 +19679,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 3
             back_x = 230
             back_y = 32
-            ray_x = 270
-            ray_y = 96
+            @ray_x = 270
+            @ray_y = 96
             if @all_attack_count == 1
 
                 case @battle_anime_frame
@@ -19810,8 +19743,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1463 #(フリーザ1)スーパーエネルギー波
             back_x = 230
             back_y = 32
-            ray_x = 210
-            ray_y = 120
+            @ray_x = 210
+            @ray_y = 120
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
@@ -19852,8 +19785,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 227
-                ray_x = 300
-                ray_y = 142
+                @ray_x = 300
+                @ray_y = 142
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -19870,8 +19803,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 3
             back_x = 230
             back_y = 32
-            ray_x = 270
-            ray_y = 96
+            @ray_x = 270
+            @ray_y = 96
             if @all_attack_count == 1
 
                 case @battle_anime_frame
@@ -19934,8 +19867,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1466 #(フリーザ2)スーパーエネルギー波
             back_x = 230
             back_y = 32
-            ray_x = 210
-            ray_y = 120
+            @ray_x = 210
+            @ray_y = 120
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
@@ -19976,11 +19909,11 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 3
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 227
-                ray_x = 300
-                ray_y = 142
+                @ray_x = 300
+                @ray_y = 142
                 if @enedatenum == 57 #フルパワー
-                    ray_x = 320
-                    ray_y = 146
+                    @ray_x = 320
+                    @ray_y = 146
                 end
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
@@ -19998,8 +19931,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 3
             back_x = 230
             back_y = 32
-            ray_x = 270
-            ray_y = 96
+            @ray_x = 270
+            @ray_y = 96
             if @all_attack_count == 1
 
                 case @battle_anime_frame
@@ -20068,11 +20001,11 @@ module Scene_Db_Battle_Anime_pattern
         when 1469 #(フリーザ3)スーパーエネルギー波
             back_x = 204
             back_y = 32
-            ray_x = 116
-            ray_y = 96
+            @ray_x = 116
+            @ray_y = 96
             if @enedatenum == 57 #フルパワー
-                ray_x = 142
-                ray_y = 102
+                @ray_x = 142
+                @ray_y = 102
             end
             case @battle_anime_frame
             when 0 #初期化
@@ -20116,8 +20049,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1724 #フリーザデスボール
             back_x = 228
             back_y = 88
-            ray_x = 346
-            ray_y = 66
+            @ray_x = 346
+            @ray_y = 66
 
             case @battle_anime_frame
             when 0 #初期化
@@ -20217,8 +20150,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
             when 431..455
 
-                #ray_x = 346
-                #ray_y = 136
+                #@ray_x = 346
+                #@ray_y = 136
                 @effect_anime_pattern = 294
             when 456
                 anime_pattern_init
@@ -20227,8 +20160,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1794 #俺に殺されるべきなんだ
             back_x = 228
             back_y = 88
-            ray_x = 0#0346
-            ray_y = 158#66
+            @ray_x = 0#0346
+            @ray_y = 158#66
 
             case @battle_anime_frame
             when 0 #初期化
@@ -20283,8 +20216,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 when 140..230
                     Audio.se_play("Audio/SE/" + "DB3 気を溜める2") if @battle_anime_frame == 140
-                    ray_x = 260
-                    ray_y = 228
+                    @ray_x = 260
+                    @ray_y = 228
 
                     @effect_anime_pattern = 235
                 when 231
@@ -20305,7 +20238,7 @@ module Scene_Db_Battle_Anime_pattern
                 set_chr_display_out
             #Audio.se_play("Audio/SE/" + "Z1 ザー")
             when 311..336
-                ray_y = 112
+                @ray_y = 112
                 #@effect_anime_pattern = 265
                 #@effect_anime_pattern = 266
                 @effect_anime_pattern = 48
@@ -20316,8 +20249,8 @@ module Scene_Db_Battle_Anime_pattern
         when 1795 #スーパーギャリック砲
             back_x = 228
             back_y = 88
-            ray_x = 0#0346
-            ray_y = 158#66
+            @ray_x = 0#0346
+            @ray_y = 158#66
 
             case @battle_anime_frame
             when 0 #初期化
@@ -20356,8 +20289,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 when sframe..250
                     Audio.se_play("Audio/SE/" + "DB3 気を溜める2") if @battle_anime_frame == sframe
-                    ray_x = 278
-                    ray_y = 66
+                    @ray_x = 278
+                    @ray_y = 66
                     @effect_anime_pattern = 235
                 end
 
@@ -20376,8 +20309,8 @@ module Scene_Db_Battle_Anime_pattern
                     @eney = STANDARD_ENEY
                 end
 
-                ray_x = 86
-                ray_y = 68
+                @ray_x = 86
+                @ray_y = 68
             when 301
                 #@tec_output_back = false
                 @chr_cutin = true
@@ -20388,7 +20321,7 @@ module Scene_Db_Battle_Anime_pattern
                 set_chr_display_out
             #Audio.se_play("Audio/SE/" + "Z1 ザー")
             when 311..336
-                ray_y = 112
+                @ray_y = 112
                 #@effect_anime_pattern = 265
                 #@effect_anime_pattern = 266
                 @effect_anime_pattern = 48
@@ -20397,8 +20330,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 1474 #(ターレス)エネルギー波
-            ray_x = 314
-            ray_y = 144
+            @ray_x = 314
+            @ray_y = 144
             case @battle_anime_frame
 
             when 0 #初期化
@@ -20496,8 +20429,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 1476 #(ターレス)キルドライバー
 
-            ray_x = 216
-            ray_y = 118
+            @ray_x = 216
+            @ray_y = 118
             if $btl_progress >= 2
                 back_x = 246
                 back_y = 86
@@ -20554,8 +20487,8 @@ module Scene_Db_Battle_Anime_pattern
                 se_name = "Z2 気を溜める"
             end
 
-            ray_x = 210
-            ray_y = 120
+            @ray_x = 210
+            @ray_y = 120
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + se_name)
@@ -20669,13 +20602,13 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
 
             when 327..340
-                ray_x = CENTER_ENEX-4
-                ray_y = STANDARD_ENEY+32
+                @ray_x = CENTER_ENEX-4
+                @ray_y = STANDARD_ENEY+32
                 @ray_color = 3
                 @effect_anime_pattern = 237
             when 341..400
-                ray_x = CENTER_ENEX-20
-                ray_y = STANDARD_ENEY+24
+                @ray_x = CENTER_ENEX-20
+                @ray_y = STANDARD_ENEY+24
                 @ray_color = 3
                 @effect_anime_pattern = 235
             when 401
@@ -20701,13 +20634,13 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern 4#5
                 battle_anime_change 0,7
                 @effect_anime_pattern = 21
-                ray_x = 234
-                ray_y = 100
+                @ray_x = 234
+                @ray_y = 100
             elsif @battle_anime_frame >= 82 && @battle_anime_frame <= 102
                 back_anime_pattern 4#5
                 battle_anime_change 0,7
-                ray_x = 234
-                ray_y = 100 - (@battle_anime_frame-82)
+                @ray_x = 234
+                @ray_y = 100 - (@battle_anime_frame-82)
             #elsif @battle_anime_frame == 81
             #Audio.se_stop
             #Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
@@ -20715,21 +20648,21 @@ module Scene_Db_Battle_Anime_pattern
             #back_anime_pattern 5
             elsif @battle_anime_frame >= 103 && @battle_anime_frame <= 184
                 back_anime_pattern 4#5
-                ray_x = 234
-                ray_y = 80
+                @ray_x = 234
+                @ray_y = 80
             elsif @battle_anime_frame >= 185 && @battle_anime_frame <= 209
                 battle_anime_change 0,8
-                ray_x = 226
-                ray_y = 88
+                @ray_x = 226
+                @ray_y = 88
             elsif @battle_anime_frame == 210
                 Audio.se_play("Audio/SE/" + "Z1 繰気弾")    # 効果音を再生する
                 battle_anime_change 0,9
-                ray_x = 226
-                ray_y = 88
+                @ray_x = 226
+                @ray_y = 88
                 @effect_anime_pattern = 21
             elsif @battle_anime_frame >= 211 && @battle_anime_frame <= 305
-                ray_x = 226 - (@battle_anime_frame-211)*4
-                ray_y = 88 - (@battle_anime_frame-211)*4
+                @ray_x = 226 - (@battle_anime_frame-211)*4
+                @ray_y = 88 - (@battle_anime_frame-211)*4
 
                 if @battle_anime_frame >= 265
                     back_anime_pattern 11
@@ -20744,18 +20677,18 @@ module Scene_Db_Battle_Anime_pattern
                 @eney = -200 #キャラ画面範囲外へ
             elsif @battle_anime_frame >= 308 && @battle_anime_frame <= 374
                 @effect_anime_pattern = 21
-                ray_x = 256
-                ray_y = 240 - (@battle_anime_frame-308)*2
+                @ray_x = 256
+                @ray_y = 240 - (@battle_anime_frame-308)*2
                 if @battle_anime_frame == 374
-                    #p ray_y #108
+                    #p @ray_y #108
                 end
             elsif @battle_anime_frame == 375
-                ray_x = 256
-                ray_y = 108
+                @ray_x = 256
+                @ray_y = 108
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める(元気弾)")    # 効果音を再生する
             elsif @battle_anime_frame >= 375 && @battle_anime_frame <= 439
-                ray_x = 256
-                ray_y = 108
+                @ray_x = 256
+                @ray_y = 108
 
                 if @battle_anime_frame <= 383
                     color = Color.new(255,255,255,260)
@@ -20832,8 +20765,8 @@ module Scene_Db_Battle_Anime_pattern
             end
 
         when 1478 #(スラッグ)エネルギー波
-            ray_x = 308
-            ray_y = 138
+            @ray_x = 308
+            @ray_y = 138
             @ray_color = 1
             case @battle_anime_frame
 
@@ -20937,15 +20870,15 @@ module Scene_Db_Battle_Anime_pattern
                 back_y = 86
                 backhai_no = 201
                 se_name = "Z3 変身"
-                ray_x = 120
-                ray_y = 106
+                @ray_x = 120
+                @ray_y = 106
             else
                 back_x = 208
                 back_y = 32
                 backhai_no = 102
                 se_name = "Z2 気を溜める"
-                ray_x = 120
-                ray_y = 106
+                @ray_x = 120
+                @ray_y = 106
             end
 
             @ray_color = 1
@@ -20994,8 +20927,8 @@ module Scene_Db_Battle_Anime_pattern
                 se_name = "Z2 気を溜める"
             end
 
-            ray_x = 214
-            ray_y = 120
+            @ray_x = 214
+            @ray_y = 120
             @ray_color = 1
             case @battle_anime_frame
             when 0 #初期化
@@ -21083,8 +21016,8 @@ module Scene_Db_Battle_Anime_pattern
             when 260
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
             when 261..300
-                ray_x = 214-4
-                ray_y = 120-10
+                @ray_x = 214-4
+                @ray_y = 120-10
                 battle_anime_change 0,1
                 @effect_anime_pattern = 233
             when 301
@@ -21194,8 +21127,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 1482 #(ジース,バータ)パープルコメットクラッシュ
-            ray_x = 236
-            ray_y = 122
+            @ray_x = 236
+            @ray_y = 122
             case @battle_anime_frame
 
             when 0 #初期化
@@ -21292,15 +21225,15 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,2
                 @effect_anime_pattern = 218
                 @effect_anime_frame = 0
-                ray_x = 290
-                ray_y = 86
+                @ray_x = 290
+                @ray_y = 86
             when 151..179
                 sframe = 151
                 Audio.se_play("Audio/SE/" + "Z1 気円斬") if sframe == @battle_anime_frame
                 @effect_anime_pattern = 218
                 battle_anime_change 0,3
-                ray_x = 184
-                ray_y = 140
+                @ray_x = 184
+                @ray_y = 140
             when 180
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -21396,8 +21329,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 102
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 170
-            ray_y = 130
+            @ray_x = 170
+            @ray_y = 130
             @ray_color = 3
             case @battle_anime_frame
             when 0 #初期化
@@ -21524,8 +21457,8 @@ module Scene_Db_Battle_Anime_pattern
                 se_name = "Z2 気を溜める"
             end
 
-            ray_x = 326-80
-            ray_y = 96
+            @ray_x = 326-80
+            @ray_y = 96
 
             if @all_attack_count == 1
                 case @battle_anime_frame
@@ -21600,8 +21533,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 102
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 170
-            ray_y = 130
+            @ray_x = 170
+            @ray_y = 130
             @ray_color = 3
             case @battle_anime_frame
             when 0 #初期化
@@ -21645,8 +21578,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 256
-            ray_y = 206
+            @ray_x = 256
+            @ray_y = 206
             case @battle_anime_frame
             when 0
                 #set_chr_display_out
@@ -21738,8 +21671,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 250
-            ray_y = 120
+            @ray_x = 250
+            @ray_y = 120
             @ray_color = 3
             case @battle_anime_frame
             when 0 #初期化
@@ -21783,8 +21716,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 280
-            ray_y = 154
+            @ray_x = 280
+            @ray_y = 154
             @ray_color = 3
             case @battle_anime_frame
             when 0 #初期化
@@ -21801,12 +21734,12 @@ module Scene_Db_Battle_Anime_pattern
             when 110
                 battle_anime_change 0,4
                 Audio.se_play("Audio/SE/" + "DB3 ダッシュ")    # 効果音を再生する
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
             when 111..148
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
             when 149..158
                 @back_anime_frame -= 1
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
             when 159
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -21814,11 +21747,11 @@ module Scene_Db_Battle_Anime_pattern
                 set_chr_display_out
                 @back_anime_frame = 0
             when 160..186
-                ray_x = 640
+                @ray_x = 640
                 #@effect_anime_pattern = 340
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
             when 187..219
-                ray_x = 640
+                @ray_x = 640
                 sframe = 187
                 @back_anime_frame -= 1
                 if @attack_hit == false
@@ -21827,7 +21760,7 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == sframe
 
                 end
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
                 battle_anime_change 1,16
                 case (@battle_anime_frame - sframe)
                 #battle_anime_change 1,16
@@ -21838,21 +21771,21 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 220..229
                 sframe = 220
-                ray_x = 280 + 38
+                @ray_x = 280 + 38
                 @chax = -200
                 @enex = CENTER_ENEX
                 @eney = STANDARD_ENEY
                 @back_anime_frame -= 1
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
             when 230..267
                 sframe = 230
-                ray_x = 280 + 38
+                @ray_x = 280 + 38
                 @back_anime_frame -= 1
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
                 battle_anime_change 0,9
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波2") if @battle_anime_frame == sframe
-                ray_x = 292
-                ray_y = 120
+                @ray_x = 292
+                @ray_y = 120
                 @effect_anime_pattern = 233
             when 268..294
                 sframe = 268
@@ -21861,12 +21794,12 @@ module Scene_Db_Battle_Anime_pattern
                 @chay = STANDARD_CHAY if @battle_anime_frame == sframe
                 @eney = -200
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
-                ray_x = 640
-                back_anime_pattern 216,ray_x,ray_y
+                @ray_x = 640
+                back_anime_pattern 216,@ray_x,@ray_y
                 battle_anime_change 1,16
                 @back_anime_frame -= 1
-                ray_x = 250
-                ray_y = 120
+                @ray_x = 250
+                @ray_y = 120
                 @effect_anime_pattern = 234
             when 295
                 anime_pattern_init
@@ -21884,8 +21817,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 212
-            ray_y = 120
+            @ray_x = 212
+            @ray_y = 120
             @ray_color = 3
             case @battle_anime_frame
             when 0 #初期化
@@ -21932,8 +21865,8 @@ module Scene_Db_Battle_Anime_pattern
                 se_name = "Z2 気を溜める"
             end
 
-            ray_x = 326
-            ray_y = 96
+            @ray_x = 326
+            @ray_y = 96
 
             if @all_attack_count == 1
                 case @battle_anime_frame
@@ -21985,13 +21918,13 @@ module Scene_Db_Battle_Anime_pattern
                     end
 
                     if @effect_anime_pattern == 16
-                        ray_x = 220
-                        ray_y = 98
+                        @ray_x = 220
+                        @ray_y = 98
                     end
 
                     if @effect_anime_pattern == 18
-                        ray_x = 278
-                        ray_y = 98
+                        @ray_x = 278
+                        @ray_y = 98
                     end
 
                 when 310
@@ -22001,7 +21934,7 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_type = 0
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
                 when 311..337
-                    ray_y = 160
+                    @ray_y = 160
                     @effect_anime_pattern = 340
                 when 338
                     anime_pattern_init
@@ -22017,7 +21950,7 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_frame = 0
                     @effect_anime_type = 0
                 when 1..27
-                    ray_y = 160
+                    @ray_y = 160
                     @effect_anime_pattern = 340
                     @chr_cutin = true
                     @chr_cutin_mirror_flag = true
@@ -22041,8 +21974,8 @@ module Scene_Db_Battle_Anime_pattern
                 se_name = "Z2 気を溜める"
             end
 
-            ray_x = 212
-            ray_y = 120
+            @ray_x = 212
+            @ray_y = 120
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + se_name)
@@ -22140,8 +22073,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 212
-            ray_y = 120
+            @ray_x = 212
+            @ray_y = 120
             @ray_color = 3
             case @battle_anime_frame
             when 0 #初期化
@@ -22199,8 +22132,8 @@ module Scene_Db_Battle_Anime_pattern
                 backhai_no = 101
                 se_name = "Z2 気を溜める"
             end
-            ray_x = 280
-            ray_y = 154
+            @ray_x = 280
+            @ray_y = 154
             @ray_color = 3
             case @battle_anime_frame
             when 0
@@ -22283,18 +22216,18 @@ module Scene_Db_Battle_Anime_pattern
             when 170
                 battle_anime_change 0,4
                 Audio.se_play("Audio/SE/" + "DB3 ダッシュ")    # 効果音を再生する
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
                 picture = Cache.picture("Z2_戦闘_必殺技_敵_メダマッチャ")
                 rect = Rect.new(0, 0,96,96)
                 @back_window.contents.blt(740-8*39,STANDARD_ENEY,picture,rect)
             when 171..208
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
                 picture = Cache.picture("Z2_戦闘_必殺技_敵_メダマッチャ")
                 rect = Rect.new(0, 0,96,96)
                 @back_window.contents.blt(740-8*39,STANDARD_ENEY,picture,rect)
             when 209..218
                 @back_anime_frame -= 1
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
                 picture = Cache.picture("Z2_戦闘_必殺技_敵_メダマッチャ")
                 rect = Rect.new(0, 0,96,96)
                 @back_window.contents.blt(740-8*39,STANDARD_ENEY,picture,rect)
@@ -22305,11 +22238,11 @@ module Scene_Db_Battle_Anime_pattern
                 set_chr_display_out
                 @back_anime_frame = 0
             when 220..246
-                ray_x = 640
+                @ray_x = 640
                 #@effect_anime_pattern = 340
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
             when 247..279
-                ray_x = 640
+                @ray_x = 640
                 sframe = 247
                 @back_anime_frame -= 1
                 if @attack_hit == false
@@ -22318,7 +22251,7 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == sframe
 
                 end
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
                 battle_anime_change 1,16
                 case (@battle_anime_frame - sframe)
                 #battle_anime_change 1,16
@@ -22329,20 +22262,20 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 280..289
                 sframe = 280
-                #ray_x = 280 + 38
+                #@ray_x = 280 + 38
                 @chax = -200
                 @enex = TEC_CENTER_CHAX #CENTER_ENEX
                 @eney = STANDARD_ENEY
 
                 @back_anime_frame -= 1
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
 
                 picture = Cache.picture("Z2_戦闘_必殺技_敵_メダマッチャ")
                 rect = Rect.new(0, 0,96,96)
                 @back_window.contents.blt(740-8*39,STANDARD_ENEY,picture,rect)
             when 290..430
                 @back_anime_frame -= 1
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
 
                 sframe = 290
 
@@ -22392,7 +22325,7 @@ module Scene_Db_Battle_Anime_pattern
             when 431..478
                 sframe = 431
                 @back_anime_frame -= 1
-                back_anime_pattern 216,ray_x,ray_y
+                back_anime_pattern 216,@ray_x,@ray_y
 
                 kaerux = @enex + 166
                 picture = Cache.picture("Z2_戦闘_必殺技_敵_メダマッチャ")
@@ -22425,8 +22358,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "DB3 SE061") if @battle_anime_frame == sframe + 26
                 @back_anime_frame = 27
                 @back_anime_frame -= 1
-                ray_x = 640
-                back_anime_pattern 216,ray_x,ray_y
+                @ray_x = 640
+                back_anime_pattern 216,@ray_x,@ray_y
 
             when 537..597
                 sframe = 537
@@ -22439,8 +22372,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 @back_anime_frame = 27
                 @back_anime_frame -= 1
-                ray_x = 640
-                back_anime_pattern 216,ray_x,ray_y
+                @ray_x = 640
+                back_anime_pattern 216,@ray_x,@ray_y
             when 598..624
                 sframe = 598
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波2") if @battle_anime_frame == sframe
@@ -22452,12 +22385,12 @@ module Scene_Db_Battle_Anime_pattern
                 #@chay = STANDARD_CHAY if @battle_anime_frame == sframe
                 #@eney = -200
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
-                ray_x = 640
-                back_anime_pattern 216,ray_x,ray_y
+                @ray_x = 640
+                back_anime_pattern 216,@ray_x,@ray_y
                 #battle_anime_change 1,16
 
-                ray_x = 250
-                ray_y = 120
+                @ray_x = 250
+                @ray_y = 120
                 @effect_anime_pattern = 234
             when 625
                 anime_pattern_init
@@ -22487,8 +22420,8 @@ module Scene_Db_Battle_Anime_pattern
                 @genkityuushin_y = 60
                 @genkitama_kanri_frame = [0,0,0,0,0,0]
             when 1..320
-                ray_x = @genkityuushin_x - 12
-                ray_y = @genkityuushin_y - 12
+                @ray_x = @genkityuushin_x - 12
+                @ray_y = @genkityuushin_y - 12
                 tame_end = 250
 
                 if @battle_anime_frame == tame_end
@@ -22578,27 +22511,27 @@ module Scene_Db_Battle_Anime_pattern
                         end
 
                         if @effect_anime_pattern == 252
-                            ray_x = @genkityuushin_x - (12 + 16)
-                            ray_y = @genkityuushin_y - (12 + 16)
+                            @ray_x = @genkityuushin_x - (12 + 16)
+                            @ray_y = @genkityuushin_y - (12 + 16)
                         elsif @effect_anime_pattern == 235
-                            ray_x = @genkityuushin_x - 12
-                            ray_y = @genkityuushin_y - 12
+                            @ray_x = @genkityuushin_x - 12
+                            @ray_y = @genkityuushin_y - 12
                         end
                     elsif @battle_anime_frame <= tame_end
                         #p @battle_anime_frame,@effect_anime_pattern
-                        ray_x = @genkityuushin_x - (12 + 16)
-                        ray_y = @genkityuushin_y - (12 + 16)
+                        @ray_x = @genkityuushin_x - (12 + 16)
+                        @ray_y = @genkityuushin_y - (12 + 16)
                         @effect_anime_pattern = 252
                     else #@battle_anime_frame <= 400
                         #p @battle_anime_frame,@effect_anime_pattern
-                        ray_x = @genkityuushin_x - (12 + 16) #- (@battle_anime_frame-400)*2
-                        ray_y = @genkityuushin_y - (12 + 16) - (@battle_anime_frame-tame_end)*2
+                        @ray_x = @genkityuushin_x - (12 + 16) #- (@battle_anime_frame-400)*2
+                        @ray_y = @genkityuushin_y - (12 + 16) - (@battle_anime_frame-tame_end)*2
                         @effect_anime_pattern = 252
                     end
                 end
             when 321
-                #ray_x = @genkityuushin_x - (12 + 16) #- (@battle_anime_frame-400)*2
-                #ray_y = @genkityuushin_y - (12 + 16) - (@battle_anime_frame-tame_end)*2
+                #@ray_x = @genkityuushin_x - (12 + 16) #- (@battle_anime_frame-400)*2
+                #@ray_y = @genkityuushin_y - (12 + 16) - (@battle_anime_frame-tame_end)*2
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
@@ -22613,8 +22546,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2119 #超元気弾
             back_x = 180
             back_y = 0
-            ray_x = (640-246)
-            ray_y = 0
+            @ray_x = (640-246)
+            @ray_y = 0
 
             case @battle_anime_frame
             when 0 #初期化
@@ -22645,8 +22578,8 @@ module Scene_Db_Battle_Anime_pattern
                 @back_window.contents.blt(270,90,picture,rect)
 
 
-                #ray_x = @genkityuushin_x - 12
-                #ray_y = @genkityuushin_y - 12
+                #@ray_x = @genkityuushin_x - 12
+                #@ray_y = @genkityuushin_y - 12
                 tame_end = 300
 
                 if @battle_anime_frame == tame_end
@@ -22737,8 +22670,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2127 #瞬間移動かめはめは
             color = Color.new(255,255,255,260)
-            ray_x = 340
-            ray_y = 96
+            @ray_x = 340
+            @ray_y = 96
 
             backhai_no = 201
             back_x = 228
@@ -22766,16 +22699,16 @@ module Scene_Db_Battle_Anime_pattern
                 sframe = 151
                 @ray_color = 3
                 back_anime_pattern backhai_no,back_x,back_y
-                ray_x = 284
-                ray_y = 160
+                @ray_x = 284
+                @ray_y = 160
                 @ray_color = 0
                 @effect_anime_pattern = 237
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める2") if @battle_anime_frame == sframe + 80
             when 271..350
                 sframe = 271
 
-                ray_x = 284-8
-                ray_y = 160-8
+                @ray_x = 284-8
+                @ray_y = 160-8
                 @effect_anime_pattern = 235
                 @effect_anime_pattern = 0 if @battle_anime_frame == 350
             when 351..410
@@ -22803,8 +22736,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 481..540
                 sframe = 481
-                ray_x = 284-8-48
-                ray_y = 160-8
+                @ray_x = 284-8-48
+                @ray_y = 160-8
                 @effect_anime_pattern = 235
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める2") if @battle_anime_frame == sframe
                 @chay = STANDARD_CHAY
@@ -22818,8 +22751,8 @@ module Scene_Db_Battle_Anime_pattern
                 @chay = -200
                 itix = 258
                 itiy = 46
-                ray_x = itix + 16
-                ray_y = itiy + 86
+                @ray_x = itix + 16
+                @ray_y = itiy + 86
                 if $game_variables[171] == 1
                     picture = Cache.picture("ZG_必殺技_超カメハメ波2(悟空_ボロボロ)")
                 elsif $game_variables[171] == 2
@@ -22838,8 +22771,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 itix = 258
                 itiy = 46
-                ray_x = itix + 16
-                ray_y = itiy + 86
+                @ray_x = itix + 16
+                @ray_y = itiy + 86
                 @effect_anime_pattern = 0
                 Audio.se_stop if @battle_anime_frame == sframe
                 Audio.se_play("Audio/SE/" + "ZG SE040") if @battle_anime_frame == sframe
@@ -22872,8 +22805,8 @@ module Scene_Db_Battle_Anime_pattern
             when 721..820
                 sframe = 721
                 @eney = -200
-                ray_x = 308
-                ray_y = 96
+                @ray_x = 308
+                @ray_y = 96
                 Audio.se_stop if @battle_anime_frame == sframe
                 Audio.se_play("Audio/SE/" + "ZG 光線1") if @battle_anime_frame == sframe
                 battle_anime_change 0,3
@@ -23234,8 +23167,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2136 #魔貫光殺砲
             back_x = 180
             back_y = 0
-            ray_x = (640-246-16)
-            ray_y = 180
+            @ray_x = (640-246-16)
+            @ray_y = 180
             color = Color.new(255,255,255,260)
 
             case @battle_anime_frame
@@ -23285,7 +23218,7 @@ module Scene_Db_Battle_Anime_pattern
 
             #@chr_cutin = true
             when 262..287
-                ray_y = 134
+                @ray_y = 134
                 @effect_anime_pattern = 255
             when 288
                 anime_pattern_init
@@ -23293,8 +23226,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2139 #激烈光弾
 
-            ray_x = 350
-            ray_y = 114
+            @ray_x = 350
+            @ray_y = 114
             if $btl_progress == 2
                 backhai_no = 201
                 back_x = 228
@@ -23331,14 +23264,14 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 if @battle_anime_frame >= 180
                     @effect_anime_pattern = 252
-                    ray_x = 322-16
-                    ray_y = 164-16
+                    @ray_x = 322-16
+                    @ray_y = 164-16
                     @ray_anime_type = 0 if @battle_anime_frame == 180
                 #Audio.se_play("Audio/SE/" + "Z1 気を溜める2")    # 効果音を再生する
                 elsif @battle_anime_frame >= 120
                     @effect_anime_pattern = 235
-                    ray_x = 322
-                    ray_y = 164
+                    @ray_x = 322
+                    @ray_y = 164
                     Audio.se_play("Audio/SE/" + "Z1 気を溜める2") if @battle_anime_frame == 120   # 効果音を再生する
                 end
 
@@ -23369,8 +23302,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2140 #魔空包囲弾
 
-            ray_x = 340
-            ray_y = 96
+            @ray_x = 340
+            @ray_y = 96
             if $btl_progress == 2
                 backhai_no = 201
                 back_x = 228
@@ -23411,35 +23344,35 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0 if @battle_anime_frame == 121
                 battle_anime_change 0,9
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 80
+                @ray_x = 320
+                @ray_y = 80
             when 136..150
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 136
                 @effect_anime_frame = 0 if @battle_anime_frame == 136
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 104
+                @ray_x = 320
+                @ray_y = 104
             when 151
                 #Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 160 # 効果音を再生する
                 #@effect_anime_frame = 0 if @battle_anime_frame == 160
                 battle_anime_change 0,10
             #@effect_anime_pattern = 201
-            #ray_x = 320
-            #ray_y = 140
+            #@ray_x = 320
+            #@ray_y = 140
             when 181..195
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 181 # 効果音を再生する
                 @effect_anime_frame = 0 if @battle_anime_frame == 181
                 battle_anime_change 0,11
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 140
+                @ray_x = 320
+                @ray_y = 140
             when 196..210
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 196 # 効果音を再生する
                 @effect_anime_frame = 0 if @battle_anime_frame == 196
                 #battle_anime_change 0,11
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 116
+                @ray_x = 320
+                @ray_y = 116
             when 211
                 Audio.se_stop
                 #Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
@@ -23450,35 +23383,35 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0 if @battle_anime_frame == 241
                 battle_anime_change 0,9
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 80
+                @ray_x = 320
+                @ray_y = 80
             when 256..270
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 256
                 @effect_anime_frame = 0 if @battle_anime_frame == 256
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 104
+                @ray_x = 320
+                @ray_y = 104
             when 271
                 #Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 160 # 効果音を再生する
                 #@effect_anime_frame = 0 if @battle_anime_frame == 160
                 battle_anime_change 0,10
             #@effect_anime_pattern = 201
-            #ray_x = 320
-            #ray_y = 140
+            #@ray_x = 320
+            #@ray_y = 140
             when 301..315
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 301 # 効果音を再生する
                 @effect_anime_frame = 0 if @battle_anime_frame == 301
                 battle_anime_change 0,11
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 140
+                @ray_x = 320
+                @ray_y = 140
             when 316..330
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 316 # 効果音を再生する
                 @effect_anime_frame = 0 if @battle_anime_frame == 316
                 #battle_anime_change 0,11
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 116
+                @ray_x = 320
+                @ray_y = 116
 
             when 360
 
@@ -23684,8 +23617,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2147 #魔閃光
             back_x = 228
             back_y = 88
-            ray_x = 326
-            ray_y = 196
+            @ray_x = 326
+            @ray_y = 196
             masenkou = 228
             case @battle_anime_frame
             when 0 #初期化
@@ -23710,19 +23643,19 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_pattern = 235 if @battle_anime_frame == 145
 
                     if @battle_anime_frame == 146 || @battle_anime_frame == 147 || @battle_anime_frame == 148  || @battle_anime_frame == 149
-                        ray_x += 6 * (@battle_anime_frame-145)
-                        ray_y -= 6 * (@battle_anime_frame-145)
+                        @ray_x += 6 * (@battle_anime_frame-145)
+                        @ray_y -= 6 * (@battle_anime_frame-145)
                     end
                     if @battle_anime_frame >= 150
-                        ray_x = 336
-                        ray_y = 112
+                        @ray_x = 336
+                        @ray_y = 112
 
                         if @battle_anime_frame >= 170
-                            ray_x -= 12 * (@battle_anime_frame - 170)
+                            @ray_x -= 12 * (@battle_anime_frame - 170)
                             masenkou -= 12 * (@battle_anime_frame - 170)
                             if masenkou < 26
                                 masenkou = 26
-                                ray_x = masenkou + 98
+                                @ray_x = masenkou + 98
                             end
                             #@chax -= 4 * (@battle_anime_frame - 170)
                         end
@@ -23733,8 +23666,8 @@ module Scene_Db_Battle_Anime_pattern
                 else
                     battle_anime_change 0,3
                     @effect_anime_pattern = 239
-                    ray_x = 326
-                    ray_y = 120
+                    @ray_x = 326
+                    @ray_y = 120
                     @ray_color = 0
                     Audio.se_play("Audio/SE/" + "DB3 エネルギー波2") if @battle_anime_frame == 129
                 end
@@ -23762,8 +23695,8 @@ module Scene_Db_Battle_Anime_pattern
             color1 = Color.new(127,127,127,260)
             color2 = Color.new(188,188,188,260)
             color3 = Color.new(255,255,255,260)
-            ray_x = 350
-            ray_y = 114
+            @ray_x = 350
+            @ray_y = 114
 
             backhai_no = 201
             back_x = 228
@@ -23864,8 +23797,8 @@ module Scene_Db_Battle_Anime_pattern
             color1 = Color.new(127,127,127,260)
             color2 = Color.new(188,188,188,260)
             color3 = Color.new(255,255,255,260)
-            ray_x = 230
-            ray_y = 118
+            @ray_x = 230
+            @ray_y = 118
 
             backhai_no = 201
             back_x = 228
@@ -23888,12 +23821,12 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,17
                 back_anime_pattern backhai_no,back_x,back_y
                 @effect_anime_pattern = 237 if @battle_anime_frame == sframe
-                ray_x = 276 if @battle_anime_frame < sframe + 90
-                ray_y = 164 if @battle_anime_frame < sframe + 90
+                @ray_x = 276 if @battle_anime_frame < sframe + 90
+                @ray_y = 164 if @battle_anime_frame < sframe + 90
 
                 @effect_anime_pattern = 235 if @battle_anime_frame == sframe + 90
-                ray_x = 268 if @battle_anime_frame >= sframe + 90
-                ray_y = 156 if @battle_anime_frame >= sframe + 90
+                @ray_x = 268 if @battle_anime_frame >= sframe + 90
+                @ray_y = 156 if @battle_anime_frame >= sframe + 90
             when 301..398
                 @ray_color = 0
                 sframe = 301
@@ -23930,8 +23863,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2163 #拡散エネルギー波
 
-            ray_x = 316
-            ray_y = 102
+            @ray_x = 316
+            @ray_y = 102
             if $btl_progress == 2
                 backhai_no = 201
                 back_x = 228
@@ -23970,8 +23903,8 @@ module Scene_Db_Battle_Anime_pattern
                     @ay = 2 if @battle_anime_frame == 91 && $btl_progress >= 2
                     @ay = -2 if @battle_anime_frame == 94 && $btl_progress >= 2
                     @ay = 0 if @battle_anime_frame == 97 && $btl_progress >= 2
-                    ray_x += 8 * (@battle_anime_frame - 91)
-                    ray_y += -8 * (@battle_anime_frame - 91)
+                    @ray_x += 8 * (@battle_anime_frame - 91)
+                    @ray_y += -8 * (@battle_anime_frame - 91)
 
                 when 111
                     @effect_anime_pattern = 0
@@ -24051,8 +23984,8 @@ module Scene_Db_Battle_Anime_pattern
                     set_chr_display_out
                 when 216..234
                     @effect_anime_pattern = 259
-                    ray_x = 354
-                    ray_y = 0 #+ 8*(@battle_anime_frame-211)
+                    @ray_x = 354
+                    @ray_y = 0 #+ 8*(@battle_anime_frame-211)
                 when 235
                     anime_pattern_init
                     return @battle_anime_result + 1
@@ -24075,8 +24008,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 when 1..19
                     @effect_anime_pattern = 259
-                    ray_x = 354
-                    ray_y = 0
+                    @ray_x = 354
+                    @ray_y = 0
                 when 20
                     anime_pattern_init
                     return @battle_anime_result + 1
@@ -24085,8 +24018,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2164 #気円斬
             back_x = 228
             back_y = 88
-            ray_x = 326
-            ray_y = 196
+            @ray_x = 326
+            @ray_y = 196
 
             case @battle_anime_frame
             when 0 #初期化
@@ -24229,8 +24162,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2165 #気円烈斬
             back_x = 228
             back_y = 88
-            ray_x = 326
-            ray_y = 196
+            @ray_x = 326
+            @ray_y = 196
             if @all_attack_count == 1
                 case @battle_anime_frame
                 when 0 #初期化
@@ -24246,8 +24179,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_stop if @battle_anime_frame == start_frame
                     @output_anime_type = 1
 
-                    ray_x = 224
-                    ray_y = 96
+                    @ray_x = 224
+                    @ray_y = 96
 
                     @back_anime_frame = 0   if @battle_anime_frame == start_frame
                     @back_anime_type = 54   if @battle_anime_frame == start_frame
@@ -24264,14 +24197,14 @@ module Scene_Db_Battle_Anime_pattern
                     #battle_anime_change 0,5 if @battle_anime_frame == 189
                     case @back_anime_type
                       when 5,56,54 #動かない
-                          ray_x += 0
-                          ray_y += 0
+                          @ray_x += 0
+                          @ray_y += 0
                       when 6 #右
-                          ray_x += 8
-                          ray_y += 2
+                          @ray_x += 8
+                          @ray_y += 2
                       when 4 #左
-                          ray_x -= 8
-                          ray_y -= 2
+                          @ray_x -= 8
+                          @ray_y -= 2
                       when 2 #下
 
                       when 8 #上
@@ -24302,10 +24235,10 @@ module Scene_Db_Battle_Anime_pattern
                     end_frame = 59 + start_frame
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == start_frame
                     battle_anime_change 0,9
-                    ray_x = 224
-                    ray_y = 96
-                    ray_x += 16 * (@battle_anime_frame - start_frame)
-                    ray_y += 2 * (@battle_anime_frame - start_frame)
+                    @ray_x = 224
+                    @ray_y = 96
+                    @ray_x += 16 * (@battle_anime_frame - start_frame)
+                    @ray_y += 2 * (@battle_anime_frame - start_frame)
                     if @battle_anime_frame == end_frame
                         @effect_anime_pattern = 0
                         @effect_anime_frame = 0
@@ -24316,8 +24249,8 @@ module Scene_Db_Battle_Anime_pattern
                     #Audio.se_stop if @battle_anime_frame == start_frame
                     @output_anime_type = 1
 
-                    ray_x = 256
-                    ray_y = 96
+                    @ray_x = 256
+                    @ray_y = 96
 
                     @back_anime_frame = 0   if @battle_anime_frame == start_frame
                     @back_anime_type = 54   if @battle_anime_frame == start_frame
@@ -24334,14 +24267,14 @@ module Scene_Db_Battle_Anime_pattern
                     #battle_anime_change 0,5 if @battle_anime_frame == 189
                     case @back_anime_type
                       when 5,56,54 #動かない
-                          ray_x += 0
-                          ray_y += 0
+                          @ray_x += 0
+                          @ray_y += 0
                       when 6 #右
-                          ray_x += 8
-                          ray_y += 2
+                          @ray_x += 8
+                          @ray_y += 2
                       when 4 #左
-                          ray_x -= 8
-                          ray_y -= 2
+                          @ray_x -= 8
+                          @ray_y -= 2
                       when 2 #下
 
                       when 8 #上
@@ -24372,10 +24305,10 @@ module Scene_Db_Battle_Anime_pattern
                     end_frame = 59 + start_frame
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == start_frame
                     battle_anime_change 0,10
-                    ray_x = 256
-                    ray_y = 96
-                    ray_x += 16 * (@battle_anime_frame - start_frame)
-                    ray_y += 2 * (@battle_anime_frame - start_frame)
+                    @ray_x = 256
+                    @ray_y = 96
+                    @ray_x += 16 * (@battle_anime_frame - start_frame)
+                    @ray_y += 2 * (@battle_anime_frame - start_frame)
                     if @battle_anime_frame == end_frame
                         @effect_anime_pattern = 0
                         @effect_anime_frame = 0
@@ -24544,8 +24477,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2173 #繰気弾
             back_x = 228
             back_y = 88
-            ray_x = 346
-            ray_y = 66
+            @ray_x = 346
+            @ray_y = 66
 
             case @battle_anime_frame
             when 0 #初期化
@@ -24646,19 +24579,19 @@ module Scene_Db_Battle_Anime_pattern
 
                     case kiptan
                     when 0
-                        ray_y += 4*0
+                        @ray_y += 4*0
                     when 1
-                        ray_y += 4*1
+                        @ray_y += 4*1
                     when 2
-                        ray_y += 4*2
+                        @ray_y += 4*2
                     when 3
-                        ray_y += 4*2 - 2*1
+                        @ray_y += 4*2 - 2*1
                     when 4
-                        ray_y -= 4*1
+                        @ray_y -= 4*1
                     when 5
-                        ray_y -= 4*2
+                        @ray_y -= 4*2
                     when 6
-                        ray_y -= 4*2 + 2*1
+                        @ray_y -= 4*2 + 2*1
                     else
                         #kiptan = 0
 
@@ -24666,7 +24599,7 @@ module Scene_Db_Battle_Anime_pattern
 
                     if @battle_anime_frame >= kienkizyunframe + 54
                         Audio.se_play("Audio/SE/" + "Z3 エネルギー波") if @battle_anime_frame == kienkizyunframe + 54
-                        ray_y -= 6*(@battle_anime_frame-(kienkizyunframe + 54))
+                        @ray_y -= 6*(@battle_anime_frame-(kienkizyunframe + 54))
                     end
                 end
             #if @battle_anime_frame >= kienkizyunframe + 50
@@ -24684,8 +24617,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
             when 261..297
 
-                #ray_x = 346
-                ray_y = 136
+                #@ray_x = 346
+                @ray_y = 136
                 @effect_anime_pattern = 262
             when 298
                 anime_pattern_init
@@ -24694,8 +24627,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2174 #超繰気弾
             back_x = 228
             back_y = 88
-            ray_x = 346
-            ray_y = 66
+            @ray_x = 346
+            @ray_y = 66
             if @all_attack_count == 1
                 case @battle_anime_frame
                 when 0 #初期化
@@ -24785,8 +24718,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
                 when 461..485
 
-                    #ray_x = 346
-                    #ray_y = 136
+                    #@ray_x = 346
+                    #@ray_y = 136
                     @effect_anime_pattern = 294
                 when 486
                     anime_pattern_init
@@ -24815,8 +24748,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2175 #新狼牙風風拳
             back_x = 206
             back_y = 88
-            ray_x = 316
-            ray_y = 102
+            @ray_x = 316
+            @ray_y = 102
             case @battle_anime_frame
 
             when 0 #初期化
@@ -24931,30 +24864,30 @@ module Scene_Db_Battle_Anime_pattern
                 sframe = 381
                 back_anime_pattern 201,back_x,back_y
 
-                ray_x = 264
-                ray_y = 160
+                @ray_x = 264
+                @ray_y = 160
                 case (@battle_anime_frame-sframe)
                 when 30..74
                     Audio.se_play("Audio/SE/" + "Z1 気を溜める")  if (@battle_anime_frame-sframe) == 30
                     battle_anime_change 0,2
                     @effect_anime_pattern = 237
                 when 75..130
-                    ray_x -= 8
-                    ray_y -= 8
+                    @ray_x -= 8
+                    @ray_y -= 8
                     @effect_anime_pattern = 235
                 end
             when 509
-                ray_x = 264
-                ray_y = 160
-                ray_x -= 8
-                ray_y -= 8
+                @ray_x = 264
+                @ray_y = 160
+                @ray_x -= 8
+                @ray_y -= 8
                 #@effect_anime_pattern = 0
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             when 510..550
                 sframe = 510
-                ray_x = 316
-                ray_y = 102
+                @ray_x = 316
+                @ray_y = 102
                 Audio.se_stop if (@battle_anime_frame-sframe) == 0
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if (@battle_anime_frame-sframe) == 0
                 battle_anime_change 0,3
@@ -24968,7 +24901,7 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 1,0
                 @gx = 0
             when 561..587
-                ray_y = 96
+                @ray_y = 96
                 @effect_anime_pattern = 207
             when 588
                 anime_pattern_init
@@ -24977,8 +24910,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2182 #四身の拳
             #back_x = 222
             #back_y = 60
-            ray_x = CENTER_CHAX
-            ray_y = STANDARD_CHAY
+            @ray_x = CENTER_CHAX
+            @ray_y = STANDARD_CHAY
             case @battle_anime_frame
             when 0 #初期化
                 @output_anime_type = 1
@@ -25049,8 +24982,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2183 #気功砲
             back_x = 228
             back_y = 88
-            ray_x = 346
-            ray_y = 66
+            @ray_x = 346
+            @ray_y = 66
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -25095,8 +25028,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 ザー")
             when 241..290
 
-                #ray_x = 346
-                #ray_y = 136
+                #@ray_x = 346
+                #@ray_y = 136
                 back_anime_pattern 1
             when 291
                 anime_pattern_init
@@ -25105,8 +25038,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2184 #四身の拳気功砲
             back_x = 238
             back_y = 88
-            ray_x = CENTER_CHAX
-            ray_y = STANDARD_CHAY
+            @ray_x = CENTER_CHAX
+            @ray_y = STANDARD_CHAY
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -25204,8 +25137,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 ゴー")
             when 491..540
 
-                #ray_x = 346
-                #ray_y = 136
+                #@ray_x = 346
+                #@ray_y = 136
                 back_anime_pattern 9
             when 541
                 anime_pattern_init
@@ -25214,8 +25147,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2185 #新気功砲
             back_x = 228
             back_y = 88
-            ray_x = 346
-            ray_y = 66
+            @ray_x = 346
+            @ray_y = 66
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -25261,8 +25194,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 ゴー")
             when 341..550
 
-                #ray_x = 346
-                #ray_y = 136
+                #@ray_x = 346
+                #@ray_y = 136
                 back_anime_pattern 9
                 case @battle_anime_frame
                 when 370..373,410..413,450..453,490..493
@@ -25278,8 +25211,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2192 #超能力
             back_x = 228
             back_y = 88
-            ray_x = 325
-            ray_y = 138
+            @ray_x = 325
+            @ray_y = 138
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
@@ -25309,8 +25242,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2194 #超能力(全体)
             back_x = 228
             back_y = 88
-            ray_x = 325
-            ray_y = 138
+            @ray_x = 325
+            @ray_y = 138
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             if @all_attack_count == 1
@@ -25378,8 +25311,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2195 #おもいっきりどどんぱ
             back_x = 228
             back_y = 88
-            ray_x = 306
-            ray_y = 94
+            @ray_x = 306
+            @ray_y = 94
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -25393,8 +25326,8 @@ module Scene_Db_Battle_Anime_pattern
                 sframe = 1
                 back_anime_pattern 201,back_x,back_y
 
-                ray_x = 290
-                ray_y = 132
+                @ray_x = 290
+                @ray_y = 132
 
                 case (@battle_anime_frame-sframe)
                 when 30..74
@@ -25402,8 +25335,8 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,7
                     @effect_anime_pattern = 237
                 when 75..200
-                    ray_x -= 8
-                    ray_y -= 16
+                    @ray_x -= 8
+                    @ray_y -= 16
                     @effect_anime_pattern = 235
                 end
             when 200
@@ -25432,7 +25365,7 @@ module Scene_Db_Battle_Anime_pattern
             #@tec_output_back = false
             #@chr_cutin_flag = false
             when 321..347
-                ray_y = 132
+                @ray_y = 132
                 @effect_anime_pattern = 297
             #back_anime_pattern 9
             when 348
@@ -25582,13 +25515,13 @@ module Scene_Db_Battle_Anime_pattern
             if @attackDir == 0
                 back_x = 228
                 back_y = 88
-                ray_x = 326
-                ray_y = 96
+                @ray_x = 326
+                @ray_y = 96
             else
                 back_x = 210+24
                 back_y = 32
-                ray_x = 326-64
-                ray_y = 96
+                @ray_x = 326-64
+                @ray_y = 96
             end
             if @all_attack_count == 1
 
@@ -25652,8 +25585,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2225 #ビッグバンアタック
             back_x = 228
             back_y = 88
-            ray_x = 338
-            ray_y = 156
+            @ray_x = 338
+            @ray_y = 156
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -25712,11 +25645,11 @@ module Scene_Db_Battle_Anime_pattern
                 when 140..230
                     Audio.se_play("Audio/SE/" + "DB3 気を溜める2") if @battle_anime_frame == 140
                     if $super_saiyazin_flag[3] == true
-                        ray_x = 368
-                        ray_y = 220
+                        @ray_x = 368
+                        @ray_y = 220
                     else
-                        ray_x = 344
-                        ray_y = 180
+                        @ray_x = 344
+                        @ray_y = 180
                     end
                     @effect_anime_pattern = 235
                 when 231
@@ -25739,11 +25672,11 @@ module Scene_Db_Battle_Anime_pattern
             when 311..336
 
                 if $super_saiyazin_flag[3] == true
-                    ray_y = 112
+                    @ray_y = 112
                     @effect_anime_pattern = 265
 
                 else
-                    ray_y = 112
+                    @ray_y = 112
                     @effect_anime_pattern = 266
                 end
 
@@ -25754,8 +25687,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2230 #ファイナルフラッシュ
             back_x = 228
             back_y = 88
-            ray_x = 338
-            ray_y = 156
+            @ray_x = 338
+            @ray_y = 156
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -25807,8 +25740,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 when 180..210
 
-                    ray_x = 276+24
-                    ray_y = 284-16
+                    @ray_x = 276+24
+                    @ray_y = 284-16
                     @effect_anime_pattern = 278
                 when 211..340
                     @effect_anime_pattern = 0
@@ -25847,7 +25780,7 @@ module Scene_Db_Battle_Anime_pattern
             #Audio.se_play("Audio/SE/" + "Z1 ザー")
             when 351..376
 
-                ray_y = 112
+                @ray_y = 112
                 @effect_anime_pattern = 265
 
             when 377
@@ -25856,8 +25789,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2246 #ミスティックフラッシャー(若者)
 
-            ray_x = 350
-            ray_y = 114
+            @ray_x = 350
+            @ray_y = 114
 
             backhai_no = 201
             back_x = 228
@@ -26006,15 +25939,15 @@ module Scene_Db_Battle_Anime_pattern
                 @back_window.contents.blt(220,104,picture,rect)
                 @ray_color = 3
                 back_anime_pattern 106,0,0,1
-                #ray_x +=  (@battle_anime_frame-141)/2 - @effect_anime_frame*RAY_SPEED
-                ray_x = 278
-                ray_y = 6
-                ray_x += 0 - @effect_anime_frame*RAY_SPEED
+                #@ray_x +=  (@battle_anime_frame-141)/2 - @effect_anime_frame*RAY_SPEED
+                @ray_x = 278
+                @ray_y = 6
+                @ray_x += 0 - @effect_anime_frame*RAY_SPEED
                 @effect_anime_pattern = 236
             when 361..397
                 startflame = 361
-                ray_x = 404
-                ray_y = 98
+                @ray_x = 404
+                @ray_y = 98
                 if @battle_anime_frame == startflame
 
                     @effect_anime_mirror = 1
@@ -26290,8 +26223,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 rect = Rect.new(0, 26,274,228)
                 @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
-                ray_x = 202
-                ray_y = 236
+                @ray_x = 202
+                @ray_y = 236
                 @effect_anime_pattern = 235
             when 351..410
                 if $game_variables[175] == 0 #バーダックの衣装
@@ -26301,8 +26234,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 rect = Rect.new(0, 26,274,228)
                 @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
-                ray_x = 202
-                ray_y = 236
+                @ray_x = 202
+                @ray_y = 236
                 @effect_anime_pattern = 235
             when 411..470
                 if $game_variables[175] == 0 #バーダックの衣装
@@ -26313,21 +26246,21 @@ module Scene_Db_Battle_Anime_pattern
                 rect = Rect.new(0, 26,274,228)
                 @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
                 @chr_cutin = true if @battle_anime_frame == 470
-                ray_x = 186
-                ray_y = 220
+                @ray_x = 186
+                @ray_y = 220
                 @effect_anime_pattern = 289
             when 471..520
                 @chax = TEC_CENTER_CHAX
 
-                ray_x = 276
-                ray_y = 140
+                @ray_x = 276
+                @ray_y = 140
                 battle_anime_change 0,6
                 @effect_anime_pattern = 235
             when 521
                 Audio.se_stop
                 battle_anime_change 0,2
-                ray_x = -360
-                ray_y = -96
+                @ray_x = -360
+                @ray_y = -96
             when 522
                 #@ray_color = 0
                 Audio.se_stop
@@ -26336,18 +26269,18 @@ module Scene_Db_Battle_Anime_pattern
                 #battle_anime_change 0,1
                 @effect_anime_pattern = 206
                 @effect_anime_frame = 0
-                ray_x = -360
-                ray_y = -96
+                @ray_x = -360
+                @ray_y = -96
             #back_anime_pattern 101,back_x,back_y
 
             when 523..560
                 #back_anime_pattern 101,back_x,back_y
                 @effect_anime_pattern = 206
-                ray_x = 360
+                @ray_x = 360
                 if $btl_progress >= 2
-                    ray_y = 96
+                    @ray_y = 96
                 else
-                    ray_y = 92
+                    @ray_y = 92
                 end
             when 561
                 #battle_anime_change 0,1
@@ -26378,8 +26311,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 267
-                ray_x = 228
-                ray_y = 134
+                @ray_x = 228
+                @ray_y = 134
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -26397,13 +26330,13 @@ module Scene_Db_Battle_Anime_pattern
            if @attackDir == 0
                back_x = 228
                back_y = 88
-               ray_x = 326
-               ray_y = 96
+               @ray_x = 326
+               @ray_y = 96
            else
                back_x = 210+24
                back_y = 32
-               ray_x = 326-64
-               ray_y = 96
+               @ray_x = 326-64
+               @ray_y = 96
            end
            if @all_attack_count == 1
 
@@ -26467,8 +26400,8 @@ module Scene_Db_Battle_Anime_pattern
            end
         when 2274 #ませんこう
 
-            ray_x = 340
-            ray_y = 96
+            @ray_x = 340
+            @ray_y = 96
             if $btl_progress == 2
                 backhai_no = 201
                 back_x = 228
@@ -26519,8 +26452,8 @@ module Scene_Db_Battle_Anime_pattern
             if $game_variables[173] == 0 || $game_variables[173] == 4
                 back_x = 228
                 back_y = 88
-                ray_x = 338
-                ray_y = 156
+                @ray_x = 338
+                @ray_y = 156
                 color = Color.new(255,255,255,260)
                 #@back_window.contents.fill_rect(0,0,640,378,color)
                 case @battle_anime_frame
@@ -26586,11 +26519,11 @@ module Scene_Db_Battle_Anime_pattern
                     when 140..230
                         Audio.se_play("Audio/SE/" + "Z1 気を溜める") if @battle_anime_frame == 140
                         if $super_saiyazin_flag[3] == true
-                            ray_x = 368
-                            ray_y = 220
+                            @ray_x = 368
+                            @ray_y = 220
                         else
-                            ray_x = 344
-                            ray_y = 180
+                            @ray_x = 344
+                            @ray_y = 180
                         end
                         @effect_anime_pattern = 235
                     when 231
@@ -26614,11 +26547,11 @@ module Scene_Db_Battle_Anime_pattern
                 when 311..337
                     @effect_anime_pattern = 211
                     if $super_saiyazin_flag[4] == true
-                        #  ray_y = 112
+                        #  @ray_y = 112
                         @effect_anime_pattern = 211
 
                     else
-                        #  ray_y = 112
+                        #  @ray_y = 112
                         @effect_anime_pattern = 209
                     end
 
@@ -26629,8 +26562,8 @@ module Scene_Db_Battle_Anime_pattern
             else
                 back_x = 228
                 back_y = 88
-                ray_x = 338
-                ray_y = 156
+                @ray_x = 338
+                @ray_y = 156
                 color = Color.new(255,255,255,260)
                 #@back_window.contents.fill_rect(0,0,640,378,color)
                 case @battle_anime_frame
@@ -26715,11 +26648,11 @@ module Scene_Db_Battle_Anime_pattern
                 when 371..397
                     @effect_anime_pattern = 211
                     if $super_saiyazin_flag[4] == true
-                        #  ray_y = 112
+                        #  @ray_y = 112
                         @effect_anime_pattern = 211
 
                     else
-                        #  ray_y = 112
+                        #  @ray_y = 112
                         @effect_anime_pattern = 209
                     end
 
@@ -26731,10 +26664,10 @@ module Scene_Db_Battle_Anime_pattern
         when 2277 #シャイニングソードアタック
             back_x = 228
             back_y = 88
-            ray_x = 338
-            ray_y = 156
-            #ray_x = 228
-            #ray_y = 134
+            @ray_x = 338
+            @ray_y = 156
+            #@ray_x = 228
+            #@ray_y = 134
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
 
@@ -26801,11 +26734,11 @@ module Scene_Db_Battle_Anime_pattern
                 when 140..230
                     Audio.se_play("Audio/SE/" + "Z1 気を溜める") if @battle_anime_frame == 140
                     if $super_saiyazin_flag[3] == true
-                        ray_x = 368
-                        ray_y = 220
+                        @ray_x = 368
+                        @ray_y = 220
                     else
-                        ray_x = 344
-                        ray_y = 180
+                        @ray_x = 344
+                        @ray_y = 180
                     end
                     @effect_anime_pattern = 235
                 when 231
@@ -26828,11 +26761,11 @@ module Scene_Db_Battle_Anime_pattern
             when 311..370
                 @effect_anime_pattern = 211
                 if $super_saiyazin_flag[4] == true
-                    #  ray_y = 112
+                    #  @ray_y = 112
                     @effect_anime_pattern = 211
 
                 else
-                    #  ray_y = 112
+                    #  @ray_y = 112
                     @effect_anime_pattern = 209
                 end
 
@@ -27066,14 +26999,14 @@ module Scene_Db_Battle_Anime_pattern
                 case @effect_anime_pattern
 
                 when 267,268
-                    ray_x = 228
-                    ray_y = 134-16
+                    @ray_x = 228
+                    @ray_y = 134-16
                 when 269,270
-                    ray_x = 292
-                    ray_y = 70
+                    @ray_x = 292
+                    @ray_y = 70
                 when 256
-                    ray_x = 336-32
-                    ray_y = 112
+                    @ray_x = 336-32
+                    @ray_y = 112
                 end
             when 700
 
@@ -27094,10 +27027,10 @@ module Scene_Db_Battle_Anime_pattern
             #back_x = 228
             back_x = 216
             back_y = 88
-            ray_x = 320-90
-            ray_y = 246-198
-            #ray_x = 228
-            #ray_y = 134
+            @ray_x = 320-90
+            @ray_y = 246-198
+            #@ray_x = 228
+            #@ray_y = 134
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
 
@@ -27130,8 +27063,8 @@ module Scene_Db_Battle_Anime_pattern
                     @enex += 24
                     @eney -= 12
                     @effect_anime_pattern = 123 if @battle_anime_frame == 56
-                    ray_x = 330
-                    ray_y = 150
+                    @ray_x = 330
+                    @ray_y = 150
                     @effect_anime_pattern = 0 if @battle_anime_frame == 64
                 end
             when 100
@@ -27172,8 +27105,8 @@ module Scene_Db_Battle_Anime_pattern
                     @chax = TEC_CENTER_CHAX
                 end
             when 371..459
-                ray_x = 320-114
-                ray_y = 246-188
+                @ray_x = 320-114
+                @ray_y = 246-188
                 if @battle_anime_frame == 371
                     @ray_color = 0
                     @chay = STANDARD_ENEY + 72
@@ -27195,8 +27128,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 1,0
                 battle_anime_change 1,21 if @enedatenum == 127
             when 461..494
-                ray_x = 320-114
-                ray_y = 640
+                @ray_x = 320-114
+                @ray_y = 640
                 @effect_anime_pattern = 292
                 if @enedatenum == 127 && @battle_anime_frame == 475
                     battle_anime_change 1,19
@@ -27207,8 +27140,8 @@ module Scene_Db_Battle_Anime_pattern
             end
          when 2281 #フィニッシュバスター
 
-             ray_x = 340
-             ray_y = 96
+             @ray_x = 340
+             @ray_y = 96
              if $btl_progress == 2
                  backhai_no = 201
                  back_x = 228
@@ -27236,13 +27169,13 @@ module Scene_Db_Battle_Anime_pattern
                  battle_anime_change 0,12 if $game_variables[173] == 1 || $game_variables[173] == 2 || $game_variables[173] == 3 #剣なしなら
                  back_anime_pattern backhai_no,back_x,back_y
                  @effect_anime_pattern = 237
-                 ray_x = 276
-                 ray_y = 108
+                 @ray_x = 276
+                 @ray_y = 108
              when 91..189
                  back_anime_pattern backhai_no,back_x,back_y
                  @effect_anime_pattern = 237
-                 ray_x = 276
-                 ray_y = 108
+                 @ray_x = 276
+                 @ray_y = 108
              when 190
                  Audio.se_stop
                  Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
@@ -27276,8 +27209,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
 
             when 1..126
-                ray_x = 242
-                ray_y = 96
+                @ray_x = 242
+                @ray_y = 96
                 @effect_anime_frame += 1
 
                 if @effect_anime_frame == 5
@@ -27286,7 +27219,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 picture = Cache.picture("Z3_戦闘_必殺技_気円斬")
                 rect = Rect.new(0, 30*@effect_anime_type,126,30)
-                @back_window.contents.blt(ray_x,ray_y,picture,rect)
+                @back_window.contents.blt(@ray_x,@ray_y,picture,rect)
                 if @battle_anime_frame == 126
                     @effect_anime_pattern = 0
                     @effect_anime_frame = 0
@@ -27298,11 +27231,11 @@ module Scene_Db_Battle_Anime_pattern
             when 127..155
                 @effect_anime_frame += 1
                 #@effect_anime_pattern = 273
-                ray_x = 340
-                ray_y = 150
+                @ray_x = 340
+                @ray_y = 150
                 picture = Cache.picture("Z3_戦闘_必殺技_気円斬")
                 rect = Rect.new(0, 30*4,126,30)
-                @back_window.contents.blt(ray_x+@effect_anime_frame*RAY_SPEED,ray_y,picture,rect)
+                @back_window.contents.blt(@ray_x+@effect_anime_frame*RAY_SPEED,@ray_y,picture,rect)
             when 156
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -27321,8 +27254,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 266
             #back_x = 206
             back_y = 0
-            ray_x = 302
-            ray_y = 62
+            @ray_x = 302
+            @ray_y = 62
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -27334,13 +27267,13 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
                 @ray_color = 3
-                #ray_x = 338
-                #ray_y = 156
+                #@ray_x = 338
+                #@ray_y = 156
                 @genkitama_kanri_frame = []
                 @genkitama_kanri_maxflame = 15
                 @genkitama_kanri_spdup = 10
-                @genkityuushin_x = ray_x + 12
-                @genkityuushin_y = ray_y + 12
+                @genkityuushin_x = @ray_x + 12
+                @genkityuushin_y = @ray_y + 12
                 @genkitama_kanri_frame = [0,0,0,0,0,0,0,0]
                 @chr_cutin = false
             when 1..350
@@ -27359,8 +27292,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 @back_window.contents.blt(bezikat_x,bezikat_y,picture,rect)
 
-                #ray_x = 290
-                #ray_y = 40
+                #@ray_x = 290
+                #@ray_y = 40
 
                 tame_end = 360
 
@@ -27448,8 +27381,8 @@ module Scene_Db_Battle_Anime_pattern
                 if @battle_anime_frame > (sframe + 240)
 
                     @effect_anime_pattern = 289
-                    ray_x -= 16
-                    ray_y -= 16
+                    @ray_x -= 16
+                    @ray_y -= 16
                 end
 
                 #back_anime_pattern 201,back_x,back_y
@@ -27472,8 +27405,8 @@ module Scene_Db_Battle_Anime_pattern
                 @output_anime_type = 1
                 battle_anime_change 0,10
                 @effect_anime_pattern = 239
-                ray_x = 338
-                ray_y = 104
+                @ray_x = 338
+                @ray_y = 104
 
             when 391
                 @tec_output_back = true
@@ -27486,7 +27419,7 @@ module Scene_Db_Battle_Anime_pattern
                 set_chr_display_out
             #Audio.se_play("Audio/SE/" + "Z1 ザー")
             when 401..427
-                ray_y = 106
+                @ray_y = 106
                 @effect_anime_pattern = 240
 
             when 428
@@ -27500,8 +27433,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 266
             #back_x = 206
             back_y = 0
-            ray_x = back_x +82
-            ray_y = back_y +60
+            @ray_x = back_x +82
+            @ray_y = back_y +60
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -27512,18 +27445,18 @@ module Scene_Db_Battle_Anime_pattern
                 #@ray_color = 3
                 Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
                 @ray_color = 3
-                ray_x = 338
-                ray_y = 156
+                @ray_x = 338
+                @ray_y = 156
                 @genkitama_kanri_frame = []
                 @genkitama_kanri_maxflame = 15
                 @genkitama_kanri_spdup = 10
-                @genkityuushin_x = ray_x -14
-                @genkityuushin_y = ray_y +2 + 10
+                @genkityuushin_x = @ray_x -14
+                @genkityuushin_y = @ray_y +2 + 10
                 @genkitama_kanri_frame = [0,0,0,0,0,0,0,0]
             when 1..128
 
-                ray_x = 324
-                ray_y = 120
+                @ray_x = 324
+                @ray_y = 120
 
                 tame_end = 128
 
@@ -27631,14 +27564,14 @@ module Scene_Db_Battle_Anime_pattern
                     sframe = 140
                     Audio.se_play("Audio/SE/" + "Z1 気を溜める") if @battle_anime_frame == 140
 
-                    ray_x = 302
-                    ray_y = 224
+                    @ray_x = 302
+                    @ray_y = 224
                     @effect_anime_pattern = 235
 
                     if @battle_anime_frame > (sframe + 60)
                         @effect_anime_pattern = 289
-                        ray_x -= 16
-                        ray_y -= 16
+                        @ray_x -= 16
+                        @ray_y -= 16
                     end
 
                 when 261..330
@@ -27666,7 +27599,7 @@ module Scene_Db_Battle_Anime_pattern
                 set_chr_display_out
             #Audio.se_play("Audio/SE/" + "Z1 ザー")
             when 341..367
-                ray_y = 106
+                @ray_y = 106
                 @effect_anime_type = 4
                 @effect_anime_pattern = 271
 
@@ -27676,8 +27609,8 @@ module Scene_Db_Battle_Anime_pattern
             end
 
         when 2314 #ロケットパンチ
-            ray_x = 340
-            ray_y = 156
+            @ray_x = 340
+            @ray_y = 156
             case @battle_anime_frame
 
             when 0 #初期化
@@ -27700,8 +27633,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ax = -2
                 @ax = 0
             #@effect_anime_pattern = 273
-            #ray_x = 340
-            #ray_y = 156
+            #@ray_x = 340
+            #@ray_y = 156
             when 76
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -27720,8 +27653,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 266
             #back_x = 206
             back_y = 0
-            ray_x = back_x +82
-            ray_y = back_y +60
+            @ray_x = back_x +82
+            @ray_y = back_y +60
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -27732,18 +27665,18 @@ module Scene_Db_Battle_Anime_pattern
                 #@ray_color = 3
                 Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
                 @ray_color = 3
-                ray_x = 338
-                ray_y = 156
+                @ray_x = 338
+                @ray_y = 156
                 @genkitama_kanri_frame = []
                 @genkitama_kanri_maxflame = 15
                 @genkitama_kanri_spdup = 10
-                @genkityuushin_x = ray_x -14
-                @genkityuushin_y = ray_y +2
+                @genkityuushin_x = @ray_x -14
+                @genkityuushin_y = @ray_y +2
                 @genkitama_kanri_frame = [0,0,0,0,0,0,0,0]
             when 1..128
 
-                ray_x = 324
-                ray_y = 120
+                @ray_x = 324
+                @ray_y = 120
 
                 tame_end = 128
 
@@ -27864,8 +27797,8 @@ module Scene_Db_Battle_Anime_pattern
                 when 140..230
                     Audio.se_play("Audio/SE/" + "Z1 気を溜める") if @battle_anime_frame == 140
 
-                    ray_x = 362
-                    ray_y = 244
+                    @ray_x = 362
+                    @ray_y = 244
                     @effect_anime_pattern = 235
                 when 231
                     Audio.se_stop
@@ -27888,7 +27821,7 @@ module Scene_Db_Battle_Anime_pattern
                 set_chr_display_out
             #Audio.se_play("Audio/SE/" + "Z1 ザー")
             when 311..337
-                ray_y = 114
+                @ray_y = 114
                 @effect_anime_pattern = 265
 
             when 338
@@ -27899,8 +27832,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2317 #自爆
             back_x = 218
             back_y = 60
-            ray_x = 325
-            ray_y = 138
+            @ray_x = 325
+            @ray_y = 138
             case @battle_anime_frame
             when 0 #初期化
                 @output_anime_type = 1
@@ -27962,8 +27895,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2329 #MAXパワーカメハメ波
 
-            ray_x = 242
-            ray_y = 120
+            @ray_x = 242
+            @ray_y = 120
 
             if $btl_progress == 2
                 backhai_no = 201
@@ -28035,8 +27968,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2330 #魔封波
-            ray_x = 242
-            ray_y = 120
+            @ray_x = 242
+            @ray_y = 120
 
 
             backhai_no = 201
@@ -28200,8 +28133,8 @@ module Scene_Db_Battle_Anime_pattern
                 @chax += 2
             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
                 @effect_anime_pattern = 201
-                ray_x = 312
-                ray_y = 96
+                @ray_x = 312
+                @ray_y = 96
             elsif @battle_anime_frame == 41
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -28217,8 +28150,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2337 #魔閃光(未来ゴハン)
             back_x = 228
             back_y = 88
-            ray_x = 350
-            ray_y = 130
+            @ray_x = 350
+            @ray_y = 130
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
@@ -28255,13 +28188,13 @@ module Scene_Db_Battle_Anime_pattern
             if @attackDir == 0
                 back_x = 228
                 back_y = 88
-                ray_x = 326
-                ray_y = 96
+                @ray_x = 326
+                @ray_y = 96
             else
                 back_x = 210+24
                 back_y = 32
-                ray_x = 326-64
-                ray_y = 96
+                @ray_x = 326-64
+                @ray_y = 96
             end
             if @all_attack_count == 1
 
@@ -28325,8 +28258,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2340 #魔貫光殺砲(未来悟飯)
             back_x = 180
             back_y = 0
-            ray_x = 358
-            ray_y = 124
+            @ray_x = 358
+            @ray_y = 124
 
             color = Color.new(255,255,255,260)
 
@@ -28382,7 +28315,7 @@ module Scene_Db_Battle_Anime_pattern
 
             #@chr_cutin = true
             when 222..247
-                ray_y = 134
+                @ray_y = 134
                 @effect_anime_pattern = 255
             when 248
                 anime_pattern_init
@@ -28392,8 +28325,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 0
             back_x = 140
             back_y = 100
-            ray_x = back_x +202
-            ray_y = back_y +90
+            @ray_x = back_x +202
+            @ray_y = back_y +90
             case @battle_anime_frame
             when 0 #初期化
                 if @attackDir == 0
@@ -28433,9 +28366,9 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_frame = 0
                 end
             when 121..210
-                ray_y = 6
+                @ray_y = 6
                 back_x -= (@battle_anime_frame-121)/2
-                ray_x -=  (@battle_anime_frame-121)/2
+                @ray_x -=  (@battle_anime_frame-121)/2
                 if $super_saiyazin_flag[6] != true
                     picture = Cache.picture("Z3_必殺技_超カメハメ波(未来悟飯)") #ダメージ表示用
                 else
@@ -28481,8 +28414,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 3
             back_x = 228
             back_y = 88
-            ray_x = 356
-            ray_y = 112
+            @ray_x = 356
+            @ray_y = 112
 
 
             case @battle_anime_frame
@@ -28527,8 +28460,8 @@ module Scene_Db_Battle_Anime_pattern
             when 212..240
                 battle_anime_change 1,16
                 @effect_anime_pattern = 123
-                ray_x = 346
-                ray_y = 154
+                @ray_x = 346
+                @ray_y = 154
 
                 @effect_anime_pattern = 0 if @battle_anime_frame >= 220
                 @enex += 20
@@ -28570,8 +28503,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
 
                 @effect_anime_pattern = 123
-                ray_x = 324
-                ray_y = 158
+                @ray_x = 324
+                @ray_y = 158
 
                 @effect_anime_pattern = 0 if @battle_anime_frame >= 313
                 battle_anime_change 0,17
@@ -28599,8 +28532,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,16
             when 366..389
                 @effect_anime_pattern = 123
-                ray_x = 324
-                ray_y = 158
+                @ray_x = 324
+                @ray_y = 158
 
                 @effect_anime_pattern = 0 if @battle_anime_frame >= 374
                 @enex -= 4
@@ -28689,8 +28622,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2350 #フルパワーフレイムバレット
             back_x = 228
             back_y = 88
-            ray_x = 346
-            ray_y = 66
+            @ray_x = 346
+            @ray_y = 66
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
@@ -28771,8 +28704,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 354..390
                 sframe = 354
-                ray_x = 352
-                ray_y = 98
+                @ray_x = 352
+                @ray_y = 98
                 if @battle_anime_frame == sframe
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
                     Audio.se_play("Audio/SE/" + "DB3 エネルギー波2")
@@ -28795,9 +28728,9 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "DB3 エネルギー波2")
             when 401..425
 
-                #ray_x = 346
-                #ray_y = 136
-                ray_y = 98
+                #@ray_x = 346
+                #@ray_y = 136
+                @ray_y = 98
                 @effect_anime_pattern = 266
             when 426
                 anime_pattern_init
@@ -28806,8 +28739,8 @@ module Scene_Db_Battle_Anime_pattern
           when 2360 #ハンティングアロー
               back_x = 228
               back_y = 88
-              ray_x = 346
-              ray_y = 66
+              @ray_x = 346
+              @ray_y = 66
               case @battle_anime_frame
               when 0 #初期化
                   Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
@@ -28818,8 +28751,8 @@ module Scene_Db_Battle_Anime_pattern
                   back_anime_pattern 201,back_x,back_y
               when 129..303
                   sframe = 129
-                  ray_x = 372
-                  ray_y = 116
+                  @ray_x = 372
+                  @ray_y = 116
                   @tec_output_back_no = 1
                   Audio.se_stop if @battle_anime_frame == sframe
                   Audio.se_play("Audio/SE/" + "Z1 気を溜める3") if @battle_anime_frame == sframe
@@ -28837,8 +28770,8 @@ module Scene_Db_Battle_Anime_pattern
                   end
               when 304..340
                   sframe = 304
-                  ray_x = 352
-                  ray_y = 98
+                  @ray_x = 352
+                  @ray_y = 98
                   #battle_anime_change 0,2 if @battle_anime_frame == sframe + 4
                   if @battle_anime_frame == sframe
                       Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
@@ -28863,9 +28796,9 @@ module Scene_Db_Battle_Anime_pattern
                   Audio.se_play("Audio/SE/" + "DB3 エネルギー波2")
               when 351..375
 
-                  #ray_x = 346
-                  #ray_y = 136
-                  ray_y = 98
+                  #@ray_x = 346
+                  #@ray_y = 136
+                  @ray_y = 98
                   @effect_anime_pattern = 266
               when 376
                   anime_pattern_init
@@ -28874,8 +28807,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2369 #アングリーキャノン
             back_x = 228
             back_y = 88
-            ray_x = 338
-            ray_y = 156
+            @ray_x = 338
+            @ray_y = 156
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -28928,8 +28861,8 @@ module Scene_Db_Battle_Anime_pattern
                 when 140..230
                     Audio.se_play("Audio/SE/" + "DB3 気を溜める2") if @battle_anime_frame == 140
 
-                    ray_x = 344 + 26
-                    ray_y = 180 + 110
+                    @ray_x = 344 + 26
+                    @ray_y = 180 + 110
                     @effect_anime_pattern = 235
                 when 231
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
@@ -28951,11 +28884,11 @@ module Scene_Db_Battle_Anime_pattern
             when 311..336
 
                 if $super_saiyazin_flag[3] == true
-                    ray_y = 112
+                    @ray_y = 112
                     @effect_anime_pattern = 265
 
                 else
-                    ray_y = 112
+                    @ray_y = 112
                     @effect_anime_pattern = 266
                 end
 
@@ -28966,8 +28899,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2377 #マッシブキャノン
             back_x = 228
             back_y = 88
-            ray_x = 346
-            ray_y = 66
+            @ray_x = 346
+            @ray_y = 66
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
@@ -28978,8 +28911,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern 201,back_x,back_y
             when 129..303
                 sframe = 129
-                ray_x = 372
-                ray_y = 116
+                @ray_x = 372
+                @ray_y = 116
                 @tec_output_back_no = 4
                 Audio.se_stop if @battle_anime_frame == sframe
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める3") if @battle_anime_frame == sframe
@@ -28997,8 +28930,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 304..340
                 sframe = 304
-                ray_x = 352
-                ray_y = 98
+                @ray_x = 352
+                @ray_y = 98
                 #battle_anime_change 0,2 if @battle_anime_frame == sframe + 4
                 if @battle_anime_frame == sframe
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
@@ -29023,9 +28956,9 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "DB3 エネルギー波2")
             when 351..375
 
-                #ray_x = 346
-                #ray_y = 136
-                ray_y = 98
+                #@ray_x = 346
+                #@ray_y = 136
+                @ray_y = 98
                 @effect_anime_pattern = 266
             when 376
                 anime_pattern_init
@@ -29072,16 +29005,16 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_frame = 0
                     Audio.se_play("Audio/SE/" + "DB3 キラーン")
                 end
-                ray_x = 64
-                ray_y = 32
+                @ray_x = 64
+                @ray_y = 32
                 @effect_anime_pattern = 124
             elsif @battle_anime_frame == 261
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2812 #地球人ストライク
-            ray_x = 302
-            ray_y = 64
+            @ray_x = 302
+            @ray_y = 64
             @ray_color = 0
             idougo = 212-18
             idouryou = 8
@@ -29197,8 +29130,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,2
 
 
-                ray_x = @chax
-                ray_y = STANDARD_CHAY + 40
+                @ray_x = @chax
+                @ray_y = STANDARD_CHAY + 40
 
                 if @battle_anime_frame >= 151 && @battle_anime_frame <= 320
                     Audio.se_play("Audio/SE/" + "Z1 分身") if @battle_anime_frame == 151
@@ -29276,8 +29209,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
             when 446..474
                 @effect_anime_pattern = 203
-                ray_x = 340
-                ray_y = 142
+                @ray_x = 340
+                @ray_y = 142
                 @ax = -2 if @battle_anime_frame == 446 && $btl_progress >= 2
                 @ax = 2 if @battle_anime_frame == 449 && $btl_progress >= 2
                 @ax = 0 if @battle_anime_frame == 452 && $btl_progress >= 2
@@ -29742,8 +29675,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
 
             case @battle_anime_frame
 
@@ -29825,7 +29758,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
@@ -29878,8 +29811,8 @@ module Scene_Db_Battle_Anime_pattern
             #@effect_anime_pattern = 85
             when 60..100
                 sframe = 60
-                ray_x = 282
-                ray_y = 58
+                @ray_x = 282
+                @ray_y = 58
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 @effect_anime_pattern = 201
 
@@ -29945,8 +29878,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 back_anime_pattern 118,TEC_CENTER_CHAX - 216 + 0,STANDARD_CHAY
                 @eney = STANDARD_CHAY
-                ray_x = 340 - 80
-                ray_y = 156
+                @ray_x = 340 - 80
+                @ray_y = 156
 
             when 451..478
                 sframe = 451
@@ -29956,8 +29889,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "DB3 エネルギー波2") if @battle_anime_frame == sframe
                 back_anime_pattern 118,TEC_CENTER_CHAX - 216 + 0,STANDARD_CHAY
                 @effect_anime_pattern = 273
-                ray_x = 138
-                ray_y = 156
+                @ray_x = 138
+                @ray_y = 156
             when 479
                 anime_pattern_init
                 return @battle_anime_result + 1
@@ -29967,8 +29900,8 @@ module Scene_Db_Battle_Anime_pattern
             #back_x = 234
             #back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             if $btl_progress >= 2
                 backhai_no = 201
                 back_x = 234
@@ -30063,7 +29996,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
@@ -30075,8 +30008,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
 
             case @battle_anime_frame
 
@@ -30159,7 +30092,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 306
             when 306
                 anime_pattern_init
@@ -30170,8 +30103,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
 
@@ -30273,7 +30206,7 @@ module Scene_Db_Battle_Anime_pattern
 
             #@chr_cutin = true
             when 283..308
-                ray_y = 134
+                @ray_y = 134
                 @effect_anime_pattern = 308
             when 309
                 anime_pattern_init
@@ -30281,8 +30214,8 @@ module Scene_Db_Battle_Anime_pattern
             end
 
         when 2829 #四身の拳・かめはめは
-            ray_x = 88
-            ray_y = 118
+            @ray_x = 88
+            @ray_y = 118
             @ray_color = 0
             idougo = 212+24
             idouryou = 8
@@ -30440,8 +30373,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2838 #3大超サイヤ人
             color = Color.new(255,255,255,260)
-            ray_x = 302
-            ray_y = 64
+            @ray_x = 302
+            @ray_y = 64
             @ray_color = 0
             idougo = 212+24-48
             idouryou = 8
@@ -30531,8 +30464,8 @@ module Scene_Db_Battle_Anime_pattern
             when 101..160
                 sframe = 101
                 @effect_anime_pattern = 201
-                ray_x = 230
-                ray_y = 160
+                @ray_x = 230
+                @ray_y = 160
                 Audio.se_play("Audio/SE/" + "Z3 エネルギー波") if @battle_anime_frame == sframe
                 @scombo_cha2_anime_type = 1
                 #@ray_color = 3
@@ -30603,8 +30536,8 @@ module Scene_Db_Battle_Anime_pattern
             when 303..322
                 sframe = 303
                 @effect_anime_pattern = 201
-                ray_x = -16
-                ray_y = 96
+                @ray_x = -16
+                @ray_y = 96
                 battle_anime_change 0,16
                 Audio.se_play("Audio/SE/" + "Z1 飛ぶ") if @battle_anime_frame == sframe
                 @chay -= 16
@@ -30705,14 +30638,14 @@ module Scene_Db_Battle_Anime_pattern
                 case @effect_anime_pattern
 
                 when 267,268
-                    ray_x = 228
-                    ray_y = 134-16
+                    @ray_x = 228
+                    @ray_y = 134-16
                 when 269,270
-                    ray_x = 292
-                    ray_y = 70
+                    @ray_x = 292
+                    @ray_y = 70
                 when 256
-                    ray_x = 336-32
-                    ray_y = 112
+                    @ray_x = 336-32
+                    @ray_y = 112
                 end
             when 441..489
                 sframe = 441
@@ -30726,8 +30659,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 back_x = 180
                 back_y = 0
-                ray_x = (640-246)
-                ray_y = 0
+                @ray_x = (640-246)
+                @ray_y = 0
                 @tec_output_back_no = 2
                 case @battle_anime_frame - sframe
                 when 0 #初期化
@@ -30814,8 +30747,8 @@ module Scene_Db_Battle_Anime_pattern
                     @back_window.contents.blt(270,90,picture,rect)
 
 
-                    #ray_x = @genkityuushin_x - 12
-                    #ray_y = @genkityuushin_y - 12
+                    #@ray_x = @genkityuushin_x - 12
+                    #@ray_y = @genkityuushin_y - 12
                     tame_end = 650
 
                     if (@battle_anime_frame - sframe) == tame_end
@@ -31089,8 +31022,8 @@ module Scene_Db_Battle_Anime_pattern
             idouryou = 8
             back_x = 190
             back_y = 36
-            ray_x = 340
-            ray_y = 112
+            @ray_x = 340
+            @ray_y = 112
             @ray_color = 0
             case @battle_anime_frame
 
@@ -31208,8 +31141,8 @@ module Scene_Db_Battle_Anime_pattern
                 @genkityuushin_y = 60
                 @genkitama_kanri_frame = [0,0,0,0,0,0]
             when 141..388
-                ray_x = @genkityuushin_x - 12
-                ray_y = @genkityuushin_y - 12
+                @ray_x = @genkityuushin_x - 12
+                @ray_y = @genkityuushin_y - 12
                 tame_end = 390
 
                 if @battle_anime_frame == tame_end
@@ -31299,21 +31232,21 @@ module Scene_Db_Battle_Anime_pattern
                         end
 
                         if @effect_anime_pattern == 252
-                            ray_x = @genkityuushin_x - (12 + 16)
-                            ray_y = @genkityuushin_y - (12 + 16)
+                            @ray_x = @genkityuushin_x - (12 + 16)
+                            @ray_y = @genkityuushin_y - (12 + 16)
                         elsif @effect_anime_pattern == 235
-                            ray_x = @genkityuushin_x - 12
-                            ray_y = @genkityuushin_y - 12
+                            @ray_x = @genkityuushin_x - 12
+                            @ray_y = @genkityuushin_y - 12
                         end
                     elsif @battle_anime_frame <= tame_end
                         #p @battle_anime_frame,@effect_anime_pattern
-                        ray_x = @genkityuushin_x - (12 + 16)
-                        ray_y = @genkityuushin_y - (12 + 16)
+                        @ray_x = @genkityuushin_x - (12 + 16)
+                        @ray_y = @genkityuushin_y - (12 + 16)
                         @effect_anime_pattern = 252
                     else #@battle_anime_frame <= 540
                         #p @battle_anime_frame,@effect_anime_pattern
-                        ray_x = @genkityuushin_x - (12 + 16) #- (@battle_anime_frame-540)*2
-                        ray_y = @genkityuushin_y - (12 + 16) - (@battle_anime_frame-tame_end)*2
+                        @ray_x = @genkityuushin_x - (12 + 16) #- (@battle_anime_frame-540)*2
+                        @ray_y = @genkityuushin_y - (12 + 16) - (@battle_anime_frame-tame_end)*2
                         @effect_anime_pattern = 252
                     end
                 end
@@ -31404,8 +31337,8 @@ module Scene_Db_Battle_Anime_pattern
                 idoux = 12
                 @effect_anime_pattern = 237
                 @ray_color = 1
-                ray_x = STANDARD_CHAX+idoux*27 + 58
-                ray_y = STANDARD_CHAY-8 + 24
+                @ray_x = STANDARD_CHAX+idoux*27 + 58
+                @ray_y = STANDARD_CHAY-8 + 24
                 back_anime_pattern 116,STANDARD_CHAX+idoux*27,STANDARD_CHAY-30 + 24
                 back_anime_pattern 117,192,176
             when 581
@@ -31413,16 +31346,16 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 1
                 #Audio.se_stop
                 #Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
-                ray_x = STANDARD_CHAX+idoux*27 + 58
-                ray_y = STANDARD_CHAY-8 + 24
+                @ray_x = STANDARD_CHAX+idoux*27 + 58
+                @ray_y = STANDARD_CHAY-8 + 24
                 back_anime_pattern 116,STANDARD_CHAX+idoux*27,STANDARD_CHAY-30 + 24
                 back_anime_pattern 117,192,176
             when 582..585
                 sframe = 582
                 @ray_color = 1
                 idoux = 12
-                ray_x = STANDARD_CHAX+idoux*27 + 58 + 2*(@battle_anime_frame - sframe + 1)
-                ray_y = STANDARD_CHAY-8 + 24
+                @ray_x = STANDARD_CHAX+idoux*27 + 58 + 2*(@battle_anime_frame - sframe + 1)
+                @ray_y = STANDARD_CHAY-8 + 24
                 back_anime_pattern 116,STANDARD_CHAX+idoux*27,STANDARD_CHAY-30 + 24
                 back_anime_pattern 117,192,176
             when 586..595
@@ -31576,8 +31509,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
 
             case @battle_anime_frame
 
@@ -31748,7 +31681,7 @@ module Scene_Db_Battle_Anime_pattern
                 sframe = 581
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 battle_anime_change 1,16 if @battle_anime_frame == sframe
-                #ray_y = 110
+                #@ray_y = 110
                 @chay = -200
                 @enex = TEC_CENTER_CHAX + 48
                 @effect_anime_pattern = 317
@@ -31757,8 +31690,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
       when 2841 #あっち行ってけろ
-          ray_x = 0
-          ray_y = 118
+          @ray_x = 0
+          @ray_y = 118
           @ray_color = 0
           idougo = 212+24
           idouryou = 8
@@ -31842,8 +31775,8 @@ module Scene_Db_Battle_Anime_pattern
           when 121..160
               @effect_anime_pattern = 225
               @chay -= 16
-              ray_x = 168
-              ray_y = 128
+              @ray_x = 168
+              @ray_y = 128
               back_anime_pattern 116,@chax-160,STANDARD_CHAY
           when 161
               @effect_anime_pattern = 0
@@ -31862,8 +31795,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
 
             case @battle_anime_frame
 
@@ -32026,7 +31959,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
@@ -32035,8 +31968,8 @@ module Scene_Db_Battle_Anime_pattern
             end
 
         when 2844 #よけられるハズだべ・・・
-            ray_x = 340-160
-            ray_y = 96
+            @ray_x = 340-160
+            @ray_y = 96
 
             if $btl_progress == 2
                 backhai_no = 201
@@ -32180,14 +32113,14 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2845 #うごきをとめろ
-            #ray_x = 302
-            #ray_y = 64
+            #@ray_x = 302
+            #@ray_y = 64
             @ray_color = 0
             idougo = 212+24
             idouryou = 8
 
-            ray_x = 242
-            ray_y = 120
+            @ray_x = 242
+            @ray_y = 120
 
 
             backhai_no = 201
@@ -32394,8 +32327,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2846 #ダブル残像拳(全パターンで流用)
-            ray_x = 88
-            ray_y = 118
+            @ray_x = 88
+            @ray_y = 118
             @ray_color = 0
             idougo = 212+24
             idouryou = 8
@@ -32615,11 +32548,11 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 204
             back_y = -18
             if @battle_anime_frame <= 500
-                ray_x = 325
-                ray_y = 70
+                @ray_x = 325
+                @ray_y = 70
             else
-                ray_x = 340
-                ray_y = 200
+                @ray_x = 340
+                @ray_y = 200
           end
             #@tec_back_small = true
             case @battle_anime_frame
@@ -32774,8 +32707,8 @@ module Scene_Db_Battle_Anime_pattern
             back_y = 86
             backhai_no = 201
 
-            ray_x = 326
-            ray_y = 124
+            @ray_x = 326
+            @ray_y = 124
 
             if @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] == 5 || @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] == 18
                 #@btl_ani_cha_chg_no = 3
@@ -32909,16 +32842,16 @@ module Scene_Db_Battle_Anime_pattern
                         @gx = -8
                         battle_anime_change 1,16
                         @effect_anime_pattern = 123
-                        ray_x = hit_efe_x
-                        ray_y = hit_efe_y
+                        @ray_x = hit_efe_x
+                        @ray_y = hit_efe_y
                     when 428..429
                         @gx = 8
-                        ray_x = hit_efe_x
-                        ray_y = hit_efe_y
+                        @ray_x = hit_efe_x
+                        @ray_y = hit_efe_y
                     when 430..433
                         @gx = 0
-                        ray_x = hit_efe_x
-                        ray_y = hit_efe_y
+                        @ray_x = hit_efe_x
+                        @ray_y = hit_efe_y
                     when 434
                         @effect_anime_pattern = 0
                         @effect_anime_frame = 0
@@ -32946,8 +32879,8 @@ module Scene_Db_Battle_Anime_pattern
                         battle_anime_change 1,17
                         Audio.se_play("Audio/SE/" + "ZG 打撃2") if @battle_anime_frame == 454
                         @effect_anime_pattern = 123 if @battle_anime_frame == 454
-                        ray_x = hit_efe_x
-                        ray_y = hit_efe_y
+                        @ray_x = hit_efe_x
+                        @ray_y = hit_efe_y
                         #p @battle_anime_frame
                         @effect_anime_pattern = 0 if @battle_anime_frame == 470
                     when 471..485
@@ -32981,8 +32914,8 @@ module Scene_Db_Battle_Anime_pattern
                         Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                     when 512..516
                         @effect_anime_pattern = 123
-                        ray_x = hit_efe_x
-                        ray_y = hit_efe_y
+                        @ray_x = hit_efe_x
+                        @ray_y = hit_efe_y
 
                     when 517
                         @effect_anime_frame = 0
@@ -32992,8 +32925,8 @@ module Scene_Db_Battle_Anime_pattern
                         Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                     when 518..520
                         @effect_anime_pattern = 123
-                        ray_x = hit_efe_x
-                        ray_y = hit_efe_y - 14
+                        @ray_x = hit_efe_x
+                        @ray_y = hit_efe_y - 14
                     when 521
                         #@gx = -4
                         @effect_anime_frame = 0
@@ -33002,8 +32935,8 @@ module Scene_Db_Battle_Anime_pattern
                         Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                     when 522..524
                         @effect_anime_pattern = 123
-                        ray_x = hit_efe_x
-                        ray_y = hit_efe_y
+                        @ray_x = hit_efe_x
+                        @ray_y = hit_efe_y
                     when 525
                         @effect_anime_frame = 0
                         @effect_anime_pattern = 0
@@ -33012,8 +32945,8 @@ module Scene_Db_Battle_Anime_pattern
                         Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                     when 526..528
                         @effect_anime_pattern = 123
-                        ray_x = hit_efe_x
-                        ray_y = hit_efe_y - 14
+                        @ray_x = hit_efe_x
+                        @ray_y = hit_efe_y - 14
                     when 529
                         @effect_anime_frame = 0
                         @effect_anime_pattern = 0
@@ -33022,8 +32955,8 @@ module Scene_Db_Battle_Anime_pattern
                         Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                     when 530..532
                         @effect_anime_pattern = 123
-                        ray_x = hit_efe_x
-                        ray_y = hit_efe_y
+                        @ray_x = hit_efe_x
+                        @ray_y = hit_efe_y
                     when 533
                         @effect_anime_frame = 0
                         @effect_anime_pattern = 0
@@ -33032,8 +32965,8 @@ module Scene_Db_Battle_Anime_pattern
                         Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                     when 534..536
                         @effect_anime_pattern = 123
-                        ray_x = hit_efe_x
-                        ray_y = hit_efe_y - 14
+                        @ray_x = hit_efe_x
+                        @ray_y = hit_efe_y - 14
                     when 537
                         @effect_anime_frame = 0
                         @effect_anime_pattern = 0
@@ -33042,8 +32975,8 @@ module Scene_Db_Battle_Anime_pattern
                         Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                     when 538..540
                         @effect_anime_pattern = 123
-                        ray_x = hit_efe_x
-                        ray_y = hit_efe_y
+                        @ray_x = hit_efe_x
+                        @ray_y = hit_efe_y
                     when 541
                         @effect_anime_frame = 0
                         @effect_anime_pattern = 0
@@ -33052,8 +32985,8 @@ module Scene_Db_Battle_Anime_pattern
                         Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
                     when 542..544
                         @effect_anime_pattern = 123
-                        ray_x = hit_efe_x
-                        ray_y = hit_efe_y - 14
+                        @ray_x = hit_efe_x
+                        @ray_y = hit_efe_y - 14
                         @gx = 0
                         battle_anime_change 0,0
                         @ax = -24
@@ -33106,8 +33039,8 @@ module Scene_Db_Battle_Anime_pattern
                         set_chr_display_out
                         battle_anime_change 1,16
                     when 671..700
-                        ray_x = 330
-                        ray_y = -600
+                        @ray_x = 330
+                        @ray_y = -600
                         @effect_anime_pattern = 258
                     when 701
                         @battle_anime_frame = 1166
@@ -33124,8 +33057,8 @@ module Scene_Db_Battle_Anime_pattern
             #back_x = 234
             #back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = 234
             back_y = -18 + 54+ 50
@@ -33217,7 +33150,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
@@ -33229,8 +33162,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
 
@@ -33324,7 +33257,7 @@ module Scene_Db_Battle_Anime_pattern
 
             #@chr_cutin = true
             when 283..308
-                ray_y = 134
+                @ray_y = 134
                 @effect_anime_pattern = 308
             when 309
                 anime_pattern_init
@@ -33334,11 +33267,11 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 204
             back_y = -18
             if @battle_anime_frame <= 500
-                ray_x = 325
-                ray_y = 70
+                @ray_x = 325
+                @ray_y = 70
             else
-                ray_x = 340
-                ray_y = 200
+                @ray_x = 340
+                @ray_y = 200
           end
             #@tec_back_small = true
             case @battle_anime_frame
@@ -33488,11 +33421,11 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 204
             back_y = -18
             if @battle_anime_frame <= 500
-                ray_x = 325
-                ray_y = 70
+                @ray_x = 325
+                @ray_y = 70
             else
-                ray_x = 340
-                ray_y = 200
+                @ray_x = 340
+                @ray_y = 200
             end
             color = Color.new(255,255,255,260)
             #@tec_back_small = true
@@ -33625,8 +33558,8 @@ module Scene_Db_Battle_Anime_pattern
                 start_frame = 331
                 @output_anime_type = 1
 
-                ray_x = 224
-                ray_y = 96 - 50
+                @ray_x = 224
+                @ray_y = 96 - 50
 
                 @back_anime_frame = 0   if @battle_anime_frame == start_frame
                 @back_anime_type = 54   if @battle_anime_frame == start_frame
@@ -33643,14 +33576,14 @@ module Scene_Db_Battle_Anime_pattern
                 #battle_anime_change 0,5 if @battle_anime_frame == 189
                 case @back_anime_type
                   when 5,56,54 #動かない
-                      ray_x += 0
-                      ray_y += 0
+                      @ray_x += 0
+                      @ray_y += 0
                   when 6 #右
-                      ray_x += 8
-                      ray_y += 2
+                      @ray_x += 8
+                      @ray_y += 2
                   when 4 #左
-                      ray_x -= 8
-                      ray_y -= 2
+                      @ray_x -= 8
+                      @ray_y -= 2
                   when 2 #下
 
                   when 8 #上
@@ -33681,10 +33614,10 @@ module Scene_Db_Battle_Anime_pattern
                 end_frame = 59 + start_frame
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == start_frame
                 battle_anime_change 0,9
-                ray_x = 224
-                ray_y = 96 - 50
-                ray_x += 16 * (@battle_anime_frame - start_frame)
-                ray_y += 2 * (@battle_anime_frame - start_frame)
+                @ray_x = 224
+                @ray_y = 96 - 50
+                @ray_x += 16 * (@battle_anime_frame - start_frame)
+                @ray_y += 2 * (@battle_anime_frame - start_frame)
                 if @battle_anime_frame == end_frame
                     @effect_anime_pattern = 0
                     @effect_anime_frame = 0
@@ -33719,8 +33652,8 @@ module Scene_Db_Battle_Anime_pattern
        when 2863 #ギャリックかめはめは(ヤムチャとベジータ)
            back_x = 200
            back_y = 32
-           ray_x = 300
-           ray_y = 162
+           @ray_x = 300
+           @ray_y = 162
            wake_color = Color.new(188,188,188,256)
            if @btl_ani_tokusyu_flag == false && ($partyc[@chanum.to_i] == 12 || $partyc[@chanum.to_i] == 19)
                #@btl_ani_cha_chg_no = 3
@@ -33747,8 +33680,8 @@ module Scene_Db_Battle_Anime_pattern
                    back_x = 198
                    back_y = 32
                end
-               ray_x = 340
-               ray_y = 96
+               @ray_x = 340
+               @ray_y = 96
                case @battle_anime_frame
                when 0 #初期化
                    if $btl_progress == 2
@@ -33774,7 +33707,7 @@ module Scene_Db_Battle_Anime_pattern
 
                    back_x -= 12*(@battle_anime_frame-140)
                    @ax = -12
-                   #ray_x -= 2*(@battle_anime_frame-140)
+                   #@ray_x -= 2*(@battle_anime_frame-140)
                    back_anime_pattern backhai_no,back_x,back_y
                    if @battle_anime_frame > 161
                        #CENTER_ENEX = 304
@@ -34007,8 +33940,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
 
@@ -34088,8 +34021,8 @@ module Scene_Db_Battle_Anime_pattern
                 picture = Cache.picture("Z3_必殺技_超カメハメ波(球点滅小)") #ダメージ表示用
                 rect = Rect.new(16*@ray_anime_type, 0,16,16)
                 @effect_anime_pattern = 237
-                ray_x = 282
-                ray_y = 110
+                @ray_x = 282
+                @ray_y = 110
                 @back_window.contents.blt(278,214,picture,rect)
 
             when 192..281
@@ -34104,8 +34037,8 @@ module Scene_Db_Battle_Anime_pattern
                 picture = Cache.picture("Z3_必殺技_超カメハメ波(球点滅)") #ダメージ表示用
                 rect = Rect.new(32*@ray_anime_type, 0,32,32)
                 @effect_anime_pattern = 235
-                ray_x = 276
-                ray_y = 104
+                @ray_x = 276
+                @ray_y = 104
                 @back_window.contents.blt(272,208,picture,rect)
             when 282..398
                 @chay -= 200
@@ -34151,8 +34084,8 @@ module Scene_Db_Battle_Anime_pattern
                 @back_window.contents.blt(210,40,picture,rect)
                 #@chr_cutin = true
                 @effect_anime_pattern = 333
-                ray_x = 236
-                ray_y = 128
+                @ray_x = 236
+                @ray_y = 128
             when 399
                 @chr_cutin = true
                 @effect_anime_pattern = 0
@@ -34173,8 +34106,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 338
-            ray_y = 204
+            @ray_x = 338
+            @ray_y = 204
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
 
@@ -34274,7 +34207,7 @@ module Scene_Db_Battle_Anime_pattern
 
             #@chr_cutin = true
             when 283..308
-                ray_y = 134
+                @ray_y = 134
                 @effect_anime_pattern = 308
             when 309
                 anime_pattern_init
@@ -34289,10 +34222,10 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 3
             back_x = 176
             back_y = 88
-            ray_x = 356
-            ray_y = 112
-            #ray_x = 326
-            #ray_y = 124
+            @ray_x = 356
+            @ray_y = 112
+            #@ray_x = 326
+            #@ray_y = 124
 
             if @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] == 26
                 #@btl_ani_cha_chg_no = 3
@@ -34416,8 +34349,8 @@ module Scene_Db_Battle_Anime_pattern
                 when 482..510
                     battle_anime_change 1,16
                     @effect_anime_pattern = 123
-                    ray_x = 346
-                    ray_y = 154
+                    @ray_x = 346
+                    @ray_y = 154
 
                     @effect_anime_pattern = 0 if @battle_anime_frame >= 490
                     @enex += 20
@@ -34459,8 +34392,8 @@ module Scene_Db_Battle_Anime_pattern
                     end
 
                     @effect_anime_pattern = 123
-                    ray_x = 324
-                    ray_y = 158
+                    @ray_x = 324
+                    @ray_y = 158
 
                     @effect_anime_pattern = 0 if @battle_anime_frame >= 583
                     battle_anime_change 0,17
@@ -34488,8 +34421,8 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,16
                 when 636..659
                     @effect_anime_pattern = 123
-                    ray_x = 324
-                    ray_y = 158
+                    @ray_x = 324
+                    @ray_y = 158
 
                     @effect_anime_pattern = 0 if @battle_anime_frame >= 644
                     @enex -= 4
@@ -34592,8 +34525,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
 
             case @battle_anime_frame
 
@@ -34676,15 +34609,15 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 306
             when 306
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
         when 2872 #トリプルませんこう(悟飯&未来悟飯＆トランクス)
-            ray_x = 302
-            ray_y = 64
+            @ray_x = 302
+            @ray_y = 64
             @ray_color = 3
             idougo = 212+24
             idouryou = 8
@@ -34829,8 +34762,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 338
-            ray_y = 204
+            @ray_x = 338
+            @ray_y = 204
             color = Color.new(255,255,255,260)
             idougo = 212+24
             idouryou = 8
@@ -34968,7 +34901,7 @@ module Scene_Db_Battle_Anime_pattern
 
             #@chr_cutin = true
             when 283..308
-                ray_y = 134
+                @ray_y = 134
                 @effect_anime_pattern = 345
             when 309
                 anime_pattern_init
@@ -34979,8 +34912,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 202
+            @ray_x = 340
+            @ray_y = 202
 
             case @battle_anime_frame
 
@@ -35140,7 +35073,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
@@ -35152,8 +35085,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 202
+            @ray_x = 340
+            @ray_y = 202
 
             case @battle_anime_frame
 
@@ -35313,7 +35246,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
@@ -35325,8 +35258,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 202
+            @ray_x = 340
+            @ray_y = 202
 
             case @battle_anime_frame
 
@@ -35487,7 +35420,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
@@ -35500,8 +35433,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 202
+            @ray_x = 340
+            @ray_y = 202
 
             case @battle_anime_frame
 
@@ -35662,7 +35595,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
@@ -35674,8 +35607,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 202
+            @ray_x = 340
+            @ray_y = 202
 
             case @battle_anime_frame
 
@@ -35836,7 +35769,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
@@ -35848,8 +35781,8 @@ module Scene_Db_Battle_Anime_pattern
             #back_x = 234
             #back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = 234
             back_y = -18 + 54+ 50
@@ -35942,7 +35875,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 3
                 @effect_anime_pattern = 240
             when 306
@@ -35951,8 +35884,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2880 #超爆力魔波(未来悟飯＆ピッコロ)
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = TEC_CENTER_CHAX - 80 + 40
             back_y = STANDARD_CHAY - 30
@@ -36082,11 +36015,11 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 204
             back_y = -18
             if @battle_anime_frame <= 500
-                ray_x = 325
-                ray_y = 70
+                @ray_x = 325
+                @ray_y = 70
             else
-                ray_x = 340
-                ray_y = 200
+                @ray_x = 340
+                @ray_y = 200
           end
             #@tec_back_small = true
             case @battle_anime_frame
@@ -36191,8 +36124,8 @@ module Scene_Db_Battle_Anime_pattern
                 sframe = 238
                 #when 252..293
                 @effect_anime_pattern = 125
-                ray_x = 350
-                ray_y = 158
+                @ray_x = 350
+                @ray_y = 158
                 @chay = STANDARD_CHAY
                 @output_anime_type = 1
                 Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == 252
@@ -36251,11 +36184,11 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 204
             back_y = -18
             if @battle_anime_frame <= 500
-                ray_x = 325
-                ray_y = 70
+                @ray_x = 325
+                @ray_y = 70
             else
-                ray_x = 340
-                ray_y = 200
+                @ray_x = 340
+                @ray_y = 200
           end
             #@tec_back_small = true
             case @battle_anime_frame
@@ -36360,8 +36293,8 @@ module Scene_Db_Battle_Anime_pattern
                 sframe = 238
                 #when 252..293
                 @effect_anime_pattern = 125
-                ray_x = 350
-                ray_y = 158
+                @ray_x = 350
+                @ray_y = 158
                 @chay = STANDARD_CHAY
                 @output_anime_type = 1
                 Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == 252
@@ -36417,8 +36350,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2883 #悟飯ちゃんを巻き込む出ねえ
-            ray_x = 340-160
-            ray_y = 96
+            @ray_x = 340-160
+            @ray_y = 96
 
             if $btl_progress == 2
                 backhai_no = 201
@@ -36613,8 +36546,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2884 #悟空さを巻き込む出ねえ
-            ray_x = 340-160
-            ray_y = 96
+            @ray_x = 340-160
+            @ray_y = 96
 
             if $btl_progress == 2
                 backhai_no = 201
@@ -36815,8 +36748,8 @@ module Scene_Db_Battle_Anime_pattern
             idouryou = 8
             back_x = 190
             back_y = 36
-            ray_x = 346
-            ray_y = 84
+            @ray_x = 346
+            @ray_y = 84
             @ray_color = 3
             case @battle_anime_frame
 
@@ -36996,8 +36929,8 @@ module Scene_Db_Battle_Anime_pattern
             #back_x = 234
             #back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = 234
             back_y = -18 + 54+ 50
@@ -37088,7 +37021,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 0
                 @effect_anime_pattern = 48
             when 306
@@ -37100,8 +37033,8 @@ module Scene_Db_Battle_Anime_pattern
             #back_x = 234
             #back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = 234
             back_y = -18 + 54+ 50
@@ -37192,7 +37125,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 0
                 @effect_anime_pattern = 48
             when 306
@@ -37204,8 +37137,8 @@ module Scene_Db_Battle_Anime_pattern
             #back_x = 234
             #back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = 234
             back_y = -18 + 54+ 50
@@ -37294,7 +37227,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 0
                 @effect_anime_pattern = 48
             when 306
@@ -37306,8 +37239,8 @@ module Scene_Db_Battle_Anime_pattern
             #back_x = 234
             #back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = 234
             back_y = -18 + 54+ 50
@@ -37396,7 +37329,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 0
                 @effect_anime_pattern = 48
             when 306
@@ -37408,8 +37341,8 @@ module Scene_Db_Battle_Anime_pattern
             #back_x = 234
             #back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = 234
             back_y = -18 + 54+ 50
@@ -37500,7 +37433,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @ray_color = 0
                 @effect_anime_pattern = 48
             when 306
@@ -37508,8 +37441,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2891 #かめはめ乱舞(親子)
-            ray_x = 356
-            ray_y = 70
+            @ray_x = 356
+            @ray_y = 70
             @ray_color = 0
             idougo = 212+24
             idouryou = 8
@@ -37627,8 +37560,8 @@ module Scene_Db_Battle_Anime_pattern
             #back_x = 234
             #back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = 234
             back_y = -18 + 54+ 50
@@ -37963,8 +37896,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 back_anime_pattern 118,TEC_CENTER_CHAX + 0,STANDARD_CHAY + 50
 
-                ray_x = 340
-                ray_y = 74
+                @ray_x = 340
+                @ray_y = 74
             when 620
                 @chay = -200
                 #battle_anime_change 0,1
@@ -37973,7 +37906,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
                 set_chr_display_out
             when 621..645
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 353
             when 646
                 anime_pattern_init
@@ -37982,8 +37915,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2893 #あの時の借りを返すよ！(天津飯と18号)
             back_x = 228
             back_y = 88
-            ray_x = 346
-            ray_y = 66
+            @ray_x = 346
+            @ray_y = 66
             color = Color.new(255,255,255,260)
 
             #18号
@@ -38052,8 +37985,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
                 when 341..550
 
-                    #ray_x = 346
-                    #ray_y = 136
+                    #@ray_x = 346
+                    #@ray_y = 136
                     back_anime_pattern 9
                     case @battle_anime_frame
                     when 370..373,410..413,450..453,490..493
@@ -38180,8 +38113,8 @@ module Scene_Db_Battle_Anime_pattern
                     eframe = 427
                     back_x = 266
                     back_y = 0
-                    ray_x = 302
-                    ray_y = 62
+                    @ray_x = 302
+                    @ray_y = 62
                     color = Color.new(255,255,255,260)
                     case @battle_anime_frame - ssframe
                     when 0 #初期化
@@ -38199,13 +38132,13 @@ module Scene_Db_Battle_Anime_pattern
                         Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
                         Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
                         @ray_color = 3
-                        #ray_x = 338
-                        #ray_y = 156
+                        #@ray_x = 338
+                        #@ray_y = 156
                         @genkitama_kanri_frame = []
                         @genkitama_kanri_maxflame = 15
                         @genkitama_kanri_spdup = 10
-                        @genkityuushin_x = ray_x + 12
-                        @genkityuushin_y = ray_y + 12
+                        @genkityuushin_x = @ray_x + 12
+                        @genkityuushin_y = @ray_y + 12
                         @genkitama_kanri_frame = [0,0,0,0,0,0,0,0]
                         @chr_cutin = false
                     when 1..350
@@ -38224,8 +38157,8 @@ module Scene_Db_Battle_Anime_pattern
 
                         @back_window.contents.blt(bezikat_x,bezikat_y,picture,rect)
 
-                        #ray_x = 290
-                        #ray_y = 40
+                        #@ray_x = 290
+                        #@ray_y = 40
 
                         tame_end = 360
 
@@ -38312,8 +38245,8 @@ module Scene_Db_Battle_Anime_pattern
                         if (@battle_anime_frame - ssframe) > (sframe + 240)
 
                             @effect_anime_pattern = 289
-                            ray_x -= 16
-                            ray_y -= 16
+                            @ray_x -= 16
+                            @ray_y -= 16
                         end
 
                         #back_anime_pattern 201,back_x,back_y
@@ -38336,8 +38269,8 @@ module Scene_Db_Battle_Anime_pattern
                         @output_anime_type = 1
                         battle_anime_change 0,10
                         @effect_anime_pattern = 239
-                        ray_x = 338
-                        ray_y = 104
+                        @ray_x = 338
+                        @ray_y = 104
 
                     when 391
                         @tec_output_back = true
@@ -38350,7 +38283,7 @@ module Scene_Db_Battle_Anime_pattern
                         set_chr_display_out
                     #Audio.se_play("Audio/SE/" + "Z1 ザー")
                     when 401..427
-                        ray_y = 106
+                        @ray_y = 106
                         @effect_anime_pattern = 240
 
                         if (@battle_anime_frame - ssframe) == eframe
@@ -38369,8 +38302,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2894 #あの時の借りを返すぞ！(天津飯と16号)
             back_x = 228
             back_y = 88
-            ray_x = 346
-            ray_y = 66
+            @ray_x = 346
+            @ray_y = 66
             color = Color.new(255,255,255,260)
 
             #16号
@@ -38439,8 +38372,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
                 when 341..550
 
-                    #ray_x = 346
-                    #ray_y = 136
+                    #@ray_x = 346
+                    #@ray_y = 136
                     back_anime_pattern 9
                     case @battle_anime_frame
                     when 370..373,410..413,450..453,490..493
@@ -38568,8 +38501,8 @@ module Scene_Db_Battle_Anime_pattern
                     eframe = 337
                     back_x = 266
                     back_y = 0
-                    ray_x = back_x +82
-                    ray_y = back_y +60
+                    @ray_x = back_x +82
+                    @ray_y = back_y +60
                     color = Color.new(255,255,255,260)
                     case (@battle_anime_frame - ssframe)
                     when 0 #初期化
@@ -38581,18 +38514,18 @@ module Scene_Db_Battle_Anime_pattern
                         #@ray_color = 3
                         Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
                         @ray_color = 3
-                        ray_x = 338
-                        ray_y = 156
+                        @ray_x = 338
+                        @ray_y = 156
                         @genkitama_kanri_frame = []
                         @genkitama_kanri_maxflame = 15
                         @genkitama_kanri_spdup = 10
-                        @genkityuushin_x = ray_x -14
-                        @genkityuushin_y = ray_y +2
+                        @genkityuushin_x = @ray_x -14
+                        @genkityuushin_y = @ray_y +2
                         @genkitama_kanri_frame = [0,0,0,0,0,0,0,0]
                     when 1..128
 
-                        ray_x = 324
-                        ray_y = 120
+                        @ray_x = 324
+                        @ray_y = 120
 
                         tame_end = 128
 
@@ -38713,8 +38646,8 @@ module Scene_Db_Battle_Anime_pattern
                         when 140..230
                             Audio.se_play("Audio/SE/" + "Z1 気を溜める") if (@battle_anime_frame - ssframe) == 140
 
-                            ray_x = 362
-                            ray_y = 244
+                            @ray_x = 362
+                            @ray_y = 244
                             @effect_anime_pattern = 235
                         when 231
                             Audio.se_stop
@@ -38737,7 +38670,7 @@ module Scene_Db_Battle_Anime_pattern
                           set_chr_display_out
                       #Audio.se_play("Audio/SE/" + "Z1 ザー")
                       when 311..337
-                          ray_y = 114
+                          @ray_y = 114
                           @effect_anime_pattern = 265
                           if (@battle_anime_frame - ssframe) == eframe
                               @battle_anime_frame = 9998
@@ -38755,8 +38688,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2895 #借りがあるらしいな(天津飯と17号)
             back_x = 228
             back_y = 88
-            ray_x = 346
-            ray_y = 66
+            @ray_x = 346
+            @ray_y = 66
             color = Color.new(255,255,255,260)
 
             #17号
@@ -38825,8 +38758,8 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
                 when 341..550
 
-                    #ray_x = 346
-                    #ray_y = 136
+                    #@ray_x = 346
+                    #@ray_y = 136
                     back_anime_pattern 9
                     case @battle_anime_frame
                     when 370..373,410..413,450..453,490..493
@@ -38953,8 +38886,8 @@ module Scene_Db_Battle_Anime_pattern
                     eframe = 367
                     back_x = 266
                     back_y = 0
-                    ray_x = back_x +82
-                    ray_y = back_y +60
+                    @ray_x = back_x +82
+                    @ray_y = back_y +60
                     color = Color.new(255,255,255,260)
                     case (@battle_anime_frame - ssframe)
                     when 0 #初期化
@@ -38966,19 +38899,19 @@ module Scene_Db_Battle_Anime_pattern
                         #@ray_color = 3
                         Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
                         @ray_color = 3
-                        ray_x = 338
-                        ray_y = 156
+                        @ray_x = 338
+                        @ray_y = 156
 
                         @genkitama_kanri_frame = []
                         @genkitama_kanri_maxflame = 15
                         @genkitama_kanri_spdup = 10
-                        @genkityuushin_x = ray_x -14
-                        @genkityuushin_y = ray_y +2 + 10
+                        @genkityuushin_x = @ray_x -14
+                        @genkityuushin_y = @ray_y +2 + 10
                         @genkitama_kanri_frame = [0,0,0,0,0,0,0,0]
                     when 1..128
 
-                        ray_x = 324
-                        ray_y = 120
+                        @ray_x = 324
+                        @ray_y = 120
 
                         tame_end = 128
 
@@ -39086,14 +39019,14 @@ module Scene_Db_Battle_Anime_pattern
                             sframe = 140
                             Audio.se_play("Audio/SE/" + "Z1 気を溜める") if (@battle_anime_frame - ssframe) == 140
 
-                            ray_x = 302
-                            ray_y = 224
+                            @ray_x = 302
+                            @ray_y = 224
                             @effect_anime_pattern = 235
 
                             if (@battle_anime_frame - ssframe) > (sframe + 60)
                                 @effect_anime_pattern = 289
-                                ray_x -= 16
-                                ray_y -= 16
+                                @ray_x -= 16
+                                @ray_y -= 16
                             end
 
                         when 261..330
@@ -39121,7 +39054,7 @@ module Scene_Db_Battle_Anime_pattern
                         set_chr_display_out
                     #Audio.se_play("Audio/SE/" + "Z1 ザー")
                     when 341..367
-                        ray_y = 106
+                        @ray_y = 106
                         @effect_anime_type = 4
                         @effect_anime_pattern = 271
                         if (@battle_anime_frame - ssframe) == eframe
@@ -39140,8 +39073,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2896 #あんたも助けるよ！(チャオズと18号)
             back_x = 228
             back_y = 88
-            ray_x = 306
-            ray_y = 94
+            @ray_x = 306
+            @ray_y = 94
             color = Color.new(255,255,255,260)
 
             #18号
@@ -39174,8 +39107,8 @@ module Scene_Db_Battle_Anime_pattern
                     sframe = 1
                     back_anime_pattern 201,back_x,back_y
 
-                    ray_x = 290
-                    ray_y = 132
+                    @ray_x = 290
+                    @ray_y = 132
 
                     case (@battle_anime_frame-sframe)
                     when 30..74
@@ -39183,8 +39116,8 @@ module Scene_Db_Battle_Anime_pattern
                         battle_anime_change 0,7
                         @effect_anime_pattern = 237
                     when 75..200
-                        ray_x -= 8
-                        ray_y -= 16
+                        @ray_x -= 8
+                        @ray_y -= 16
                         @effect_anime_pattern = 235
                     end
                 when 200
@@ -39215,7 +39148,7 @@ module Scene_Db_Battle_Anime_pattern
                 #@tec_output_back = false
                 #@chr_cutin_flag = false
                 when 321..347
-                    ray_y = 132
+                    @ray_y = 132
                     @effect_anime_pattern = 297
 
                     if @battle_anime_frame == 347
@@ -39341,8 +39274,8 @@ module Scene_Db_Battle_Anime_pattern
                     eframe = 427
                     back_x = 266
                     back_y = 0
-                    ray_x = 302
-                    ray_y = 62
+                    @ray_x = 302
+                    @ray_y = 62
                     color = Color.new(255,255,255,260)
                     case @battle_anime_frame - ssframe
                     when 0 #初期化
@@ -39360,13 +39293,13 @@ module Scene_Db_Battle_Anime_pattern
                         Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
                         Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
                         @ray_color = 3
-                        #ray_x = 338
-                        #ray_y = 156
+                        #@ray_x = 338
+                        #@ray_y = 156
                         @genkitama_kanri_frame = []
                         @genkitama_kanri_maxflame = 15
                         @genkitama_kanri_spdup = 10
-                        @genkityuushin_x = ray_x + 12
-                        @genkityuushin_y = ray_y + 12
+                        @genkityuushin_x = @ray_x + 12
+                        @genkityuushin_y = @ray_y + 12
                         @genkitama_kanri_frame = [0,0,0,0,0,0,0,0]
                         @chr_cutin = false
                     when 1..350
@@ -39385,8 +39318,8 @@ module Scene_Db_Battle_Anime_pattern
 
                         @back_window.contents.blt(bezikat_x,bezikat_y,picture,rect)
 
-                        #ray_x = 290
-                        #ray_y = 40
+                        #@ray_x = 290
+                        #@ray_y = 40
 
                         tame_end = 360
 
@@ -39473,8 +39406,8 @@ module Scene_Db_Battle_Anime_pattern
                         if (@battle_anime_frame - ssframe) > (sframe + 240)
 
                             @effect_anime_pattern = 289
-                            ray_x -= 16
-                            ray_y -= 16
+                            @ray_x -= 16
+                            @ray_y -= 16
                         end
 
                         #back_anime_pattern 201,back_x,back_y
@@ -39497,8 +39430,8 @@ module Scene_Db_Battle_Anime_pattern
                         @output_anime_type = 1
                         battle_anime_change 0,10
                         @effect_anime_pattern = 239
-                        ray_x = 338
-                        ray_y = 104
+                        @ray_x = 338
+                        @ray_y = 104
 
                     when 391
                         @tec_output_back = true
@@ -39511,7 +39444,7 @@ module Scene_Db_Battle_Anime_pattern
                         set_chr_display_out
                     #Audio.se_play("Audio/SE/" + "Z1 ザー")
                     when 401..427
-                        ray_y = 106
+                        @ray_y = 106
                         @effect_anime_pattern = 240
 
                         if (@battle_anime_frame - ssframe) == eframe
@@ -39530,8 +39463,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2897 #お前も助けるぞ！(チャオズと16号)
             back_x = 228
             back_y = 88
-            ray_x = 306
-            ray_y = 94
+            @ray_x = 306
+            @ray_y = 94
             color = Color.new(255,255,255,260)
 
             #16号
@@ -39564,8 +39497,8 @@ module Scene_Db_Battle_Anime_pattern
                      sframe = 1
                      back_anime_pattern 201,back_x,back_y
 
-                     ray_x = 290
-                     ray_y = 132
+                     @ray_x = 290
+                     @ray_y = 132
 
                      case (@battle_anime_frame-sframe)
                      when 30..74
@@ -39573,8 +39506,8 @@ module Scene_Db_Battle_Anime_pattern
                          battle_anime_change 0,7
                          @effect_anime_pattern = 237
                      when 75..200
-                         ray_x -= 8
-                         ray_y -= 16
+                         @ray_x -= 8
+                         @ray_y -= 16
                          @effect_anime_pattern = 235
                      end
                  when 200
@@ -39605,7 +39538,7 @@ module Scene_Db_Battle_Anime_pattern
                  #@tec_output_back = false
                  #@chr_cutin_flag = false
                  when 321..347
-                     ray_y = 132
+                     @ray_y = 132
                      @effect_anime_pattern = 297
 
                      if @battle_anime_frame == 347
@@ -39732,8 +39665,8 @@ module Scene_Db_Battle_Anime_pattern
                      eframe = 337
                      back_x = 266
                      back_y = 0
-                     ray_x = back_x +82
-                     ray_y = back_y +60
+                     @ray_x = back_x +82
+                     @ray_y = back_y +60
                      color = Color.new(255,255,255,260)
                      case (@battle_anime_frame - ssframe)
                      when 0 #初期化
@@ -39745,18 +39678,18 @@ module Scene_Db_Battle_Anime_pattern
                          #@ray_color = 3
                          Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
                          @ray_color = 3
-                         ray_x = 338
-                         ray_y = 156
+                         @ray_x = 338
+                         @ray_y = 156
                          @genkitama_kanri_frame = []
                          @genkitama_kanri_maxflame = 15
                          @genkitama_kanri_spdup = 10
-                         @genkityuushin_x = ray_x -14
-                         @genkityuushin_y = ray_y +2
+                         @genkityuushin_x = @ray_x -14
+                         @genkityuushin_y = @ray_y +2
                          @genkitama_kanri_frame = [0,0,0,0,0,0,0,0]
                      when 1..128
 
-                         ray_x = 324
-                         ray_y = 120
+                         @ray_x = 324
+                         @ray_y = 120
 
                          tame_end = 128
 
@@ -39877,8 +39810,8 @@ module Scene_Db_Battle_Anime_pattern
                          when 140..230
                              Audio.se_play("Audio/SE/" + "Z1 気を溜める") if (@battle_anime_frame - ssframe) == 140
 
-                             ray_x = 362
-                             ray_y = 244
+                             @ray_x = 362
+                             @ray_y = 244
                              @effect_anime_pattern = 235
                          when 231
                              Audio.se_stop
@@ -39901,7 +39834,7 @@ module Scene_Db_Battle_Anime_pattern
                            set_chr_display_out
                        #Audio.se_play("Audio/SE/" + "Z1 ザー")
                        when 311..337
-                           ray_y = 114
+                           @ray_y = 114
                            @effect_anime_pattern = 265
                            if (@battle_anime_frame - ssframe) == eframe
                                @battle_anime_frame = 9998
@@ -39919,8 +39852,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2898 #今度は俺が助けてやる(チャオズと17号)
             back_x = 228
             back_y = 88
-            ray_x = 306
-            ray_y = 94
+            @ray_x = 306
+            @ray_y = 94
             color = Color.new(255,255,255,260)
 
             #17号
@@ -39953,8 +39886,8 @@ module Scene_Db_Battle_Anime_pattern
                      sframe = 1
                      back_anime_pattern 201,back_x,back_y
 
-                     ray_x = 290
-                     ray_y = 132
+                     @ray_x = 290
+                     @ray_y = 132
 
                      case (@battle_anime_frame-sframe)
                      when 30..74
@@ -39962,8 +39895,8 @@ module Scene_Db_Battle_Anime_pattern
                          battle_anime_change 0,7
                          @effect_anime_pattern = 237
                      when 75..200
-                         ray_x -= 8
-                         ray_y -= 16
+                         @ray_x -= 8
+                         @ray_y -= 16
                          @effect_anime_pattern = 235
                      end
                  when 200
@@ -39994,7 +39927,7 @@ module Scene_Db_Battle_Anime_pattern
                  #@tec_output_back = false
                  #@chr_cutin_flag = false
                  when 321..347
-                     ray_y = 132
+                     @ray_y = 132
                      @effect_anime_pattern = 297
 
                      if @battle_anime_frame == 347
@@ -40120,8 +40053,8 @@ module Scene_Db_Battle_Anime_pattern
                      eframe = 367
                      back_x = 266
                      back_y = 0
-                     ray_x = back_x +82
-                     ray_y = back_y +60
+                     @ray_x = back_x +82
+                     @ray_y = back_y +60
                      color = Color.new(255,255,255,260)
                      case (@battle_anime_frame - ssframe)
                      when 0 #初期化
@@ -40133,19 +40066,19 @@ module Scene_Db_Battle_Anime_pattern
                          #@ray_color = 3
                          Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
                          @ray_color = 3
-                         ray_x = 338
-                         ray_y = 156
+                         @ray_x = 338
+                         @ray_y = 156
 
                          @genkitama_kanri_frame = []
                          @genkitama_kanri_maxflame = 15
                          @genkitama_kanri_spdup = 10
-                         @genkityuushin_x = ray_x -14
-                         @genkityuushin_y = ray_y +2 + 10
+                         @genkityuushin_x = @ray_x -14
+                         @genkityuushin_y = @ray_y +2 + 10
                          @genkitama_kanri_frame = [0,0,0,0,0,0,0,0]
                      when 1..128
 
-                         ray_x = 324
-                         ray_y = 120
+                         @ray_x = 324
+                         @ray_y = 120
 
                          tame_end = 128
 
@@ -40253,14 +40186,14 @@ module Scene_Db_Battle_Anime_pattern
                              sframe = 140
                              Audio.se_play("Audio/SE/" + "Z1 気を溜める") if (@battle_anime_frame - ssframe) == 140
 
-                             ray_x = 302
-                             ray_y = 224
+                             @ray_x = 302
+                             @ray_y = 224
                              @effect_anime_pattern = 235
 
                              if (@battle_anime_frame - ssframe) > (sframe + 60)
                                  @effect_anime_pattern = 289
-                                 ray_x -= 16
-                                 ray_y -= 16
+                                 @ray_x -= 16
+                                 @ray_y -= 16
                              end
 
                          when 261..330
@@ -40288,7 +40221,7 @@ module Scene_Db_Battle_Anime_pattern
                          set_chr_display_out
                      #Audio.se_play("Audio/SE/" + "Z1 ザー")
                      when 341..367
-                         ray_y = 106
+                         @ray_y = 106
                          @effect_anime_type = 4
                          @effect_anime_pattern = 271
                          if (@battle_anime_frame - ssframe) == eframe
@@ -40305,8 +40238,8 @@ module Scene_Db_Battle_Anime_pattern
                 @battle_anime_frame = -1 # 効果音を再生する
             end
         when 2899 #流派を超えた連携！(天津飯と亀仙人)
-            ray_x = 340
-            ray_y = 150
+            @ray_x = 340
+            @ray_y = 150
 
             #天津飯
             if @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] == 8
@@ -40398,8 +40331,8 @@ module Scene_Db_Battle_Anime_pattern
                     eframe = 550
                     back_x = 228
                     back_y = 88
-                    ray_x = 346
-                    ray_y = 66
+                    @ray_x = 346
+                    @ray_y = 66
                     color = Color.new(255,255,255,260)
                     #@back_window.contents.fill_rect(0,0,640,378,color)
                     case (@battle_anime_frame - ssframe)
@@ -40448,8 +40381,8 @@ module Scene_Db_Battle_Anime_pattern
                         Audio.se_play("Audio/SE/" + "Z1 ザー")
                         Audio.se_play("Audio/SE/" + "Z1 ゴー")
                     when 341..550
-                        #ray_x = 346
-                        #ray_y = 136
+                        #@ray_x = 346
+                        #@ray_y = 136
                         back_anime_pattern 9
                         case (@battle_anime_frame - ssframe)
                         when 370..373,410..413,450..453,490..493
@@ -40472,8 +40405,8 @@ module Scene_Db_Battle_Anime_pattern
                 @battle_anime_frame = -1 # 効果音を再生する
             end
         when 2900 #流派を超えた連携(チャオズと亀仙人)
-            ray_x = 340
-            ray_y = 150
+            @ray_x = 340
+            @ray_y = 150
 
             #チャオズ
             if @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] == 9
@@ -40565,8 +40498,8 @@ module Scene_Db_Battle_Anime_pattern
                     eframe = 347
                     back_x = 228
                     back_y = 88
-                    ray_x = 306
-                    ray_y = 94
+                    @ray_x = 306
+                    @ray_y = 94
                     color = Color.new(255,255,255,260)
                     #@back_window.contents.fill_rect(0,0,640,378,color)
                     case (@battle_anime_frame - ssframe)
@@ -40584,8 +40517,8 @@ module Scene_Db_Battle_Anime_pattern
                         sframe = 1
                         back_anime_pattern 201,back_x,back_y
 
-                        ray_x = 290
-                        ray_y = 132
+                        @ray_x = 290
+                        @ray_y = 132
 
                         case ((@battle_anime_frame - ssframe)-sframe)
                         when 30..74
@@ -40593,8 +40526,8 @@ module Scene_Db_Battle_Anime_pattern
                             battle_anime_change 0,7
                             @effect_anime_pattern = 237
                         when 75..200
-                            ray_x -= 8
-                            ray_y -= 16
+                            @ray_x -= 8
+                            @ray_y -= 16
                             @effect_anime_pattern = 235
                         end
                     when 200
@@ -40623,7 +40556,7 @@ module Scene_Db_Battle_Anime_pattern
                     #@tec_output_back = false
                     #@chr_cutin_flag = false
                     when 321..347
-                        ray_y = 132
+                        @ray_y = 132
                         @effect_anime_pattern = 297
                         if (@battle_anime_frame - ssframe) == eframe
                             @battle_anime_frame = 9998
@@ -40641,8 +40574,8 @@ module Scene_Db_Battle_Anime_pattern
        when 2901 #ダブル魔封波(ピッコロと亀仙人)
            back_x = 200
            back_y = 32
-           ray_x = 300
-           ray_y = 162
+           @ray_x = 300
+           @ray_y = 162
            wake_color = Color.new(188,188,188,256)
            color = Color.new(255,255,255,260)
 
@@ -40672,8 +40605,8 @@ module Scene_Db_Battle_Anime_pattern
                    back_x = 198
                    back_y = 32
                end
-               ray_x = 340
-               ray_y = 96
+               @ray_x = 340
+               @ray_y = 96
                case @battle_anime_frame
                when 0 #初期化
                    @back_anime_frame = 0
@@ -40695,7 +40628,7 @@ module Scene_Db_Battle_Anime_pattern
 
                    back_x -= 12*(@battle_anime_frame-140)
                    @ax = -12
-                   #ray_x -= 2*(@battle_anime_frame-140)
+                   #@ray_x -= 2*(@battle_anime_frame-140)
                    back_anime_pattern backhai_no,back_x,back_y
                    if @battle_anime_frame > 161
                        #CENTER_ENEX = 304
@@ -40878,8 +40811,8 @@ module Scene_Db_Battle_Anime_pattern
                    ssframe = 611
 
 
-                   ray_x = 242
-                   ray_y = 120
+                   @ray_x = 242
+                   @ray_y = 120
 
                    back_x = 218
                    back_y = 88
@@ -41032,8 +40965,8 @@ module Scene_Db_Battle_Anime_pattern
        when 2902 #ダブル魔封波(若者と亀仙人)
            back_x = 200
            back_y = 32
-           ray_x = 300
-           ray_y = 162
+           @ray_x = 300
+           @ray_y = 162
            wake_color = Color.new(188,188,188,256)
            color = Color.new(255,255,255,260)
 
@@ -41063,8 +40996,8 @@ module Scene_Db_Battle_Anime_pattern
                    back_x = 198
                    back_y = 32
                end
-               ray_x = 340
-               ray_y = 96
+               @ray_x = 340
+               @ray_y = 96
                case @battle_anime_frame
                when 0 #初期化
                    @back_anime_frame = 0
@@ -41086,7 +41019,7 @@ module Scene_Db_Battle_Anime_pattern
 
                    back_x -= 12*(@battle_anime_frame-140)
                    @ax = -12
-                   #ray_x -= 2*(@battle_anime_frame-140)
+                   #@ray_x -= 2*(@battle_anime_frame-140)
                    back_anime_pattern backhai_no,back_x,back_y
                    if @battle_anime_frame > 161
                        #CENTER_ENEX = 304
@@ -41271,8 +41204,8 @@ module Scene_Db_Battle_Anime_pattern
                    ssframe = 611
 
 
-                   ray_x = 242
-                   ray_y = 120
+                   @ray_x = 242
+                   @ray_y = 120
 
                    back_x = 218
                    back_y = 88
@@ -41425,8 +41358,8 @@ module Scene_Db_Battle_Anime_pattern
 
        when 2903 #スピリッツかめはめ波(悟空とバーダック)
 
-           ray_x = 340
-           ray_y = 200
+           @ray_x = 340
+           @ray_y = 200
            backhai_no = 201
            back_x = 234
            back_y = -18 + 54+ 50
@@ -41887,8 +41820,8 @@ module Scene_Db_Battle_Anime_pattern
                @back_window.contents.blt(140,-6,picture,rect)
                #@chr_cutin = true
                @effect_anime_pattern = 366
-               ray_x = 266
-               ray_y = 60
+               @ray_x = 266
+               @ray_y = 60
            when 795
                @chr_cutin = true
                @effect_anime_pattern = 0
@@ -41907,8 +41840,8 @@ module Scene_Db_Battle_Anime_pattern
        when 2907 #俺たちに不可能はない(超悟空、超ベジータ)
            back_x = 200
            back_y = 32
-           ray_x = 300
-           ray_y = 162
+           @ray_x = 300
+           @ray_y = 162
            wake_color = Color.new(188,188,188,256)
            color = Color.new(255,255,255,260)
            color2 = Color.new(255,216,160,260)
@@ -41940,8 +41873,8 @@ module Scene_Db_Battle_Anime_pattern
                    back_x = 198
                    back_y = 32
                end
-               ray_x = 340
-               ray_y = 96
+               @ray_x = 340
+               @ray_y = 96
                case @battle_anime_frame
                when 0 #初期化
                    @back_anime_frame = 0
@@ -41959,21 +41892,21 @@ module Scene_Db_Battle_Anime_pattern
 
                #back_anime_pattern backhai_no,back_x,back_y
                when 131..210
-                   ray_x = 280
-                   ray_y = 132
+                   @ray_x = 280
+                   @ray_y = 132
                    @ray_color = 0
                    @effect_anime_pattern = 237
                #back_anime_pattern backhai_no,back_x,back_y
                when 211..290
                    sframe = 211
 
-                   ray_x = 280-8
-                   ray_y = 132-8
+                   @ray_x = 280-8
+                   @ray_y = 132-8
                    @effect_anime_pattern = 235
                when 291..305
                    sframe = 291
-                   ray_x = 280-8
-                   ray_y = 132-8
+                   @ray_x = 280-8
+                   @ray_y = 132-8
                    if (@battle_anime_frame - sframe) == 0
                        @enex = 640
                        @eney = STANDARD_ENEY
@@ -42135,8 +42068,8 @@ module Scene_Db_Battle_Anime_pattern
 
                    end
 
-                   ray_x = 280-8
-                   ray_y = 132-8
+                   @ray_x = 280-8
+                   @ray_y = 132-8
 
 
                    kien_y = -16 * (@battle_anime_frame - sframe) + 300
@@ -42179,8 +42112,8 @@ module Scene_Db_Battle_Anime_pattern
                        Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
                    end
                    battle_anime_change 0,7
-                   ray_x = 358-8 + (@battle_anime_frame - sframe) * 12
-                   ray_y = 152-8
+                   @ray_x = 358-8 + (@battle_anime_frame - sframe) * 12
+                   @ray_y = 152-8
                when 561
                    @effect_anime_pattern = 0
                when 570
@@ -42199,24 +42132,24 @@ module Scene_Db_Battle_Anime_pattern
                        Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
                    end
                    @effect_anime_pattern = 235
-                   ray_x = -64 + (@battle_anime_frame - sframe) * 12
-                   ray_y = 152-8
+                   @ray_x = -64 + (@battle_anime_frame - sframe) * 12
+                   @ray_y = 152-8
 
                    if @battle_anime_frame == eframe
-                       #p ray_x
+                       #p @ray_x
                    end
                when 607..636
                    sframe = 607
-                   ray_x = 356
-                   ray_y = 152-8
+                   @ray_x = 356
+                   @ray_y = 152-8
                when 637..666
                    sframe = 637
                    if (@battle_anime_frame - sframe) == 0
                        Audio.se_stop
                        Audio.se_play("Audio/SE/" + "Z1 SE102")
                    end
-                   ray_x = 356+8
-                   ray_y = 152
+                   @ray_x = 356+8
+                   @ray_y = 152
                    @effect_anime_pattern = 237
                when 667..696
                    @effect_anime_pattern = 0
@@ -42249,8 +42182,8 @@ module Scene_Db_Battle_Anime_pattern
                        @effect_anime_frame = 0
                        @effect_anime_type = 0
                    end
-                   ray_x = CENTER_ENEX + 48
-                   ray_y = STANDARD_CHAY + 24
+                   @ray_x = CENTER_ENEX + 48
+                   @ray_y = STANDARD_CHAY + 24
 
                when 788
                    anime_pattern_init
@@ -42265,8 +42198,8 @@ module Scene_Db_Battle_Anime_pattern
             #back_x = 234
             #back_y = -18 + 54+ 50
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = 234
             back_y = -18 + 54+ 50
@@ -42339,8 +42272,8 @@ module Scene_Db_Battle_Anime_pattern
                 @back_anime_frame -= 1
 
                 back_anime_pattern 118,TEC_CENTER_CHAX,STANDARD_CHAY+50
-                ray_x = 290
-                ray_y = 132 + 50
+                @ray_x = 290
+                @ray_y = 132 + 50
 
                 case (@battle_anime_frame-sframe)
                 when 30..74
@@ -42350,8 +42283,8 @@ module Scene_Db_Battle_Anime_pattern
                     @scombo_cha2_anime_type = 7
                     @effect_anime_pattern = 237
                 when 75..200
-                    ray_x -= 8
-                    ray_y -= 16
+                    @ray_x -= 8
+                    @ray_y -= 16
                     @effect_anime_pattern = 235
                 end
             when 260..290
@@ -42414,7 +42347,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
             when 391..415
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 369
             when 416
                 anime_pattern_init
@@ -42431,11 +42364,11 @@ module Scene_Db_Battle_Anime_pattern
                 back_y = 60
             end
             if @battle_anime_frame <= 500
-                ray_x = 325
-                ray_y = 70
+                @ray_x = 325
+                @ray_y = 70
             else
-                ray_x = 340
-                ray_y = 200
+                @ray_x = 340
+                @ray_y = 200
             end
 
             wake_color = Color.new(188,188,188,256)
@@ -42599,11 +42532,11 @@ module Scene_Db_Battle_Anime_pattern
                 back_y = 60
             end
             if @battle_anime_frame <= 500
-                ray_x = 325
-                ray_y = 70
+                @ray_x = 325
+                @ray_y = 70
             else
-                ray_x = 340
-                ray_y = 200
+                @ray_x = 340
+                @ray_y = 200
             end
 
             wake_color = Color.new(188,188,188,256)
@@ -42688,14 +42621,14 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 if @battle_anime_frame >= sframe + 90
                     @effect_anime_pattern = 252
-                    ray_x = 322-16
-                    ray_y = 164-16
+                    @ray_x = 322-16
+                    @ray_y = 164-16
                     @ray_anime_type = 0 if @battle_anime_frame == sframe + 90
                 #Audio.se_play("Audio/SE/" + "Z1 気を溜める2")    # 効果音を再生する
                 elsif @battle_anime_frame >= sframe + 30
                     @effect_anime_pattern = 235
-                    ray_x = 322
-                    ray_y = 164
+                    @ray_x = 322
+                    @ray_y = 164
                     Audio.se_play("Audio/SE/" + "Z1 気を溜める2") if @battle_anime_frame == sframe + 30 # 効果音を再生する
                 end
             when 311#71
@@ -42879,8 +42812,8 @@ module Scene_Db_Battle_Anime_pattern
             idouryou = 8
             back_x = 190
             back_y = 36
-            ray_x = 346
-            ray_y = 84
+            @ray_x = 346
+            @ray_y = 84
             @ray_color = 0
             case @battle_anime_frame
 
@@ -43069,11 +43002,11 @@ module Scene_Db_Battle_Anime_pattern
                 back_y = 60
             end
             if @battle_anime_frame <= 500
-                ray_x = 325
-                ray_y = 70
+                @ray_x = 325
+                @ray_y = 70
             else
-                ray_x = 340
-                ray_y = 200
+                @ray_x = 340
+                @ray_y = 200
             end
             color = Color.new(255,255,255,260)
             wake_color = Color.new(188,188,188,256)
@@ -43282,8 +43215,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 ゴー")
             when 681..890
                 sframe = 681
-                #ray_x = 346
-                #ray_y = 136
+                #@ray_x = 346
+                #@ray_y = 136
                 back_anime_pattern 9
                 case @battle_anime_frame
                 when sframe+30..sframe+33,sframe+70..sframe+73,sframe+110..sframe+113,sframe+150..sframe+153
@@ -43340,8 +43273,8 @@ module Scene_Db_Battle_Anime_pattern
 
         when 2914 #超操気円裂斬(クリリン＆ヤムチャ)
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = TEC_CENTER_CHAX - 80 + 40
             back_y = STANDARD_CHAY - 30
@@ -43589,8 +43522,8 @@ module Scene_Db_Battle_Anime_pattern
             end
 
         when 2915 #烈戦人造人間
-            ray_x = 356
-            ray_y = 70
+            @ray_x = 356
+            @ray_y = 70
             @ray_color = 0
             idougo = 212+24
             idouryou = 8
@@ -43829,8 +43762,8 @@ module Scene_Db_Battle_Anime_pattern
             end
 
        when 2918 #ダブルポコペン
-           ray_x = 328
-           ray_y = 148
+           @ray_x = 328
+           @ray_y = 148
            @ray_color = 0
 
            case @battle_anime_frame
@@ -43903,8 +43836,8 @@ module Scene_Db_Battle_Anime_pattern
                return @battle_anime_result + 1
            end
        when 2920 #超能力きこうほう改
-           ray_x = 328
-           ray_y = 148
+           @ray_x = 328
+           @ray_y = 148
 
            color = Color.new(255,255,255,260)
            case @battle_anime_frame
@@ -43983,8 +43916,8 @@ module Scene_Db_Battle_Anime_pattern
                Audio.se_play("Audio/SE/" + "Z1 ゴー")
            when 361..561
                sframe = 361
-               #ray_x = 346
-               #ray_y = 136
+               #@ray_x = 346
+               #@ray_y = 136
                back_anime_pattern 9
                case @battle_anime_frame
                when sframe+30..sframe+33,sframe+70..sframe+73,sframe+110..sframe+113,sframe+150..sframe+153
@@ -44007,11 +43940,11 @@ module Scene_Db_Battle_Anime_pattern
                 back_y = 60
             end
             #if @battle_anime_frame <= 500
-            ray_x = 324
-            ray_y = 80
+            @ray_x = 324
+            @ray_y = 80
             #else
-            #ray_x = 340
-            #ray_y = 200
+            #@ray_x = 340
+            #@ray_y = 200
             #end
 
             color1 = Color.new(127,127,127,260)
@@ -44099,14 +44032,14 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 if @battle_anime_frame >= sframe + 90
                     @effect_anime_pattern = 252
-                    ray_x = 322-16
-                    ray_y = 164-16
+                    @ray_x = 322-16
+                    @ray_y = 164-16
                     @ray_anime_type = 0 if @battle_anime_frame == sframe + 90
                 #Audio.se_play("Audio/SE/" + "Z1 気を溜める2")    # 効果音を再生する
                 elsif @battle_anime_frame >= sframe + 30
                     @effect_anime_pattern = 235
-                    ray_x = 322
-                    ray_y = 164
+                    @ray_x = 322
+                    @ray_y = 164
                     Audio.se_play("Audio/SE/" + "Z1 気を溜める2") if @battle_anime_frame == sframe + 30 # 効果音を再生する
                 end
             when 349..549
@@ -44210,11 +44143,11 @@ module Scene_Db_Battle_Anime_pattern
                 back_y = 60
             end
             #if @battle_anime_frame <= 500
-            ray_x = 324
-            ray_y = 80
+            @ray_x = 324
+            @ray_y = 80
             #else
-            #ray_x = 340
-            #ray_y = 200
+            #@ray_x = 340
+            #@ray_y = 200
             #end
 
             color1 = Color.new(127,127,127,260)
@@ -44347,11 +44280,11 @@ module Scene_Db_Battle_Anime_pattern
                 back_y = 60
             end
             #if @battle_anime_frame <= 500
-            ray_x = 324
-            ray_y = 80
+            @ray_x = 324
+            @ray_y = 80
             #else
-            #ray_x = 340
-            #ray_y = 200
+            #@ray_x = 340
+            #@ray_y = 200
             #end
 
             color1 = Color.new(127,127,127,260)
@@ -44441,8 +44374,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 itix = 258
                 itiy = 46
-                ray_x = itix + 16
-                ray_y = itiy + 86
+                @ray_x = itix + 16
+                @ray_y = itiy + 86
                 if $game_variables[171] == 1
                     picture = Cache.picture("ZG_必殺技_超カメハメ波2(悟空_ボロボロ)")
                 elsif $game_variables[171] == 2
@@ -44510,8 +44443,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
                 back_anime_pattern 118,TEC_CENTER_CHAX + 0,STANDARD_CHAY + 50
                 @effect_anime_pattern = 372
-                ray_x = 328
-                ray_y = 84
+                @ray_x = 328
+                @ray_y = 84
             when 510 #初期化
                 @effect_anime_frame = 0
                 @effect_anime_pattern = 0
@@ -44537,11 +44470,11 @@ module Scene_Db_Battle_Anime_pattern
                 back_y = 60
             end
             #if @battle_anime_frame <= 500
-            ray_x = 324
-            ray_y = 80
+            @ray_x = 324
+            @ray_y = 80
             #else
-            #ray_x = 340
-            #ray_y = 200
+            #@ray_x = 340
+            #@ray_y = 200
             #end
 
             color1 = Color.new(127,127,127,260)
@@ -44844,14 +44777,14 @@ module Scene_Db_Battle_Anime_pattern
                     case @effect_anime_pattern
 
                     when 267,268
-                        ray_x = 228
-                        ray_y = 134-16
+                        @ray_x = 228
+                        @ray_y = 134-16
                     when 269,270
-                        ray_x = 292
-                        ray_y = 70
+                        @ray_x = 292
+                        @ray_y = 70
                     when 256
-                        ray_x = 336-32
-                        ray_y = 112
+                        @ray_x = 336-32
+                        @ray_y = 112
                     end
                 when 591..622
                     sframe = 591
@@ -44919,8 +44852,8 @@ module Scene_Db_Battle_Anime_pattern
                     end
 
                     @effect_anime_pattern = 123
-                    ray_x = 324
-                    ray_y = 158
+                    @ray_x = 324
+                    @ray_y = 158
 
                     @effect_anime_pattern = 0 if @battle_anime_frame >= (sframe + 8)
                     battle_anime_change 0,17
@@ -44950,8 +44883,8 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,16
                 when 756..779
                     @effect_anime_pattern = 123
-                    ray_x = 324
-                    ray_y = 158
+                    @ray_x = 324
+                    @ray_y = 158
 
                     @effect_anime_pattern = 0 if @battle_anime_frame >= 374
                     @enex -= 4
@@ -45180,8 +45113,8 @@ module Scene_Db_Battle_Anime_pattern
                 when 272..300
                     battle_anime_change 1,16
                     @effect_anime_pattern = 123
-                    ray_x = 346
-                    ray_y = 154
+                    @ray_x = 346
+                    @ray_y = 154
 
                     @effect_anime_pattern = 0 if @battle_anime_frame >= 220
                     @enex += 20
@@ -45225,8 +45158,8 @@ module Scene_Db_Battle_Anime_pattern
                     end
 
                     @effect_anime_pattern = 123
-                    ray_x = 324
-                    ray_y = 158
+                    @ray_x = 324
+                    @ray_y = 158
 
                     @effect_anime_pattern = 0 if @battle_anime_frame >= (sframe + 8)
                     battle_anime_change 0,17
@@ -45257,8 +45190,8 @@ module Scene_Db_Battle_Anime_pattern
                 when 426..449
                     sframe = 426
                     @effect_anime_pattern = 123
-                    ray_x = 324
-                    ray_y = 158
+                    @ray_x = 324
+                    @ray_y = 158
 
                     @effect_anime_pattern = 0 if @battle_anime_frame >= (sframe + 8)
                     @enex -= 4
@@ -45468,8 +45401,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2925 #サイコ気円裂斬(クリリン＆チャオズ)
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = TEC_CENTER_CHAX - 80 + 40
             back_y = STANDARD_CHAY - 30
@@ -45828,8 +45761,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2927 #ダブルエクスプロージョン(ベジータ＆トランクス)
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = TEC_CENTER_CHAX - 80 + 40
             back_y = STANDARD_CHAY - 30
@@ -45959,8 +45892,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2928 #ダブルエクスプロージョン(未来悟飯＆トランクス)
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = TEC_CENTER_CHAX - 80 + 40
             back_y = STANDARD_CHAY - 30
@@ -46091,8 +46024,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2929 #ダブルエクスプロージョン(ピッコロ＆トランクス)
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = TEC_CENTER_CHAX - 80 + 40
             back_y = STANDARD_CHAY - 30
@@ -46221,8 +46154,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2930 #ダブルエクスプロージョン(ピッコロ＆ベジータ)
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = TEC_CENTER_CHAX - 80 + 40
             back_y = STANDARD_CHAY - 30
@@ -46351,8 +46284,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2931 #ダブルエクスプロージョン(ベジータ＆未来悟飯)
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = TEC_CENTER_CHAX - 80 + 40
             back_y = STANDARD_CHAY - 30
@@ -46482,8 +46415,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2932 #ダブルエクスプロージョン(バーダック、ピッコロ)
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = TEC_CENTER_CHAX - 80 + 40
             back_y = STANDARD_CHAY - 30
@@ -46612,8 +46545,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2933 #ダブルエクスプロージョン(バーダック、ベジータ)
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = TEC_CENTER_CHAX - 80 + 40
             back_y = STANDARD_CHAY - 30
@@ -46743,8 +46676,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2934 #ダブルエクスプロージョン(バーダック、トランクス)
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = TEC_CENTER_CHAX - 80 + 40
             back_y = STANDARD_CHAY - 30
@@ -46874,8 +46807,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2935 #ダブルエクスプロージョン(バーダック、未来悟飯)
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
             backhai_no = 201
             back_x = TEC_CENTER_CHAX - 80 + 40
             back_y = STANDARD_CHAY - 30
@@ -47008,8 +46941,8 @@ module Scene_Db_Battle_Anime_pattern
             idouryou = 8
             back_x = 190
             back_y = 36
-            ray_x = 346
-            ray_y = 84
+            @ray_x = 346
+            @ray_y = 84
             @ray_color = 3
             case @battle_anime_frame
 
@@ -47184,8 +47117,8 @@ module Scene_Db_Battle_Anime_pattern
             idouryou = 8
             back_x = 190
             back_y = 36
-            ray_x = 346
-            ray_y = 84
+            @ray_x = 346
+            @ray_y = 84
             @ray_color = 3
             case @battle_anime_frame
 
@@ -47375,8 +47308,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2939 #親子乱舞(悟飯)
-            ray_x = 302
-            ray_y = 64
+            @ray_x = 302
+            @ray_y = 64
             @ray_color = 0
             idougo = 212+24
             idouryou = 8
@@ -47756,8 +47689,8 @@ module Scene_Db_Battle_Anime_pattern
                     @ray_color = 0
                 end
 
-                ray_x = 356
-                ray_y = 68
+                @ray_x = 356
+                @ray_y = 68
 
                 back_anime_pattern 116,idougo,STANDARD_CHAY - 64
                 @back_anime_frame -= 1
@@ -47777,8 +47710,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2940 #親子乱舞(F悟飯)
-            ray_x = 302
-            ray_y = 64
+            @ray_x = 302
+            @ray_y = 64
             @ray_color = 0
             idougo = 212+24
             idouryou = 8
@@ -48161,8 +48094,8 @@ module Scene_Db_Battle_Anime_pattern
                     @ray_color = 0
                 end
 
-                ray_x = 356
-                ray_y = 68
+                @ray_x = 356
+                @ray_y = 68
 
                 back_anime_pattern 116,idougo,STANDARD_CHAY - 64
                 @back_anime_frame -= 1
@@ -48245,8 +48178,8 @@ module Scene_Db_Battle_Anime_pattern
             when 107..140
                 sframe = 107
                 @effect_anime_pattern = 203
-                ray_x = 340 - 8
-                ray_y = 142 - 50
+                @ray_x = 340 - 8
+                @ray_y = 142 - 50
                 @ax = 2 if @battle_anime_frame == sframe
                 @ax = -2 if @battle_anime_frame == sframe + 3
                 @ax = 0 if @battle_anime_frame == sframe + 6
@@ -48302,8 +48235,8 @@ module Scene_Db_Battle_Anime_pattern
                     @scombo_cha2_anime_type = 3
                     @effect_anime_pattern = 273
                 end
-                ray_x = 138 - 16
-                ray_y = 156
+                @ray_x = 138 - 16
+                @ray_y = 156
                 @effect_anime_frame = 0
                 back_anime_pattern 118,TEC_CENTER_CHAX - 216 + 0,STANDARD_CHAY
                 @eney = STANDARD_CHAY
@@ -48315,8 +48248,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "DB3 エネルギー波2") if @battle_anime_frame == sframe
                 back_anime_pattern 118,TEC_CENTER_CHAX - 216 + 0,STANDARD_CHAY
                 @effect_anime_pattern = 273
-                ray_x = 138
-                ray_y = 156
+                @ray_x = 138
+                @ray_y = 156
             when 379
                 anime_pattern_init
                 return @battle_anime_result + 1
@@ -48420,21 +48353,21 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_type = 0
                 end
 
-                ray_x = TEC_CENTER_CHAX + 84
-                ray_y = STANDARD_CHAY - 8
+                @ray_x = TEC_CENTER_CHAX + 84
+                @ray_y = STANDARD_CHAY - 8
 
                 picture = Cache.picture("Z3_戦闘_必殺技_エネルギー波_半円")
                 rect = Rect.new(0, 0,xfra*RAY_SPEED,128)
-                @back_window.contents.blt(ray_x-20,ray_y-50,picture,rect)
+                @back_window.contents.blt(@ray_x-20,@ray_y-50,picture,rect)
 
                 picture = Cache.picture("Z3_戦闘_必殺技_エネルギー波_半円(緑)")
-                @back_window.contents.blt(ray_x-8,ray_y+50-20,picture,rect)
+                @back_window.contents.blt(@ray_x-8,@ray_y+50-20,picture,rect)
                 back_anime_pattern 118,TEC_CENTER_CHAX + 0,STANDARD_CHAY + 50
             when 441..509
                 sframe = 441
                 xfra = @battle_anime_frame - sframe
-                ray_x = 0
-                ray_y = STANDARD_CHAY - 8
+                @ray_x = 0
+                @ray_y = STANDARD_CHAY - 8
                 if @battle_anime_frame == sframe
                     @chay = -200
                 end
@@ -48445,10 +48378,10 @@ module Scene_Db_Battle_Anime_pattern
 
                 picture = Cache.picture("Z3_戦闘_必殺技_エネルギー波_半円")
                 rect = Rect.new(60, 0,xfra*RAY_SPEED,128)
-                @back_window.contents.blt(ray_x,ray_y-50,picture,rect)
+                @back_window.contents.blt(@ray_x,@ray_y-50,picture,rect)
 
                 picture = Cache.picture("Z3_戦闘_必殺技_エネルギー波_半円(緑)")
-                @back_window.contents.blt(ray_x,ray_y+50+2,picture,rect)
+                @back_window.contents.blt(@ray_x,@ray_y+50+2,picture,rect)
 
                 if @battle_anime_frame == (sframe + 20)
                     #月破壊
@@ -48467,14 +48400,14 @@ module Scene_Db_Battle_Anime_pattern
             when 511..537
                 sframe = 511
                 xfra = @battle_anime_frame - sframe
-                ray_x = -700 + xfra * RAY_SPEED
-                ray_y = STANDARD_CHAY - 8
+                @ray_x = -700 + xfra * RAY_SPEED
+                @ray_y = STANDARD_CHAY - 8
                 picture = Cache.picture("Z3_戦闘_必殺技_エネルギー波_半円")
                 rect = Rect.new(0, 128,700,128)
-                @back_window.contents.blt(ray_x,ray_y-50,picture,rect)
+                @back_window.contents.blt(@ray_x,@ray_y-50,picture,rect)
 
                 picture = Cache.picture("Z3_戦闘_必殺技_エネルギー波_半円(緑)")
-                @back_window.contents.blt(ray_x,ray_y+50+2,picture,rect)
+                @back_window.contents.blt(@ray_x,@ray_y+50+2,picture,rect)
             when 538
                 anime_pattern_init
                 return @battle_anime_result + 1
@@ -48484,8 +48417,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 16
             tcha1s = 32 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 7 #超サイヤ人のフラグNo
@@ -48584,7 +48517,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -48595,8 +48528,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 16
             tcha1s = 32 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 7 #超サイヤ人のフラグNo
@@ -48695,7 +48628,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -48706,8 +48639,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 16
             tcha1s = 32 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 7 #超サイヤ人のフラグNo
@@ -48806,7 +48739,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -48817,8 +48750,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 16
             tcha1s = 32 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 7 #超サイヤ人のフラグNo
@@ -48917,7 +48850,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -48928,8 +48861,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 27
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -49028,7 +48961,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -49039,8 +48972,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 27
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -49139,7 +49072,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -49150,8 +49083,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 27
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -49250,7 +49183,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -49261,8 +49194,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 28
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -49361,7 +49294,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -49372,8 +49305,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 28
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -49472,7 +49405,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -49483,8 +49416,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 29
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -49583,7 +49516,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -49594,8 +49527,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 4
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -49771,7 +49704,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -49782,8 +49715,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 4
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -49959,7 +49892,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -49970,8 +49903,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 4
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -50147,7 +50080,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -50158,8 +50091,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 25
             tcha1s = 26 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 6 #超サイヤ人のフラグNo
@@ -50335,7 +50268,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -50346,8 +50279,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 25
             tcha1s = 26 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 6 #超サイヤ人のフラグNo
@@ -50523,7 +50456,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -50534,8 +50467,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 25
             tcha1s = 26 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 6 #超サイヤ人のフラグNo
@@ -50711,7 +50644,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -50722,8 +50655,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 25
             tcha1s = 26 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 6 #超サイヤ人のフラグNo
@@ -50822,7 +50755,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -50833,8 +50766,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 228
             back_y = 88 - 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 4
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -50927,38 +50860,38 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 battle_anime_change 0,9
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 80 - 50
+                @ray_x = 320
+                @ray_y = 80 - 50
             when 196..210
                 sframe = 196
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 104 - 50
+                @ray_x = 320
+                @ray_y = 104 - 50
             when 211
                 #Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 160 # 効果音を再生する
                 #@effect_anime_frame = 0 if @battle_anime_frame == 160
                 battle_anime_change 0,10
             #@effect_anime_pattern = 201
-            #ray_x = 320
-            #ray_y = 140
+            #@ray_x = 320
+            #@ray_y = 140
             when 241..255
                 sframe = 241
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe # 効果音を再生する
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 battle_anime_change 0,11
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 140 - 50
+                @ray_x = 320
+                @ray_y = 140 - 50
             when 256..270
                 sframe = 256
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe # 効果音を再生する
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 #battle_anime_change 0,11
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 116 - 50
+                @ray_x = 320
+                @ray_y = 116 - 50
             when 271
                 Audio.se_stop
                 #Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
@@ -50970,38 +50903,38 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 battle_anime_change 0,9
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 80 - 50
+                @ray_x = 320
+                @ray_y = 80 - 50
             when 316..330
                 sframe = 316
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 104 - 50
+                @ray_x = 320
+                @ray_y = 104 - 50
             when 331
                 #Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 160 # 効果音を再生する
                 #@effect_anime_frame = 0 if @battle_anime_frame == 160
                 battle_anime_change 0,10
             #@effect_anime_pattern = 201
-            #ray_x = 320
-            #ray_y = 140
+            #@ray_x = 320
+            #@ray_y = 140
             when 361..375
                 sframe = 361
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe # 効果音を再生する
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 battle_anime_change 0,11
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 140 - 50
+                @ray_x = 320
+                @ray_y = 140 - 50
             when 376..390
                 sframe = 376
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe # 効果音を再生する
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 #battle_anime_change 0,11
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 116 - 50
+                @ray_x = 320
+                @ray_y = 116 - 50
 
             when 420
                 @chay = -200
@@ -51341,8 +51274,8 @@ module Scene_Db_Battle_Anime_pattern
                 #@back_window.contents.fill_rect(0,0,640,378,color) if @battle_anime_frame >= 200-14
                 @chay = STANDARD_CHAY
                 #@back_window.contents.fill_rect(0,0,640,378,color) if @battle_anime_frame >= 200-10
-                ray_x = 334
-                ray_y = 128
+                @ray_x = 334
+                @ray_y = 128
                 if @battle_anime_frame == (sframe + 10)
                     battle_anime_change 0,9
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波3")
@@ -51361,7 +51294,7 @@ module Scene_Db_Battle_Anime_pattern
 
             #@chr_cutin = true
             when 1122..1147
-                ray_y = 134
+                @ray_y = 134
                 @effect_anime_pattern = 255
             when 1148
                 anime_pattern_init
@@ -51373,8 +51306,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 228
             back_y = 88 - 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 4
             tcha1s = 0 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 0 #超サイヤ人のフラグNo
@@ -51464,38 +51397,38 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 battle_anime_change 0,9
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 80 - 50
+                @ray_x = 320
+                @ray_y = 80 - 50
             when 196..210
                 sframe = 196
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 104 - 50
+                @ray_x = 320
+                @ray_y = 104 - 50
             when 211
                 #Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 160 # 効果音を再生する
                 #@effect_anime_frame = 0 if @battle_anime_frame == 160
                 battle_anime_change 0,10
             #@effect_anime_pattern = 201
-            #ray_x = 320
-            #ray_y = 140
+            #@ray_x = 320
+            #@ray_y = 140
             when 241..255
                 sframe = 241
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe # 効果音を再生する
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 battle_anime_change 0,11
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 140 - 50
+                @ray_x = 320
+                @ray_y = 140 - 50
             when 256..270
                 sframe = 256
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe # 効果音を再生する
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 #battle_anime_change 0,11
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 116 - 50
+                @ray_x = 320
+                @ray_y = 116 - 50
             when 271
                 Audio.se_stop
                 #Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
@@ -51507,38 +51440,38 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 battle_anime_change 0,9
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 80 - 50
+                @ray_x = 320
+                @ray_y = 80 - 50
             when 316..330
                 sframe = 316
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 104 - 50
+                @ray_x = 320
+                @ray_y = 104 - 50
             when 331
                 #Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 160 # 効果音を再生する
                 #@effect_anime_frame = 0 if @battle_anime_frame == 160
                 battle_anime_change 0,10
             #@effect_anime_pattern = 201
-            #ray_x = 320
-            #ray_y = 140
+            #@ray_x = 320
+            #@ray_y = 140
             when 361..375
                 sframe = 361
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe # 効果音を再生する
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 battle_anime_change 0,11
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 140 - 50
+                @ray_x = 320
+                @ray_y = 140 - 50
             when 376..390
                 sframe = 376
                 Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe # 効果音を再生する
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 #battle_anime_change 0,11
                 @effect_anime_pattern = 201
-                ray_x = 320
-                ray_y = 116 - 50
+                @ray_x = 320
+                @ray_y = 116 - 50
 
             when 420
                 @chax = -140
@@ -51924,8 +51857,8 @@ module Scene_Db_Battle_Anime_pattern
             end
 
         when 2963 #オメエもピッコロとおなじけ！(チチ&若者)
-            ray_x = 340-160
-            ray_y = 96
+            @ray_x = 340-160
+            @ray_y = 96
             cha2no = 15
             if $btl_progress == 2
                 backhai_no = 201
@@ -52121,8 +52054,8 @@ module Scene_Db_Battle_Anime_pattern
             end
 
         when 2965 #悟空さに近寄るでねえ！(チチ&18号)
-            ray_x = 340-160
-            ray_y = 96
+            @ray_x = 340-160
+            @ray_y = 96
             cha2no = 21
             if $btl_progress == 2
                 backhai_no = 201
@@ -52317,8 +52250,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2966 #悟空さに近寄るでねえ！(チチ&17号)
-            ray_x = 340-160
-            ray_y = 96
+            @ray_x = 340-160
+            @ray_y = 96
             cha2no = 22
             if $btl_progress == 2
                 backhai_no = 201
@@ -52513,8 +52446,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2967 #悟空さに近寄るでねえ！(チチ&16号)
-            ray_x = 340-160
-            ray_y = 96
+            @ray_x = 340-160
+            @ray_y = 96
             cha2no = 23
             if $btl_progress == 2
                 backhai_no = 201
@@ -52717,10 +52650,10 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 3
             back_x = 176
             back_y = 88
-            ray_x = 356
-            ray_y = 112
-            #ray_x = 326
-            #ray_y = 124
+            @ray_x = 356
+            @ray_y = 112
+            #@ray_x = 326
+            #@ray_y = 124
             color = Color.new(255,255,255,260)
             if @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] == 14
                 #@btl_ani_cha_chg_no = 3
@@ -52822,8 +52755,8 @@ module Scene_Db_Battle_Anime_pattern
                     sframe = 421
                     @ray_color = 3
                     back_anime_pattern backhai_no,back_x,back_y
-                    ray_x = 284 - (TEC_CENTER_CHAX-(-96 + 16 * 25 - 8 * 12))
-                    ray_y = 160
+                    @ray_x = 284 - (TEC_CENTER_CHAX-(-96 + 16 * 25 - 8 * 12))
+                    @ray_y = 160
                     @ray_color = 0
                     @effect_anime_pattern = 237
                     Audio.se_play("Audio/SE/" + "Z1 気を溜める2") if @battle_anime_frame == sframe + 80
@@ -52831,8 +52764,8 @@ module Scene_Db_Battle_Anime_pattern
                     sframe = 541
                     eframe = 620
                     @ray_color = 0
-                    ray_x = 284-8 - (TEC_CENTER_CHAX-(-96 + 16 * 25 - 8 * 12))
-                    ray_y = 160-8
+                    @ray_x = 284-8 - (TEC_CENTER_CHAX-(-96 + 16 * 25 - 8 * 12))
+                    @ray_y = 160-8
                     @effect_anime_pattern = 235
                     @effect_anime_pattern = 0 if @battle_anime_frame == eframe
                 when 621..680
@@ -52862,8 +52795,8 @@ module Scene_Db_Battle_Anime_pattern
                     end
                 when 751..810
                     sframe = 751
-                    ray_x = 284-8-48
-                    ray_y = 160-8
+                    @ray_x = 284-8-48
+                    @ray_y = 160-8
                     @ray_color = 0
                     @effect_anime_pattern = 235
                     Audio.se_play("Audio/SE/" + "Z1 気を溜める2") if @battle_anime_frame == sframe
@@ -52879,8 +52812,8 @@ module Scene_Db_Battle_Anime_pattern
                     itix = 258
                     itiy = 46
                     @ray_color = 0
-                    ray_x = itix + 16
-                    ray_y = itiy + 86
+                    @ray_x = itix + 16
+                    @ray_y = itiy + 86
                     if $game_variables[171] == 1
                         picture = Cache.picture("ZG_必殺技_超カメハメ波2(悟空_ボロボロ)")
                     elsif $game_variables[171] == 2
@@ -52899,8 +52832,8 @@ module Scene_Db_Battle_Anime_pattern
 
                     itix = 258
                     itiy = 46
-                    ray_x = itix + 16
-                    ray_y = itiy + 86
+                    @ray_x = itix + 16
+                    @ray_y = itiy + 86
                     @effect_anime_pattern = 0
                     Audio.se_stop if @battle_anime_frame == sframe
                     Audio.se_play("Audio/SE/" + "ZG SE040") if @battle_anime_frame == sframe
@@ -52933,8 +52866,8 @@ module Scene_Db_Battle_Anime_pattern
                 when 991..1090
                     sframe = 991
                     @eney = -200
-                    ray_x = 308
-                    ray_y = 96
+                    @ray_x = 308
+                    @ray_y = 96
                     @ray_color = 0
                     Audio.se_stop if @battle_anime_frame == sframe
                     Audio.se_play("Audio/SE/" + "ZG 光線1") if @battle_anime_frame == sframe
@@ -52964,10 +52897,10 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 3
             back_x = 176
             back_y = 88
-            ray_x = 356
-            ray_y = 112
-            #ray_x = 326
-            #ray_y = 124
+            @ray_x = 356
+            @ray_y = 112
+            #@ray_x = 326
+            #@ray_y = 124
             color = Color.new(255,255,255,260)
             if @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] == 32
                 #@btl_ani_cha_chg_no = 3
@@ -53307,8 +53240,8 @@ module Scene_Db_Battle_Anime_pattern
                     end
                     rect = Rect.new(0, 26,274,228)
                     @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
-                    ray_x = 202
-                    ray_y = 236
+                    @ray_x = 202
+                    @ray_y = 236
                     @effect_anime_pattern = 235
                 when 621..680
                     if $game_variables[175] == 0 #バーダックの衣装
@@ -53318,8 +53251,8 @@ module Scene_Db_Battle_Anime_pattern
                     end
                     rect = Rect.new(0, 26,274,228)
                     @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
-                    ray_x = 202
-                    ray_y = 236
+                    @ray_x = 202
+                    @ray_y = 236
                     @effect_anime_pattern = 235
                 when 681..740
                     eframe = 740
@@ -53331,21 +53264,21 @@ module Scene_Db_Battle_Anime_pattern
                     rect = Rect.new(0, 26,274,228)
                     @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
                     @chr_cutin = true if @battle_anime_frame == eframe
-                    ray_x = 186
-                    ray_y = 220
+                    @ray_x = 186
+                    @ray_y = 220
                     @effect_anime_pattern = 289
                 when 741..790
                     @chax = TEC_CENTER_CHAX
 
-                    ray_x = 276
-                    ray_y = 140
+                    @ray_x = 276
+                    @ray_y = 140
                     battle_anime_change 0,6
                     @effect_anime_pattern = 235
                 when 791
                     Audio.se_stop
                     battle_anime_change 0,2
-                    ray_x = -360
-                    ray_y = -96
+                    @ray_x = -360
+                    @ray_y = -96
                 when 792
                     #@ray_color = 0
                     Audio.se_stop
@@ -53354,18 +53287,18 @@ module Scene_Db_Battle_Anime_pattern
                     #battle_anime_change 0,1
                     @effect_anime_pattern = 206
                     @effect_anime_frame = 0
-                    ray_x = -360
-                    ray_y = -96
+                    @ray_x = -360
+                    @ray_y = -96
                 #back_anime_pattern 101,back_x,back_y
 
                 when 793..830
                     #back_anime_pattern 101,back_x,back_y
                     @effect_anime_pattern = 206
-                    ray_x = 360
+                    @ray_x = 360
                     if $btl_progress >= 2
-                        ray_y = 96
+                        @ray_y = 96
                     else
-                        ray_y = 92
+                        @ray_y = 92
                     end
                 when 831
                     #battle_anime_change 0,1
@@ -53393,10 +53326,10 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 3
             back_x = 176
             back_y = 88
-            ray_x = 356
-            ray_y = 112
-            #ray_x = 326
-            #ray_y = 124
+            @ray_x = 356
+            @ray_y = 112
+            #@ray_x = 326
+            #@ray_y = 124
             color = Color.new(255,255,255,260)
             if @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] == 32
                 #@btl_ani_cha_chg_no = 3
@@ -53465,11 +53398,11 @@ module Scene_Db_Battle_Anime_pattern
                     picture = Cache.picture("DB3_亀仙人カメハメは")
                     rect = Rect.new(2*64, 0, 64, 96)
                     @back_window.contents.blt(CENTER_CHAX+48,STANDARD_CHAY-0,picture,rect)
-                    ray_x = 242
-                    ray_y = 120
+                    @ray_x = 242
+                    @ray_y = 120
                 when 242..279
-                    ray_x = 242
-                    ray_y = 120
+                    @ray_x = 242
+                    @ray_y = 120
                     @ray_color = 0
                     picture = Cache.picture("DB3_亀仙人カメハメは")
                     rect = Rect.new(2*64, 0, 64, 96)
@@ -53491,8 +53424,8 @@ module Scene_Db_Battle_Anime_pattern
                         @effect_anime_pattern = 256
                     end
 
-                    ray_x = 308 + 22
-                    ray_y = 96 + 16
+                    @ray_x = 308 + 22
+                    @ray_y = 96 + 16
                     @ray_color = 0
 
                     #味方の行動
@@ -53543,8 +53476,8 @@ module Scene_Db_Battle_Anime_pattern
                         @effect_anime_pattern =238
                     end
 
-                    ray_x = -100 + xframe * 24
-                    ray_y = STANDARD_CHAY + 50 - xframe * 2
+                    @ray_x = -100 + xframe * 24
+                    @ray_y = STANDARD_CHAY + 50 - xframe * 2
 
                     case @battle_anime_frame - sframe
 
@@ -53809,8 +53742,8 @@ module Scene_Db_Battle_Anime_pattern
                     end
                     rect = Rect.new(0, 26,274,228)
                     @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
-                    ray_x = 202
-                    ray_y = 236
+                    @ray_x = 202
+                    @ray_y = 236
                     @effect_anime_pattern = 235
                 when 751..810
                     if $game_variables[175] == 0 #バーダックの衣装
@@ -53820,8 +53753,8 @@ module Scene_Db_Battle_Anime_pattern
                     end
                     rect = Rect.new(0, 26,274,228)
                     @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
-                    ray_x = 202
-                    ray_y = 236
+                    @ray_x = 202
+                    @ray_y = 236
                     @effect_anime_pattern = 235
                 when 811..870
                     eframe = 870
@@ -53833,21 +53766,21 @@ module Scene_Db_Battle_Anime_pattern
                     rect = Rect.new(0, 26,274,228)
                     @back_window.contents.blt(barcut_x,barcut_y,picture,rect)
                     @chr_cutin = true if @battle_anime_frame == eframe
-                    ray_x = 186
-                    ray_y = 220
+                    @ray_x = 186
+                    @ray_y = 220
                     @effect_anime_pattern = 289
                 when 871..920
                     @chax = TEC_CENTER_CHAX
 
-                    ray_x = 276
-                    ray_y = 140
+                    @ray_x = 276
+                    @ray_y = 140
                     battle_anime_change 0,6
                     @effect_anime_pattern = 235
                 when 921
                     Audio.se_stop
                     battle_anime_change 0,2
-                    ray_x = -360
-                    ray_y = -96
+                    @ray_x = -360
+                    @ray_y = -96
                 when 922
                     #@ray_color = 0
                     Audio.se_stop
@@ -53856,18 +53789,18 @@ module Scene_Db_Battle_Anime_pattern
                     #battle_anime_change 0,1
                     @effect_anime_pattern = 206
                     @effect_anime_frame = 0
-                    ray_x = -360
-                    ray_y = -96
+                    @ray_x = -360
+                    @ray_y = -96
                 #back_anime_pattern 101,back_x,back_y
 
                 when 923..960
                     #back_anime_pattern 101,back_x,back_y
                     @effect_anime_pattern = 206
-                    ray_x = 360
+                    @ray_x = 360
                     if $btl_progress >= 2
-                        ray_y = 96
+                        @ray_y = 96
                     else
-                        ray_y = 92
+                        @ray_y = 92
                     end
                 when 961
                     #battle_anime_change 0,1
@@ -53891,8 +53824,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 25
             tcha1s = 26 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 6 #超サイヤ人のフラグNo
@@ -53991,7 +53924,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -54002,8 +53935,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 25
             tcha1s = 26 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 6 #超サイヤ人のフラグNo
@@ -54102,7 +54035,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -54113,8 +54046,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 25
             tcha1s = 26 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 6 #超サイヤ人のフラグNo
@@ -54213,7 +54146,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -54224,8 +54157,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 234
             back_y = -18 + 54+ 50
 
-            ray_x = 342
-            ray_y = 68
+            @ray_x = 342
+            @ray_y = 68
             tcha1 = 25
             tcha1s = 26 #超サイヤ人のときのキャラNo
             tcha1s_flagno = 6 #超サイヤ人のフラグNo
@@ -54324,7 +54257,7 @@ module Scene_Db_Battle_Anime_pattern
             when 280
                 set_chr_display_out
             when 281..305
-                ray_y = 110
+                @ray_y = 110
                 @effect_anime_pattern = 48
             when 306
                 anime_pattern_init
@@ -54337,8 +54270,8 @@ module Scene_Db_Battle_Anime_pattern
 
             backhai_no = 201
 
-            ray_x = 340
-            ray_y = 200
+            @ray_x = 340
+            @ray_y = 200
 
             if @btl_ani_tokusyu_flag == false && $partyc[@chanum.to_i] != 3
                 #@btl_ani_cha_chg_no = 5
@@ -54471,7 +54404,7 @@ module Scene_Db_Battle_Anime_pattern
                      @enex = CENTER_ENEX
                      battle_anime_change 1,0
                  when 374..398#281..305
-                     ray_y = 110
+                     @ray_y = 110
                      @ray_color = 0
                      @effect_anime_pattern = 48
                  when 399..420
@@ -54560,8 +54493,8 @@ module Scene_Db_Battle_Anime_pattern
             color1 = Color.new(127,127,127,260)
             color2 = Color.new(188,188,188,260)
             color3 = Color.new(255,255,255,260)
-            ray_x = 230
-            ray_y = 118
+            @ray_x = 230
+            @ray_y = 118
 
             backhai_no = 201
             back_x = 228
@@ -54701,12 +54634,12 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,17
                 back_anime_pattern backhai_no,back_x,back_y
                 @effect_anime_pattern = 237 if @battle_anime_frame == sframe
-                ray_x = 276 if @battle_anime_frame < sframe + 90
-                ray_y = 164 if @battle_anime_frame < sframe + 90
+                @ray_x = 276 if @battle_anime_frame < sframe + 90
+                @ray_y = 164 if @battle_anime_frame < sframe + 90
 
                 @effect_anime_pattern = 235 if @battle_anime_frame == sframe + 90
-                ray_x = 268 if @battle_anime_frame >= sframe + 90
-                ray_y = 156 if @battle_anime_frame >= sframe + 90
+                @ray_x = 268 if @battle_anime_frame >= sframe + 90
+                @ray_y = 156 if @battle_anime_frame >= sframe + 90
             when 631..728
                 @ray_color = 0
                 sframe = 631
@@ -54755,8 +54688,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2979 #スーパーどどはめは
-            ray_x = 348
-            ray_y = 70
+            @ray_x = 348
+            @ray_y = 70
             @ray_color = 0
             idougo = 212+24
             idouryou = 8
@@ -54891,253 +54824,253 @@ module Scene_Db_Battle_Anime_pattern
                 case $partyc[@chanum]
 
                 when 21 # 18号
-                    ray_x = 338
-                    ray_y = 140
+                    @ray_x = 338
+                    @ray_y = 140
                 when 22 # 17号
-                    ray_x = 344
-                    ray_y = 136
+                    @ray_x = 344
+                    @ray_y = 136
                 when 23 # 16号
-                    ray_x = 358
-                    ray_y = 138
+                    @ray_x = 358
+                    @ray_y = 138
                 when 27 # トーマ
-                    ray_x = 352
-                    ray_y = 136
+                    @ray_x = 352
+                    @ray_y = 136
                     if $cha_bigsize_on[@chanum] == true
-                        ray_x = 310
-                        ray_y = 112
+                        @ray_x = 310
+                        @ray_y = 112
                     end
                 when 28 # セリパ
-                    ray_x = 340
-                    ray_y = 138
+                    @ray_x = 340
+                    @ray_y = 138
                     if $cha_bigsize_on[@chanum] == true
-                        ray_x = 304
-                        ray_y = 102
+                        @ray_x = 304
+                        @ray_y = 102
                     end
                 when 29 # トテッポ
-                    ray_x = 358
-                    ray_y = 124
+                    @ray_x = 358
+                    @ray_y = 124
                     if $cha_bigsize_on[@chanum] == true
-                        ray_x = 310
-                        ray_y = 112
+                        @ray_x = 310
+                        @ray_y = 112
                     end
                 when 30 # パンブーキン
-                    ray_x = 346
-                    ray_y = 134
+                    @ray_x = 346
+                    @ray_y = 134
                     if $cha_bigsize_on[@chanum] == true
-                        ray_x = 304
-                        ray_y = 98
+                        @ray_x = 304
+                        @ray_y = 98
                     end
                 else
-                    ray_x = 328
-                    ray_y = 148
+                    @ray_x = 328
+                    @ray_y = 148
                 end
 
 
             else
                 case @enedatenum #敵キャラによって光線の位置を変える
                 when 65,217 #アモンド系
-                    ray_x = 328
-                    ray_y = 142
+                    @ray_x = 328
+                    @ray_y = 142
                 when 66,218 #ダイーズ系
-                    ray_x = 320
-                    ray_y = 140
+                    @ray_x = 320
+                    @ray_y = 140
                 when 67,219 #カカオ系
-                    ray_x = 314
-                    ray_y = 138
+                    @ray_x = 314
+                    @ray_y = 138
                 when 68,220 #レズン系
-                    ray_x = 340
-                    ray_y = 162
+                    @ray_x = 340
+                    @ray_y = 162
                     enerugi_anime_no = 2
                 when 69,221 #ラカセイ系
-                    ray_x = 340
-                    ray_y = 162
+                    @ray_x = 340
+                    @ray_y = 162
                 when 72,224 #アンギラ系
-                    ray_x = 324
-                    ray_y = 142
+                    @ray_x = 324
+                    @ray_y = 142
                 when 73,225 #ドロダボ系
-                    ray_x = 308
-                    ray_y = 142
+                    @ray_x = 308
+                    @ray_y = 142
                 when 74,226 #メダマッチャ系
-                    ray_x = 326
-                    ray_y = 154
+                    @ray_x = 326
+                    @ray_y = 154
                 when 75,227 #ゼエウン系
-                    ray_x = 310
-                    ray_y = 140
+                    @ray_x = 310
+                    @ray_y = 140
                 when 76,228 #スラッグ軍兵士系
-                    ray_x = 314
-                    ray_y = 154
+                    @ray_x = 314
+                    @ray_y = 154
                 when 101,102,117..119,170,230,240,243,260 #フリーザ系、サウザー系
-                    ray_x = 314
-                    ray_y = 156
+                    @ray_x = 314
+                    @ray_y = 156
                 when 103..105,131,109,110,133 #エイル系、メーイ系
-                    ray_x = 308
-                    ray_y = 146
+                    @ray_x = 308
+                    @ray_y = 146
                 when 111..113,114..116,231,232,241,242 #ネイズドーレ系
-                    ray_x = 310
-                    ray_y = 142
+                    @ray_x = 310
+                    @ray_y = 142
                 when 106..108,132 #ピラール系
-                    ray_x = 314
-                    ray_y = 144
+                    @ray_x = 314
+                    @ray_y = 144
                 when 120,123,169,234,239,265 #クウラ系 19号
-                    ray_x = 320
-                    ray_y = 146
+                    @ray_x = 320
+                    @ray_y = 146
                 when 121,261 #クウラ最終形態
-                    ray_x = 306
-                    ray_y = 142
+                    @ray_x = 306
+                    @ray_y = 142
                 when 122,262 #20号
-                    ray_x = 328
-                    ray_y = 140
+                    @ray_x = 328
+                    @ray_y = 140
                 when 125,236 #17号
-                    ray_x = 324
-                    ray_y = 144
+                    @ray_x = 324
+                    @ray_y = 144
                 when 126,127,128,237,264,268 #16号、セル1、セル２
-                    ray_x = 306
-                    ray_y = 144
+                    @ray_x = 306
+                    @ray_y = 144
                 when 129,135,269 #セル完全体
-                    ray_x = 314
-                    ray_y = 134
+                    @ray_x = 314
+                    @ray_y = 134
                 when 130 #セルジュニア
-                    ray_x = 344
-                    ray_y = 158
+                    @ray_x = 344
+                    @ray_y = 158
                 when 138 #13号
-                    ray_x = 320
-                    ray_y = 136
+                    @ray_x = 320
+                    @ray_y = 136
                 when 139,267 #13号合体
-                    ray_x = 310
-                    ray_y = 136
+                    @ray_x = 310
+                    @ray_y = 136
                 when 140 #14号
-                    ray_x = 308
-                    ray_y = 136
+                    @ray_x = 308
+                    @ray_y = 136
                 when 141 #15号
-                    ray_x = 344
-                    ray_y = 160
+                    @ray_x = 344
+                    @ray_y = 160
                 when 142 #ボージャック
-                    ray_x = 310
-                    ray_y = 136
+                    @ray_x = 310
+                    @ray_y = 136
                 when 143 #ボージャックフルパワー
-                    ray_x = 310
-                    ray_y = 136
+                    @ray_x = 310
+                    @ray_y = 136
                 when 144 #ゴクア
-                    ray_x = 312
-                    ray_y = 138
+                    @ray_x = 312
+                    @ray_y = 138
                 when 145 #ザンギャ
-                    ray_x = 342
-                    ray_y = 142
+                    @ray_x = 342
+                    @ray_y = 142
                 when 146 #ビドー
-                    ray_x = 312
-                    ray_y = 142
+                    @ray_x = 312
+                    @ray_y = 142
                 when 147 #ブージン
-                    ray_x = 342
-                    ray_y = 160
+                    @ray_x = 342
+                    @ray_y = 160
                 when 148 #戦闘員
-                    ray_x = 312
-                    ray_y = 154
+                    @ray_x = 312
+                    @ray_y = 154
                 when 151 #ブロリー(超)
-                    ray_x = 308
-                    ray_y = 142
+                    @ray_x = 308
+                    @ray_y = 142
                 when 152,270 #ブロリー(フルパワー)
-                    ray_x = 308
-                    ray_y = 126
+                    @ray_x = 308
+                    @ray_y = 126
                 when 154,275 #オゾット
-                    ray_x = 308
-                    ray_y = 134
+                    @ray_x = 308
+                    @ray_y = 134
                 when 155..158 #キンカーン系
-                    ray_x = 308
-                    ray_y = 148
+                    @ray_x = 308
+                    @ray_y = 148
                 when 159..161 #アービー系
-                    ray_x = 312
-                    ray_y = 144
+                    @ray_x = 312
+                    @ray_y = 144
                 when 162..164 #グーレ系
-                    ray_x = 312
-                    ray_y = 144
+                    @ray_x = 312
+                    @ray_y = 144
                 when 165..166,233 #ターレス系
-                    ray_x = 312
-                    ray_y = 144
+                    @ray_x = 312
+                    @ray_y = 144
                 when 167..168,255 #スラッグ系
-                    ray_x = 308
-                    ray_y = 138
+                    @ray_x = 308
+                    @ray_y = 138
                 when 171 #ゴッドゴーガン
-                    ray_x = 308
-                    ray_y = 130
+                    @ray_x = 308
+                    @ray_y = 130
                 when 172,273 #ゴーストライチー
-                    ray_x = 326
-                    ray_y = 144
+                    @ray_x = 326
+                    @ray_y = 144
                 when 173,274 #ハッチヒャック
-                    ray_x = 314
-                    ray_y = 138
+                    @ray_x = 314
+                    @ray_y = 138
                 when 177 #ガッシュ
-                    ray_x = 310
-                    ray_y = 142
+                    @ray_x = 310
+                    @ray_y = 142
                 when 178 #タード
-                    ray_x = 318
-                    ray_y = 144
+                    @ray_x = 318
+                    @ray_y = 144
                 when 179 #ビネガー
-                    ray_x = 310
-                    ray_y = 142
+                    @ray_x = 310
+                    @ray_y = 142
                 when 180 #ゾルド
-                    ray_x = 340
-                    ray_y = 160
+                    @ray_x = 340
+                    @ray_y = 160
                 when 189,190,246 #キュイ系
-                    ray_x = 324
-                    ray_y = 140
+                    @ray_x = 324
+                    @ray_y = 140
                 when 191,192,245 #ザーボン変身系
-                    ray_x = 328
-                    ray_y = 142
+                    @ray_x = 328
+                    @ray_y = 142
                 when 193,194 #アプール系
-                    ray_x = 314
-                    ray_y = 142
+                    @ray_x = 314
+                    @ray_y = 142
                 when 195,196,244 #ドドリア系
-                    ray_x = 326
-                    ray_y = 154
+                    @ray_x = 326
+                    @ray_y = 154
                 when 197,198,251 #グルド系
-                    ray_x = 340
-                    ray_y = 162
+                    @ray_x = 340
+                    @ray_y = 162
                 when 199,200,250 #リクーム系
-                    ray_x = 320
-                    ray_y = 138
+                    @ray_x = 320
+                    @ray_y = 138
                     enerugi_anime_no = 2
                 when 201,202,249 #バータ系
-                    ray_x = 308
-                    ray_y = 142
+                    @ray_x = 308
+                    @ray_y = 142
                 when 203,204,248 #ジース系
-                    ray_x = 322
-                    ray_y = 142
+                    @ray_x = 322
+                    @ray_y = 142
                 when 205,206,247 #ギニュー系
-                    ray_x = 316
-                    ray_y = 142
+                    @ray_x = 316
+                    @ray_y = 142
                 when 213 #ロボット兵
-                    ray_x = 308
-                    ray_y = 132
+                    @ray_x = 308
+                    @ray_y = 132
                 when 215,277 #パイクーハン
-                    ray_x = 316
-                    ray_y = 142
+                    @ray_x = 316
+                    @ray_y = 142
                 when 216 #タオパイパイ
-                    ray_x = 328
-                    ray_y = 146
+                    @ray_x = 328
+                    @ray_y = 146
                 when 70,222 #ターレス大猿
-                    ray_x = 316
-                    ray_y = 124
+                    @ray_x = 316
+                    @ray_y = 124
                     ray_big = true
                 when 71,223,259 #スラッグ巨大化
-                    ray_x = 260
-                    ray_y = 120
+                    @ray_x = 260
+                    @ray_y = 120
                     ray_big = true
                     ray_color = 1
                 when 238,252,272 #チルド系
-                    ray_x = 314
-                    ray_y = 144
+                    @ray_x = 314
+                    @ray_y = 144
                 when 253,276 #オゾット変身
-                    ray_x = 282
-                    ray_y = 152
+                    @ray_x = 282
+                    @ray_y = 152
                 when 254,278 #ブウ
-                    ray_x = 326
-                    ray_y = 142
+                    @ray_x = 326
+                    @ray_y = 142
                 when 279 #フルパワーフリーザ
-                    ray_x = 320
-                    ray_y = 146
+                    @ray_x = 320
+                    @ray_y = 146
                 else
-                    ray_x = 328
-                    ray_y = 148
+                    @ray_x = 328
+                    @ray_y = 148
                 end
             end
             if @battle_anime_frame == 0 #初期化
@@ -55162,7 +55095,7 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 228
                 @effect_anime_pattern = 234 if $cha_bigsize_on[@chanum] == true && @attackDir == 0 || ray_big == true
-                ray_y = 136
+                @ray_y = 136
             elsif @battle_anime_frame == 76
                 anime_pattern_init
                 return @battle_anime_result + 1
@@ -55170,8 +55103,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2492 #超能力
             back_x = 228
             back_y = 88
-            ray_x = 325
-            ray_y = 138
+            @ray_x = 325
+            @ray_y = 138
             if @all_attack_count == 1
                 case @battle_anime_frame
                 when 0 #初期化
@@ -55219,8 +55152,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2493 #フリーザカッター
             back_x = 228
             back_y = 88
-            ray_x = 326
-            ray_y = 196
+            @ray_x = 326
+            @ray_y = 196
 
             case @battle_anime_frame
             when 0 #初期化
@@ -55359,13 +55292,13 @@ module Scene_Db_Battle_Anime_pattern
              if @attackDir == 0
                  back_x = 228
                  back_y = 88
-                 ray_x = 304
-                 ray_y = 138
+                 @ray_x = 304
+                 @ray_y = 138
              else
                  back_x = 228
                  back_y = 88
-                 ray_x = 180
-                 ray_y = 138
+                 @ray_x = 180
+                 @ray_y = 138
              end
              @ray_color = 3
              if @all_attack_count == 1
@@ -55393,7 +55326,7 @@ module Scene_Db_Battle_Anime_pattern
                      @effect_anime_pattern = 201
 
                      if @battle_anime_frame <= hatudoukaisi + hatudougofra*1
-                         ray_y = 138
+                         @ray_y = 138
                          if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*0
                              @ax = -2
                          elsif @battle_anime_frame <= hatudoukaisi+5 + hatudougofra*0
@@ -55408,7 +55341,7 @@ module Scene_Db_Battle_Anime_pattern
                          battle_anime_change 0,1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1
                          @effect_anime_frame = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1 && @enedatenum == 172 && @attackDir == 1
                          battle_anime_change 0,1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1 && @enedatenum == 172 && @attackDir == 1
-                         ray_y = 78
+                         @ray_y = 78
                          if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*1
                              @ax = -2
                          elsif @battle_anime_frame <= hatudoukaisi+5 + hatudougofra*1
@@ -55430,7 +55363,7 @@ module Scene_Db_Battle_Anime_pattern
                          end
                          @effect_anime_frame = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2 && @enedatenum == 172 && @attackDir == 1
                          battle_anime_change 0,10 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2 && @enedatenum == 172 && @attackDir == 1
-                         ray_y = 138
+                         @ray_y = 138
                          if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*2
                              @ax = -2
                          elsif @battle_anime_frame <= hatudoukaisi+5 + hatudougofra*2
@@ -55444,7 +55377,7 @@ module Scene_Db_Battle_Anime_pattern
                          @effect_anime_frame = 0 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*3
                          @output_anime_type = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*3
                          battle_anime_change 0,1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*3
-                         ray_y = 98
+                         @ray_y = 98
                          if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*3
                              @ax = -2
                          elsif @battle_anime_frame <= hatudoukaisi+5 + hatudougofra*3
@@ -55493,14 +55426,14 @@ module Scene_Db_Battle_Anime_pattern
             case @enedatenum
 
             when 238,252 #チルド
-                ray_x = 262
-                ray_y = 64
+                @ray_x = 262
+                @ray_y = 64
             when 120,239 #クウラ
-                ray_x = 250
-                ray_y = 10
+                @ray_x = 250
+                @ray_y = 10
             else
-                ray_x = 242
-                ray_y = 20
+                @ray_x = 242
+                @ray_y = 20
             end
 
             case @battle_anime_frame
@@ -55531,8 +55464,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,6 if @enedatenum == 238 || @enedatenum == 252
                 @tec_output_back_no = 0 if @battle_anime_frame == 131
                 Audio.se_play("Audio/SE/" + "Z1 繰気弾") if @battle_anime_frame == 131
-                ray_x -= 12*(@battle_anime_frame - 131)
-                ray_y += 2*(@battle_anime_frame - 131)
+                @ray_x -= 12*(@battle_anime_frame - 131)
+                @ray_y += 2*(@battle_anime_frame - 131)
             when 171
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -55656,44 +55589,44 @@ module Scene_Db_Battle_Anime_pattern
                 case $partyc[@chanum]
 
                 when 21,22
-                    ray_x = 300
-                    ray_y = 120
+                    @ray_x = 300
+                    @ray_y = 120
 
                 when 23
-                    ray_x = 324
-                    ray_y = 120
+                    @ray_x = 324
+                    @ray_y = 120
                 when 27
-                    ray_x = 318
-                    ray_y = 122
+                    @ray_x = 318
+                    @ray_y = 122
 
                     if $cha_bigsize_on[@chanum] == true
                         ray_big = false
-                        ray_x = 316
-                        ray_y = 98
+                        @ray_x = 316
+                        @ray_y = 98
                     end
                 when 28
-                    ray_x = 306
-                    ray_y = 124
+                    @ray_x = 306
+                    @ray_y = 124
                     if $cha_bigsize_on[@chanum] == true
                         ray_big = false
-                        ray_x = 304
-                        ray_y = 86
+                        @ray_x = 304
+                        @ray_y = 86
                     end
                 when 29
-                    ray_x = 324
-                    ray_y = 110
+                    @ray_x = 324
+                    @ray_y = 110
                     if $cha_bigsize_on[@chanum] == true
                         ray_big = false
-                        ray_x = 314
-                        ray_y = 96
+                        @ray_x = 314
+                        @ray_y = 96
                     end
                 when 30
-                    ray_x = 312
-                    ray_y = 120
+                    @ray_x = 312
+                    @ray_y = 120
                     if $cha_bigsize_on[@chanum] == true
                         ray_big = false
-                        ray_x = 310
-                        ray_y = 86
+                        @ray_x = 310
+                        @ray_y = 86
                     end
                 end
             else
@@ -55705,190 +55638,190 @@ module Scene_Db_Battle_Anime_pattern
 
                 case @enedatenum #敵キャラによって光線の位置を変える
                 when 111..113,114..116,241,242 #ネイズ、ドーレ系
-                    ray_x = 210
-                    ray_y = 116
+                    @ray_x = 210
+                    @ray_y = 116
                 when 117..119,240 #サウザー系
-                    ray_x = 216
-                    ray_y = 126
+                    @ray_x = 216
+                    @ray_y = 126
                 when 120,136,169,239 #クウラ系
-                    ray_x = 222
-                    ray_y = 120
+                    @ray_x = 222
+                    @ray_y = 120
                     ray_big = true
                 when 121,261 #クウラ(最終形態)系
-                    ray_x = 208
-                    ray_y = 116
+                    @ray_x = 208
+                    @ray_y = 116
                     ray_big = true
                 when 122,262 #20号
-                    ray_x = 230
-                    ray_y = 112
+                    @ray_x = 230
+                    @ray_y = 112
                     kitamenasi = true
                     ray_big = true
                 #@battle_anime_frame = 129 if @battle_anime_frame == 0
                 when 123,263 #19号
-                    ray_x = 222
-                    ray_y = 120
+                    @ray_x = 222
+                    @ray_y = 120
                     kitamenasi = true
                     ray_big = true
                 #@battle_anime_frame = 129 if @battle_anime_frame == 0
                 when 124,125 #18,17号
-                    ray_x = 230
-                    ray_y = 120
+                    @ray_x = 230
+                    @ray_y = 120
                     kitamenasi = true
                     ray_big = true
                 when 126 #16号
-                    ray_x = 208
-                    ray_y = 120
+                    @ray_x = 208
+                    @ray_y = 120
                     kitamenasi = true
                     ray_big = true
                 when 138 #13号
-                    ray_x = 210
-                    ray_y = 112
+                    @ray_x = 210
+                    @ray_y = 112
                     kitamenasi = true
                     ray_big = true
                 when 139 #13号(合体)
-                    ray_x = 200
-                    ray_y = 112
+                    @ray_x = 200
+                    @ray_y = 112
                     kitamenasi = true
                     ray_big = true
                 when 140 #14号
-                    ray_x = 198
-                    ray_y = 112
+                    @ray_x = 198
+                    @ray_y = 112
                     kitamenasi = true
                     ray_big = true
                 when 141 #15号
-                    ray_x = 234
-                    ray_y = 136
+                    @ray_x = 234
+                    @ray_y = 136
                     kitamenasi = true
                     ray_big = true
                 when 142 #ボージャック
-                    ray_x = 200
-                    ray_y = 112
+                    @ray_x = 200
+                    @ray_y = 112
                     kitamenasi = true
                     ray_big = true
                 when 143,271 #ボージャック(フルパワー)
-                    ray_x = 200
-                    ray_y = 112
+                    @ray_x = 200
+                    @ray_y = 112
                     #kitamenasi = true
                     ray_big = true
                 when 144 #ゴクア
-                    ray_x = 202
-                    ray_y = 114
+                    @ray_x = 202
+                    @ray_y = 114
                     #kitamenasi = true
                     ray_big = true
                 when 145 #ザンギャ
-                    ray_x = 232
-                    ray_y = 118
+                    @ray_x = 232
+                    @ray_y = 118
                     kitamenasi = true
                     ray_big = false
                 when 146 #ビドー
-                    ray_x = 202
-                    ray_y = 116
+                    @ray_x = 202
+                    @ray_y = 116
                     kitamenasi = true
                     ray_big = false
                 when 147 #ブージン
-                    ray_x = 232
-                    ray_y = 134
+                    @ray_x = 232
+                    @ray_y = 134
                     kitamenasi = false
                     ray_big = false
                 when 151 #ブロリー(超)
-                    ray_x = 202
-                    ray_y = 116
+                    @ray_x = 202
+                    @ray_y = 116
                     kitamenasi = false
                     ray_big = true
                 when 152,270 #ブロリー(フルパワー)
-                    ray_x = 202
-                    ray_y = 100
+                    @ray_x = 202
+                    @ray_y = 100
                     kitamenasi = false
                     ray_big = true
                 when 154,275 #オゾット
-                    ray_x = 202
-                    ray_y = 108
+                    @ray_x = 202
+                    @ray_y = 108
                     kitamenasi = true
                     ray_big = true
                 when 172,273 #ライチー
-                    ray_x = 224
-                    ray_y = 118
+                    @ray_x = 224
+                    @ray_y = 118
                     kitamenasi = true
                     ray_big = true
                 when 173,274 #ハッチヒャック
-                    ray_x = 212
-                    ray_y = 112
+                    @ray_x = 212
+                    @ray_y = 112
                     kitamenasi = true
                     ray_big = true
                 when 177 #ガッシュ
-                    ray_x = 210
-                    ray_y = 116
+                    @ray_x = 210
+                    @ray_y = 116
                     kitamenasi = false
                     ray_big = true
                 when 178 #タード
-                    ray_x = 218
-                    ray_y = 118
+                    @ray_x = 218
+                    @ray_y = 118
                     kitamenasi = false
                     ray_big = true
                 when 179 #ビネガー
-                    ray_x = 210
-                    ray_y = 116
+                    @ray_x = 210
+                    @ray_y = 116
                     kitamenasi = false
                     ray_big = true
                 when 180 #ゾルド
-                    ray_x = 240
-                    ray_y = 134
+                    @ray_x = 240
+                    @ray_y = 134
                     kitamenasi = false
                     ray_big = true
                 when 213 #ロボット兵
-                    ray_x = 206
-                    ray_y = 108
+                    @ray_x = 206
+                    @ray_y = 108
                     kitamenasi = true
                     ray_big = true
                 when 215,277 #パイクーハン
-                    ray_x = 216
-                    ray_y = 116
+                    @ray_x = 216
+                    @ray_y = 116
                     kitamenasi = false
                     ray_big = true
                 when 216 #タオパイパイ
-                    ray_x = 228
-                    ray_y = 120
+                    @ray_x = 228
+                    @ray_y = 120
                     kitamenasi = true
                     ray_big = true
                 when 70,222 #ターレス大猿
-                    ray_x = 216
-                    ray_y = 98
+                    @ray_x = 216
+                    @ray_y = 98
                     kitamenasi = true
                     ray_big = true
                 when 71,223,259 #スラッグ巨大化
-                    ray_x = 160
-                    ray_y = 102
+                    @ray_x = 160
+                    @ray_y = 102
                     kitamenasi = true
                     ray_big = true
                     ray_color = 1
                 when 238,252,272 #チルド系
-                    ray_x = 220
-                    ray_y = 130
+                    @ray_x = 220
+                    @ray_y = 130
                     kitamenasi = false
                     ray_big = true
                 when 253,276 #オゾット(変身)
-                    ray_x = 180
-                    ray_y = 124
+                    @ray_x = 180
+                    @ray_y = 124
                     kitamenasi = true
                     ray_big = true
 
                 when 254,278 #ブウ
-                    ray_x = 222
-                    ray_y = 118
+                    @ray_x = 222
+                    @ray_y = 118
                     kitamenasi = true
                     ray_big = true
                 else
-                    ray_x = 210
-                    ray_y = 120
+                    @ray_x = 210
+                    @ray_y = 120
                 end
             end
             if ray_big == true && @battle_anime_frame >= 140
                 if @attackDir == 0
-                    ray_x -= -40
-                    ray_y -= 18
+                    @ray_x -= -40
+                    @ray_y -= 18
                 else
-                    ray_x -= 88
-                    ray_y -= 18
+                    @ray_x -= 88
+                    @ray_y -= 18
                 end
             end
             case @battle_anime_frame
@@ -55921,8 +55854,8 @@ module Scene_Db_Battle_Anime_pattern
                 @genkitama_kanri_frame = []
                 @genkitama_kanri_maxflame = 15
                 @genkitama_kanri_spdup = 10
-                @genkityuushin_x = ray_x +48
-                @genkityuushin_y = ray_y +32
+                @genkityuushin_x = @ray_x +48
+                @genkityuushin_y = @ray_y +32
 
                 if $cha_bigsize_on[@chanum] == true && @attackDir == 0
                     @genkityuushin_x -= 44
@@ -56057,8 +55990,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2501 #マシーナリーレイン
             back_x = 248
             back_y = 88
-            ray_x = 250
-            ray_y = 116
+            @ray_x = 250
+            @ray_y = 116
             sframe = 0
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
@@ -56095,8 +56028,8 @@ module Scene_Db_Battle_Anime_pattern
                 @enex = 640-16*(@battle_anime_frame-sframe)
                 @eney = STANDARD_ENEY
             when 165..169
-                ray_x = 270
-                ray_y = 156
+                @ray_x = 270
+                @ray_y = 156
                 sframe = 165
                 @effect_anime_pattern = 123
                 Audio.se_play("Audio/SE/" + "ZG 打撃3") if @battle_anime_frame == sframe
@@ -56108,8 +56041,8 @@ module Scene_Db_Battle_Anime_pattern
                     @chax += 8
                 end
             when 170..182
-                ray_x = 270
-                ray_y = 156
+                @ray_x = 270
+                @ray_y = 156
                 battle_anime_change 1,0
                 sframe = 170
                 #Audio.se_play("Audio/SE/" + "ZG 打撃3") if @battle_anime_frame == sframe
@@ -56160,8 +56093,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 183..190
                 sframe = 183
-                ray_x = 250
-                ray_y = 140
+                @ray_x = 250
+                @ray_y = 140
 
                 if @battle_anime_frame == sframe + 7
                     @output_anime_type = 0
@@ -56175,8 +56108,8 @@ module Scene_Db_Battle_Anime_pattern
                 @eney = STANDARD_ENEY
             when 191..229
                 sframe = 191
-                ray_x = 250
-                ray_y = 140
+                @ray_x = 250
+                @ray_y = 140
                 @effect_anime_pattern = 0 if @battle_anime_frame == sframe + 7
                 @enex = 248
             when 230..250
@@ -56190,8 +56123,8 @@ module Scene_Db_Battle_Anime_pattern
                 @eney = -96
             when 251..264
                 sframe = 251
-                ray_x = 280
-                ray_y = 156
+                @ray_x = 280
+                @ray_y = 156
                 @output_anime_type = 1 if @battle_anime_frame == sframe
                 battle_anime_change 0,6 if @battle_anime_frame == sframe
 
@@ -56211,8 +56144,8 @@ module Scene_Db_Battle_Anime_pattern
                 @eney = -96+16*(@battle_anime_frame-sframe)
             when 265..300
                 sframe = 265
-                ray_x = 280
-                ray_y = 156
+                @ray_x = 280
+                @ray_y = 156
                 if @battle_anime_frame == sframe + 7
                     @effect_anime_pattern = 0
                     @effect_anime_frame = 0
@@ -56244,8 +56177,8 @@ module Scene_Db_Battle_Anime_pattern
                     @back_window.contents.blt(@enex + 20+16,134+16,picture,rect)
                 end
             when 342..370
-                ray_x = 280
-                ray_y = 156
+                @ray_x = 280
+                @ray_y = 156
                 @tec_output_back_no = 3
                 sframe = 342
                 @effect_anime_pattern = 123 if @battle_anime_frame == sframe
@@ -56292,8 +56225,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2503 #ネイズバインドウェーブ
 
 
-            ray_x = 284
-            ray_y = 146
+            @ray_x = 284
+            @ray_y = 146
             backhai_no = 201
             back_x = 240
             back_y = 88
@@ -56336,8 +56269,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2505 #ドーレテリブルラッシュ
             back_x = 248
             back_y = 88
-            ray_x = 250
-            ray_y = 116
+            @ray_x = 250
+            @ray_y = 116
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
@@ -56411,8 +56344,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 1,17
                 @gx = 16
                 @gy = -16
-                ray_x = @enex+84
-                ray_y = @eney+24
+                @ray_x = @enex+84
+                @ray_y = @eney+24
                 @effect_anime_pattern = 123
             when 271..296
                 @effect_anime_pattern = 0
@@ -56459,8 +56392,8 @@ module Scene_Db_Battle_Anime_pattern
                     rect = Rect.new(0, 48,64,64)
                     @back_window.contents.blt(@enex + 20,144,picture,rect)
                 end
-                ray_x = CENTER_ENEX-24
-                ray_y = STANDARD_ENEY+36
+                @ray_x = CENTER_ENEX-24
+                @ray_y = STANDARD_ENEY+36
 
                 @effect_anime_pattern = 123
             when 341
@@ -56519,8 +56452,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2510 #ドレインライフ
-            ray_x = 280
-            ray_y = 140
+            @ray_x = 280
+            @ray_y = 140
             case @battle_anime_frame
             when 0 #初期化
                 @ray_color = 0
@@ -56623,8 +56556,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
             when 241..280
                 back_anime_pattern 1
-                ray_x = 328
-                ray_y = 140
+                @ray_x = 328
+                @ray_y = 140
                 @effect_anime_pattern = 227
             when 281
                 back_anime_pattern 1
@@ -56636,8 +56569,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2519 #アクセルダンス
 
-            ray_x = 242
-            ray_y = 20
+            @ray_x = 242
+            @ray_y = 20
             enezyouge = 44
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
@@ -56891,8 +56824,8 @@ module Scene_Db_Battle_Anime_pattern
                 akifra = 3
                 @effect_anime_frame = 0
                 @effect_anime_pattern = 123 if @battle_anime_frame <= strfra + akifra * 11
-                ray_x = 266
-                ray_y = 148
+                @ray_x = 266
+                @ray_y = 148
                 raytyouseiy = 32
                 case @battle_anime_frame
                 when strfra + akifra * 0
@@ -56902,7 +56835,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                 when strfra + akifra * 2..strfra + akifra * 3-1
                     battle_anime_change 0,2
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 2
                 when strfra + akifra * 3
                     battle_anime_change 0,0
@@ -56913,7 +56846,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                 when strfra + akifra * 6..strfra + akifra * 7-1
                     battle_anime_change 0,4
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 6
                 when strfra + akifra * 7
                     battle_anime_change 0,0
@@ -56924,7 +56857,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                 when strfra + akifra * 10..strfra + akifra * 11-1
                     battle_anime_change 0,2
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 10
                 when strfra + akifra * 11..strfra + akifra * 11+8
                     @effect_anime_pattern = 0
@@ -56978,20 +56911,20 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame >= 47 && @battle_anime_frame <= 75
                 @effect_anime_pattern = 203
                 if @enedatenum == 127 || @enedatenum == 264
-                    ray_x = 214
-                    ray_y = 134
+                    @ray_x = 214
+                    @ray_y = 134
                 elsif @enedatenum == 128 || @enedatenum == 268
-                    ray_x = 206
-                    ray_y = 134
+                    @ray_x = 206
+                    @ray_y = 134
                 elsif @enedatenum == 129 || @enedatenum == 135 || @enedatenum == 269
-                    ray_x = 202
-                    ray_y = 128
+                    @ray_x = 202
+                    @ray_y = 128
                 elsif @enedatenum == 130
-                    ray_x = 202
-                    ray_y = 146
+                    @ray_x = 202
+                    @ray_y = 146
                 else
-                    ray_x = 214
-                    ray_y = 134
+                    @ray_x = 214
+                    @ray_y = 134
                 end
 
                 case @battle_anime_frame
@@ -57020,11 +56953,11 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 180
             back_y = 0
             if @enedatenum == 127
-                ray_x = 200
-                ray_y = 128
+                @ray_x = 200
+                @ray_y = 128
             else
-                ray_x = 224
-                ray_y = 142
+                @ray_x = 224
+                @ray_y = 142
             end
             color = Color.new(255,255,255,260)
 
@@ -57080,7 +57013,7 @@ module Scene_Db_Battle_Anime_pattern
 
             #@chr_cutin = true
             when 222..247
-                ray_y = 134
+                @ray_y = 134
                 @effect_anime_pattern = 255
             when 248
                 anime_pattern_init
@@ -57089,8 +57022,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2532 #太陽拳(セル1)
             #back_x = 222
             #back_y = 60
-            ray_x = CENTER_CHAX
-            ray_y = STANDARD_CHAY
+            @ray_x = CENTER_CHAX
+            @ray_y = STANDARD_CHAY
             color = Color.new(255,255,255,260)
             if @all_attack_count == 1
                 case @battle_anime_frame
@@ -57172,10 +57105,10 @@ module Scene_Db_Battle_Anime_pattern
         when 2537 #ビッグバンアタック(セル２)
             back_x = 248
             back_y = 88
-            #ray_x = 338
-            #ray_y = 156
-            ray_x = -52
-            ray_y = 208
+            #@ray_x = 338
+            #@ray_y = 156
+            @ray_x = -52
+            @ray_y = 208
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -57222,8 +57155,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 when 140..230
                     Audio.se_play("Audio/SE/" + "DB3 気を溜める2") if @battle_anime_frame == 140
-                    ray_x = 196
-                    ray_y = 250
+                    @ray_x = 196
+                    @ray_y = 250
                     @effect_anime_pattern = 235
                 when 231
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
@@ -57244,7 +57177,7 @@ module Scene_Db_Battle_Anime_pattern
             #Audio.se_play("Audio/SE/" + "Z1 ザー")
             when 311..336
 
-                ray_y = 112
+                @ray_y = 112
                 @effect_anime_pattern = 265
 
             when 337
@@ -57255,10 +57188,10 @@ module Scene_Db_Battle_Anime_pattern
             @ray_color = 3
             back_x = 164
             back_y = 112
-            #ray_x = back_x +82
-            #ray_y = back_y +60
-            ray_x = 130
-            ray_y = 0
+            #@ray_x = back_x +82
+            #@ray_y = back_y +60
+            @ray_x = 130
+            @ray_y = 0
             case @battle_anime_frame
             when 0 #初期化
                 #  if @attackDir == 0
@@ -57280,8 +57213,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_x = 248
                 back_y = 88
                 back_anime_pattern 201,back_x,back_y
-                ray_x = 336
-                ray_y = 154
+                @ray_x = 336
+                @ray_y = 154
                 @effect_anime_pattern = 237
 
             #end
@@ -57295,21 +57228,21 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin = false
                     @chr_cutin_flag = false
                     @eney = -200 #キャラ画面範囲外へ
-                    ray_x = -100
-                    ray_y = -100
+                    @ray_x = -100
+                    @ray_y = -100
                 else
                     back_x = 248
                     back_y = 88
                     back_anime_pattern 201,back_x,back_y
                     @effect_anime_pattern = 235
-                    ray_x = 336 - 8
-                    ray_y = 154 - 8
+                    @ray_x = 336 - 8
+                    @ray_y = 154 - 8
                 end
             when 171..260
-                #ray_y = 6
+                #@ray_y = 6
                 #@effect_anime_frame*RAY_SPEED
                 back_x += (@battle_anime_frame-141)/2
-                ray_x +=  (@battle_anime_frame-141)/2 - @effect_anime_frame*RAY_SPEED
+                @ray_x +=  (@battle_anime_frame-141)/2 - @effect_anime_frame*RAY_SPEED
                 picture = Cache.picture("Z3_必殺技_超カメハメ波(セル完全体)")
                 rect = Rect.new(0, 0,288,234)
                 @back_window.contents.blt(back_x,back_y,picture,rect)
@@ -57349,8 +57282,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2570 #痺れ液
 
-            ray_x = 266
-            ray_y = 108
+            @ray_x = 266
+            @ray_y = 108
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
@@ -57413,8 +57346,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 battle_anime_change 0,16 if @battle_anime_frame == 51
             when 53..119
-                ray_x = 266
-                ray_y = 148
+                @ray_x = 266
+                @ray_y = 148
                 @output_anime_type = 0
                 case @battle_anime_frame
 
@@ -57441,18 +57374,18 @@ module Scene_Db_Battle_Anime_pattern
                     @gx = -8
                     battle_anime_change 1,16
                     @effect_anime_pattern = 132
-                    ray_x = 266
-                    ray_y = 148 + 32
+                    @ray_x = 266
+                    @ray_y = 148 + 32
                 when 66
-                    ray_x = 266
-                    ray_y = 148 + 32
+                    @ray_x = 266
+                    @ray_y = 148 + 32
                 when 67
                     @gx = 8
-                    ray_x = 266
-                    ray_y = 148 + 32
+                    @ray_x = 266
+                    @ray_y = 148 + 32
                 when 68..70
-                    ray_x = 266
-                    ray_y = 148 + 32
+                    @ray_x = 266
+                    @ray_y = 148 + 32
                 when 71
                     @effect_anime_pattern = 0
                     Audio.se_play("Audio/SE/" + "ZG 打撃3")
@@ -57498,8 +57431,8 @@ module Scene_Db_Battle_Anime_pattern
                 akifra = 3
                 @effect_anime_frame = 0
                 @effect_anime_pattern = 123 if @battle_anime_frame <= strfra + akifra * 11
-                ray_x = 266
-                ray_y = 148
+                @ray_x = 266
+                @ray_y = 148
                 raytyouseiy = 32
                 case @battle_anime_frame
                 when strfra + akifra * 0
@@ -57509,7 +57442,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                 when strfra + akifra * 2..strfra + akifra * 3-1
                     battle_anime_change 0,2
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 2
                 when strfra + akifra * 3
                     battle_anime_change 0,0
@@ -57520,7 +57453,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                 when strfra + akifra * 6..strfra + akifra * 7-1
                     battle_anime_change 0,4
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 6
                 when strfra + akifra * 7
                     battle_anime_change 0,0
@@ -57531,7 +57464,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                 when strfra + akifra * 10..strfra + akifra * 11-1
                     battle_anime_change 0,2
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 10
                 when strfra + akifra * 11..strfra + akifra * 11+8
                     @effect_anime_pattern = 0
@@ -57593,8 +57526,8 @@ module Scene_Db_Battle_Anime_pattern
                 akifra = 8
                 @effect_anime_frame = 0
                 @effect_anime_pattern = 123 if @battle_anime_frame <= strfra + akifra * 11
-                ray_x = 266
-                ray_y = 148
+                @ray_x = 266
+                @ray_y = 148
                 raytyouseiy = 32
                 case @battle_anime_frame
                 when strfra + akifra * 0
@@ -57604,7 +57537,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                 when strfra + akifra * 2..strfra + akifra * 3-1
                     battle_anime_change 0,2
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == strfra + akifra * 2
                 when strfra + akifra * 3
                     battle_anime_change 0,0
@@ -57615,7 +57548,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                 when strfra + akifra * 6..strfra + akifra * 7-1
                     battle_anime_change 0,4
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == strfra + akifra * 6
                 when strfra + akifra * 7
                     battle_anime_change 0,0
@@ -57626,7 +57559,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                 when strfra + akifra * 10..strfra + akifra * 11-1
                     battle_anime_change 0,3
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "ZG 打撃2") if @battle_anime_frame == strfra + akifra * 10
                     @gx = -16
                     battle_anime_change 1,17
@@ -57640,8 +57573,8 @@ module Scene_Db_Battle_Anime_pattern
                 sframe = 171
                 battle_anime_change 0,1
                 Audio.se_play("Audio/SE/" + "Z1 怪光線") if @battle_anime_frame == sframe
-                ray_x = 338
-                ray_y = 136
+                @ray_x = 338
+                @ray_y = 136
                 @output_anime_type = 1
                 @effect_anime_pattern = 227
             when 220
@@ -57664,8 +57597,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2575 #13号)SSデッドリィボンバー
 
-            ray_x = 250
-            ray_y = 100
+            @ray_x = 250
+            @ray_y = 100
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める2")    # 効果音を再生する
@@ -57760,8 +57693,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2579 #合体13号)SSデッドリィボンバー
 
-            ray_x = 250
-            ray_y = 100
+            @ray_x = 250
+            @ray_y = 100
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める2")    # 効果音を再生する
@@ -57864,8 +57797,8 @@ module Scene_Db_Battle_Anime_pattern
                 raytyouseiy = 0
                 strfra = 119
                 akifra = 8
-                ray_x = 316 -2*(@battle_anime_frame-sframe)
-                ray_y = 160
+                @ray_x = 316 -2*(@battle_anime_frame-sframe)
+                @ray_y = 160
                 @effect_anime_frame = 0
                 @effect_anime_pattern = 123 if @battle_anime_frame >= strfra + akifra * 2 && @battle_anime_frame <= strfra + akifra * 9
                 case @battle_anime_frame
@@ -57876,7 +57809,7 @@ module Scene_Db_Battle_Anime_pattern
                     n = 0
                 when strfra + akifra * 2..strfra + akifra * 3-1
                     n = 1
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "ZG 打撃5") if @battle_anime_frame == strfra + akifra * 2
                 when strfra + akifra * 3
                     n = 0
@@ -57934,8 +57867,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,2
                 @ray_color = 4
             when 281..380
-                ray_x = 250
-                ray_y = 100
+                @ray_x = 250
+                @ray_y = 100
                 @effect_anime_pattern = 16
 
                 @effect_anime_frame -= 1 if @battle_anime_frame % 2 == 0
@@ -57953,15 +57886,15 @@ module Scene_Db_Battle_Anime_pattern
             when 381..520
                 sframe = 381
                 @eney = -200
-                ray_x = -400 - (@battle_anime_frame-sframe) * 6
-                ray_y = 0
+                @ray_x = -400 - (@battle_anime_frame-sframe) * 6
+                @ray_y = 0
                 back_x = 240
                 back_y = 90
 
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == sframe
                 #@effect_anime_frame*RAY_SPEED
                 #back_x += (@battle_anime_frame-sframe)/2
-                #ray_x +=  (@battle_anime_frame-sframe)/2 - @effect_anime_frame*RAY_SPEED
+                #@ray_x +=  (@battle_anime_frame-sframe)/2 - @effect_anime_frame*RAY_SPEED
                 picture = Cache.picture("Z3_必殺技_フルパワーSSデッドリィボンバー(合体13号)")
                 rect = Rect.new(0, 0,312,192)
                 @back_window.contents.blt(back_x,back_y,picture,rect)
@@ -57969,7 +57902,7 @@ module Scene_Db_Battle_Anime_pattern
                 #@effect_anime_pattern = 236
                 picture = Cache.picture("Z2_戦闘_必殺技_デスボール(極大玉)_反転")
                 rect = Rect.new(900-640, 78,640,356)
-                @back_window.contents.blt(ray_x,ray_y,picture,rect)
+                @back_window.contents.blt(@ray_x,@ray_y,picture,rect)
             when 521
                 @gx = 0
                 @effect_anime_pattern = 0
@@ -58057,8 +57990,8 @@ module Scene_Db_Battle_Anime_pattern
                 raytyouseiy = 0
                 strfra = 119
                 akifra = 8
-                ray_x = 316 -2*(@battle_anime_frame-sframe)
-                ray_y = 160
+                @ray_x = 316 -2*(@battle_anime_frame-sframe)
+                @ray_y = 160
                 @effect_anime_frame = 0
                 @effect_anime_pattern = 123 if @battle_anime_frame >= strfra + akifra * 2 && @battle_anime_frame <= strfra + akifra * 9
                 case @battle_anime_frame
@@ -58069,7 +58002,7 @@ module Scene_Db_Battle_Anime_pattern
                     n = 0
                 when strfra + akifra * 2..strfra + akifra * 3-1
                     n = 1
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "ZG 打撃5") if @battle_anime_frame == strfra + akifra * 2
                 when strfra + akifra * 3
                     n = 0
@@ -58333,8 +58266,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2595 #ボーフル)ギャラテクティックタイラント
             back_x = 248
             back_y = 88
-            ray_x = 214
-            ray_y = 120
+            @ray_x = 214
+            @ray_y = 120
             @ray_color = 1
             case @battle_anime_frame
             when 0 #初期化
@@ -58430,8 +58363,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,1
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める") if @battle_anime_frame == 300
                 @effect_anime_pattern = 252
-                ray_x = 336 - 88
-                ray_y = 154 - 32
+                @ray_x = 336 - 88
+                @ray_y = 154 - 32
             when 391
                 @gx  = 0
                 #@chax = CENTER_CHAX
@@ -58442,10 +58375,10 @@ module Scene_Db_Battle_Anime_pattern
         when 2596 #ギャラクティックバスター
             back_x = 248
             back_y = 88
-            #ray_x = 338
-            #ray_y = 156
-            ray_x = -52
-            ray_y = 208
+            #@ray_x = 338
+            #@ray_y = 156
+            @ray_x = -52
+            @ray_y = 208
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -58492,8 +58425,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 when 140..230
                     Audio.se_play("Audio/SE/" + "DB3 気を溜める2") if @battle_anime_frame == 140
-                    ray_x = 196
-                    ray_y = 250
+                    @ray_x = 196
+                    @ray_y = 250
                     @effect_anime_pattern = 235
                 when 231
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
@@ -58514,7 +58447,7 @@ module Scene_Db_Battle_Anime_pattern
             #Audio.se_play("Audio/SE/" + "Z1 ザー")
             when 311..336
 
-                ray_y = 112
+                @ray_y = 112
                 @effect_anime_pattern = 265
 
             when 337
@@ -58525,8 +58458,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 248
             back_y = 88
 
-            ray_x = -52
-            ray_y = 208
+            @ray_x = -52
+            @ray_y = 208
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
@@ -58629,8 +58562,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 264
             back_y = 88
 
-            ray_x = 270
-            ray_y = 100
+            @ray_x = 270
+            @ray_y = 100
             case @battle_anime_frame
 
             when 0 #初期化
@@ -58749,8 +58682,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2606 #ザンギャビドーブージン単体超能力
             back_x = 228
             back_y = 88
-            ray_x = 325
-            ray_y = 138
+            @ray_x = 325
+            @ray_y = 138
 
             case @battle_anime_frame
             when 0 #初期化
@@ -58784,8 +58717,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 248
             back_y = 88
 
-            ray_x = 128
-            ray_y = 92
+            @ray_x = 128
+            @ray_y = 92
             case @battle_anime_frame
 
 
@@ -58862,8 +58795,8 @@ module Scene_Db_Battle_Anime_pattern
             when 271..398
                 back_anime_pattern 201,back_x,back_y
                 @effect_anime_pattern = 235
-                ray_x = 306
-                ray_y = 158
+                @ray_x = 306
+                @ray_y = 158
             when 399
                 Audio.se_stop
                 @effect_anime_pattern = 0
@@ -58893,8 +58826,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 248
             back_y = 88
 
-            ray_x = 128
-            ray_y = 92
+            @ray_x = 128
+            @ray_y = 92
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
 
@@ -59213,8 +59146,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2624 #ブロ超)イレイザーキャノン
             back_x = 258
             back_y = 88
-            ray_x = 348
-            ray_y = 134
+            @ray_x = 348
+            @ray_y = 134
 
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
@@ -59330,12 +59263,12 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,2
                 #@ray_color = 3
                 @ray_color = 3
-                ray_x = 348
-                ray_y = 134
+                @ray_x = 348
+                @ray_y = 134
                 @effect_anime_pattern = 237
                 if sframe + 60 <= @battle_anime_frame
-                    ray_x = 348 - 8
-                    ray_y = 134 - 16
+                    @ray_x = 348 - 8
+                    @ray_y = 134 - 16
                     @effect_anime_pattern = 235
                 end
                 back_anime_pattern 201,back_x,back_y
@@ -59343,8 +59276,8 @@ module Scene_Db_Battle_Anime_pattern
                 sframe = 309
                 Audio.se_stop if @battle_anime_frame == sframe
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == sframe
-                ray_x = 230 - 16*(@battle_anime_frame-sframe)
-                ray_y = 140
+                @ray_x = 230 - 16*(@battle_anime_frame-sframe)
+                @ray_y = 140
                 battle_anime_change 0,3
                 @effect_anime_pattern = 261
             when 351
@@ -59359,7 +59292,7 @@ module Scene_Db_Battle_Anime_pattern
                 @output_anime_type = 1
                 battle_anime_change 1,16
             when 361..386
-                ray_y = 140
+                @ray_y = 140
                 @effect_anime_pattern = 262
 
             when 387
@@ -59370,8 +59303,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2630 #ブロフル)イレイザーブロウ
             back_x = 258
             back_y = 88
-            ray_x = 348
-            ray_y = 134
+            @ray_x = 348
+            @ray_y = 134
 
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
@@ -59404,8 +59337,8 @@ module Scene_Db_Battle_Anime_pattern
                 #battle_anime_change 1,16
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める")
             when 56..130
-                ray_x = 288
-                ray_y = 164
+                @ray_x = 288
+                @ray_y = 164
                 @effect_anime_pattern = 237
             when 131
                 #battle_anime_change 0,19 #演出上例外的に移動しないで残す
@@ -59416,8 +59349,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2631 #ブロフル)イレイザーキャノン
             back_x = 242
             back_y = 88
-            ray_x = 348
-            ray_y = 134
+            @ray_x = 348
+            @ray_y = 134
 
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
@@ -59436,27 +59369,27 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,4
                 #@ray_color = 3
 
-                ray_x = 268
-                ray_y = 154
+                @ray_x = 268
+                @ray_y = 154
                 @effect_anime_pattern = 237
                 if sframe + 40 <= @battle_anime_frame
-                    ray_x = 268 - 8
-                    ray_y = 154 - 8
+                    @ray_x = 268 - 8
+                    @ray_y = 154 - 8
                     @effect_anime_pattern = 235
                 end
 
                 if sframe + 80 <= @battle_anime_frame
                     @ray_anime_type = 0 if sframe + 80 == @battle_anime_frame
-                    ray_x = 268 - 24
-                    ray_y = 154 - 24
+                    @ray_x = 268 - 24
+                    @ray_y = 154 - 24
                     @effect_anime_pattern = 252
                 end
                 @ray_color = 3
                 back_anime_pattern 201,back_x,back_y
                 @ray_color = 0
             when 129..180
-                ray_x = 268 - 24
-                ray_y = 154 - 24
+                @ray_x = 268 - 24
+                @ray_y = 154 - 24
                 @effect_anime_pattern = 252
             when 181..222
                 @ray_anime_type = 1
@@ -59464,8 +59397,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_stop if @battle_anime_frame == sframe
                 #Audio.se_play("Audio/SE/" + "ZG 打撃4") if @battle_anime_frame == sframe
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == sframe
-                ray_x = 268 - 24 - 16*(@battle_anime_frame-sframe)
-                ray_y = 154 - 24
+                @ray_x = 268 - 24 - 16*(@battle_anime_frame-sframe)
+                @ray_y = 154 - 24
                 battle_anime_change 0,5
                 @effect_anime_pattern = 252 #261
             when 223
@@ -59480,8 +59413,8 @@ module Scene_Db_Battle_Anime_pattern
                 @output_anime_type = 1
             #battle_anime_change 1,16
             when 234..259
-                ray_y = 140
-                #ray_x = 268 - 24 - 16*(@battle_anime_frame-sframe)
+                @ray_y = 140
+                #@ray_x = 268 - 24 - 16*(@battle_anime_frame-sframe)
                 #@ray_anime_type = 1
                 @effect_anime_pattern = 262
 
@@ -59493,8 +59426,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2632 #ブロフル)スローイングブラスター
             back_x = 242
             back_y = 88
-            ray_x = 348
-            ray_y = 134
+            @ray_x = 348
+            @ray_y = 134
 
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
@@ -59513,27 +59446,27 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,4
                 #@ray_color = 3
 
-                ray_x = 348
-                ray_y = 136
+                @ray_x = 348
+                @ray_y = 136
                 @effect_anime_pattern = 237
                 if sframe + 40 <= @battle_anime_frame
-                    ray_x = 348 - 8
-                    ray_y = 136 - 8
+                    @ray_x = 348 - 8
+                    @ray_y = 136 - 8
                     @effect_anime_pattern = 235
                 end
 
                 if sframe + 80 <= @battle_anime_frame
                     @ray_anime_type = 0 if sframe + 80 == @battle_anime_frame
-                    ray_x = 348 - 24
-                    ray_y = 136 - 24
+                    @ray_x = 348 - 24
+                    @ray_y = 136 - 24
                     @effect_anime_pattern = 252
                 end
                 @ray_color = 3
                 back_anime_pattern 201,back_x,back_y
                 @ray_color = 0
             when 129..180
-                ray_x = 348 - 24
-                ray_y = 136 - 24
+                @ray_x = 348 - 24
+                @ray_y = 136 - 24
                 @effect_anime_pattern = 252
             when 181..222
                 @ray_anime_type = 1
@@ -59542,8 +59475,8 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0 if @battle_anime_frame == sframe
                 #Audio.se_play("Audio/SE/" + "ZG 打撃4") if @battle_anime_frame == sframe
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == sframe
-                ray_x = 78 #- 24 - 16*(@battle_anime_frame-sframe)
-                ray_y = 110 #- 24
+                @ray_x = 78 #- 24 - 16*(@battle_anime_frame-sframe)
+                @ray_y = 110 #- 24
                 battle_anime_change 0,6
                 @effect_anime_pattern = 293
             when 223
@@ -59558,8 +59491,8 @@ module Scene_Db_Battle_Anime_pattern
                 @output_anime_type = 1
             #battle_anime_change 1,16
             when 234..259
-                ray_y = 110
-                #ray_x = 268 - 24 - 16*(@battle_anime_frame-sframe)
+                @ray_y = 110
+                #@ray_x = 268 - 24 - 16*(@battle_anime_frame-sframe)
                 #@ray_anime_type = 1
                 @effect_anime_pattern = 266
 
@@ -59571,8 +59504,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2633 #ブロフル)オメガブラスター
             back_x = 242
             back_y = 88
-            ray_x = 348
-            ray_y = 134
+            @ray_x = 348
+            @ray_y = 134
 
             color = Color.new(255,255,255,260)
             #@back_window.contents.fill_rect(0,0,640,378,color)
@@ -59591,28 +59524,28 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 0,0
                 #@ray_color = 3
 
-                ray_x = 318
-                ray_y = 154
+                @ray_x = 318
+                @ray_y = 154
                 @effect_anime_pattern = 237
                 if sframe + 40 <= @battle_anime_frame
                     battle_anime_change 0,4
-                    ray_x = 348 - 8
-                    ray_y = 136 - 8
+                    @ray_x = 348 - 8
+                    @ray_y = 136 - 8
                     @effect_anime_pattern = 235
                 end
 
                 if sframe + 80 <= @battle_anime_frame
                     @ray_anime_type = 0 if sframe + 80 == @battle_anime_frame
-                    ray_x = 348 - 24
-                    ray_y = 136 - 24
+                    @ray_x = 348 - 24
+                    @ray_y = 136 - 24
                     @effect_anime_pattern = 252
                 end
                 #@ray_color = 3
                 #back_anime_pattern 201,back_x,back_y
                 @ray_color = 1
             when 129..180
-                ray_x = 348 - 24
-                ray_y = 136 - 24
+                @ray_x = 348 - 24
+                @ray_y = 136 - 24
                 @effect_anime_pattern = 252
             when 181..222
                 @ray_anime_type = 1
@@ -59620,8 +59553,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_stop if @battle_anime_frame == sframe
                 #Audio.se_play("Audio/SE/" + "ZG 打撃4") if @battle_anime_frame == sframe
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == sframe
-                ray_x = 268 - 24 - 16*(@battle_anime_frame-sframe)
-                ray_y = 154 - 24
+                @ray_x = 268 - 24 - 16*(@battle_anime_frame-sframe)
+                @ray_y = 154 - 24
                 battle_anime_change 0,5
                 @effect_anime_pattern = 252 #261
             when 223
@@ -59637,8 +59570,8 @@ module Scene_Db_Battle_Anime_pattern
             #battle_anime_change 1,16
             when 234..289#259
                 sframe = 234
-                ray_y = 140
-                #ray_x = 268 - 24 - 16*(@battle_anime_frame-sframe)
+                @ray_y = 140
+                #@ray_x = 268 - 24 - 16*(@battle_anime_frame-sframe)
                 #@ray_anime_type = 1
                 @ray_color = 1
                 @effect_anime_pattern = 262
@@ -59680,8 +59613,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 1
                 sframe = 531
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == sframe
-                ray_x = 268 + 22
-                ray_y = 140
+                @ray_x = 268 + 22
+                @ray_y = 140
                 @chay = STANDARD_ENEY
                 @effect_anime_pattern = 252
                 @tec_output_back = true
@@ -59696,8 +59629,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2635 #アラレ)ウンチ攻撃
 
-            ray_x = 328
-            ray_y = 148
+            @ray_x = 328
+            @ray_y = 148
             case @battle_anime_frame
 
             when 0 #初期化
@@ -60006,8 +59939,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2637 #アラレ)岩攻撃
 
-            ray_x = 328
-            ray_y = 148
+            @ray_x = 328
+            @ray_y = 148
             case @battle_anime_frame
 
             when 0 #初期化
@@ -60231,8 +60164,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2639 #アラレ)んちゃ砲
 
-            ray_x = 366
-            ray_y = 168
+            @ray_x = 366
+            @ray_y = 168
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
 
@@ -60552,8 +60485,8 @@ module Scene_Db_Battle_Anime_pattern
                     @ax = 0
                 end
                 @effect_anime_pattern = 203
-                ray_x = 184
-                ray_y = 134 #スーパーサイヤ人
+                @ray_x = 184
+                @ray_y = 134 #スーパーサイヤ人
 
             when 226
                 @effect_anime_pattern = 0
@@ -60568,8 +60501,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2646 #ミストまこうほう
-            ray_x = 80
-            ray_y = 96
+            @ray_x = 80
+            @ray_y = 96
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
 
@@ -60635,8 +60568,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2647 #ミストませんこう
             back_x = 198
             back_y = 34
-            ray_x = 204
-            ray_y = 134
+            @ray_x = 204
+            @ray_y = 134
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
 
@@ -60689,8 +60622,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2648 #ミストギャリック砲
             back_x = 198
             back_y = 34
-            ray_x = 350-120
-            ray_y = 124
+            @ray_x = 350-120
+            @ray_y = 124
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
 
@@ -60746,8 +60679,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2649 #ミスト剣攻撃
             back_x = 198
             back_y = 34
-            ray_x = 350-120
-            ray_y = 124
+            @ray_x = 350-120
+            @ray_y = 124
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
 
@@ -60777,8 +60710,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
             when 151..190
                 @effect_anime_pattern = 267
-                ray_x = 228
-                ray_y = 134
+                @ray_x = 228
+                @ray_y = 134
             when 191
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -60795,8 +60728,8 @@ module Scene_Db_Battle_Anime_pattern
             back_x = 248
             back_y = 88
 
-            ray_x = 128
-            ray_y = 92
+            @ray_x = 128
+            @ray_y = 92
             case @battle_anime_frame
 
 
@@ -60865,18 +60798,18 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2669 #ゴッドガ)テイルザンバー
 
-            ray_x = 202
-            ray_y = 108
+            @ray_x = 202
+            @ray_y = 108
             kitamenasi = true
             ray_big = true
             @ray_color = 3
             if ray_big == true && @battle_anime_frame >= 140
                 if @attackDir == 0
-                    ray_x -= -40
-                    ray_y -= 18
+                    @ray_x -= -40
+                    @ray_y -= 18
                 else
-                    ray_x -= 88
-                    ray_y -= 18
+                    @ray_x -= 88
+                    @ray_y -= 18
                 end
             end
             case @battle_anime_frame
@@ -60897,8 +60830,8 @@ module Scene_Db_Battle_Anime_pattern
                 @genkitama_kanri_frame = []
                 @genkitama_kanri_maxflame = 15
                 @genkitama_kanri_spdup = 10
-                @genkityuushin_x = ray_x +48
-                @genkityuushin_y = ray_y +32
+                @genkityuushin_x = @ray_x +48
+                @genkityuushin_y = @ray_y +32
                 @genkitama_kanri_frame = [0,0,0,0,0,0,0,0]
             when 1..128
                 @ax = 0 if @enedatenum == 126
@@ -60993,9 +60926,9 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "ZG 光線1") if @battle_anime_frame == sframe
                 battle_anime_change 0,1
                 @effect_anime_pattern = 252
-                ray_x += 86
-                ray_y += 18
-                ray_x -= 16*(@battle_anime_frame-sframe)
+                @ray_x += 86
+                @ray_y += 18
+                @ray_x -= 16*(@battle_anime_frame-sframe)
             when 179
                 #battle_anime_change 0,1
                 @effect_anime_pattern = 0
@@ -61004,7 +60937,7 @@ module Scene_Db_Battle_Anime_pattern
             when 189
                 set_chr_display_out
             when 190..215
-                ray_y += 50
+                @ray_y += 50
                 @effect_anime_pattern = 262
             when 216
                 anime_pattern_init
@@ -61013,8 +60946,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2670 #ゴッドガ)ガードンクラッシャー
             back_x = 700
             back_y = 120
-            ray_x = 366
-            ray_y = 168
+            @ray_x = 366
+            @ray_y = 168
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
 
@@ -61060,22 +60993,22 @@ module Scene_Db_Battle_Anime_pattern
                 @back_window.contents.blt(back_x,back_y,picture,rect)
                 rect = Rect.new(0, 0,48,32)
                 picture = Cache.picture("ZG_必殺技_ガードンクラッシャー_ゴッドガードン_エネルギー弾")
-                ray_x = back_x-48-16*(@battle_anime_frame-sframe)
-                ray_y = back_y+34 #+20
+                @ray_x = back_x-48-16*(@battle_anime_frame-sframe)
+                @ray_y = back_y+34 #+20
 
                 case @battle_anime_frame
 
                 when sframe-1+akifra*1..sframe-1+akifra*2-1
-                    ray_y = back_y+34+20
-                    ray_x = back_x-48-16*(@battle_anime_frame-sframe-akifra*1+1)
+                    @ray_y = back_y+34+20
+                    @ray_x = back_x-48-16*(@battle_anime_frame-sframe-akifra*1+1)
                 when sframe-1+akifra*2..sframe-1+akifra*3-1
-                    ray_y = back_y+34+40
-                    ray_x = back_x-48-16*(@battle_anime_frame-sframe-akifra*2+1)
+                    @ray_y = back_y+34+40
+                    @ray_x = back_x-48-16*(@battle_anime_frame-sframe-akifra*2+1)
                 when sframe-1+akifra*3..sframe-1+akifra*4-1
-                    ray_y = back_y+34+20
-                    ray_x = back_x-48-16*(@battle_anime_frame-sframe-akifra*3+1)
+                    @ray_y = back_y+34+20
+                    @ray_x = back_x-48-16*(@battle_anime_frame-sframe-akifra*3+1)
                 end
-                @back_window.contents.blt(ray_x,ray_y,picture,rect)
+                @back_window.contents.blt(@ray_x,@ray_y,picture,rect)
 
             when 211
                 @effect_anime_pattern = 0
@@ -61093,8 +61026,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2675 #ライチ)ビッグスマッシャー
             back_x = 198
             back_y = 34
-            ray_x = 284
-            ray_y = 114
+            @ray_x = 284
+            @ray_y = 114
             @ray_color = 3
             color = Color.new(255,255,255,260)
             case @battle_anime_frame
@@ -61126,8 +61059,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2678 #ライチ)イレイサーショック
             back_x = 280
             back_y = 112
-            ray_x = 370
-            ray_y = back_y + 2
+            @ray_x = 370
+            @ray_y = back_y + 2
             color1 = Color.new(127,127,127,260)
             color2 = Color.new(188,188,188,260)
             color3 = Color.new(255,255,255,260)
@@ -61202,8 +61135,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2683 #ハッチ)リベンジャーチャージ
             back_x = 186
             back_y = 52
-            ray_x = 370
-            ray_y = back_y + 2
+            @ray_x = 370
+            @ray_y = back_y + 2
             color1 = Color.new(127,127,127,260)
             color2 = Color.new(188,188,188,260)
             color3 = Color.new(255,255,255,260)
@@ -61247,8 +61180,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2684 #ハッチ)リベンジャーカノン
             back_x = 176
             back_y = 44
-            ray_x = 370
-            ray_y = 114
+            @ray_x = 370
+            @ray_y = 114
             color1 = Color.new(127,127,127,260)
             color2 = Color.new(188,188,188,260)
             color3 = Color.new(255,255,255,260)
@@ -61393,8 +61326,8 @@ module Scene_Db_Battle_Anime_pattern
                akifra = 4
                @effect_anime_frame = 0
                @effect_anime_pattern = 123 if @battle_anime_frame <= strfra + akifra * 11
-               ray_x = 266
-               ray_y = 148
+               @ray_x = 266
+               @ray_y = 148
                raytyouseiy = 32
                case @battle_anime_frame
                when strfra + akifra * 0
@@ -61404,7 +61337,7 @@ module Scene_Db_Battle_Anime_pattern
                    battle_anime_change 0,0
                when strfra + akifra * 2..strfra + akifra * 3-1
                    battle_anime_change 0,2
-                   ray_y += raytyouseiy
+                   @ray_y += raytyouseiy
                    Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 2
                when strfra + akifra * 3
                    battle_anime_change 0,0
@@ -61415,7 +61348,7 @@ module Scene_Db_Battle_Anime_pattern
                    battle_anime_change 0,0
                when strfra + akifra * 6..strfra + akifra * 7-1
                    battle_anime_change 0,4
-                   ray_y += raytyouseiy
+                   @ray_y += raytyouseiy
                    Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 6
                when strfra + akifra * 7
                    battle_anime_change 0,0
@@ -61426,7 +61359,7 @@ module Scene_Db_Battle_Anime_pattern
                    battle_anime_change 0,0
                when strfra + akifra * 10..strfra + akifra * 11-1
                    battle_anime_change 0,2
-                   ray_y += raytyouseiy
+                   @ray_y += raytyouseiy
                    Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 10
                when strfra + akifra * 11..strfra + akifra * 11+8
                    @effect_anime_pattern = 0
@@ -61595,8 +61528,8 @@ module Scene_Db_Battle_Anime_pattern
               akifra = 8
               @effect_anime_frame = 0
               @effect_anime_pattern = 123 if @battle_anime_frame <= strfra + akifra * 11
-              ray_x = 266
-              ray_y = 148
+              @ray_x = 266
+              @ray_y = 148
               raytyouseiy = 32
               case @battle_anime_frame
               when strfra + akifra * 0
@@ -61612,7 +61545,7 @@ module Scene_Db_Battle_Anime_pattern
                   @gx = -16
                   battle_anime_change 1,16
                   battle_anime_change 0,2
-                  ray_y += raytyouseiy
+                  @ray_y += raytyouseiy
                   Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == strfra + akifra * 2
               when strfra + akifra * 3
                   @gx = 16
@@ -61631,7 +61564,7 @@ module Scene_Db_Battle_Anime_pattern
                   @gx = -16
                   battle_anime_change 1,16
                   battle_anime_change 0,4
-                  ray_y += raytyouseiy
+                  @ray_y += raytyouseiy
                   Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == strfra + akifra * 6
               when strfra + akifra * 7
                   @gx = 16
@@ -61650,7 +61583,7 @@ module Scene_Db_Battle_Anime_pattern
                   @gx = -16
                   battle_anime_change 1,16
                   battle_anime_change 0,2
-                  ray_y += raytyouseiy
+                  @ray_y += raytyouseiy
                   Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == strfra + akifra * 10
               when strfra + akifra * 11..strfra + akifra * 11+8
                   @gx = 16
@@ -61755,8 +61688,8 @@ module Scene_Db_Battle_Anime_pattern
                akifra = 4
                @effect_anime_frame = 0
                @effect_anime_pattern = 123 if @battle_anime_frame <= strfra + akifra * 11
-               ray_x = 266
-               ray_y = 148
+               @ray_x = 266
+               @ray_y = 148
                raytyouseiy = 32
                case @battle_anime_frame
                when strfra + akifra * 0
@@ -61769,7 +61702,7 @@ module Scene_Db_Battle_Anime_pattern
                when strfra + akifra * 2..strfra + akifra * 3-1
                    @gx = -8
                    battle_anime_change 0,3
-                   ray_y += raytyouseiy
+                   @ray_y += raytyouseiy
                    Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 2
                when strfra + akifra * 3
                    @gx = 8
@@ -61784,7 +61717,7 @@ module Scene_Db_Battle_Anime_pattern
                when strfra + akifra * 6..strfra + akifra * 7-1
                    @gx = -8
                    battle_anime_change 0,3
-                   ray_y += raytyouseiy
+                   @ray_y += raytyouseiy
                    Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 6
                when strfra + akifra * 7
                    @gx = 8
@@ -61799,7 +61732,7 @@ module Scene_Db_Battle_Anime_pattern
                when strfra + akifra * 10..strfra + akifra * 11-1
                    @gx = -8
                    battle_anime_change 0,3
-                   ray_y += raytyouseiy
+                   @ray_y += raytyouseiy
                    Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 10
                when strfra + akifra * 11..strfra + akifra * 11+8
                    @gx = 8
@@ -61926,8 +61859,8 @@ module Scene_Db_Battle_Anime_pattern
               return @battle_anime_result + 1
           end
         when 2707 #タード&ゾルト)ダブルアタック
-            ray_x = 340-160
-            ray_y = 96
+            @ray_x = 340-160
+            @ray_y = 96
 
             backhai_no = 102
             back_x = 194-160
@@ -62078,8 +62011,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
        when 1708 #刀攻撃強(ジンジャー系)
-           ray_x = 210
-           ray_y = 118
+           @ray_x = 210
+           @ray_y = 118
            case @battle_anime_frame
 
            when 0
@@ -62213,8 +62146,8 @@ module Scene_Db_Battle_Anime_pattern
            end
 
         when 1709 #刀攻撃強(ニッキー系)
-            ray_x = 210
-            ray_y = 118
+            @ray_x = 210
+            @ray_y = 118
             case @battle_anime_frame
 
             when 0
@@ -62392,11 +62325,11 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_type = 0
                     @effect_anime_pattern = 18
                     back_anime_pattern 4
-                    ray_x = 230+38
-                    ray_y = 104
+                    @ray_x = 230+38
+                    @ray_y = 104
                 elsif @battle_anime_frame >= 126 && @battle_anime_frame <= 188
-                    ray_x = 230+38
-                    ray_y = 104
+                    @ray_x = 230+38
+                    @ray_y = 104
                     back_anime_pattern 4
                 elsif @battle_anime_frame == 189
                     Audio.se_stop
@@ -62416,11 +62349,11 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_type = 0
                     @effect_anime_pattern = 18
                     back_anime_pattern 4
-                    ray_x = 230+38
-                    ray_y = 104
+                    @ray_x = 230+38
+                    @ray_y = 104
                 elsif @battle_anime_frame >= 254 && @battle_anime_frame <= 316
-                    ray_x = 230+38
-                    ray_y = 104
+                    @ray_x = 230+38
+                    @ray_y = 104
                     back_anime_pattern 4
                 elsif @battle_anime_frame == 317
                     @effect_anime_pattern = 0
@@ -62568,8 +62501,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
             end
         when 2713 #ロボット兵 バルカン砲
-            ray_x = 210
-            ray_y = 118
+            @ray_x = 210
+            @ray_y = 118
             case @battle_anime_frame
 
             when 0
@@ -62622,9 +62555,9 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "DB3 エネルギー波2")
                     @effect_anime_pattern = 322
                 end
-                ray_x = 800 - ((@battle_anime_frame - 285) * 8)
-                ray_x = 800 - ((349 - 285) * 8) if @battle_anime_frame >= 349
-                ray_y = 134
+                @ray_x = 800 - ((@battle_anime_frame - 285) * 8)
+                @ray_x = 800 - ((349 - 285) * 8) if @battle_anime_frame >= 349
+                @ray_y = 134
 
                 if @battle_anime_frame == 349
                     @effect_anime_pattern = 323
@@ -62644,8 +62577,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2714 #メタルクウラコア エネルギー波
-            ray_x = 260
-            ray_y = 116
+            @ray_x = 260
+            @ray_y = 116
             case @battle_anime_frame
 
             when 0 #初期化
@@ -62669,7 +62602,7 @@ module Scene_Db_Battle_Anime_pattern
             when 146..173
                 @effect_anime_pattern = 234
                 #@effect_anime_pattern = 228 if $cha_bigsize_on[@chanum] == true && @attackDir == 1
-                ray_y = 136
+                @ray_y = 136
             when 174
                 anime_pattern_init
                 return @battle_anime_result + 1
@@ -62679,8 +62612,8 @@ module Scene_Db_Battle_Anime_pattern
             #ray_big = true
             #back_x = 228
             #back_y = 88
-            ray_x = 180
-            ray_y = 90
+            @ray_x = 180
+            @ray_y = 90
             case @battle_anime_frame
 
             when 0 #初期化
@@ -62812,8 +62745,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 back_x = 180
                 back_y = 0
-                ray_x = 178
-                ray_y = 84
+                @ray_x = 178
+                @ray_y = 84
 
                 case @battle_anime_frame
                 when 0 #初期化
@@ -62843,8 +62776,8 @@ module Scene_Db_Battle_Anime_pattern
                     @effect_anime_type = 0
                     set_chr_display_out
                 when 162..232
-                    ray_y = 116
-                    ray_x = 780
+                    @ray_y = 116
+                    @ray_x = 780
                     @effect_anime_pattern = 329
                 when 233
                     anime_pattern_init
@@ -62865,8 +62798,8 @@ module Scene_Db_Battle_Anime_pattern
                     set_chr_display_out
                     @tec_output_back = true
                 when 1..71
-                    ray_y = 116
-                    ray_x = 780
+                    @ray_y = 116
+                    @ray_x = 780
                     @effect_anime_pattern = 329
                 when 72
                     anime_pattern_init
@@ -62880,8 +62813,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 back_x = 180
                 back_y = 0
-                ray_x = 0#(640-246)
-                ray_y = 0
+                @ray_x = 0#(640-246)
+                @ray_y = 0
 
                 case @battle_anime_frame
                 when 0 #初期化
@@ -62903,8 +62836,8 @@ module Scene_Db_Battle_Anime_pattern
                     @back_window.contents.blt(200,100,picture,rect)
 
 
-                    #ray_x = @genkityuushin_x - 12
-                    #ray_y = @genkityuushin_y - 12
+                    #@ray_x = @genkityuushin_x - 12
+                    #@ray_y = @genkityuushin_y - 12
                     tame_end = 300
 
                     if @battle_anime_frame == tame_end
@@ -62991,8 +62924,8 @@ module Scene_Db_Battle_Anime_pattern
                         @effect_anime_pattern = 325
                     end
 
-                    ray_x = 62
-                    ray_y = -276
+                    @ray_x = 62
+                    @ray_y = -276
 
                     @effect_anime_pattern = 0 if @battle_anime_frame == 286
                 when 287
@@ -63006,8 +62939,8 @@ module Scene_Db_Battle_Anime_pattern
                     @tec_output_back_no = 0
                     @tec_back_small = true
                 when 288..334
-                    ray_x = 640
-                    ray_y = -200
+                    @ray_x = 640
+                    @ray_y = -200
                     @effect_anime_pattern = 326
                 when 335
                     anime_pattern_init
@@ -63028,8 +62961,8 @@ module Scene_Db_Battle_Anime_pattern
                     @tec_back_small = true
                     @tec_output_back = true
                 when 1..46
-                    ray_x = 640
-                    ray_y = -200
+                    @ray_x = 640
+                    @ray_y = -200
                     @effect_anime_pattern = 326
                 when 47
                     anime_pattern_init
@@ -63078,8 +63011,8 @@ module Scene_Db_Battle_Anime_pattern
                 akifra = 3
                 @effect_anime_frame = 0
                 @effect_anime_pattern = 123 if @battle_anime_frame <= strfra + akifra * 11
-                ray_x = 266
-                ray_y = 148
+                @ray_x = 266
+                @ray_y = 148
                 raytyouseiy = 32
                 case @battle_anime_frame
                 when strfra + akifra * 0
@@ -63089,7 +63022,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                 when strfra + akifra * 2..strfra + akifra * 3-1
                     battle_anime_change 0,2
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 2
                 when strfra + akifra * 3
                     battle_anime_change 0,0
@@ -63100,7 +63033,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                 when strfra + akifra * 6..strfra + akifra * 7-1
                     battle_anime_change 0,4
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 6
                 when strfra + akifra * 7
                     battle_anime_change 0,0
@@ -63111,7 +63044,7 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change 0,0
                 when strfra + akifra * 10..strfra + akifra * 11-1
                     battle_anime_change 0,2
-                    ray_y += raytyouseiy
+                    @ray_y += raytyouseiy
                     Audio.se_play("Audio/SE/" + "Z1 打撃") if @battle_anime_frame == strfra + akifra * 10
                 when strfra + akifra * 11..strfra + akifra * 11+8
                     @effect_anime_pattern = 0
@@ -63165,8 +63098,8 @@ module Scene_Db_Battle_Anime_pattern
             backhai_no = 201
             se_name = "Z3 変身"
 
-            ray_x = 270
-            ray_y = 96
+            @ray_x = 270
+            @ray_y = 96
             if @all_attack_count == 1
 
                 case @battle_anime_frame
@@ -63321,8 +63254,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "DB3 SE103") if @battle_anime_frame == sframe
                 Audio.se_play("Audio/SE/" + "DB3 エネルギー波2") if @battle_anime_frame == sframe
                 @ray_color = 0
-                ray_x = 288
-                ray_y = 102
+                @ray_x = 288
+                @ray_y = 102
                 #@effect_anime_pattern = 295
                 @effect_anime_pattern = 256
             when 261
@@ -63330,8 +63263,8 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 set_chr_display_out
             when 262..289
-                ray_x = 288
-                ray_y = 102
+                @ray_x = 288
+                @ray_y = 102
                 #back_anime_pattern 1
                 @effect_anime_pattern = 265
             when 290
@@ -63339,8 +63272,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2779 #カメハメ波(ブウ)
-            ray_x = 200
-            ray_y = 134
+            @ray_x = 200
+            @ray_y = 134
             if @battle_anime_frame == 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
                 #Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
@@ -63377,8 +63310,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2780 #巻きつき攻撃(ブウ)
-            ray_x = 274
-            ray_y = 118
+            @ray_x = 274
+            @ray_y = 118
             case @battle_anime_frame #初期化
 
             when 0
@@ -63410,8 +63343,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "Z1 ブン") if @battle_anime_frame == sframe
                 battle_anime_change 0,8
                 @effect_anime_type = 4
-                ray_x = 274
-                ray_y = 120
+                @ray_x = 274
+                @ray_y = 120
             when 121..159
                 sframe = 121
                 Audio.se_play("Audio/SE/" + "Z1 飛ぶ") if @battle_anime_frame == sframe
@@ -63426,8 +63359,8 @@ module Scene_Db_Battle_Anime_pattern
                 Audio.se_play("Audio/SE/" + "DB3 SE096")
             when 161..187
                 @effect_anime_pattern = 351
-                ray_x = 640
-                ray_y = 120
+                @ray_x = 640
+                @ray_y = 120
 
 
             when 188
@@ -63441,14 +63374,14 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change 1,16
                 @eney = STANDARD_ENEY
                 @enex = 640
-                ray_x = @chax
-                ray_y = @chay
+                @ray_x = @chax
+                @ray_y = @chay
                 @effect_anime_type = 5
                 @effect_anime_frame = 0
 
                 if $cha_bigsize_on[@chanum.to_i] == true
-                    ray_x -= 96
-                    ray_y -= 32
+                    @ray_x -= 96
+                    @ray_y -= 32
                     @effect_anime_type = 0
                     @effect_anime_pattern = 354
                 end
@@ -63457,15 +63390,15 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_frame = 0
                 sframe = 189
                 #p @chax,@chay
-                ray_x = 240 #@chax
-                ray_y = 120 #@chay
+                @ray_x = 240 #@chax
+                @ray_y = 120 #@chay
                 Audio.se_play("Audio/SE/" + "Z1 飛ぶ") if @battle_anime_frame == sframe
                 @enex -= 16
                 battle_anime_change 0,9
 
                 if $cha_bigsize_on[@chanum.to_i] == true
-                    ray_x -= 96
-                    ray_y -= 32
+                    @ray_x -= 96
+                    @ray_y -= 32
                     @effect_anime_type = 0
                     @effect_anime_pattern = 354
                 end
@@ -63478,21 +63411,21 @@ module Scene_Db_Battle_Anime_pattern
                 @chay =  -300
                 #@chax -= 16
                 #@chay -= 8
-                ray_x = 240 - (16 * (@battle_anime_frame - sframe))
-                ray_y = 120 - 8 * (@battle_anime_frame - sframe)
+                @ray_x = 240 - (16 * (@battle_anime_frame - sframe))
+                @ray_y = 120 - 8 * (@battle_anime_frame - sframe)
                 @effect_anime_type = 6
                 @effect_anime_frame = 0
                 battle_anime_change 1,16
                 if $cha_bigsize_on[@chanum.to_i] == true
-                    ray_x -= 128
-                    ray_y -= 48
+                    @ray_x -= 128
+                    @ray_y -= 48
                     @effect_anime_pattern = 354
                     @effect_anime_type = 1
                 end
             when 251..264
                 sframe = 251
-                ray_x = 640 - (16 * (@battle_anime_frame - sframe))
-                ray_y = 240 - (8 * (@battle_anime_frame - sframe))
+                @ray_x = 640 - (16 * (@battle_anime_frame - sframe))
+                @ray_y = 240 - (8 * (@battle_anime_frame - sframe))
                 if @battle_anime_frame == sframe
                     @eney = -88
                     @enex = CENTER_CHAX
@@ -63500,11 +63433,11 @@ module Scene_Db_Battle_Anime_pattern
                 end
 
                 if $cha_bigsize_on[@chanum.to_i] == true
-                    ray_x -= 240
-                    ray_y -= 48
+                    @ray_x -= 240
+                    @ray_y -= 48
 
-                    #@chax = ray_x + 96
-                    #@chay = ray_y
+                    #@chax = @ray_x + 96
+                    #@chay = @ray_y
 
                 end
 
@@ -63517,8 +63450,8 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 2781 #お菓子光線(ブウ)
-            ray_x = 192
-            ray_y = 110
+            @ray_x = 192
+            @ray_y = 110
             case @battle_anime_frame #初期化
 
             when 0
@@ -63530,11 +63463,11 @@ module Scene_Db_Battle_Anime_pattern
             when 1..36
                 picture = Cache.picture("Z3_戦闘_必殺技_お菓子光線_前中後繋ぎ")
                 rect = Rect.new(608 - 48, 0, 48, 52) #発動側
-                @back_window.contents.blt(ray_x + 48,ray_y,picture,rect)
+                @back_window.contents.blt(@ray_x + 48,@ray_y,picture,rect)
                 rect = Rect.new(0, 0, 48, 52) #ヒット側
-                @back_window.contents.blt(ray_x - RAY_SPEED*@effect_anime_frame,ray_y,picture,rect)
+                @back_window.contents.blt(@ray_x - RAY_SPEED*@effect_anime_frame,@ray_y,picture,rect)
                 rect = Rect.new(48, 0, RAY_SPEED*@effect_anime_frame, 52) #中
-                @back_window.contents.blt(ray_x + 48 - RAY_SPEED*@effect_anime_frame,ray_y,picture,rect)
+                @back_window.contents.blt(@ray_x + 48 - RAY_SPEED*@effect_anime_frame,@ray_y,picture,rect)
                 @effect_anime_frame += 1
             when 37
                 @effect_anime_pattern = 0
@@ -63542,7 +63475,7 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
                 set_chr_display_out
             when 38..64
-                ray_y = 124
+                @ray_y = 124
                 @effect_anime_pattern = 352
             when 65
                 anime_pattern_init
@@ -63558,8 +63491,8 @@ module Scene_Db_Battle_Anime_pattern
             backhai_no = 201
             se_name = "Z3 変身"
 
-            ray_x = 270
-            ray_y = 96
+            @ray_x = 270
+            @ray_y = 96
             if @all_attack_count == 1
 
                 case @battle_anime_frame
@@ -63653,8 +63586,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
             end
         when 2788 #ラッシュ(オゾット(変身))
-            ray_x = 274
-            ray_y = 118
+            @ray_x = 274
+            @ray_y = 118
             back_x = 172
             back_y = 30
 
@@ -63887,8 +63820,8 @@ module Scene_Db_Battle_Anime_pattern
         when 2789 #イグナイトビジョン(オゾット／オゾット変身)
             #back_x = 222
             #back_y = 60
-            ray_x = CENTER_CHAX
-            ray_y = STANDARD_CHAY
+            @ray_x = CENTER_CHAX
+            @ray_y = STANDARD_CHAY
             color = Color.new(255,255,255,260)
 
             #恐らくここにないからエラー
@@ -63996,8 +63929,8 @@ module Scene_Db_Battle_Anime_pattern
             backhai_no = 201
             se_name = "Z3 変身"
 
-            ray_x = 274
-            ray_y = 118
+            @ray_x = 274
+            @ray_y = 118
             back_x = 172
             back_y = 30
 
@@ -64027,8 +63960,8 @@ module Scene_Db_Battle_Anime_pattern
                     @genkitama_kanri_frame = []
                     @genkitama_kanri_maxflame = 15
                     @genkitama_kanri_spdup = 10
-                    @genkityuushin_x = ray_x +40
-                    @genkityuushin_y = ray_y +76
+                    @genkityuushin_x = @ray_x +40
+                    @genkityuushin_y = @ray_y +76
 
                     @genkitama_kanri_frame = [0,0,0,0,0,0,0,0]
                 end
@@ -64152,8 +64085,8 @@ module Scene_Db_Battle_Anime_pattern
             backhai_no = 201
             se_name = "Z3 変身"
 
-            ray_x = 270
-            ray_y = 96
+            @ray_x = 270
+            @ray_y = 96
 
             case @battle_anime_frame
             when 0 #初期化
@@ -64222,13 +64155,13 @@ module Scene_Db_Battle_Anime_pattern
         #@back_anime_frame
 
         #結果反映
-        output_battle_anime @output_anime_type,@output_anime_type_y,@btl_ani_cha_chg_no
+        output_battle_anime(@output_anime_type, @output_anime_type_y, @btl_ani_cha_chg_no)
 
         if @effect_anime_pattern != 0
             if @effect_anime_mirror == 255
-                effect_pattern @effect_anime_pattern,ray_x,ray_y
+                effect_pattern(@effect_anime_pattern, @ray_x, @ray_y)
             else
-                effect_pattern @effect_anime_pattern,ray_x,ray_y,@effect_anime_mirror
+                effect_pattern(@effect_anime_pattern, @ray_x, @ray_y, @effect_anime_mirror)
             end
         end
         return @battle_anime_result

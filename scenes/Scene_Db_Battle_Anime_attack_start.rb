@@ -1,31 +1,4 @@
 module Scene_Db_Battle_Anime_attack_start
-    #=== copied from class
-    #include Share
-    #include Db_Battle_Anime_test_Setup
-
-    #キャラクターステータス表示位置
-    # character status
-    Chastexstr = -16
-    Chasteystr = 340
-    Chastexend = 672
-    Chasteyend = 156
-    STANDARD_CHAX = -70
-    STANDARD_CHAY = 120
-    STANDARD_ENEX = 602
-    STANDARD_ENEY = STANDARD_CHAY
-    STANDARD_BACKX = 0
-    STANDARD_BACKY = 256
-    CENTER_CHAX = 240
-    CENTER_ENEX = 304
-    TEC_CENTER_CHAX = 266
-    RAY_SPEED = 14
-    ENE_STOP_TEC = 102  #超能力の技ID
-    ENE_STOP_TEC2 = 720  #超能力の技ID
-    STOP_TURN = 1       #超能力でストップするターン
-    FLASH_Y_SIZE_CUTIN_ON = 296
-    FLASH_Y_SIZE_CUTIN_OFF = 356
-    FASTFADEFRAME = 5 #RとBでスキップ時のフェードフレーム数
-    #===
 
     #--------------------------------------------------------------------------
     # ● 戦闘アニメ処理
@@ -55,8 +28,7 @@ module Scene_Db_Battle_Anime_attack_start
         # 通常攻撃除外パターン用配列
         ok_normalattackpattern = []
 
-        if @attackDir == 0
-            # L -> R
+        if @attackDir == 0  # L -> R
             if $cha_set_action[@chanum] < 11
                 # normal attack
                 attackPattern = $cha_set_action[@chanum]
@@ -590,10 +562,10 @@ module Scene_Db_Battle_Anime_attack_start
                             end
                         end  # end of case attackPattern==1
                     else  # skill
+                        p($btl_progress, attackPattern)
                         case $btl_progress  # 0,1,2 for Z1,Z2,Z3
-
                         # 必殺技
-                        when 0 # Z1
+                        when 0  # Z1
                             case attackPattern
                             ##############################################################################
                             #
@@ -2172,7 +2144,7 @@ module Scene_Db_Battle_Anime_attack_start
                                 end
                             end
 
-                        when 1 # Z2
+                        when 1  # Z2
                             case attackPattern
                             ##############################################################################
                             #
@@ -5222,7 +5194,7 @@ module Scene_Db_Battle_Anime_attack_start
                                 end
                                 attackAnimeEnd = true
                             end
-                        when 2 # Z3
+                        when 2  # Z3
                             case attackPattern
                             ##############################################################################
                             #
@@ -5587,13 +5559,13 @@ module Scene_Db_Battle_Anime_attack_start
                             when 58 # カメハメ波(悟飯)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
-                                    @battle_anime_result = anime_pattern 31
+                                    @battle_anime_result = anime_pattern(31)
                                 elsif @battle_anime_result == 1
                                     # 必殺技発動画面へ
-                                    @battle_anime_result = anime_pattern 32
+                                    @battle_anime_result = anime_pattern(32)
                                 elsif @battle_anime_result == 2
                                     # 必殺技発動
-                                    @battle_anime_result = anime_pattern 1148
+                                    @battle_anime_result = anime_pattern(1148)
                                 elsif @battle_anime_result == 3
                                     # 光線系ダメージ
                                     damage_pattern = 23
@@ -12944,7 +12916,6 @@ module Scene_Db_Battle_Anime_attack_start
                 # $err_run_process_d3
                 # set_err_run_process_msg
                 # 例外が発生したときの処理
-
                 p "エラー発生　：" + $err_run_process.to_s,
                   "--戦闘シーン情報--",
                   "　番号　　　：" + attackPattern.to_s,
@@ -12965,7 +12936,7 @@ module Scene_Db_Battle_Anime_attack_start
             # 発動スキルの表示
             # output_runskill 1 #引数1で攻撃と判断
 
-            output_cutin attackPattern
+            output_cutin(attackPattern)
             # if @battle_anime_frame == attackAnimeEnd + 30
             #  attackAnimeEnd = true
             # end
