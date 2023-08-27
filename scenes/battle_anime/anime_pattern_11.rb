@@ -48,7 +48,7 @@ module Scene_Db_Battle_Anime_pattern_11
             Audio.se_stop()
             Audio.se_play("Audio/SE/" + "Z3 エネルギー波")
         when 47..75
-            @effect_anime_pattern = 203
+            @effect_anime_pattern = 203  # かめはめ波系(発動)
             @ray_x = 340
             @ray_y = 142
             @ax = 2 if @battle_anime_frame == 47 && $btl_progress >= 2
@@ -61,8 +61,44 @@ module Scene_Db_Battle_Anime_pattern_11
         when 80
             set_chr_display_out()
         when 81..110
-            @effect_anime_pattern = 204
-        when 111
+            @effect_anime_pattern = 204  # かめはめ波系(ヒット)
+
+        #===
+        when 111  # beam hit
+            #Audio.se_stop()
+            Audio.se_play("Audio/SE/" + "ZG 打撃4")
+
+            battle_anime_change(1, 17)
+
+            @effect_anime_pattern = 0
+            @effect_anime_frame = 0
+            @effect_anime_type = 0
+
+        when 121  # flash begin
+            #Audio.se_stop()
+            Audio.se_play("Audio/SE/" + "Z1 高速移動")
+            @chay = -120
+
+        when 122..152  # flashing
+            if @battle_anime_frame % 4 == 0
+                pic = Cache.picture("戦闘アニメ")
+                rect = Rect.new(0, 48, 64, 64)
+                @back_window.contents.blt(@chax-6, 144+2, pic, rect)
+            end
+
+        when 153  # appear
+            @enex = CENTER_ENEX
+            @eney = STANDARD_ENEY
+            @chax = CENTER_CHAX + 45
+            @chay = STANDARD_CHAY
+            battle_anime_change(0, 0)
+
+        when 163  # normal attack
+            battle_anime_change(0, 1)
+            Audio.se_play("Audio/SE/" + "ZG 打撃2")
+            #===
+
+        when 173
             anime_pattern_init()
             return @battle_anime_result + 1
         end
@@ -98,7 +134,7 @@ module Scene_Db_Battle_Anime_pattern_11
             back_anime_pattern(backhai_no, back_x, back_y)
         when 90
             Audio.se_stop()
-            Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+            Audio.se_play("Audio/SE/" + "Z1 高速移動")
             @chay = -120
             back_anime_pattern(backhai_no, back_x, back_y)
         when 91..130
@@ -109,7 +145,7 @@ module Scene_Db_Battle_Anime_pattern_11
                 @back_window.contents.blt(@chax-6, 144+2, picture, rect)
             end
         when 131
-            Audio.se_play("Audio/SE/" + "Z1 逃げる")    # 効果音を再生する
+            Audio.se_play("Audio/SE/" + "Z1 逃げる")
             @enex = CENTER_ENEX
             @eney = STANDARD_ENEY
             @chax = -200

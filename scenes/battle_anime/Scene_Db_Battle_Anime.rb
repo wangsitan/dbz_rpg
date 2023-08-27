@@ -4857,34 +4857,36 @@ class Scene_Db_Battle_Anime < Scene_Base
     def output_battle_anime(n=0, y=0, cha_chg_no=0)
         top_name = set_ene_str_no(@enedatenum)
 
+        #p(cha_chg_no)
+
         if n == 0
             if cha_chg_no == 0
                 # chpicturea = Cache.picture($btl_top_file_name + "戦闘_" + $data_actors[$partyc[@chanum.to_i]].name)
-                chpicturea = Cache.picture(get_fighter_name($partyc[@chanum.to_i], n))
+                fighterPic = Cache.picture(get_fighter_name($partyc[@chanum.to_i], n))
             else
                 # chpicturea = Cache.picture($btl_top_file_name + "戦闘_" + $data_actors[cha_chg_no].name)
-                chpicturea = Cache.picture(get_fighter_name(cha_chg_no, n))
+                fighterPic = Cache.picture(get_fighter_name(cha_chg_no, n))
             end
-            enpicturea = Cache.picture(top_name + "戦闘_敵_" + $data_enemies[@enedatenum].name)
+            enemyPic = Cache.picture(top_name + "戦闘_敵_" + $data_enemies[@enedatenum].name)
         end
 
         if n == 1 && @attackDir == 0 # 味方が必殺
             if cha_chg_no == 0
                 # chpicturea = Cache.picture($btl_top_file_name + "戦闘_必殺技_" + $data_actors[$partyc[@chanum.to_i]].name)
-                chpicturea = Cache.picture(get_fighter_name($partyc[@chanum.to_i], n))
+                fighterPic = Cache.picture(get_fighter_name($partyc[@chanum.to_i], n))
             else
                 # chpicturea = Cache.picture($btl_top_file_name + "戦闘_必殺技_" + $data_actors[cha_chg_no].name)
-                chpicturea = Cache.picture(get_fighter_name(cha_chg_no, n))
+                fighterPic = Cache.picture(get_fighter_name(cha_chg_no, n))
             end
-            enpicturea = Cache.picture(top_name + "戦闘_敵_" + $data_enemies[@enedatenum].name)
+            enemyPic = Cache.picture(top_name + "戦闘_敵_" + $data_enemies[@enedatenum].name)
         elsif n == 1 && @attackDir == 1 # 敵が必殺
             # chpicturea = Cache.picture($btl_top_file_name + "戦闘_" + $data_actors[$partyc[@chanum.to_i]].name)
-            chpicturea = Cache.picture(get_fighter_name($partyc[@chanum.to_i]))
-            enpicturea = Cache.picture(top_name + "戦闘_必殺技_敵_" + $data_enemies[@enedatenum].name)
+            fighterPic = Cache.picture(get_fighter_name($partyc[@chanum.to_i]))
+            enemyPic = Cache.picture(top_name + "戦闘_必殺技_敵_" + $data_enemies[@enedatenum].name)
         end
 
         # 結果反映
-        if @attackDir == 0
+        if @attackDir == 0  # L -> R
             @gx = -@gx
             if y != 0
                 @gy = -@gy
@@ -4896,21 +4898,23 @@ class Scene_Db_Battle_Anime < Scene_Base
             @backx += @bx
             @backy += @by
 
-            # 敵巨大キャラ
-            if $data_enemies[@enedatenum].element_ranks[23] != 1
-                @back_window.contents.blt(@enex, @eney, enpicturea, @enerect)
+            # enemy
+            if $data_enemies[@enedatenum].element_ranks[23] == 1
+                # big
+                @back_window.contents.blt(@enex, @eney - 48, enemyPic, @enerect)
             else
-                @back_window.contents.blt(@enex, @eney - 48, enpicturea, @enerect)
+                @back_window.contents.blt(@enex, @eney, enemyPic, @enerect)
             end
 
-            # 味方巨大キャラ
-            if $cha_bigsize_on[@chanum.to_i] != true
-                @back_window.contents.blt(@chax, @chay, chpicturea, @charect)
+            # our fighter
+            if $cha_bigsize_on[@chanum.to_i] == true
+                # big
+                @back_window.contents.blt(@chax - 96, @chay - 48, fighterPic, @charect)
             else
-                @back_window.contents.blt(@chax - 96, @chay - 48, chpicturea, @charect)
+                @back_window.contents.blt(@chax, @chay, fighterPic, @charect)
             end
 
-        else
+        else  # L <- R
             @ax = -@ax
             if y != 0
                 @ay = -@ay
@@ -4925,16 +4929,16 @@ class Scene_Db_Battle_Anime < Scene_Base
 
             # 味方巨大キャラ
             if $cha_bigsize_on[@chanum.to_i] != true
-                @back_window.contents.blt(@chax, @chay, chpicturea, @charect)
+                @back_window.contents.blt(@chax, @chay, fighterPic, @charect)
             else
-                @back_window.contents.blt(@chax - 96, @chay - 48, chpicturea, @charect)
+                @back_window.contents.blt(@chax - 96, @chay - 48, fighterPic, @charect)
             end
 
             # 敵巨大キャラ
             if $data_enemies[@enedatenum].element_ranks[23] != 1
-                @back_window.contents.blt(@enex, @eney, enpicturea, @enerect)
+                @back_window.contents.blt(@enex, @eney, enemyPic, @enerect)
             else
-                @back_window.contents.blt(@enex - 48, @eney - 48, enpicturea, @enerect)
+                @back_window.contents.blt(@enex - 48, @eney - 48, enemyPic, @enerect)
             end
         end
     end
