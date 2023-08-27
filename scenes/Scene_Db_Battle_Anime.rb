@@ -3488,15 +3488,14 @@ class Scene_Db_Battle_Anime < Scene_Base
     # 引数：aord:攻撃か防御か n:戦闘アニメNo
     # aord: 0 for attack, 1 for defense ?
     def battle_anime_change(aord, n)
-        if aord == 0
-            if @attackDir == 0 then
+        if aord == 0  # attack
+            if @attackDir == 0  # L attack
                 if $cha_bigsize_on[@chanum.to_i] != true
-                    @charect = Rect.new(0, 0 + (96 * n), 96, 96)
+                    @charect = Rect.new(0, 96 * n, 96, 96)
                 else
                     @charect = Rect.new(0, 192 * n, 192, 192)
                 end
-            else
-                # @enerect = Rect.new(0 , 0+(96*n), 96, 96)
+            else  # R attack
                 # 巨大キャラかチェック
                 if $data_enemies[@enedatenum].element_ranks[23] != 1
                     @enerect = Rect.new(0, 96 * n, 96, 96)
@@ -3504,22 +3503,20 @@ class Scene_Db_Battle_Anime < Scene_Base
                     @enerect = Rect.new(0, 192 * n, 192, 192)
                 end
             end
-        else
-            if @attackDir == 0 then
+        else  # defense
+            if @attackDir == 0
                 if $data_enemies[@enedatenum].element_ranks[23] != 1
                     @enerect = Rect.new(0, 96 * n, 96, 96)
                 else
                     @enerect = Rect.new(0, 192 * n, 192, 192)
                 end
             else
-                # @charect = Rect.new(0 , 0+(96*n), 96, 96)
                 if $cha_bigsize_on[@chanum.to_i] != true
-                    @charect = Rect.new(0, 0 + (96 * n), 96, 96)
+                    @charect = Rect.new(0, 96 * n, 96, 96)
                 else
                     @charect = Rect.new(0, 192 * n, 192, 192)
                 end
             end
-
         end
     end
 

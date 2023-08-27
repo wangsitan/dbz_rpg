@@ -35,6 +35,40 @@ module Scene_Db_Battle_Anime_pattern_11
         return nil
     end  # end of 1148
 
+    def anime_pattern_1148_test()
+        case @battle_anime_frame
+        when 0
+            Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+            @output_anime_type = 1
+            battle_anime_change(0, 11)
+            @ray_color = 0
+        when 41..45
+            battle_anime_change(0, 12)
+        when 46
+            Audio.se_stop()
+            Audio.se_play("Audio/SE/" + "Z3 エネルギー波")
+        when 47..75
+            @effect_anime_pattern = 203
+            @ray_x = 340
+            @ray_y = 142
+            @ax = 2 if @battle_anime_frame == 47 && $btl_progress >= 2
+            @ax = -2 if @battle_anime_frame == 50 && $btl_progress >= 2
+            @ax = 0 if @battle_anime_frame == 53 && $btl_progress >= 2
+        when 76
+            @effect_anime_pattern = 0
+            @effect_anime_frame = 0
+            @effect_anime_type = 0
+        when 80
+            set_chr_display_out()
+        when 81..110
+            @effect_anime_pattern = 204
+        when 111
+            anime_pattern_init()
+            return @battle_anime_result + 1
+        end
+
+        return nil
+    end  # 1148 test
 
     # 爆裂ラッシュ
     def anime_pattern_1152()
@@ -133,7 +167,6 @@ module Scene_Db_Battle_Anime_pattern_11
                 @effect_anime_pattern = 123 if @battle_anime_frame == 184
                 @ray_x = hit_efe_x
                 @ray_y = hit_efe_y
-                #p @battle_anime_frame
                 @effect_anime_pattern = 0 if @battle_anime_frame == 200
             when 201..215
                 @effect_anime_frame = 0

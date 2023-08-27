@@ -9842,7 +9842,8 @@ module Scene_Db_Battle_Anime_pattern
             end
 
         when 1148  # カメハメ波(悟飯)
-            ret = anime_pattern_1148()
+            #ret = anime_pattern_1148()
+            ret = anime_pattern_1148_test()
             if ret != nil
                 return ret
             end
@@ -63891,7 +63892,6 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         end
-        #@back_anime_frame
 
         #結果反映
         output_battle_anime(@output_anime_type, @output_anime_type_y, @btl_ani_cha_chg_no)
