@@ -334,8 +334,8 @@ class Scene_Db_Ryuha_Pair_Training < Scene_Base
     when 2 #戦う
       anime_frame = 260
       #@btl_anime_count = anime_frame if @btl_anime_count == 0
-      chara0 = set_battle_character_name @training_chara[@training_select_chara[0]],0
-      chara1 = set_battle_character_name @training_chara[@training_select_chara[1]],0
+      chara0 = get_fighter_name @training_chara[@training_select_chara[0]],0
+      chara1 = get_fighter_name @training_chara[@training_select_chara[1]],0
       #p chara0 , $top_file_name ,$data_actors[@training_chara[0]].name
       #p chara1
       animePattern = 0

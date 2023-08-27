@@ -373,7 +373,7 @@ class Scene_Gameover < Scene_Base #< Scene_Map #
         if @frame_count == 168
           for x in 0..$partyc.size - 1
             #@cha_sprite[x] = Sprite.new
-            #@cha_sprite[x].bitmap = Cache.picture(set_battle_character_name $partyc[x],0) #パーティーキャラの必殺技グラを取得
+            #@cha_sprite[x].bitmap = Cache.picture(get_fighter_name $partyc[x],0) #パーティーキャラの必殺技グラを取得
             @cha_sprite[x].src_rect = Rect.new(0,96*16, 96, 96)
             #@cha_sprite[x].z = 200
             #@cha_sprite[x].visible = true
@@ -659,12 +659,12 @@ class Scene_Gameover < Scene_Base #< Scene_Map #
         tyousei_y = 0
         for x in 0..$partyc.size - 1
           @cha_sprite[x] = Sprite.new
-          @cha_sprite[x].bitmap = Cache.picture(set_battle_character_name $partyc[x],0) #パーティーキャラの必殺技グラを取得
+          @cha_sprite[x].bitmap = Cache.picture(get_fighter_name $partyc[x],0) #パーティーキャラの必殺技グラを取得
           @cha_sprite[x].src_rect = Rect.new(0,96*0, 96, 96)
           @cha_sprite[x].z = 200
           @cha_sprite[x].visible = true
           @cha_down_sprite[x] = Sprite.new
-          @cha_down_sprite[x].bitmap = Cache.picture(set_battle_character_name $partyc[x],0) #パーティーキャラの必殺技グラを取得
+          @cha_down_sprite[x].bitmap = Cache.picture(get_fighter_name $partyc[x],0) #パーティーキャラの必殺技グラを取得
           @cha_down_sprite[x].src_rect = Rect.new(0,96*17, 96, 96)
           @cha_down_sprite[x].z = 200
           @cha_down_sprite[x].visible = true

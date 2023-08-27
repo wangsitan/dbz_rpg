@@ -735,10 +735,10 @@ module Scene_Db_Battle_Anime_effect_pattern
             end_frame = 85
 
             if $partyc[@chanum.to_i] == 3
-                picture = Cache.picture(set_battle_character_name(10, 0))
+                picture = Cache.picture(get_fighter_name(10, 0))
             # picture = Cache.picture($btl_top_file_name + "戦闘_チチ") #ダメージ表示用
             else
-                picture = Cache.picture(set_battle_character_name(3, 0))
+                picture = Cache.picture(get_fighter_name(3, 0))
                 # picture = Cache.picture($btl_top_file_name + "戦闘_ゴクウ") #ダメージ表示用
             end
             # attack_se = "Z3 打撃"
@@ -761,10 +761,10 @@ module Scene_Db_Battle_Anime_effect_pattern
 
             end_frame = 85
             if $partyc[@chanum.to_i] == 3
-                picture = Cache.picture(set_battle_character_name(10, 1))
+                picture = Cache.picture(get_fighter_name(10, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_チチ") #ダメージ表示用
             else
-                picture = Cache.picture(set_battle_character_name(3, 1))
+                picture = Cache.picture(get_fighter_name(3, 1))
                 # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ゴクウ") #ダメージ表示用
             end
             # attack_se = "Z3 打撃"
@@ -776,10 +776,10 @@ module Scene_Db_Battle_Anime_effect_pattern
             end_frame = 85
 
             if $partyc[@chanum.to_i] == 3
-                picture = Cache.picture(set_battle_character_name(4, 0))
+                picture = Cache.picture(get_fighter_name(4, 0))
             # picture = Cache.picture($btl_top_file_name + "戦闘_ピッコロ") #ダメージ表示用
             else
-                picture = Cache.picture(set_battle_character_name(3, 0))
+                picture = Cache.picture(get_fighter_name(3, 0))
                 # picture = Cache.picture($btl_top_file_name + "戦闘_ゴクウ") #ダメージ表示用
             end
 
@@ -805,7 +805,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             end
         when 53 # 捨て身攻撃_エネルギー波発動
 
-            picture = Cache.picture(set_battle_character_name(3, 1))
+            picture = Cache.picture(get_fighter_name(3, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ゴクウ") #ダメージ表示用
             rect = Rect.new(0, 2 * 96, 96, 96)
             if $partyc[@chanum.to_i] == 3
@@ -813,7 +813,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             else
                 @back_window.contents.blt(CENTER_CHAX + 180 - 12, STANDARD_CHAY, picture, rect)
             end
-            picture = Cache.picture(set_battle_character_name(4, 1))
+            picture = Cache.picture(get_fighter_name(4, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ピッコロ") #ダメージ表示用
             rect = Rect.new(0, 0 * 96, 96, 96)
             @back_window.contents.blt(CENTER_CHAX - 120 - 10, STANDARD_CHAY, picture, rect)
@@ -826,7 +826,7 @@ module Scene_Db_Battle_Anime_effect_pattern
                 @effect_anime_frame = 0
             end
         when 54 # 捨て身攻撃_悟空ダッシュ発動
-            picture = Cache.picture(set_battle_character_name(4, 1))
+            picture = Cache.picture(get_fighter_name(4, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ピッコロ") #ダメージ表示用
             rect = Rect.new(0, 0 * 96, 96, 96)
             @back_window.contents.blt(CENTER_CHAX - 120 - 10, STANDARD_CHAY, picture, rect)
@@ -839,7 +839,7 @@ module Scene_Db_Battle_Anime_effect_pattern
                 @effect_anime_frame = 0
             end
         when 55 # 捨て身攻撃_ピッコロ_まかんこうさっぽうため1
-            picture = Cache.picture(set_battle_character_name(4, 1))
+            picture = Cache.picture(get_fighter_name(4, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ピッコロ") #ダメージ表示用
             rect = Rect.new(0, 5 * 96, 96, 96)
             @back_window.contents.blt(CENTER_CHAX - 120 - 10, STANDARD_CHAY, picture, rect)
@@ -852,7 +852,7 @@ module Scene_Db_Battle_Anime_effect_pattern
                 @effect_anime_frame = 0
             end
         when 56 # 捨て身攻撃_ピッコロ_まかんこうさっぽうため2ゆびあたま
-            picture = Cache.picture(set_battle_character_name(4, 1)) # ダメージ表示用
+            picture = Cache.picture(get_fighter_name(4, 1)) # ダメージ表示用
             rect = Rect.new(0, 7 * 96, 96, 96)
             @back_window.contents.blt(CENTER_CHAX - 120 - 10, STANDARD_CHAY, picture, rect)
 
@@ -862,7 +862,7 @@ module Scene_Db_Battle_Anime_effect_pattern
         #  @back_window.contents.blt(CENTER_ENEX+64,STANDARD_ENEY+32,picture,rect)
         # end
         when 57 # 捨て身攻撃_ピッコロ_まかんこうさっぽうため2ゆびまえ
-            picture = Cache.picture(set_battle_character_name(4, 1)) # ダメージ表示用
+            picture = Cache.picture(get_fighter_name(4, 1)) # ダメージ表示用
             rect = Rect.new(0, 8 * 96, 96, 96)
             @back_window.contents.blt(CENTER_CHAX - 120 - 10, STANDARD_CHAY, picture, rect)
             picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_魔貫光殺砲系(緑)") # ダメージ表示用
@@ -890,18 +890,18 @@ module Scene_Db_Battle_Anime_effect_pattern
 
             for x in 0..1
                 if $partyc[@chanum.to_i] == 3 || $partyc[@chanum.to_i] == 14
-                    picture = Cache.picture(set_battle_character_name(6, 0)) if x == 0 # ダメージ表示用
-                    picture = Cache.picture(set_battle_character_name(7, 0)) if x == 1 # ダメージ表示用
+                    picture = Cache.picture(get_fighter_name(6, 0)) if x == 0 # ダメージ表示用
+                    picture = Cache.picture(get_fighter_name(7, 0)) if x == 1 # ダメージ表示用
                 # picture = Cache.picture($btl_top_file_name + "戦闘_クリリン") if x == 0#ダメージ表示用
                 # picture = Cache.picture($btl_top_file_name + "戦闘_ヤムチャ") if x == 1#ダメージ表示用
                 elsif $partyc[@chanum.to_i] == 6
-                    picture = Cache.picture(set_battle_character_name(3, 0)) if x == 0 # ダメージ表示用
-                    picture = Cache.picture(set_battle_character_name(7, 0)) if x == 1 # ダメージ表示用
+                    picture = Cache.picture(get_fighter_name(3, 0)) if x == 0 # ダメージ表示用
+                    picture = Cache.picture(get_fighter_name(7, 0)) if x == 1 # ダメージ表示用
                 # picture = Cache.picture($btl_top_file_name + "戦闘_ゴクウ") if x == 0#ダメージ表示用
                 # picture = Cache.picture($btl_top_file_name + "戦闘_ヤムチャ") if x == 1#ダメージ表示用
                 elsif $partyc[@chanum.to_i] == 7
-                    picture = Cache.picture(set_battle_character_name(3, 0)) if x == 0 # ダメージ表示用
-                    picture = Cache.picture(set_battle_character_name(6, 0)) if x == 1 # ダメージ表示用
+                    picture = Cache.picture(get_fighter_name(3, 0)) if x == 0 # ダメージ表示用
+                    picture = Cache.picture(get_fighter_name(6, 0)) if x == 1 # ダメージ表示用
                     # picture = Cache.picture($btl_top_file_name + "戦闘_ゴクウ") if x == 0#ダメージ表示用
                     # picture = Cache.picture($btl_top_file_name + "戦闘_クリリン") if x == 1#ダメージ表示用
                 end
@@ -935,7 +935,7 @@ module Scene_Db_Battle_Anime_effect_pattern
         when 61 # かめはめ乱舞_発動
             tameframe = 120
             hatudouframe = 30
-            picture = Cache.picture(set_battle_character_name(3, 1)) # ダメージ表示用
+            picture = Cache.picture(get_fighter_name(3, 1)) # ダメージ表示用
             case @effect_anime_frame
 
             when 0..tameframe
@@ -945,7 +945,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             end
             @back_window.contents.blt(TEC_CENTER_CHAX + 4, STANDARD_CHAY, picture, rect)
 
-            picture = Cache.picture(set_battle_character_name(6, 1)) # ダメージ表示用
+            picture = Cache.picture(get_fighter_name(6, 1)) # ダメージ表示用
             case @effect_anime_frame
 
             when 0..tameframe
@@ -955,7 +955,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             end
             @back_window.contents.blt(CENTER_CHAX - 120 + 8 - 28, STANDARD_CHAY + 2, picture, rect)
 
-            picture = Cache.picture(set_battle_character_name(7, 1)) # ダメージ表示用
+            picture = Cache.picture(get_fighter_name(7, 1)) # ダメージ表示用
             @back_window.contents.blt(CENTER_CHAX + 180 + 38 - 20, STANDARD_CHAY - 2, picture, rect)
 
             if @effect_anime_frame >= tameframe + hatudouframe
@@ -984,20 +984,20 @@ module Scene_Db_Battle_Anime_effect_pattern
 
             for x in 0..1
                 if $partyc[@chanum.to_i] == 3 || $partyc[@chanum.to_i] == 14
-                    picture = Cache.picture(set_battle_character_name(6, 1)) if x == 0 # ダメージ表示用
-                    picture = Cache.picture(set_battle_character_name(7, 1)) if x == 1 # ダメージ表示用
+                    picture = Cache.picture(get_fighter_name(6, 1)) if x == 0 # ダメージ表示用
+                    picture = Cache.picture(get_fighter_name(7, 1)) if x == 1 # ダメージ表示用
                 # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_クリリン") if x == 0#ダメージ表示用
                 # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ヤムチャ") if x == 1#ダメージ表示用
                 elsif $partyc[@chanum.to_i] == 6
-                    picture = Cache.picture(set_battle_character_name(3, 1)) if x == 0 # ダメージ表示用
-                    picture = Cache.picture(set_battle_character_name(14, 1)) if x == 0 && $super_saiyazin_flag[1] == true
-                    picture = Cache.picture(set_battle_character_name(7, 1)) if x == 1 # ダメージ表示用
+                    picture = Cache.picture(get_fighter_name(3, 1)) if x == 0 # ダメージ表示用
+                    picture = Cache.picture(get_fighter_name(14, 1)) if x == 0 && $super_saiyazin_flag[1] == true
+                    picture = Cache.picture(get_fighter_name(7, 1)) if x == 1 # ダメージ表示用
                 # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ゴクウ") if x == 0#ダメージ表示用
                 # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ヤムチャ") if x == 1#ダメージ表示用
                 elsif $partyc[@chanum.to_i] == 7
-                    picture = Cache.picture(set_battle_character_name(3, 1)) if x == 0 # ダメージ表示用
-                    picture = Cache.picture(set_battle_character_name(14, 1)) if x == 0 && $super_saiyazin_flag[1] == true
-                    picture = Cache.picture(set_battle_character_name(6, 1)) if x == 1 # ダメージ表示用
+                    picture = Cache.picture(get_fighter_name(3, 1)) if x == 0 # ダメージ表示用
+                    picture = Cache.picture(get_fighter_name(14, 1)) if x == 0 && $super_saiyazin_flag[1] == true
+                    picture = Cache.picture(get_fighter_name(6, 1)) if x == 1 # ダメージ表示用
                     # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ゴクウ") if x == 0#ダメージ表示用
                     # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_クリリン") if x == 1#ダメージ表示用
                 end
@@ -1023,14 +1023,14 @@ module Scene_Db_Battle_Anime_effect_pattern
             ushirox = 0
             idougo = 212 + 24
             rect = Rect.new(0, 0 * 96, 96, 96)
-            picture = Cache.picture(set_battle_character_name(3, 1))
-            picture = Cache.picture(set_battle_character_name(14, 1)) if $super_saiyazin_flag[1] == true
+            picture = Cache.picture(get_fighter_name(3, 1))
+            picture = Cache.picture(get_fighter_name(14, 1)) if $super_saiyazin_flag[1] == true
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ゴクウ")
             @back_window.contents.blt(TEC_CENTER_CHAX, STANDARD_CHAY, picture, rect)
-            picture = Cache.picture(set_battle_character_name(6, 1))
+            picture = Cache.picture(get_fighter_name(6, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_クリリン")
             @back_window.contents.blt(idougo, STANDARD_CHAY + 64, picture, rect)
-            picture = Cache.picture(set_battle_character_name(7, 1))
+            picture = Cache.picture(get_fighter_name(7, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ヤムチャ")
             @back_window.contents.blt(idougo, STANDARD_CHAY - 64, picture, rect)
 
@@ -1047,14 +1047,14 @@ module Scene_Db_Battle_Anime_effect_pattern
             else
                 rect = Rect.new(0, 3 * 96, 96, 96)
             end
-            picture = Cache.picture(set_battle_character_name(3, 1))
-            picture = Cache.picture(set_battle_character_name(14, 1)) if $super_saiyazin_flag[1] == true
+            picture = Cache.picture(get_fighter_name(3, 1))
+            picture = Cache.picture(get_fighter_name(14, 1)) if $super_saiyazin_flag[1] == true
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ゴクウ")
             @back_window.contents.blt(TEC_CENTER_CHAX, STANDARD_CHAY, picture, rect)
-            picture = Cache.picture(set_battle_character_name(6, 1))
+            picture = Cache.picture(get_fighter_name(6, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_クリリン")
             @back_window.contents.blt(idougo, STANDARD_CHAY + 64, picture, rect)
-            picture = Cache.picture(set_battle_character_name(7, 1))
+            picture = Cache.picture(get_fighter_name(7, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ヤムチャ")
             @back_window.contents.blt(idougo, STANDARD_CHAY - 64, picture, rect)
 
@@ -1120,13 +1120,13 @@ module Scene_Db_Battle_Anime_effect_pattern
         when 70 # 操気円斬_キャラ現れる
 
             if $partyc[@chanum.to_i] == 6
-                picture = Cache.picture(set_battle_character_name(7, 0))
+                picture = Cache.picture(get_fighter_name(7, 0))
                 # picture = Cache.picture($btl_top_file_name + "戦闘_ヤムチャ") #ダメージ表示用
-                picture = Cache.picture(set_battle_character_name(7, 1)) if @effect_anime_frame >= 31
+                picture = Cache.picture(get_fighter_name(7, 1)) if @effect_anime_frame >= 31
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ヤムチャ") if @effect_anime_frame >= 31
             else
-                picture = Cache.picture(set_battle_character_name(6, 0))
-                picture = Cache.picture(set_battle_character_name(6, 1)) if @effect_anime_frame >= 31
+                picture = Cache.picture(get_fighter_name(6, 0))
+                picture = Cache.picture(get_fighter_name(6, 1)) if @effect_anime_frame >= 31
                 # picture = Cache.picture($btl_top_file_name + "戦闘_クリリン") #ダメージ表示用
                 # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_クリリン") if @effect_anime_frame >= 31
 
@@ -1268,10 +1268,10 @@ module Scene_Db_Battle_Anime_effect_pattern
         when 78 # 操気円斬(Z2)_キャラ現れる
 
             if $partyc[@chanum.to_i] == 6
-                picture = Cache.picture(set_battle_character_name(7, 1))
+                picture = Cache.picture(get_fighter_name(7, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ヤムチャ")
             elsif $partyc[@chanum.to_i] == 7
-                picture = Cache.picture(set_battle_character_name(6, 1))
+                picture = Cache.picture(get_fighter_name(6, 1))
                 # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_クリリン")
             end
             rect = Rect.new(0, 0 * 96, 96, 96)
@@ -1286,7 +1286,7 @@ module Scene_Db_Battle_Anime_effect_pattern
                                           rect)
             end
         when 79 # 操気円斬(Z2)_キャラ現れる(放置)
-            picture = Cache.picture(set_battle_character_name(6, 1))
+            picture = Cache.picture(get_fighter_name(6, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_クリリン")
             rect = Rect.new(0, 0 * 96, 96, 96)
             # ushirox=0
@@ -1345,13 +1345,13 @@ module Scene_Db_Battle_Anime_effect_pattern
         when 84 # 師弟の絆(Z2)_キャラ現れる
 
             if $partyc[@chanum.to_i] == 4
-                picture = Cache.picture(set_battle_character_name(5, 1))
+                picture = Cache.picture(get_fighter_name(5, 1))
                 if $super_saiyazin_flag[2] == true || $super_saiyazin_flag[5] == true
-                    picture = Cache.picture(set_battle_character_name(18, 1))
+                    picture = Cache.picture(get_fighter_name(18, 1))
                 end
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ゴハン")
             else
-                picture = Cache.picture(set_battle_character_name(4, 1))
+                picture = Cache.picture(get_fighter_name(4, 1))
                 # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ピッコロ")
             end
             rect = Rect.new(0, 0 * 96, 96, 96)
@@ -1366,21 +1366,21 @@ module Scene_Db_Battle_Anime_effect_pattern
                                           rect)
             end
         when 85 # 師弟の絆(Z2)_キャラ現れる(放置)
-            picture = Cache.picture(set_battle_character_name(4, 1))
+            picture = Cache.picture(get_fighter_name(4, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ピッコロ")
             rect = Rect.new(0, 0 * 96, 96, 96)
             @back_window.contents.blt(TEC_CENTER_CHAX, STANDARD_CHAY + 50, picture, rect)
-            picture = Cache.picture(set_battle_character_name(5, 1))
+            picture = Cache.picture(get_fighter_name(5, 1))
             if $super_saiyazin_flag[2] == true || $super_saiyazin_flag[5] == true
-                picture = Cache.picture(set_battle_character_name(18, 1))
+                picture = Cache.picture(get_fighter_name(18, 1))
             end
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ゴハン")
             rect = Rect.new(0, 0 * 96, 96, 96)
             @back_window.contents.blt(TEC_CENTER_CHAX, STANDARD_CHAY - 50, picture, rect)
         when 86 # 師弟の絆(Z2)_キャラ現れる(放置)
-            picture = Cache.picture(set_battle_character_name(5, 1))
+            picture = Cache.picture(get_fighter_name(5, 1))
             if $super_saiyazin_flag[2] == true || $super_saiyazin_flag[5] == true
-                picture = Cache.picture(set_battle_character_name(18, 1))
+                picture = Cache.picture(get_fighter_name(18, 1))
             end
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ゴハン")
             rect = Rect.new(0, 0 * 96, 96, 96)
@@ -1452,7 +1452,7 @@ module Scene_Db_Battle_Anime_effect_pattern
                 @back_window.contents.blt(STANDARD_ENEX + 74 - 21 * RAY_SPEED, STANDARD_CHAY - 8, picture, rect)
             end
         when 89 # スパーキングコンボキャラ現れる2人目上
-            picture = Cache.picture(set_battle_character_name(@scombo_cha2, 1))
+            picture = Cache.picture(get_fighter_name(@scombo_cha2, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_" + $data_actors[@scombo_cha2].name)
 
             rect = Rect.new(0, 0 * 96, 96, 96)
@@ -1461,7 +1461,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou + 30, STANDARD_CHAY - 50, picture,
                                       rect)
         when 90 # スパーキングコンボキャラ現れる2人目下
-            picture = Cache.picture(set_battle_character_name(@scombo_cha2, 1))
+            picture = Cache.picture(get_fighter_name(@scombo_cha2, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_" + $data_actors[@scombo_cha2].name)
 
             rect = Rect.new(0, 0 * 96, 96, 96)
@@ -1470,12 +1470,12 @@ module Scene_Db_Battle_Anime_effect_pattern
             @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou + 30, STANDARD_CHAY + 50, picture,
                                       rect)
         when 91 # スパーキングコンボキャラ現れる2人目放置(上)
-            picture = Cache.picture(set_battle_character_name(@scombo_cha2, 1))
+            picture = Cache.picture(get_fighter_name(@scombo_cha2, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_" + $data_actors[@scombo_cha2].name)
             rect = Rect.new(0, 0 * 96, 96, 96)
             @back_window.contents.blt(TEC_CENTER_CHAX, STANDARD_CHAY - 50, picture, rect)
         when 92 # スパーキングコンボキャラ現れる2人目放置(下)
-            picture = Cache.picture(set_battle_character_name(@scombo_cha2, 1))
+            picture = Cache.picture(get_fighter_name(@scombo_cha2, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_" + $data_actors[@scombo_cha2].name)
             rect = Rect.new(0, 0 * 96, 96, 96)
             @back_window.contents.blt(TEC_CENTER_CHAX, STANDARD_CHAY + 50, picture, rect)
@@ -4015,10 +4015,10 @@ module Scene_Db_Battle_Anime_effect_pattern
 
             picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_テンシンハン") # ダメージ表示用
             if @btl_ani_cha_chg_no == 0
-                picture2 = Cache.picture(set_battle_character_name($partyc[@chanum.to_i], 1))
+                picture2 = Cache.picture(get_fighter_name($partyc[@chanum.to_i], 1))
             # picture2 = Cache.picture($btl_top_file_name + "戦闘_" + $data_actors[$partyc[@chanum.to_i]].name) #ダメージ表示用
             else
-                picture2 = Cache.picture(set_battle_character_name(@btl_ani_cha_chg_no, 1))
+                picture2 = Cache.picture(get_fighter_name(@btl_ani_cha_chg_no, 1))
                 # picture2 = Cache.picture($btl_top_file_name + "戦闘_" + $data_actors[@btl_ani_cha_chg_no].name) #ダメージ表示用
             end
 
@@ -4769,7 +4769,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             @back_window.contents.blt(ray_x + 22, ray_y - 134, picture, rect)
             @back_window.contents.blt(ray_x - 10, ray_y - 20, picture, rect)
         when 363 # スパーキングコンボキャラ現れる2人目右
-            picture = Cache.picture(set_battle_character_name(@scombo_cha2, 1))
+            picture = Cache.picture(get_fighter_name(@scombo_cha2, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_" + $data_actors[@scombo_cha2].name)
 
             rect = Rect.new(0, 0 * 96, 96, 96)
@@ -4778,7 +4778,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou - 30 + 12, STANDARD_CHAY, picture,
                                       rect)
         when 364 # スパーキングコンボキャラ現れる2人目左
-            picture = Cache.picture(set_battle_character_name(@scombo_cha2, 1))
+            picture = Cache.picture(get_fighter_name(@scombo_cha2, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_" + $data_actors[@scombo_cha2].name)
 
             rect = Rect.new(0, 0 * 96, 96, 96)

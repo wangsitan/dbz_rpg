@@ -733,7 +733,7 @@ class Scene_Db_Speed_Training < Scene_Base
   def output_character
     
     #picture = Cache.picture($top_file_name + "戦闘_" + $data_actors[$partyc[$training_chara_num]].name)
-    picture = Cache.picture(set_battle_character_name $partyc[$training_chara_num],0)
+    picture = Cache.picture(get_fighter_name $partyc[$training_chara_num],0)
     case @anime_count
     
     when 0..7 

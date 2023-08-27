@@ -11009,8 +11009,7 @@ end
   # ● 戦闘グラセット
   # cha_no:キャラクターNo pic_mode:通常か必殺技か 0:通常 1:必殺技
   #--------------------------------------------------------------------------
-  def set_battle_character_name cha_no,pic_mode = 0
-    
+  def get_fighter_name(cha_no, pic_mode=0)
     if pic_mode == 0
       btl_cha_name = $top_file_name + "戦闘_" + $data_actors[cha_no].name
     else
