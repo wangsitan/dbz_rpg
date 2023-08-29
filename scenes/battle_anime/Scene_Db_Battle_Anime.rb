@@ -953,8 +953,7 @@ class Scene_Db_Battle_Anime < Scene_Base
                         $cha_set_action[$partyc.index(@btl_ani_scombo_cha[y])] = (@btl_ani_scombo_flag_tec[y] + 10)
                         @cha_attack_run[$partyc.index(@btl_ani_scombo_cha[y])] = true
 
-                        tec_mp_cost = get_mp_cost(@btl_ani_scombo_cha[y], $data_skills[@btl_ani_scombo_flag_tec[y]].id,
-                                                  1)
+                        tec_mp_cost = get_mp_cost(@btl_ani_scombo_cha[y], $data_skills[@btl_ani_scombo_flag_tec[y]].id, 1)
 
                         # 戦闘練習中でなければKIを消費する
                         if $game_switches[1305] != true
@@ -1038,6 +1037,13 @@ class Scene_Db_Battle_Anime < Scene_Base
                         $battleenemy[@enenum] = 26
                         $battle_begi_oozaru_run = true
                     end
+
+                    #=== xsin
+                    if $battleenemy[@enenum] == 288 #拉蒂斯超赛
+                        $battleenemy[@enenum] = 289
+                        $battle_sura_big_run = true
+                    end
+                    #===
 
                     if $battleenemy[@enenum] == 59 # Z2ターレスを大猿化
                         $battleenemy[@enenum] = 70
@@ -1711,7 +1717,10 @@ class Scene_Db_Battle_Anime < Scene_Base
         # 敵キャラ能力
         #=======================================================================
         top_name = set_ene_str_no(@enedatenum)
-        picturec = Cache.picture(top_name + "顔敵")
+        picturec = Cache.picture(top_name + "顔敵")  # 头像
+
+        # xsin
+        #$enemp[@enedatenum.to_i] = $enebp[@enedatenum.to_i]
 
         # 表示するかチェック
         chk_put_status = true
@@ -1758,15 +1767,14 @@ class Scene_Db_Battle_Anime < Scene_Base
             # CardsetCha = [0,1,2,3,4,5] #カードをセットしたキャラ
             # p $data_enemies[1].hit
 
+            #=== xsin edit
             rect = set_card_frame(2, $enecarda[@enenum]) # 攻撃
-            @status_window.contents.blt(@@enestex + 2 + tyousei_x + $output_carda_tyousei_x, 2 + tyousei_y + $output_carda_tyousei_y,
-                                        picture, rect)
+            @status_window.contents.blt(@@enestex+2+tyousei_x+$output_card_tyousei_x, 2+tyousei_y+$output_card_tyousei_y, picture, rect)
             rect = set_card_frame(3, $enecardg[@enenum]) # 防御
-            @status_window.contents.blt(@@enestex + 30 + tyousei_x + $output_cardg_tyousei_x, 62 + tyousei_y + $output_cardg_tyousei_y,
-                                        picture, rect)
+            @status_window.contents.blt(@@enestex+30+tyousei_x , 62+tyousei_y, picture, rect)
             rect = Rect.new(0 + 32 * ($enecardi[@enenum]), 64, 32, 32) # 流派
-            @status_window.contents.blt(@@enestex + 16 + tyousei_x + $output_cardi_tyousei_x, 32 + tyousei_y + $output_cardi_tyousei_y,
-                                        picture, rect)
+            @status_window.contents.blt(@@enestex+16+tyousei_x , 32+tyousei_y, picture, rect)
+            #===
 
             if $run_scouter_ene[@enenum] == true
                 color = set_skn_color(1) # 味方ステータス枠
@@ -1789,17 +1797,66 @@ class Scene_Db_Battle_Anime < Scene_Base
                 end
 
                 # KI(KIだけどHPの桁に合わせて変える)
-                case $data_enemies[@enedatenum.to_i].maxhp.to_s.size
-                when 7..100 # (100万)
+                #=== xsin
+                #case $data_enemies[@enedatenum.to_i].maxhp.to_s.size
+                #when 7..100 # (100万)
                 # HPなど表示しない
-                when 6 # (10万)
-                    rect = Rect.new(16, 16 * 9, 16, 16)
-                    @status_window.contents.blt(@@enestex + 70 + tyousei_x, 64 + tyousei_y, picture, rect)
-                else # 1万の桁いない
-                    # KI
-                    rect = Rect.new(32, 16, 32, 16)
-                    @status_window.contents.blt(@@enestex + 70 + tyousei_x, 64 + tyousei_y, picture, rect)
+                #when 6 # (10万)
+                #    rect = Rect.new(16, 16 * 9, 16, 16)
+                #    @status_window.contents.blt(@@enestex + 70 + tyousei_x, 64 + tyousei_y, picture, rect)
+                #else # 1万の桁いない
+                # KI
+                #    rect = Rect.new(32, 16, 32, 16)
+                #    @status_window.contents.blt(@@enestex + 70 + tyousei_x, 64 + tyousei_y, picture, rect)
+
+                bp = $data_enemies[@enedatenum.to_i].read_note('bp').to_i
+                bp_str = bp.to_s
+
+                case bp_str.size
+                when 1..4
+                    rect = Rect.new(16*6, 16, 32, 16)
+                    @status_window.contents.blt(@@enestex+70+tyousei_x, 64+tyousei_y, picture, rect)
+
+                when 5..6
+                    rect = Rect.new(16*2, 16*9, 32, 16)
+                    @status_window.contents.blt(@@enestex+70+tyousei_x, 64+tyousei_y, picture, rect)
+
+                when 7..9
+                    bp_str = (bp / 10000).to_s  # 将BP除以10000，并转换为字符串
+                    rect = Rect.new(16*2, 16*9, 32, 16)
+                    @status_window.contents.blt(@@enestex+70+tyousei_x, 64+tyousei_y, picture, rect)
+                    rect = Rect.new(0, 16*10, 16, 16)
+                    @status_window.contents.blt(@@enestex+166+tyousei_x, 64+tyousei_y, picture, rect)
+
+                when 10..13
+                    bp_str = (bp / 10000000).to_s  # 将BP除以10000000，并转换为字符串
+                    rect = Rect.new(16*2, 16*10, 32, 16)
+                    @status_window.contents.blt(@@enestex+70+tyousei_x, 64+tyousei_y, picture, rect)
+                    rect = Rect.new(16, 16*11, 16, 16)
+                    @status_window.contents.blt(@@enestex+134+tyousei_x, 64+tyousei_y, picture, rect)
+
+                when 14..100
+                    bp_str = (bp / 100000000000).to_s  # 将BP除以10000，并转换为字符串
+                    rect = Rect.new(16*2, 16*9, 32, 16)
+                    @status_window.contents.blt(@@enestex+70+tyousei_x, 64+tyousei_y, picture, rect)
+                    rect = Rect.new(0, 16*10, 32, 16)
+                    @status_window.contents.blt(@@enestex+166+tyousei_x, 64+tyousei_y, picture, rect)
+                    rect = Rect.new(16, 16*11, 16, 16)
+                    @status_window.contents.blt(@@enestex+182+tyousei_x, 64+tyousei_y, picture, rect)
+
+                else
+                    rect = Rect.new(16*6, 16, 32, 16)
+                    @status_window.contents.blt(@@enestex+70+tyousei_x, 32+tyousei_y, picture, rect)
+
                 end
+
+                # 绘制BP数字
+                bp_str.size.times do |i|
+                    digit = bp_str[i].to_i
+                    rect = Rect.new(16*digit, 16*9, 16, 16)
+                    @status_window.contents.blt(@@enestex+198+i*16+tyousei_x, 64+tyousei_y, picture, rect)
+                end
+                #===
 
                 # picturea = Cache.picture("名前")
                 pictureb = Cache.picture("数字英語")
@@ -1809,44 +1866,40 @@ class Scene_Db_Battle_Anime < Scene_Base
                     @status_window.contents.blt(@@enestex + 102 + tyousei_x, 48 + tyousei_y, pictureb, rect)
                     # KI
                     @status_window.contents.blt(@@enestex + 102 + tyousei_x, 80 + tyousei_y, pictureb, rect)
+                    # BP (xsin add)
+                    @status_window.contents.blt(@@enestex+102+tyousei_x, 112+tyousei_y, pictureb, rect)
 
                 elsif $data_enemies[@enedatenum.to_i].maxhp.to_s.size < 7 # 10万
                     # HP
-                    @status_window.contents.blt(
-                        @@enestex + 102 + tyousei_x - 16 * ($data_enemies[@enedatenum.to_i].maxhp.to_s.size - 4), 48 + tyousei_y, pictureb, rect
-                    )
+                    @status_window.contents.blt(@@enestex + 102 + tyousei_x - 16 * ($data_enemies[@enedatenum.to_i].maxhp.to_s.size - 4), 48 + tyousei_y, pictureb, rect)
                     # KI
-                    @status_window.contents.blt(
-                        @@enestex + 102 + tyousei_x - 16 * ($data_enemies[@enedatenum.to_i].maxhp.to_s.size - 4), 80 + tyousei_y, pictureb, rect
-                    )
-
+                    @status_window.contents.blt(@@enestex + 102 + tyousei_x - 16 * ($data_enemies[@enedatenum.to_i].maxhp.to_s.size - 4), 80 + tyousei_y, pictureb, rect)
+                    # BP (xsin add)
+                    @status_window.contents.blt(@@enestex+102+tyousei_x - 16 * ($data_enemies[@enedatenum.to_i].maxhp.to_s.size - 4), 112+tyousei_y, pictureb, rect)
                 end
 
                 # HP無限
                 if $data_enemies[@enedatenum.to_i].element_ranks[57] == 1
                     rect = Rect.new(11 * 16, 16, 16, 16)
-                    @status_window.contents.blt(@@enestex + tyousei_x + 166 - (1 - 1) * 16, 32 + tyousei_y, pictureb,
-                                                rect)
-                    @status_window.contents.blt(@@enestex + tyousei_x + 166 - (1 - 1) * 16, 48 + tyousei_y, pictureb,
-                                                rect)
+                    @status_window.contents.blt(@@enestex + tyousei_x + 166 - (1 - 1) * 16, 32 + tyousei_y, pictureb, rect)
+                    @status_window.contents.blt(@@enestex + tyousei_x + 166 - (1 - 1) * 16, 48 + tyousei_y, pictureb, rect)
                 else
                     for y in 1..$enehp[@enenum].to_s.size # HP
                         rect = Rect.new($enehp[@enenum].to_s[-y, 1].to_i * 16, 0, 16, 16)
-                        @status_window.contents.blt(@@enestex + tyousei_x + 166 - (y - 1) * 16, 32 + tyousei_y, pictureb,
-                                                    rect)
+                        @status_window.contents.blt(@@enestex + tyousei_x + 166 - (y - 1) * 16, 32 + tyousei_y, pictureb, rect)
                     end
 
                     for y in 1..$data_enemies[@enedatenum.to_i].maxhp.to_s.size # MHP
                         rect = Rect.new($data_enemies[@enedatenum.to_i].maxhp.to_s[-y, 1].to_i * 16, 0, 16, 16)
-                        @status_window.contents.blt(@@enestex + tyousei_x + 166 - (y - 1) * 16, 48 + tyousei_y, pictureb,
-                                                    rect)
+                        @status_window.contents.blt(@@enestex + tyousei_x + 166 - (y - 1) * 16, 48 + tyousei_y, pictureb, rect)
                     end
                 end
 
-                # KI　ーを表示
-                rect = Rect.new(11 * 16, 16, 16, 16)
-                @status_window.contents.blt(@@enestex + tyousei_x + 166 - (1 - 1) * 16, 64 + tyousei_y, pictureb, rect)
-                @status_window.contents.blt(@@enestex + tyousei_x + 166 - (1 - 1) * 16, 80 + tyousei_y, pictureb, rect)
+                #=== xsin
+                # KI　ーを表示  BP表示
+                #rect = Rect.new(11 * 16, 16, 16, 16)
+                #@status_window.contents.blt(@@enestex + tyousei_x + 166 - (1 - 1) * 16, 64 + tyousei_y, pictureb, rect)
+                #@status_window.contents.blt(@@enestex + tyousei_x + 166 - (1 - 1) * 16, 80 + tyousei_y, pictureb, rect)
 
                 # KIを表示
                 # for y in 1..$enemp[@enenum].to_s.size #MP
@@ -1858,6 +1911,58 @@ class Scene_Db_Battle_Anime < Scene_Base
                 #  rect = Rect.new($data_enemies[@enedatenum.to_i].maxmp.to_s[-y,1].to_i*16, 0, 16, 16)
                 #  @status_window.contents.blt(@@enestex+166-(y-1)*16,80,pictureb,rect)
                 # end
+
+                bp = $data_enemies[@enedatenum.to_i].read_note('bp').to_i
+
+                # 判断BP的位数
+                case bp.to_s.size
+                when 1..4
+                    for y in 1..bp.to_s.size
+                        rect = Rect.new(bp.to_s[-y, 1].to_i * 16, 0, 16, 16)
+                        @status_window.contents.blt(@@enestex + 166 - (y - 1) * 16, 74, pictureb, rect)
+                    end
+
+                when 5..6
+                    for y in 1..bp.to_s.size
+                        rect = Rect.new(bp.to_s[-y, 1].to_i * 16, 0, 16, 16)
+                        @status_window.contents.blt(@@enestex + 182 - (y - 1) * 16, 74, pictureb, rect)
+                    end
+
+                when 7..9
+                    bp_wan = bp / 10000
+                    bp_yuan = bp % 10000
+
+                    for y in 1..bp_wan.to_s.size
+                        rect = Rect.new(bp_wan.to_s[-y, 1].to_i * 16, 0, 16, 16)  #第一个16是万
+                        @status_window.contents.blt(@@enestex + 166 - (y - 1) * 16, 74, pictureb, rect)
+                    end
+
+                when 10..13
+                    bp_wan = bp / 10000
+                    bp_yi = bp_wan / 10000
+                    bp_wan = bp_wan % 10000
+                    bp_yuan = bp % 10000
+
+                    for y in 1..bp_yi.to_s.size
+                        rect = Rect.new(bp_yi.to_s[-y, 1].to_i * 32, 0, 16, 16)  #第一个32是亿
+                        @status_window.contents.blt(@@enestex + 70 - (y - 1) * 16, 74, pictureb, rect)
+                    end
+
+                    for y in 1..4
+                        rect = Rect.new(16 * 2, 0, 16, 16)
+                        @status_window.contents.blt(@@enestex + 166 - (y - 1) * 16, 74, pictureb, rect)
+                    end
+                    for y in 1..bp_wan.to_s.size
+                        rect = Rect.new(bp_wan.to_s[-y, 1].to_i * 16, 0, 16, 16)
+                        @status_window.contents.blt(@@enestex + 150 - (y - 1) * 16, 74, pictureb, rect)
+                    end
+                    for y in 1..4
+                        rect = Rect.new(16 * 2, 0, 16, 16)
+                        @status_window.contents.blt(@@enestex + 182 - (y - 1) * 16, 74, pictureb, rect)
+                    end
+
+                end
+                #===
 
                 # 流派が一致かパワーアップフラグがONの時は上アイコン表示
                 picture = Cache.picture("アイコン")
@@ -2280,12 +2385,10 @@ class Scene_Db_Battle_Anime < Scene_Base
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 256 + 36, picture, rect)
                     elsif @tec_back >= (hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back - (hai_max_size_x / 2), 256 + 36, picture, rect)
-                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 256 + 36, picture,
-                                                  rect)
+                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 256 + 36, picture, rect)
                     elsif @tec_back <= -(hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 256 + 36, picture, rect)
-                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 256 + 36, picture,
-                                                  rect)
+                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 256 + 36, picture, rect)
                     end
                     # @back_window.contents.blt(0 , 256+36,picture,rect)
 
@@ -2325,12 +2428,10 @@ class Scene_Db_Battle_Anime < Scene_Base
                         @back_window.contents.blt(640 - 64, @tec_back + hai_max_size_x / 2, picture, rect)
                     elsif @tec_back >= (hai_max_size_x / 2) then
                         @back_window.contents.blt(640 - 64, @tec_back - hai_max_size_x / 2, picture, rect)
-                        @back_window.contents.blt(640 - 64, @tec_back - (hai_max_size_x + hai_max_size_x / 2), picture,
-                                                  rect)
+                        @back_window.contents.blt(640 - 64, @tec_back - (hai_max_size_x + hai_max_size_x / 2), picture, rect)
                     elsif @tec_back <= -(hai_max_size_x / 2) then
                         @back_window.contents.blt(640 - 64, @tec_back + hai_max_size_x / 2, picture, rect)
-                        @back_window.contents.blt(640 - 64, @tec_back + hai_max_size_x + hai_max_size_x / 2, picture,
-                                                  rect)
+                        @back_window.contents.blt(640 - 64, @tec_back + hai_max_size_x + hai_max_size_x / 2, picture, rect)
                     end
                     # @back_window.contents.blt(0 , 256+36,picture,rect)
 
@@ -2443,12 +2544,10 @@ class Scene_Db_Battle_Anime < Scene_Base
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 256 + 36 - tyousei_y, picture, rect)
                     elsif @tec_back >= (hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back - (hai_max_size_x / 2), 256 + 36 - tyousei_y, picture, rect)
-                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 256 + 36 - tyousei_y,
-                                                  picture, rect)
+                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 256 + 36 - tyousei_y, picture, rect)
                     elsif @tec_back <= -(hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 256 + 36 - tyousei_y, picture, rect)
-                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 256 + 36 - tyousei_y,
-                                                  picture, rect)
+                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 256 + 36 - tyousei_y, picture, rect)
                     end
                     # @back_window.contents.blt(0 , 256+36,picture,rect)
 
@@ -2490,12 +2589,10 @@ class Scene_Db_Battle_Anime < Scene_Base
                         @back_window.contents.blt(640 - 94, @tec_back + hai_max_size_x / 2, picture, rect)
                     elsif @tec_back >= (hai_max_size_x / 2) then
                         @back_window.contents.blt(640 - 94, @tec_back - hai_max_size_x / 2, picture, rect)
-                        @back_window.contents.blt(640 - 94, @tec_back - (hai_max_size_x + hai_max_size_x / 2), picture,
-                                                  rect)
+                        @back_window.contents.blt(640 - 94, @tec_back - (hai_max_size_x + hai_max_size_x / 2), picture, rect)
                     elsif @tec_back <= -(hai_max_size_x / 2) then
                         @back_window.contents.blt(640 - 94, @tec_back + hai_max_size_x / 2, picture, rect)
-                        @back_window.contents.blt(640 - 94, @tec_back + hai_max_size_x + hai_max_size_x / 2, picture,
-                                                  rect)
+                        @back_window.contents.blt(640 - 94, @tec_back + hai_max_size_x + hai_max_size_x / 2, picture, rect)
                     end
                     # @back_window.contents.blt(0 , 256+36,picture,rect)
 
@@ -2607,12 +2704,10 @@ class Scene_Db_Battle_Anime < Scene_Base
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
                     elsif @tec_back >= (hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back - (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
-                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 128 + tyousei_y,
-                                                  picture, rect)
+                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 128 + tyousei_y, picture, rect)
                     elsif @tec_back <= -(hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
-                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 128 + tyousei_y, picture,
-                                                  rect)
+                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
                     end
                     rect = Rect.new(0, 0, hai_max_size_x, 42) # 背景下
                     tyousei_y = 46 * 2 + 96
@@ -2621,12 +2716,10 @@ class Scene_Db_Battle_Anime < Scene_Base
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
                     elsif @tec_back >= (hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back - (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
-                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 128 + tyousei_y,
-                                                  picture, rect)
+                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 128 + tyousei_y, picture, rect)
                     elsif @tec_back <= -(hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
-                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 128 + tyousei_y, picture,
-                                                  rect)
+                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
                     end
                     # @back_window.contents.blt(0 , 256+36,picture,rect)
 
@@ -2653,12 +2746,10 @@ class Scene_Db_Battle_Anime < Scene_Base
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 0 + 4, picture, rect)
                     elsif @tec_back >= (hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back - (hai_max_size_x / 2), 0 + 4, picture, rect)
-                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 0 + 4, picture,
-                                                  rect)
+                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 0 + 4, picture, rect)
                     elsif @tec_back <= -(hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 0 + 4, picture, rect)
-                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 0 + 4, picture,
-                                                  rect)
+                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 0 + 4, picture, rect)
                     end
                     # picture = Cache.picture("ZG_戦闘_必殺技_背景_細い(赤)")
                     # rect = Rect.new(0, 0, hai_max_size_x, 28) # 背景下
@@ -2668,12 +2759,10 @@ class Scene_Db_Battle_Anime < Scene_Base
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
                     elsif @tec_back >= (hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back - (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
-                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 128 + tyousei_y,
-                                                  picture, rect)
+                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 128 + tyousei_y, picture, rect)
                     elsif @tec_back <= -(hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
-                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 128 + tyousei_y, picture,
-                                                  rect)
+                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
                     end
                     # @back_window.contents.blt(0 , 256+36,picture,rect)
 
@@ -2700,12 +2789,10 @@ class Scene_Db_Battle_Anime < Scene_Base
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 0 + 4, picture, rect)
                     elsif @tec_back >= (hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back - (hai_max_size_x / 2), 0 + 4, picture, rect)
-                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 0 + 4, picture,
-                                                  rect)
+                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 0 + 4, picture, rect)
                     elsif @tec_back <= -(hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 0 + 4, picture, rect)
-                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 0 + 4, picture,
-                                                  rect)
+                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 0 + 4, picture, rect)
                     end
                     # picture = Cache.picture("ZG_戦闘_必殺技_背景_細い(赤)")
                     # rect = Rect.new(0, 0, hai_max_size_x, 28) # 背景下
@@ -2715,12 +2802,10 @@ class Scene_Db_Battle_Anime < Scene_Base
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
                     elsif @tec_back >= (hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back - (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
-                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 128 + tyousei_y,
-                                                  picture, rect)
+                        @back_window.contents.blt(@tec_back - (hai_max_size_x + (hai_max_size_x / 2)), 128 + tyousei_y, picture, rect)
                     elsif @tec_back <= -(hai_max_size_x / 2) then
                         @back_window.contents.blt(@tec_back + (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
-                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 128 + tyousei_y, picture,
-                                                  rect)
+                        @back_window.contents.blt(@tec_back + hai_max_size_x + (hai_max_size_x / 2), 128 + tyousei_y, picture, rect)
                     end
                     # @back_window.contents.blt(0 , 256+36,picture,rect)
 
@@ -2938,8 +3023,7 @@ class Scene_Db_Battle_Anime < Scene_Base
                         else
                             # 通常攻撃
                             # nil対策
-                            $cha_normal_attack_level[$partyc[@chanum]] =
-                                0 if $cha_normal_attack_level[$partyc[@chanum]] == nil
+                            $cha_normal_attack_level[$partyc[@chanum]] = 0 if $cha_normal_attack_level[$partyc[@chanum]] == nil
 
                             @tec_power = 3
 
@@ -3149,8 +3233,7 @@ class Scene_Db_Battle_Anime < Scene_Base
                     end
 
                     # スキルのダメージ調整
-                    @battledamage = set_damage_add($partyc[@chanum.to_i], @enedatenum, @battledamage, 0, $cha_set_action[@chanum],
-                                                   @enenum)
+                    @battledamage = set_damage_add($partyc[@chanum.to_i], @enedatenum, @battledamage, 0, $cha_set_action[@chanum], @enenum)
 
                     # Sコンボのスキル表示を追加
                     $tmp_run_skill += @tmp_scom_run_skill
@@ -3169,9 +3252,7 @@ class Scene_Db_Battle_Anime < Scene_Base
                         # p (($data_enemies[@enedatenum].agi * 1.2 + $enecardg[@enenum]) - ($game_actors[$partyc[@chanum.to_i]].agi * 1.1 + $carda[x])).prec_i
                         # 味方の攻撃が必ず当たるフラグがONの場合は必ず当たる　回避優先
                         # かつ必中スキルを覚えていない
-                        if rand(100) + 1 < avoid && $game_switches[129] == false && $data_skills[$cha_set_action[@chanum] - 10].element_set.index(29) == nil && chk_skill_learn(
-                            389, $partyc[@chanum.to_i]
-                        )[0] == false
+                        if rand(100) + 1 < avoid && $game_switches[129] == false && $data_skills[$cha_set_action[@chanum] - 10].element_set.index(29) == nil && chk_skill_learn(389, $partyc[@chanum.to_i])[0] == false
                             @attack_hit = false
                             @battledamage = 0
                         end
@@ -3189,8 +3270,7 @@ class Scene_Db_Battle_Anime < Scene_Base
             end
 
             # ヒットスキルを取得(味方)
-            get_attack_hit_skill(@chanum.to_i, @enenum, @attack_hit, @attackDir, $cha_set_action[@chanum],
-                                 @battledamage)
+            get_attack_hit_skill(@chanum.to_i, @enenum, @attack_hit, @attackDir, $cha_set_action[@chanum], @battledamage)
 
         # @battledamage
         else
@@ -3293,8 +3373,7 @@ class Scene_Db_Battle_Anime < Scene_Base
                     # ヒットスキルを取得(敵)
                     # get_attack_hit_skill @chanum.to_i,@enenum,@attack_hit,@attackDir,0
                     # 敵の攻撃も送るようにしてみる
-                    get_attack_hit_skill(@chanum.to_i, @enenum, @attack_hit, @attackDir, @ene_set_action,
-                                         @battledamage)
+                    get_attack_hit_skill(@chanum.to_i, @enenum, @attack_hit, @attackDir, @ene_set_action, @battledamage)
                 end
 
             end
@@ -3901,8 +3980,7 @@ class Scene_Db_Battle_Anime < Scene_Base
             else
                 rect = Rect.new(0, 11 * 96, 96, 96)
                 rect = Rect.new(0, 16 * 96, 96, 96) if $btl_progress == 1 || $btl_progress == 2
-                @back_window.contents.blt(CENTER_ENEX + 12 + 8 * 4, STANDARD_ENEY + 6 - 6 - (@back_anime_frame - 8) * 16,
-                                          picture, rect)
+                @back_window.contents.blt(CENTER_ENEX + 12 + 8 * 4, STANDARD_ENEY + 6 - 6 - (@back_anime_frame - 8) * 16, picture, rect)
             end
 
             if @back_anime_frame == 8 #  && @back_anime_type != 2
@@ -4073,12 +4151,10 @@ class Scene_Db_Battle_Anime < Scene_Base
             ushirox = 0
             idouryou = 8
             if $partyc[@chanum.to_i] == 8
-                @back_window.contents.blt(STANDARD_CHAX + @back_anime_frame * idouryou + 30, STANDARD_CHAY - 50, picture,
-                                          rect)
+                @back_window.contents.blt(STANDARD_CHAX + @back_anime_frame * idouryou + 30, STANDARD_CHAY - 50, picture, rect)
             # p STANDARD_CHAX+@effect_anime_frame*idouryou,TEC_CENTER_CHAX if $partyc[@chanum.to_i] == 6 || $partyc[@chanum.to_i] == 7
             else
-                @back_window.contents.blt(STANDARD_CHAX + @back_anime_frame * idouryou + 30, STANDARD_CHAY + 50, picture,
-                                          rect)
+                @back_window.contents.blt(STANDARD_CHAX + @back_anime_frame * idouryou + 30, STANDARD_CHAY + 50, picture, rect)
             end
         when 40 # ダブルどどんぱ(Z2)_キャラ現れる(放置)
             rect = Rect.new(0, 0 * 96, 96, 96)
@@ -4815,8 +4891,7 @@ class Scene_Db_Battle_Anime < Scene_Base
             rect = Rect.new(@battledamage.to_s[-y, 1].to_i * 16, 32, 16, 16)
             if @attackDir == 0 # 味方
                 if $game_variables[29] == 0 || $game_variables[29] == 2 # 下
-                    @status_window.contents.blt(@@enestex + tyousei_x + 232 - (y - 1) * 16, 48 + tyousei_y, picturez,
-                                                rect)
+                    @status_window.contents.blt(@@enestex + tyousei_x + 232 - (y - 1) * 16, 48 + tyousei_y, picturez, rect)
                 end
 
                 if $game_variables[29] == 1 || $game_variables[29] == 2 # 上
@@ -4828,8 +4903,7 @@ class Scene_Db_Battle_Anime < Scene_Base
                 end
             else
                 if $game_variables[29] == 0 || $game_variables[29] == 2 # 下
-                    @status_window.contents.blt(@@chastex + tyousei_x + 48 - (y - 1) * 16, 48 + tyousei_y, picturez,
-                                                rect)
+                    @status_window.contents.blt(@@chastex + tyousei_x + 48 - (y - 1) * 16, 48 + tyousei_y, picturez, rect)
                 end
 
                 if $game_variables[29] == 1 || $game_variables[29] == 2 # 上
@@ -4843,8 +4917,7 @@ class Scene_Db_Battle_Anime < Scene_Base
                 # 吸収
                 if $data_skills[@ene_set_action - 10].element_set.index(15) != nil # 下
                     rect = Rect.new(@battledamage.to_s[-y, 1].to_i * 16, 64, 16, 16)
-                    @status_window.contents.blt(@@enestex + tyousei_x + 232 - (y - 1) * 16, 48 + tyousei_y, picturez,
-                                                rect)
+                    @status_window.contents.blt(@@enestex + tyousei_x + 232 - (y - 1) * 16, 48 + tyousei_y, picturez, rect)
                 end
             end
         end
@@ -5112,13 +5185,10 @@ class Scene_Db_Battle_Anime < Scene_Base
                 tmp_scombo_no[x] = ttmp_scombo_no[$player_scombo_priority[$partyc[@chanum]][x]]
                 tmp_scombo_cha[x] = ttmp_scombo_cha[$player_scombo_priority[$partyc[@chanum]][x]]
                 tmp_scombo_flag_tec[x] = ttmp_scombo_flag_tec[$player_scombo_priority[$partyc[@chanum]][x]]
-                tmp_scombo_skill_level_num[x] =
-                    ttmp_scombo_skill_level_num[$player_scombo_priority[$partyc[@chanum]][x]]
-                tmp_scombo_card_attack_num[x] =
-                    ttmp_scombo_card_attack_num[$player_scombo_priority[$partyc[@chanum]][x]]
+                tmp_scombo_skill_level_num[x] = ttmp_scombo_skill_level_num[$player_scombo_priority[$partyc[@chanum]][x]]
+                tmp_scombo_card_attack_num[x] = ttmp_scombo_card_attack_num[$player_scombo_priority[$partyc[@chanum]][x]]
                 tmp_scombo_card_gard_num[x] = ttmp_scombo_card_gard_num[$player_scombo_priority[$partyc[@chanum]][x]]
-                tmp_scombo_chk_flag_oozaru_put[x] =
-                    ttmp_scombo_chk_flag_oozaru_put[$player_scombo_priority[$partyc[@chanum]][x]]
+                tmp_scombo_chk_flag_oozaru_put[x] = ttmp_scombo_chk_flag_oozaru_put[$player_scombo_priority[$partyc[@chanum]][x]]
             end
 
             # p tmp_scombo_no,$player_scombo_priority[$partyc[@chanum]]
@@ -5194,17 +5264,20 @@ class Scene_Db_Battle_Anime < Scene_Base
             cha_skill_level_num = []
             case tmp_set_action
 
-            when 304 # 自爆(サイバイマン
-                # ヤムチャ以外には使わない
-                # return false if $partyc[@chanum] != 7
+            #=== xsin del
+            # when 304 # 自爆(サイバイマン
+            #     # ヤムチャ以外には使わない
+            #     # return false if $partyc[@chanum] != 7
+            #
+            #     chkchanum = 7
+            #
+            #     if get_chabtljoin_dead((chkchanum) == true)
+            #         return false
+            #     else
+            #         @ene_coerce_target_chanum = chkchanum
+            #     end
+            #===
 
-                chkchanum = 7
-
-                if get_chabtljoin_dead((chkchanum) == true)
-                    return false
-                else
-                    @ene_coerce_target_chanum = chkchanum
-                end
             when 373 # 大猿変身(べジータ
 
                 return false if $battle_begi_oozaru_run == true
@@ -5216,6 +5289,11 @@ class Scene_Db_Battle_Anime < Scene_Base
             when 645 # 巨大化(スラッグ
 
                 return false if $battle_sura_big_run == true
+
+            #=== xsin
+            when 978 #拉蒂斯超赛
+                return false if $battle_sura_big_run == true
+            #===
 
             when 382, 383 # パープルコメットクラッシュ
                 # ジースが生きてる
@@ -5395,11 +5473,13 @@ class Scene_Db_Battle_Anime < Scene_Base
             end
 
             if $game_switches[26] == true # HP30％攻撃回数増加チェックフラグ
-                @attack_num += 1 if ($enehp[@enenum] * 100 / $data_enemies[@enedatenum].maxhp) <= 30
+                # xsin edit
+                @attack_num += 1 if ($enehp[@enenum] * 100 / $data_enemies[@enedatenum].maxhp) <= 15
             end
 
             if $game_switches[27] == true # HP40％攻撃回数増加チェックフラグ
-                @attack_num += 1 if ($enehp[@enenum] * 100 / $data_enemies[@enedatenum].maxhp) <= 40
+                # xsin edit
+                @attack_num += 1 if ($enehp[@enenum] * 100 / $data_enemies[@enedatenum].maxhp) <= 30
             end
 
             if $game_switches[29] == true # HP50％攻撃回数増加チェックフラグ
@@ -5466,8 +5546,7 @@ class Scene_Db_Battle_Anime < Scene_Base
 
                     else # 通常攻撃
                         # nilの初期化
-                        $cha_normal_attack_level[$partyc[@chanum]] =
-                            0 if $cha_normal_attack_level[$partyc[@chanum]] == nil
+                        $cha_normal_attack_level[$partyc[@chanum]] = 0 if $cha_normal_attack_level[$partyc[@chanum]] == nil
 
                         saiyazinflag = false
                         tuuzyouchanum = 0
@@ -5505,8 +5584,7 @@ class Scene_Db_Battle_Anime < Scene_Base
                         # サイヤ人系の通常攻撃の回数同期用の処理
                         if saiyazinflag == true
                             # nilの初期化
-                            $cha_normal_attack_level[tuuzyouchanum] =
-                                0 if $cha_normal_attack_level[tuuzyouchanum] == nil
+                            $cha_normal_attack_level[tuuzyouchanum] = 0 if $cha_normal_attack_level[tuuzyouchanum] == nil
                             # nilの初期化
                             $cha_normal_attack_level[superchanum] = 0 if $cha_normal_attack_level[superchanum] == nil
 

@@ -4129,6 +4129,7 @@ module Scene_Db_Battle_Anime_pattern
             #@effect_anime_pattern = 2
             elsif @battle_anime_frame == 51
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "悟空龟波")
                 battle_anime_change(0, 4)
                 @effect_anime_pattern = 2
             elsif @battle_anime_frame == 90
@@ -4157,7 +4158,8 @@ module Scene_Db_Battle_Anime_pattern
 
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z1 気を溜める7")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める7")
+                Audio.se_play("Audio/SE/" + "悟空界王拳") # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 6)
                 @ray_color = 0
@@ -4190,7 +4192,8 @@ module Scene_Db_Battle_Anime_pattern
 
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z1 気を溜める7")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める7")
+                Audio.se_play("Audio/SE/" + "悟空界王拳") # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 6)
                 @ray_color = 0
@@ -4205,6 +4208,7 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(17)
             when 161
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "悟空龟波")
                 battle_anime_change(0, 4)
                 @effect_anime_pattern = 2
                 back_anime_pattern(17)
@@ -4245,6 +4249,7 @@ module Scene_Db_Battle_Anime_pattern
             when 120 #初期化
                 Audio.se_stop
                 Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "悟空元气弹前摇")
                 back_anime_pattern(7)
             when 121..220
                 back_anime_pattern(7)
@@ -4394,7 +4399,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(4)
             elsif @battle_anime_frame == 61
                 #Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "短笛爆裂魔波") # 効果音を再生する
                 battle_anime_change(0, 6)
                 @effect_anime_pattern = 6
                 back_anime_pattern(4)
@@ -4435,7 +4441,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(5)
             elsif @battle_anime_frame == 131
                 #Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波3")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波3")
+                Audio.se_play("Audio/SE/" + "短笛魔贯光杀炮") # 効果音を再生する
                 battle_anime_change(0, 8)
                 @effect_anime_pattern = 7
                 back_anime_pattern(5)
@@ -4505,7 +4512,7 @@ module Scene_Db_Battle_Anime_pattern
                     @ray_color = 0
                 elsif @battle_anime_frame <= 60
 
-                    #@battle_anime_frame <= 180
+                    @battle_anime_frame <= 180
                     rect = Rect.new(0, 384, 96, 112)
                     @back_window.contents.blt(266, 118, picture, rect)
 
@@ -4556,7 +4563,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(6)
             elsif @battle_anime_frame == 61
                 #Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "悟饭幼年魔闪光") # 効果音を再生する
                 battle_anime_change(0, 3)
                 @effect_anime_pattern = 8
                 back_anime_pattern(6)
@@ -4699,7 +4707,8 @@ module Scene_Db_Battle_Anime_pattern
             #@effect_anime_pattern = 2
             elsif @battle_anime_frame == 51
                 battle_anime_change(0, 2)
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                Audio.se_play("Audio/SE/" + "小林龟波")  # 効果音を再生する
                 @effect_anime_pattern = 2
             elsif @battle_anime_frame == 90
                 @effect_anime_pattern = 0
@@ -4733,7 +4742,8 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern(4)
                 elsif @battle_anime_frame == 61
                     #Audio.se_stop
-                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                    Audio.se_play("Audio/SE/" + "小林跟踪弹")  # 効果音を再生する
                     battle_anime_change(0, 4)
                     @effect_anime_pattern = 6
                     back_anime_pattern(4)
@@ -4765,7 +4775,8 @@ module Scene_Db_Battle_Anime_pattern
                 elsif @battle_anime_frame == 204
                     battle_anime_change(0, 6)
                     Audio.se_stop
-                    Audio.se_play("Audio/SE/" + "Z1 ブン")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z1 ブン")
+                    Audio.se_play("Audio/SE/" + "小林跟踪弹2")    # 効果音を再生する
                 elsif @battle_anime_frame == 244
                     if @attackDir == 0
                         @output_anime_type = 0
@@ -4827,7 +4838,8 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame == 131
                 battle_anime_change(0, 8)
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 気円斬")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気円斬")
+                Audio.se_play("Audio/SE/" + "小林气元斩")  # 効果音を再生する
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
@@ -4853,7 +4865,8 @@ module Scene_Db_Battle_Anime_pattern
                 @output_anime_type = 1
                 battle_anime_change(0, 0)
             elsif @battle_anime_frame == 30
-                Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 高速移動")
+                Audio.se_play("Audio/SE/" + "乐平狼牙风风拳")   # 効果音を再生する
                 @chay = -120
             elsif @battle_anime_frame >= 31 && @battle_anime_frame <= 70
                 if @battle_anime_frame % 4 == 0
@@ -4886,7 +4899,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 172 #カメハメ波(ヤムチャ)
             if @battle_anime_frame == 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+                Audio.se_play("Audio/SE/" + "乐平龟派气功") # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 1)
                 @ray_color = 0
@@ -4894,7 +4908,8 @@ module Scene_Db_Battle_Anime_pattern
             #@effect_anime_pattern = 2
             elsif @battle_anime_frame == 51
                 battle_anime_change(0, 2)
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                # 効果音を再生する
                 @effect_anime_pattern = 2
             elsif @battle_anime_frame == 90
                 @effect_anime_pattern = 0
@@ -4922,7 +4937,8 @@ module Scene_Db_Battle_Anime_pattern
             case @battle_anime_frame
 
             when 0
-                Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+                Audio.se_play("Audio/SE/" + "乐平操气弹") # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 3)
                 @ray_color = 0
@@ -4942,7 +4958,8 @@ module Scene_Db_Battle_Anime_pattern
             when 102
                 battle_anime_change(0, 6)
             when 112
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                # 効果音を再生する
                 battle_anime_change(0, 7)
             when 152
                 @effect_anime_pattern = 0
@@ -5031,7 +5048,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 183 #気功砲
             if @battle_anime_frame == 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 ザー")
+                Audio.se_play("Audio/SE/" + "天津饭气功炮")  # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 2)
                 @ray_color = 0
@@ -5092,7 +5110,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 191 #どとんぱ
             if @battle_anime_frame == 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+                Audio.se_play("Audio/SE/" + "饺子普通洞洞波")# 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 2)
                 @ray_color = 0
@@ -5100,7 +5119,8 @@ module Scene_Db_Battle_Anime_pattern
 
             elsif @battle_anime_frame == 61
                 battle_anime_change(0, 3)
-                Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 怪光線")
+            # 効果音を再生する
             elsif @battle_anime_frame >= 70 && @battle_anime_frame <= 99
                 @effect_anime_pattern = 2
             elsif @battle_anime_frame == 100
@@ -5122,7 +5142,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 192 #超能力チャオズ
             if @battle_anime_frame == 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+                Audio.se_play("Audio/SE/" + "饺子超能力") # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 1)
                 @ray_color = 1
@@ -5335,6 +5356,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 end
             when 71
+                Audio.se_play("Audio/SE/" + "龟仙人残像拳")
                 set_chr_display_out
                 @tec_output_back = false
 
@@ -5428,7 +5450,8 @@ module Scene_Db_Battle_Anime_pattern
             when 1..50
             #@effect_anime_pattern = 2
             when 51
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                Audio.se_play("Audio/SE/" + "龟仙人鬼派")   # 効果音を再生する
                 battle_anime_change(0, 3)
                 @effect_anime_pattern = 2
             when 90
@@ -5459,7 +5482,8 @@ module Scene_Db_Battle_Anime_pattern
             when 150
                 battle_anime_change(0, 5)
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "DB3 エネルギー波1")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "DB3 エネルギー波1")
+                Audio.se_play("Audio/SE/" + "龟仙人万国惊天掌") # 効果音を再生する
                 #battle_anime_change 0,1
                 @effect_anime_pattern = 16
             #back_anime_pattern 101,back_x,back_y
@@ -5497,7 +5521,8 @@ module Scene_Db_Battle_Anime_pattern
             when 91..160
                 back_anime_pattern(17)
             when 161
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "龟仙人MAX") # 効果音を再生する
                 battle_anime_change(0, 3)
                 @effect_anime_pattern = 2
                 back_anime_pattern(17)
@@ -6104,6 +6129,7 @@ module Scene_Db_Battle_Anime_pattern
                     end
                 when 1 #初期化
                     if @btl_ani_tokusyu_flag == true
+                        Audio.se_play("Audio/SE/" + "Z2到英雄战斗悟空元气弹收集中")
                         Audio.se_play("Audio/SE/" + "Z1 気を溜める(元気弾)")    # 効果音を再生する
                         @output_anime_type = 1
                         battle_anime_change(0, 7)
@@ -7581,7 +7607,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(11)
             when 100
                 #Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "拉蒂斯爆发波")  # 効果音を再生する
                 battle_anime_change(0, 2)
                 @effect_anime_pattern = 14
                 back_anime_pattern(11)
@@ -7619,7 +7646,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(12)
             when 100
                 #Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "拉蒂斯爆裂弹") # 効果音を再生する
                 battle_anime_change(0, 4)
                 @effect_anime_pattern = 15
                 back_anime_pattern(12)
@@ -7661,7 +7689,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 2)
             when 60
                 #Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                Audio.se_play("Audio/SE/" + "那巴能量波") # 効果音を再生する
                 battle_anime_change(0, 3)
                 @effect_anime_pattern = 14
                 back_anime_pattern(14)
@@ -7692,7 +7721,8 @@ module Scene_Db_Battle_Anime_pattern
                 case @battle_anime_frame
                 when 0 #初期化
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")    # 効果音を再生する
-                    Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z1 ザー")
+                    # 効果音を再生する
                     @output_anime_type = 1
                     battle_anime_change(0, 4)
                     @ray_color = 0
@@ -7746,7 +7776,8 @@ module Scene_Db_Battle_Anime_pattern
             case @battle_anime_frame
 
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z1 気を溜める3")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める3")
+                Audio.se_play("Audio/SE/" + "那巴爆发波") # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 6)
                 @ray_color = 0
@@ -7757,7 +7788,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(14)
             when 60
                 #Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "那巴大招") # 効果音を再生する
                 battle_anime_change(0, 7)
                 @effect_anime_pattern = 5
                 back_anime_pattern(15)
@@ -7785,10 +7817,70 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+
+
+  when 415 #剑气波
+      if @all_attack_count == 1
+          case @battle_anime_frame
+          when 0 #初期化
+              Audio.se_play("Audio/SE/" + "Z1 ゴー")    # 効果音を再生する
+              Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+              @output_anime_type = 1
+              battle_anime_change(0, 4)
+              @ray_color = 0
+          when 1..50
+              back_anime_pattern(14)
+              battle_anime_change(0, 4)
+          when 51..100
+              back_anime_pattern(14)
+              battle_anime_change(0, 5)
+          when 101
+              if @attackDir == 0
+                  @output_anime_type = 0
+                  @chay = -120 #キャラ画面範囲外へ
+                  @enex = CENTER_ENEX
+                  @eney = STANDARD_ENEY
+              else
+                  @eney = -200 #キャラ画面範囲外へ
+                  @chax = CENTER_CHAX
+                  @chay = STANDARD_CHAY
+              end
+          when 102..162
+              back_anime_pattern(1)
+          when 163
+              anime_pattern_init
+              return @battle_anime_result + 1
+          end
+      elsif @all_attack_count >= 2
+
+          if @battle_anime_frame == 0
+              Audio.se_play("Audio/SE/" + "Z1 ゴー")    # 効果音を再生する
+              Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+              if @attackDir == 0
+                  @output_anime_type = 0
+                  @chay = -120 #キャラ画面範囲外へ
+                  @enex = CENTER_ENEX
+                  @eney = STANDARD_ENEY
+              else
+                  @eney = -200 #キャラ画面範囲外へ
+                  @chax = CENTER_CHAX
+                  @chay = STANDARD_CHAY
+              end
+          elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 61
+              back_anime_pattern(1)
+          elsif @battle_anime_frame == 62
+              anime_pattern_init
+              return @battle_anime_result + 1
+          end
+      end
+
+
+
         when 416 #エネルギー波(ベジータ)
 
             if @battle_anime_frame == 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                Audio.se_play("Audio/SE/" + "贝吉塔粉碎指") # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 2)
                 @ray_color = 0
@@ -7829,7 +7921,8 @@ module Scene_Db_Battle_Anime_pattern
             elsif @battle_anime_frame == 131
                 battle_anime_change(0, 4)
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 気円斬")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気円斬")
+                # 効果音を再生する
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
@@ -7864,7 +7957,9 @@ module Scene_Db_Battle_Anime_pattern
                     battle_anime_change(0, 5)
                 when 101
                     Audio.se_stop
-                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                    Audio.se_play("Audio/SE/" + "贝吉塔爆发波")
+                    # 効果音を再生する
                     back_anime_pattern(2)
                 when 102..180
                     back_anime_pattern(2)
@@ -7921,7 +8016,9 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 8)
             elsif @battle_anime_frame == 81
                 #Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "贝吉塔 穿击炮")
+                # 効果音を再生する
                 @effect_anime_pattern = 8
                 back_anime_pattern(16)
             elsif @battle_anime_frame >= 82 && @battle_anime_frame <= 144
@@ -7983,7 +8080,9 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_x = 226
                 @ray_y = 88
             elsif @battle_anime_frame == 210
-                Audio.se_play("Audio/SE/" + "Z1 繰気弾")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 繰気弾")
+                Audio.se_play("Audio/SE/" + "贝吉塔巨猿")
+                # 効果音を再生する
                 battle_anime_change(0, 11)
                 @ray_x = 226
                 @ray_y = 88
@@ -8906,6 +9005,96 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+    when  976 #Z1_必殺技_超体当蛇姬48X48
+        @ray_color = 0
+        @ray_x = 700
+        @ray_y = 640
+        case @battle_anime_frame
+        when 0..120
+            back_anime_pattern(15)
+            if @battle_anime_frame == 0
+                Audio.se_play("Audio/SE/" + "Z1 怪しい気")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                @output_anime_type = 1
+                battle_anime_change(0, 2)
+
+            end
+
+            if @battle_anime_frame == 120
+                #Audio.se_stop
+            end
+        when 121..180
+            if @battle_anime_frame == 121
+                battle_anime_change(0, 5)
+                Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+                @eney = -200
+            end
+
+            if @battle_anime_frame % 4 == 0
+                picture = Cache.picture("戦闘アニメ96×96用回避") #ダメージ表示用
+                rect = Rect.new(0, 0, 96, 96)
+
+                @back_window.contents.blt(@enex+4, 134, picture, rect)
+            end
+
+        #@effect_anime_pattern = 5
+        when 181..280
+            #back_anime_pattern 1
+            sframe = 181
+            if @battle_anime_frame == sframe
+                Audio.se_play("Audio/SE/" + "DB3 エネルギー波2")    # 効果音を再生する
+                @effect_anime_frame = 0
+                @effect_anime_pattern = 0
+            end
+            picture = Cache.picture("Z1_必殺技_超体当蛇姬48X48") #ダメージ表示用
+            rect = Rect.new(472*@effect_anime_pattern, 0, 472, 244)
+
+
+            @effect_anime_frame += 1
+            if @effect_anime_frame == 2
+                if @effect_anime_pattern == 0
+                    @effect_anime_pattern = 1
+                else
+                    @effect_anime_pattern = 0
+                end
+            end
+            @back_window.contents.blt(640-16*(@battle_anime_frame-sframe), 40, picture, rect)
+        when 281
+
+            @effect_anime_pattern = 0
+            @effect_anime_frame = 0
+            if @attackDir == 0
+                @output_anime_type = 0
+                @chay = -200 #キャラ画面範囲外へ
+                @enex = CENTER_ENEX-30
+                @eney = STANDARD_ENEY-30
+            else
+                @eney = -200 #キャラ画面範囲外へ
+                @chax = CENTER_CHAX#+30
+                @chay = STANDARD_CHAY#-30
+            end
+        #battle_anime_change 1,0
+        when 282..305
+            sframe = 282
+            picture = Cache.picture("Z1_必殺技_超体当蛇姬48X48") #ダメージ表示用
+            rect = Rect.new(472*@effect_anime_pattern, 0, 472, 244)
+
+
+            @effect_anime_frame += 1
+            if @effect_anime_frame == 2
+                if @effect_anime_pattern == 0
+                    @effect_anime_pattern = 1
+                else
+                    @effect_anime_pattern = 0
+                end
+            end
+            @back_window.contents.blt(640-16*(@battle_anime_frame-sframe), 40, picture, rect)
+        when 306
+            anime_pattern_init
+            return @battle_anime_result + 1
+        end
+
+
         when 689 #ウィロー)ギガンティックボマー
             @ray_color = 0
             @ray_x = 700
@@ -9126,7 +9315,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 3)
             elsif @battle_anime_frame == 46
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 エネルギー波")
+                Audio.se_play("Audio/SE/" + "悟空龟波") # 効果音を再生する
             elsif @battle_anime_frame >= 47 && @battle_anime_frame <= 75
                 @ax = 2 if @battle_anime_frame == 47 && $btl_progress >= 2
                 @ax = -2 if @battle_anime_frame == 50 && $btl_progress >= 2
@@ -9171,6 +9361,7 @@ module Scene_Db_Battle_Anime_pattern
                     Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
                     @ray_color = 0
                 end
+                Audio.se_play("Audio/SE/" + "悟空界王拳")
                 @output_anime_type = 1
                 battle_anime_change(0, 4)
                 battle_anime_change(0, 0) if $super_saiyazin_flag[1] == true #超サイヤ人の場合為がないので、変更しない
@@ -9230,7 +9421,7 @@ module Scene_Db_Battle_Anime_pattern
             end
             case @battle_anime_frame
             when 0 #初期化
-
+                Audio.se_play("Audio/SE/" + "悟空界王拳")
                 if $btl_progress == 2
                     Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
                     @ray_color = 3
@@ -9252,7 +9443,8 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(backhai_no, back_x, back_y)
             when 141
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "悟空龟波") # 効果音を再生する
                 battle_anime_change(0, 3)
                 @effect_anime_pattern = 206
                 if $btl_progress == 2
@@ -9293,7 +9485,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_y = 112
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z2 気を溜める_元気弾")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z2 気を溜める_元気弾")
+                Audio.se_play("Audio/SE/" + "悟空元气弹前摇") # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 5)
                 @ray_color = 0
@@ -9307,7 +9500,8 @@ module Scene_Db_Battle_Anime_pattern
             #when 91..140
             #back_anime_pattern 102,back_x,back_y
             when 111
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                Audio.se_play("Audio/SE/" + "悟空特大元气弹")# 効果音を再生する
                 battle_anime_change(0, 1)
                 @effect_anime_pattern = 208
             #back_anime_pattern 102,back_x,back_y
@@ -9333,7 +9527,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_y = 112
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z2 気を溜める_元気弾")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z2 気を溜める_元気弾")
+                Audio.se_play("Audio/SE/" + "悟空元气弹前摇") # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 5)
                 @ray_color = 0
@@ -9347,7 +9542,8 @@ module Scene_Db_Battle_Anime_pattern
             #when 91..140
             #back_anime_pattern 102,back_x,back_y
             when 111
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                Audio.se_play("Audio/SE/" + "Z2到英雄战斗悟空元气弹发射") # 効果音を再生する
                 battle_anime_change(0, 1)
                 @effect_anime_pattern = 210
             #back_anime_pattern 102,back_x,back_y
@@ -9380,6 +9576,7 @@ module Scene_Db_Battle_Anime_pattern
             case @battle_anime_frame
             when 0..0
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める_元気弾")
+                Audio.se_play("Audio/SE/" + "悟空元气弹前摇")
                 @ray_color = 0
                 @scombo_cha1 = 4
                 @scombo_cha2 = 5
@@ -9504,6 +9701,7 @@ module Scene_Db_Battle_Anime_pattern
             when 421
                 Audio.se_play("Audio/SE/" + "Z2 気を溜める_元気弾")
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める4")
+                Audio.se_play("Audio/SE/" + "悟空特大元气弹")
                 @effect_anime_pattern = 0
                 @ray_color = 0
                 @scombo_cha1 = 4
@@ -9596,6 +9794,7 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(106)
                 @effect_anime_pattern = 236
             when 211
+                Audio.se_play("Audio/SE/" + "Z3到英雄战斗悟空瞬间移动龟派气功发射中")
                 @chr_cutin = true
                 @chr_cutin_flag = true
                 @tec_output_back = true
@@ -9765,7 +9964,9 @@ module Scene_Db_Battle_Anime_pattern
             #when 91..140
             #back_anime_pattern 102,back_x,back_y
             when 101
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波3")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波3")
+                Audio.se_play("Audio/SE/" + "短笛魔贯光杀炮")
+                # 効果音を再生する
                 battle_anime_change(0, 6)
                 @effect_anime_pattern = 214
             #back_anime_pattern 102,back_x,back_y
@@ -9784,6 +9985,71 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+
+        when 1137 #强力魔光砲
+
+            @ray_x = 340
+            @ray_y = 96
+            if $btl_progress == 2
+                backhai_no = 201
+                back_x = 228
+                back_y = 88
+            else
+                backhai_no = 101
+                back_x = 214
+                back_y = 32
+            end
+            case @battle_anime_frame
+            when 0 #初期化
+                if $btl_progress == 2
+                    Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                else
+                    Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                end
+                @output_anime_type = 1
+                battle_anime_change(0, 0)
+                @ray_color = 1
+            when 1..89
+                back_anime_pattern(backhai_no, back_x, back_y)
+            when 90
+                Audio.se_stop
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                battle_anime_change(0, 1)
+                @effect_anime_pattern = 206
+                back_anime_pattern(backhai_no, back_x, back_y)
+
+            when 91..140
+                back_anime_pattern(backhai_no, back_x, back_y)
+            when 141
+                Audio.se_stop
+                back_anime_pattern(backhai_no, back_x, back_y)
+                @ray_color = 1
+            when 142..179
+                if $btl_progress == 2
+                    @ray_color = 1
+                else
+                    @ray_color = 1
+                end
+                back_anime_pattern(backhai_no, back_x, back_y)
+                @ray_color = 0
+            #    @ax = 2 if @battle_anime_frame == 142 && $btl_progress >= 2
+            #    @ax = -2 if @battle_anime_frame == 145 && $btl_progress >= 2
+            #    @ax = 0 if @battle_anime_frame == 148 && $btl_progress >= 2
+            when 180
+                # battle_anime_change 0,1
+                @effect_anime_pattern = 0
+                @effect_anime_frame = 0
+                @effect_anime_type = 0
+            when 190
+                set_chr_display_out
+            when 191..217
+                @ray_color = 1
+                @effect_anime_pattern = 207
+            when 218
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
+
         when 1146 #魔光砲(ゴハン)
             if @battle_anime_frame == 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
@@ -9821,7 +10087,9 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(101, back_x, back_y)
             when 90
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "悟饭幼年魔闪光")
+                # 効果音を再生する
                 battle_anime_change(0, 3)
                 @effect_anime_pattern = 203
                 back_anime_pattern(101, back_x, back_y)
@@ -9856,7 +10124,8 @@ module Scene_Db_Battle_Anime_pattern
 
         when 1162 #カメハメ波(クリリン)
             if @battle_anime_frame == 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+                Audio.se_play("Audio/SE/" + "小林龟波") # 効果音を再生する
                 #Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 2)
@@ -9987,55 +10256,96 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
-        when 1173 #繰気弾(ヤムチャ)
-            back_x = 204
-            back_y = 32
-            @ray_x = 325
-            @ray_y = 120
-            case @battle_anime_frame
-            when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
-                @output_anime_type = 1
 
+
+
+        when 1175 #カメハメ波(ヤムチャ)
+            if @battle_anime_frame == 0 #初期化
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                #Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
+                @output_anime_type = 1
+                battle_anime_change(0, 2)
                 @ray_color = 0
-            when 1..89
-                back_anime_pattern(101, back_x, back_y)
-            when 90
+            elsif @battle_anime_frame >= 41 && @battle_anime_frame <= 45
+                battle_anime_change(0, 3)
+            elsif @battle_anime_frame == 46
                 Audio.se_stop
-                battle_anime_change(0, 4)
-            when 100
-                battle_anime_change(0, 5)
-            when 110
-                battle_anime_change(0, 6)
-            when 120
-                battle_anime_change(0, 7)
-            when 130
-                battle_anime_change(0, 6)
-            when 140
-                battle_anime_change(0, 8)
-            when 150
-                battle_anime_change(0, 6)
-            when 160
-                Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
-                battle_anime_change(0, 6)
-                @effect_anime_pattern = 220
-            #back_anime_pattern 101,back_x,back_y
-            when 161..198
-            #back_anime_pattern 101,back_x,back_y
-            when 199
-                battle_anime_change(0, 6)
+                Audio.se_play("Audio/SE/" + "Z3 エネルギー波")
+                Audio.se_play("Audio/SE/" + "乐平龟派气功") # 効果音を再生する
+            elsif @battle_anime_frame >= 47 && @battle_anime_frame <= 75
+                @ax = 2 if @battle_anime_frame == 47 && $btl_progress >= 2
+                @ax = -2 if @battle_anime_frame == 50 && $btl_progress >= 2
+                @ax = 0 if @battle_anime_frame == 53 && $btl_progress >= 2
+                @effect_anime_pattern = 203
+                @ray_x = 340
+                if $super_saiyazin_flag[1] == true || $btl_progress == 2 #悟空がスーパーサイヤ人か判定
+                    @ray_y = 132 #スーパーサイヤ人
+                else
+                    @ray_y = 124 #通常
+                end
+            elsif @battle_anime_frame == 76
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
-            when 209
+            elsif  @battle_anime_frame == 80
                 set_chr_display_out
-            when 210..236
-                @effect_anime_pattern = 221
-            when 237
+            elsif @battle_anime_frame >= 81 && @battle_anime_frame <= 110
+                @effect_anime_pattern = 204
+            elsif @battle_anime_frame == 111
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+
+    when 1173 #繰気弾(ヤムチャ)乐平操气弹
+        back_x = 204
+        back_y = 32
+        @ray_x = 325
+        @ray_y = 120
+        case @battle_anime_frame
+        when 0 #初期化
+            Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+            Audio.se_play("Audio/SE/" + "乐平操气弹")# 効果音を再生する
+            @output_anime_type = 1
+
+            @ray_color = 0
+        when 1..89
+            back_anime_pattern(101, back_x, back_y)
+        when 90
+            Audio.se_stop
+            battle_anime_change(0, 4)
+        when 100
+            battle_anime_change(0, 5)
+        when 110
+            battle_anime_change(0, 6)
+        when 120
+            battle_anime_change(0, 7)
+        when 130
+            battle_anime_change(0, 6)
+        when 140
+            battle_anime_change(0, 8)
+        when 150
+            battle_anime_change(0, 6)
+        when 160
+            Audio.se_stop
+            Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+            battle_anime_change(0, 6)
+            @effect_anime_pattern = 220
+        #back_anime_pattern 101,back_x,back_y
+        when 161..198
+        #back_anime_pattern 101,back_x,back_y
+        when 199
+            battle_anime_change(0, 6)
+            @effect_anime_pattern = 0
+            @effect_anime_frame = 0
+            @effect_anime_type = 0
+        when 209
+            set_chr_display_out
+        when 210..236
+            @effect_anime_pattern = 221
+        when 237
+            anime_pattern_init
+            return @battle_anime_result + 1
+        end
         when 1182 #四身の拳
             #back_x = 222
             #back_y = 60
@@ -10073,7 +10383,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_y = 138
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+                Audio.se_play("Audio/SE/" + "天津饭气功炮")# 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 0)
                 @ray_color = 0
@@ -10102,6 +10413,13 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
         when 1184 #四身の拳・気功砲
+	           if @all_attack_count >= 2 && @battle_anime_result == 0
+                @chr_cutin_flag = true
+                @battle_anime_result = 2
+             end
+            if @battle_anime_result == 0
+                @tec_output_back_no = 1
+            end
             #back_x = 222
             #back_y = 60
             @ray_x = CENTER_CHAX
@@ -10119,6 +10437,7 @@ module Scene_Db_Battle_Anime_pattern
                 @chay = -120 #キャラ画面範囲外へ
                 @effect_anime_pattern = 224
             when 226
+                Audio.se_play("Audio/SE/" + "天津饭气功炮")
                 battle_anime_change(0, 2)
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
@@ -10135,7 +10454,8 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 1191 #どどんぱ
             if @battle_anime_frame == 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 怪光線")
+                Audio.se_play("Audio/SE/" + "饺子大洞洞波")# 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 1)
                 @ray_color = 0
@@ -10162,7 +10482,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_y = 138
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+                Audio.se_play("Audio/SE/" + "饺子超能力") # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 2)
                 @ray_color = 0
@@ -10192,6 +10513,91 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+
+
+       when 1194 #Z2太阳拳天津饭
+           back_x = 218
+           back_y = 60
+           @ray_x = 325
+           @ray_y = 138
+           case @battle_anime_frame
+           when 0 #初期化
+               Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+               Audio.se_play("Audio/SE/" + "天津饭太阳拳")  # 効果音を再生する
+               @output_anime_type = 1
+               battle_anime_change(0, 8)
+               @ray_color = 0
+
+
+           when 1..69
+               back_anime_pattern(105, back_x, back_y)
+           when 70
+               #Audio.se_stop
+               #Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+               #battle_anime_change 0,3
+               #@effect_anime_pattern = 203
+               back_anime_pattern(105, back_x, back_y)
+           when 71..108
+               back_anime_pattern(105, back_x, back_y)
+           when 109
+               Audio.se_stop
+               #battle_anime_change 0,3
+               @effect_anime_pattern = 0
+               @effect_anime_frame = 0
+               @effect_anime_type = 0
+           when 119
+               set_chr_display_out
+               @tec_output_back = false
+               @chr_cutin_flag = false
+           when 120..146
+               back_anime_pattern(9)
+           when 147
+               anime_pattern_init
+               return @battle_anime_result + 1
+           end
+
+        when 1195 #Z2太阳拳小林
+            back_x = 218
+            back_y = 60
+            @ray_x = 325
+            @ray_y = 138
+            case @battle_anime_frame
+            when 0 #初期化
+                Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+                Audio.se_play("Audio/SE/" + "小林太阳拳")  # 効果音を再生する
+                @output_anime_type = 1
+                battle_anime_change(0, 8)
+                @ray_color = 0
+
+
+            when 1..69
+                back_anime_pattern(105, back_x, back_y)
+            when 70
+                #Audio.se_stop
+                #Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                #battle_anime_change 0,3
+                #@effect_anime_pattern = 203
+                back_anime_pattern(105, back_x, back_y)
+            when 71..108
+                back_anime_pattern(105, back_x, back_y)
+            when 109
+                Audio.se_stop
+                #battle_anime_change 0,3
+                @effect_anime_pattern = 0
+                @effect_anime_frame = 0
+                @effect_anime_type = 0
+            when 119
+                set_chr_display_out
+                @tec_output_back = false
+                @chr_cutin_flag = false
+            when 120..146
+                back_anime_pattern(9)
+            when 147
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
+
+
         when 1202 #ビーム
             if @battle_anime_frame == 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
@@ -10318,6 +10724,160 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+
+
+      when 1208  #魔激炮  #超気功スラッガー
+
+          @ray_x = 340
+
+          if $btl_progress == 2
+              backhai_no = 201
+              back_x = 224
+              back_y = 88
+              @ray_y = 96
+          else
+              backhai_no = 102
+              back_x = 194
+              back_y = 32
+              @ray_y = 90
+          end
+          case @battle_anime_frame
+          when 0 #初期化
+
+              if $btl_progress == 2
+                  Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                  @ray_color = 1
+              else
+                  Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                  @ray_color = 1
+              end
+              @output_anime_type = 1
+              battle_anime_change(0, 0)
+
+          when 1..89
+              back_anime_pattern(backhai_no, back_x, back_y)
+          when 90 #初期化
+              Audio.se_stop
+              Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+              battle_anime_change(0, 15)
+              back_anime_pattern(backhai_no, back_x, back_y)
+          when 91..140
+              back_anime_pattern(backhai_no, back_x, back_y)
+          when 141
+              Audio.se_stop
+              Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+              battle_anime_change(0, 16)
+              @effect_anime_pattern = 206
+              if $btl_progress == 2
+                  @ray_color = 1
+              else
+                  @ray_color = 1
+              end
+              back_anime_pattern(backhai_no, back_x, back_y)
+              @ray_color = 1
+          when 142..179
+              if $btl_progress == 2
+                  @ray_color = 1
+              else
+                  @ray_color = 1
+              end
+              back_anime_pattern(backhai_no, back_x, back_y)
+              @ray_color = 0
+              @ax = 2 if @battle_anime_frame == 142 && $btl_progress >= 2
+              @ax = -2 if @battle_anime_frame == 145 && $btl_progress >= 2
+              @ax = 0 if @battle_anime_frame == 148 && $btl_progress >= 2
+          when 180
+              battle_anime_change(0, 16)
+              @effect_anime_pattern = 0
+              @effect_anime_frame = 0
+              @effect_anime_type = 0
+          when 190
+              set_chr_display_out
+          when 191..217
+              @effect_anime_pattern = 207
+          when 218
+              anime_pattern_init
+              return @battle_anime_result + 1
+          end
+
+       when 1210  #爆碎魔弹 GOHAN  #超気功スラッガー
+
+           @ray_x = 340
+
+           if $btl_progress == 2
+               backhai_no = 201
+               back_x = 224
+               back_y = 88
+               @ray_y = 96
+           else
+               backhai_no = 102
+               back_x = 194
+               back_y = 32
+               @ray_y = 90
+           end
+           case @battle_anime_frame
+           when 0 #初期化
+
+               if $btl_progress == 2
+                   Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                   @ray_color = 1
+               else
+                   Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                   @ray_color = 1
+               end
+               @output_anime_type = 1
+               battle_anime_change(0, 0)
+
+           when 1..89
+               back_anime_pattern(backhai_no, back_x, back_y)
+           when 90 #初期化
+               Audio.se_stop
+               Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+               Audio.se_play("Audio/SE/" + "悟饭 这样如何") # 効果音を再生する
+               battle_anime_change(0, 9)
+               back_anime_pattern(backhai_no, back_x, back_y)
+           when 91..140
+               back_anime_pattern(backhai_no, back_x, back_y)
+           when 141
+               Audio.se_stop
+               Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+               # 効果音を再生する
+               battle_anime_change(0, 10)
+               @effect_anime_pattern = 206
+               if $btl_progress == 2
+                   @ray_color = 1
+               else
+                   @ray_color = 1
+               end
+               back_anime_pattern(backhai_no, back_x, back_y)
+               @ray_color = 1
+           when 142..179
+               if $btl_progress == 2
+                   @ray_color = 1
+               else
+                   @ray_color = 1
+               end
+               back_anime_pattern(backhai_no, back_x, back_y)
+               @ray_color = 1
+               @ax = 2 if @battle_anime_frame == 142 && $btl_progress >= 2
+               @ax = -2 if @battle_anime_frame == 145 && $btl_progress >= 2
+               @ax = 0 if @battle_anime_frame == 148 && $btl_progress >= 2
+           when 180
+               battle_anime_change(0, 10)
+               @effect_anime_pattern = 0
+               @effect_anime_frame = 0
+               @effect_anime_type = 0
+           when 190
+               set_chr_display_out
+           when 191..217
+               @effect_anime_pattern = 207
+           when 218
+               anime_pattern_init
+               return @battle_anime_result + 1
+           end
+
+
+
         when 1221 #(ベジータ)エネルギー波
             if @battle_anime_frame == 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
@@ -10365,7 +10925,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 case @battle_anime_frame
                 when 0 #初期化
-                    Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+                    Audio.se_play("Audio/SE/" + "贝吉塔爆发波") # 効果音を再生する
                     @output_anime_type = 1
                     battle_anime_change(0, 0)
                     @ray_color = 3
@@ -10458,7 +11019,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 6)
             when 110
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "贝吉塔 穿击炮")  # 効果音を再生する
                 #battle_anime_change 0,1
                 @effect_anime_pattern = 233
             #back_anime_pattern 101,back_x,back_y
@@ -10999,7 +11561,8 @@ module Scene_Db_Battle_Anime_pattern
                 if $btl_progress >= 2
                     Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
                 else
-                    Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+                    # 効果音を再生する
                 end
                 @output_anime_type = 1
                 @ray_color = 3
@@ -11028,6 +11591,7 @@ module Scene_Db_Battle_Anime_pattern
                 @chay = STANDARD_CHAY-26
                 @output_anime_type = 1
                 battle_anime_change(0, 3)
+                Audio.se_play("Audio/SE/" + "巴达克打击欧拉")
             when 128..144
                 if @battle_anime_frame == 143
                     Audio.se_play("Audio/SE/" + "Z1 強打")    # 効果音を再生する
@@ -11204,7 +11768,8 @@ module Scene_Db_Battle_Anime_pattern
             barcut_y = 64
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z1 気を溜める3")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める3")
+                Audio.se_play("Audio/SE/" + "巴达克必杀")  # 効果音を再生する
                 @output_anime_type = 1
                 @ray_color = 3
                 if $game_switches[504] == false || $partyc[@chanum] == 32
@@ -11858,7 +12423,9 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 3)
             elsif @battle_anime_frame == 46
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 エネルギー波")
+                Audio.se_play("Audio/SE/" + "龟仙人鬼派")
+            # 効果音を再生する
             elsif @battle_anime_frame >= 47 && @battle_anime_frame <= 75
                 @ax = 2 if @battle_anime_frame == 47 && $btl_progress >= 2
                 @ax = -2 if @battle_anime_frame == 50 && $btl_progress >= 2
@@ -11908,7 +12475,9 @@ module Scene_Db_Battle_Anime_pattern
             when 90
                 battle_anime_change(0, 5)
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "DB3 エネルギー波1")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "DB3 エネルギー波1")
+                Audio.se_play("Audio/SE/" + "龟仙人万国惊天掌")
+                # 効果音を再生する
                 #battle_anime_change 0,1
                 @effect_anime_pattern = 283
             #back_anime_pattern 101,back_x,back_y
@@ -11966,7 +12535,9 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(backhai_no, back_x, back_y)
             when 141
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "龟仙人MAX")
+                # 効果音を再生する
                 battle_anime_change(0, 3)
                 @effect_anime_pattern = 206
                 if $btl_progress == 2
@@ -13599,7 +14170,8 @@ module Scene_Db_Battle_Anime_pattern
                back_anime_pattern(40)
            when 60
                back_anime_pattern(40)
-               Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+               Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+               Audio.se_play("Audio/SE/" + "饺子超能力") # 効果音を再生する
            when 61..150
                back_anime_pattern(105, 222, 60-50)
                @back_anime_frame -= 1
@@ -14301,7 +14873,7 @@ module Scene_Db_Battle_Anime_pattern
                    rect = Rect.new(128, 0, 128, 32)
                    @back_window.contents.blt(@chax-96, STANDARD_CHAY-48, picture, rect)
 
-                   mozi = chg_fc_mozi_tikan("　9ー1は！？")
+                   mozi = chg_fc_mozi_tikan("　9ー1是！？")
                    output_mozi(mozi)
                    rect = Rect.new(16*0, 16*0, 16*mozi.split(//u).size, 24)
                    @back_window.contents.blt(@chax-96, STANDARD_CHAY-48, $tec_mozi, rect)
@@ -14324,7 +14896,7 @@ module Scene_Db_Battle_Anime_pattern
                rect = Rect.new(128, 32, 128, 32)
                @back_window.contents.blt(@chax-96, STANDARD_CHAY+48+74, picture, rect)
 
-               mozi = chg_fc_mozi_tikan("　こたえは…")
+               mozi = chg_fc_mozi_tikan("　答案就是…")
                output_mozi(mozi)
                rect = Rect.new(16*0, 16*0, 16*mozi.split(//u).size, 24)
                @back_window.contents.blt(@chax-96, STANDARD_CHAY-48, $tec_mozi, rect)
@@ -14340,7 +14912,7 @@ module Scene_Db_Battle_Anime_pattern
                rect = Rect.new(128, 32, 128, 32)
                @back_window.contents.blt(@chax-96, STANDARD_CHAY+48+74, picture, rect)
 
-               mozi = chg_fc_mozi_tikan("　　8だ！！")
+               mozi = chg_fc_mozi_tikan("　　是8啊！！")
                output_mozi(mozi)
                rect = Rect.new(16*0, 16*0, 16*mozi.split(//u).size, 24)
                @back_window.contents.blt(@chax-96, STANDARD_CHAY-48, $tec_mozi, rect)
@@ -17420,7 +17992,7 @@ module Scene_Db_Battle_Anime_pattern
                 picture = Cache.picture("戦闘アニメ_吹き出し")
                 rect = Rect.new(256, 96, 224, 32)
                 @back_window.contents.blt(@chax-96+168, STANDARD_CHAY-48+28, picture, rect)
-                mozi = chg_fc_mozi_tikan("　オレをはんごろしにしろ！")
+                mozi = chg_fc_mozi_tikan("　快打我个半死！")
                 output_mozi(mozi)
                 rect = Rect.new(16*0, 16*0, 16*mozi.split(//u).size, 24)
                 @back_window.contents.blt(@chax-96+168, STANDARD_CHAY-48+28, $tec_mozi, rect)
@@ -18833,7 +19405,9 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 1)
             when 110
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "基纽普通技")
+                # 効果音を再生する
                 #battle_anime_change 0,1
                 @effect_anime_pattern = 233
             #back_anime_pattern 101,back_x,back_y
@@ -18886,7 +19460,9 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern(backhai_no, back_x, back_y)
                 when 141
                     Audio.se_stop
-                    Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z1 ザー")
+                    Audio.se_play("Audio/SE/" + "基纽爆发波")
+                    # 効果音を再生する
                     battle_anime_change(0, 2)
                     @effect_anime_pattern = 229
                 #back_anime_pattern 101,back_x,back_y
@@ -18987,7 +19563,9 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 6-2)
             when 160
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                Audio.se_play("Audio/SE/" + "吉斯粉碎球")
+                # 効果音を再生する
                 battle_anime_change(0, 6)
                 @effect_anime_pattern = 220
             #back_anime_pattern 101,back_x,back_y
@@ -19053,7 +19631,9 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(backhai_no, back_x, back_y)
             when 90
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 高速移動")
+                Audio.se_play("Audio/SE/" + "巴特必杀技")
+                # 効果音を再生する
                 @eney = -200 #キャラ画面範囲外へ
                 @chax = CENTER_CHAX+20
 
@@ -19138,7 +19718,9 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 2)
             when 120
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+
+                Audio.se_play("Audio/SE/" + "利库姆必杀 (2)") # 効果音を再生する
                 #battle_anime_change 0,1
                 @effect_anime_pattern = 231
                 @ray_color = 4
@@ -19190,7 +19772,9 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 1)
             when 110
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "利库姆必杀 (1)")
+                # 効果音を再生する
                 #battle_anime_change 0,1
                 @effect_anime_pattern = 233
                 @ray_color = 4
@@ -19232,27 +19816,27 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
-        when 1457 #(グルド)タイムストップ
-            back_x = 260
-            back_y = 60
-            @ray_x = 325
-            @ray_y = 138
+    when 1457 #(グルド)TIMESTOP
+        back_x = 228
+        back_y = 88
+        @ray_x = 325
+        @ray_y = 138
+        if @all_attack_count == 1
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+                Audio.se_play("Audio/SE/" + "古尔多必杀技")
+                # 効果音を再生する
                 @output_anime_type = 1
-                battle_anime_change(0, 2)
-                @ray_color = 3
-            when 1..69
-                back_anime_pattern(105, back_x, back_y)
-            when 70
-                #Audio.se_stop
-                #Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
-                #battle_anime_change 0,3
-                #@effect_anime_pattern = 203
-                back_anime_pattern(105, back_x, back_y)
-            when 71..108
-                back_anime_pattern(105, back_x, back_y)
+                if @enedatenum != 172
+                    battle_anime_change(0, 2)
+                else
+                    battle_anime_change(0, 11)
+                    @enex += 4
+                end
+                @ray_color = 0
+        when 1..108
+            #back_anime_pattern 201,back_x,back_y
             when 109
                 Audio.se_stop
                 #battle_anime_change 0,3
@@ -19261,14 +19845,30 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
             when 119
                 set_chr_display_out
-                @tec_output_back = false
-                @chr_cutin_flag = false
+                #@tec_output_back = false
+                #@chr_cutin_flag = false
+                @tec_output_back_no = 1
             when 120..146
-                back_anime_pattern(9)
+            #back_anime_pattern 9
+
             when 147
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+        elsif @all_attack_count >= 2
+
+            case @battle_anime_frame
+            when 0
+                set_chr_display_out
+            when 1..27
+
+            when 28
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
+        end
+
+
         when 1458 #(フリーザ)エネルギー波
             if @battle_anime_frame == 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
@@ -19316,7 +19916,9 @@ module Scene_Db_Battle_Anime_pattern
                     back_anime_pattern(101, back_x, back_y)
                 when 141
                     Audio.se_stop
-                    Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z1 ザー")
+                    Audio.se_play("Audio/SE/" + "弗利萨大笑")
+                    # 効果音を再生する
                     battle_anime_change(0, 4)
                     @effect_anime_pattern = 229
                 #back_anime_pattern 101,back_x,back_y
@@ -19374,7 +19976,9 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 3)
             when 110
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "弗利萨招式")
+                # 効果音を再生する
                 battle_anime_change(0, 3)
                 @effect_anime_pattern = 233
             #back_anime_pattern 101,back_x,back_y
@@ -19498,7 +20102,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 1)
             when 110
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "弗利萨招式") # 効果音を再生する
                 battle_anime_change(0, 1)
                 @effect_anime_pattern = 233
             #back_anime_pattern 101,back_x,back_y
@@ -19622,7 +20227,8 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 1)
             when 110
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "弗利萨招式") # 効果音を再生する
                 battle_anime_change(0, 1)
                 @effect_anime_pattern = 233
             #back_anime_pattern 101,back_x,back_y
@@ -19763,7 +20369,8 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 110
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "弗利萨招式") # 効果音を再生する
                 battle_anime_change(0, 1)
                 if @enedatenum == 57 #フルパワー
                     battle_anime_change(0, 6)
@@ -19794,7 +20401,8 @@ module Scene_Db_Battle_Anime_pattern
 
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+                Audio.se_play("Audio/SE/" + "弗利萨大球")# 効果音を再生する
                 @output_anime_type = 1
                 @ray_color = 3
                 battle_anime_change(0, 0)
@@ -19817,9 +20425,9 @@ module Scene_Db_Battle_Anime_pattern
                 kienkizyunframe = 175
                 kiptan = 0
                 picture = Cache.picture("Z2_必殺技_デスボール(フリーザフルパワー)一枚絵")
-                if @enedatenum == 57 || @enedatenum == 279 #フルパワー
+                if @enedatenum == 57 || @enedatenum == 286 #フルパワー
                     picture = Cache.picture("Z2_必殺技_デスボール(フリーザフルパワー100)一枚絵")
-                end
+                        end
                 rect = Rect.new(0, 0, 108, 240)
                 @back_window.contents.blt(264, 78, picture, rect)
                 #picture = Cache.picture("Z3_戦闘_必殺技_気円斬")
@@ -19963,6 +20571,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 231
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
                     Audio.se_play("Audio/SE/" + "Z1 ゴー")
+                    Audio.se_play("Audio/SE/" + "弗利萨大招")
                     @ray_anime_type = 0
                     @ray_anime_frame = 0
                     @effect_anime_pattern = 264
@@ -19994,7 +20603,9 @@ module Scene_Db_Battle_Anime_pattern
 
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+                Audio.se_play("Audio/SE/" + "贝吉塔王子战法")
+                # 効果音を再生する
                 @output_anime_type = 1
                 @ray_color = 3
                 battle_anime_change(0, 5)
@@ -20042,7 +20653,11 @@ module Scene_Db_Battle_Anime_pattern
                 sframe = 251
                 if @battle_anime_frame == sframe
                     Audio.se_stop
-                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                    Audio.se_play("Audio/SE/" + "贝吉塔全力巨猿")
+
+
+                    # 効果音を再生する
                     @effect_anime_frame = 0
                     @effect_anime_pattern = 295
                     battle_anime_change(0, 6)
@@ -20654,6 +21269,275 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+
+        when 4338 #(弗利萨G)エネルギー波
+            if $btl_progress >= 2
+                back_x = 256
+                back_y = 86
+                backhai_no = 201
+                se_name = "Z3 変身"
+             else
+                 back_x = 240
+                 back_y = 32
+                 backhai_no = 101
+                 se_name = "Z2 気を溜める"
+             end
+            @ray_x = 224
+            @ray_y = 110
+            case @battle_anime_frame
+            when 0 #初期化
+                Audio.se_play("Audio/SE/" + se_name)    # 効果音を再生する
+                @output_anime_type = 1
+
+                @ray_color = 3
+            when 1..89
+                back_anime_pattern(backhai_no, back_x, back_y)
+            when 90
+                Audio.se_stop
+                battle_anime_change(0, 0)
+            when 100
+                battle_anime_change(0, 8)
+            when 110
+                battle_anime_change(0, 11)
+            when 120
+                Audio.se_stop
+                Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
+                #battle_anime_change 0,1
+                @effect_anime_pattern = 231
+            #back_anime_pattern 101,back_x,back_y
+            when 121..158
+            #back_anime_pattern 101,back_x,back_y
+            when 159
+                #battle_anime_change 0,1
+                @effect_anime_pattern = 0
+                @effect_anime_frame = 0
+                @effect_anime_type = 0
+            when 169
+                set_chr_display_out
+            when 170..196
+                @effect_anime_pattern = 232
+            when 197
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
+
+	    when 4342 #究极狼牙风风拳
+         @ray_color = 0
+         back_x = 228
+         back_y = 88
+         @ray_x = 356
+         @ray_y = 112
+
+
+         case @battle_anime_frame
+         when 0 #初期化
+             Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+             @output_anime_type = 1
+             battle_anime_change(0, 4)
+             @ray_color = 3
+         when 1..89
+             back_anime_pattern(201, back_x, back_y)
+         when 90 #初期化
+             #Audio.se_stop
+             #Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+             battle_anime_change(0, 9)
+             back_anime_pattern(201, back_x, back_y)
+         when 91..127
+             back_anime_pattern(201, back_x, back_y)
+         when 128
+             #@tec_output_back = false
+             #@chr_cutin = false
+             #@ay  -= 2
+             Audio.se_stop
+             Audio.se_play("Audio/SE/" + "Z1 飛ぶ")
+             Audio.se_play("Audio/SE/" + "乐平究极前摇") # 効果音を再生する
+             battle_anime_change(0, 10)
+         #back_anime_pattern 2
+         when 129..180
+             @chax += 20
+         #back_anime_pattern 101,back_x,back_y
+         when 181
+             #set_chr_display_out
+             @enex = CENTER_ENEX
+             @eney = STANDARD_ENEY
+             @output_anime_type = 1
+             @chax = -320
+             @chay = STANDARD_CHAY
+         when 182..210
+             @chax += 20
+         when 211
+             battle_anime_change(0, 11)
+             Audio.se_play("Audio/SE/" + "Z1 強打")
+         # 効果音を再生する
+
+         when 212..240
+             battle_anime_change(1, 17)
+             @effect_anime_pattern = 123
+             @ray_x = 346
+             @ray_y = 154
+
+             @effect_anime_pattern = 0 if @battle_anime_frame >= 220
+             @enex += 20
+             @eney -= 4
+         when 241..260
+             @effect_anime_type = 0
+             @effect_anime_frame = 0
+             @effect_anime_pattern = 0
+             Audio.se_play("Audio/SE/" + "Z1 飛ぶ") if @battle_anime_frame == 241
+             @chax += 24
+             @chay -= 4
+             battle_anime_change(0, 10)
+         when 261..289
+             if @battle_anime_frame == 261
+                 @enex = -100
+                 @eney = STANDARD_ENEY + 50
+                 @chax = -150
+                 @chay = STANDARD_ENEY + 50
+             end
+
+             if @battle_anime_frame <= 284
+                 @enex += 16
+                 @eney -= 2
+             else
+                 battle_anime_change(1, 0)
+             end
+             @chax += 28
+             @chay -= 4
+         when 290
+             Audio.se_play("Audio/SE/" + "乐平特殊超杀")
+             battle_anime_change(0, 12)
+             @chax = 740
+             @chay = STANDARD_ENEY
+         when 291..304
+             @chax -= 28
+         when 305..325
+             if @battle_anime_frame == 305
+                 Audio.se_play("Audio/SE/" + "ZG 打撃2")
+
+                 @chax -= 28
+             end
+
+             @effect_anime_pattern = 123
+             @ray_x = 324
+             @ray_y = 158
+
+             @effect_anime_pattern = 0 if @battle_anime_frame >= 313
+             battle_anime_change(0, 13)
+             battle_anime_change(1, 17)
+             @enex -= 20
+         when 326..344
+             Audio.se_play("Audio/SE/" + "Z1 飛ぶ") if @battle_anime_frame == 326
+             battle_anime_change(0, 10)
+             @chax -= 28
+             @enex -= 20
+         when 345
+             @effect_anime_type = 0
+             @effect_anime_frame = 0
+             @effect_anime_pattern = 0
+             @chax = 900
+             @chay = STANDARD_ENEY
+             @enex = 640
+             @eney = STANDARD_ENEY
+         when 346..364
+             @chax -= 28
+             @enex -= 20
+         when 365
+             Audio.se_play("Audio/SE/" + "ZG 打撃5") if @battle_anime_frame == 365
+             @chax -= 28
+             battle_anime_change(0, 12)
+         when 366..389
+             @effect_anime_pattern = 123
+             @ray_x = 324
+             @ray_y = 158
+
+             @effect_anime_pattern = 0 if @battle_anime_frame >= 374
+             @enex -= 4
+             @eney += 16
+         when 390
+             @effect_anime_type = 0
+             @effect_anime_frame = 0
+             @effect_anime_pattern = 0
+             @chr_cutin = false
+             @chr_cutin_flag = false
+             @tec_output_back_no = 1
+             @chax = CENTER_CHAX-30
+             @chay = -184
+             @enex = CENTER_ENEX-40
+             @eney = -140
+             battle_anime_change(0, 10)
+             Audio.se_play("Audio/SE/" + "Z1 飛ぶ")
+         when 391..404
+             @eney += 16
+             @chay += 24
+             @chax += 4
+         when 405
+             battle_anime_change(0, 5)  #17
+             Audio.se_play("Audio/SE/" + "ZG 打撃1")
+         when 406..439
+             if @battle_anime_frame % 4 == 0
+                 #@chax += 4
+                 @enex += 4
+             elsif @battle_anime_frame % 2 == 0
+                 #@chax -= 4
+                 @enex -= 4
+             end
+             @chay -= 4
+             @eney -= 4
+         when 440
+             @output_anime_type = 1
+             battle_anime_change(0, 10)
+             Audio.se_play("Audio/SE/" + "ZG 打撃4")
+         when 441..469
+             @chay += 2
+             @eney += 16
+         when 470
+             Audio.se_play("Audio/SE/" + "Z1 飛ぶ")
+             battle_anime_change(0, 9)
+         when 471..489
+             @chay -= 16
+             @chax -= 16
+         when 509
+             @tec_back_small = false
+             @chr_cutin = true
+             @chr_cutin_flag = true
+             @tec_output_back_no = 0
+         when 510
+             @chay = STANDARD_ENEY
+             @chax = TEC_CENTER_CHAX
+             Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+             @output_anime_type = 1
+             battle_anime_change(0, 4)
+             @ray_color = 3
+             back_anime_pattern(201, back_x, back_y)
+         when 511..569
+             back_anime_pattern(201, back_x, back_y)
+         when 570..637
+             battle_anime_change(0, 5)
+             back_anime_pattern(201, back_x, back_y)
+         when 638
+             Audio.se_stop
+             Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+             battle_anime_change(0, 1)
+             @effect_anime_pattern = 256
+             @chax += 2
+         when 737
+             @effect_anime_type = 0
+             @effect_anime_frame = 0
+             @effect_anime_pattern = 0
+             battle_anime_change(1, 17)
+             set_chr_display_out
+         when 738..763
+
+
+             @effect_anime_pattern = 265
+         when 764
+             anime_pattern_init
+             return @battle_anime_result + 1
+         end
+
+
+
+
         when 1481 #(スラッグ)メテオバースト
             if $btl_progress >= 2
                 back_x = 242
@@ -20873,7 +21757,9 @@ module Scene_Db_Battle_Anime_pattern
 
             when 0 #初期化
                 @eney = -200
-                Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+
+                # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 2)
             #back_anime_pattern 102
@@ -20892,7 +21778,9 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(107, back_x, back_y)
             when 90
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+                Audio.se_play("Audio/SE/" + "吉斯巴特合体技合并")
+            # 効果音を再生する
             #battle_anime_change 0,1
             when 91..179
                 if $battleenemy[@enenum] == 49 || $battleenemy[@enenum] == 248
@@ -20962,7 +21850,8 @@ module Scene_Db_Battle_Anime_pattern
             when 91..150
                 sframe = 91
                 Audio.se_play("Audio/SE/" + "Z1 ブン") if sframe == @battle_anime_frame
-                battle_anime_change(0, 2)
+
+                battle_anime_change(0, 3)
                 @effect_anime_pattern = 218
                 @effect_anime_frame = 0
                 @ray_x = 290
@@ -20971,7 +21860,7 @@ module Scene_Db_Battle_Anime_pattern
                 sframe = 151
                 Audio.se_play("Audio/SE/" + "Z1 気円斬") if sframe == @battle_anime_frame
                 @effect_anime_pattern = 218
-                battle_anime_change(0, 3)
+                battle_anime_change(0, 2)
                 @ray_x = 184
                 @ray_y = 140
             when 180
@@ -22149,7 +23038,8 @@ module Scene_Db_Battle_Anime_pattern
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める(元気弾)")    # 効果音を再生する
-                Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 ザー")
+                Audio.se_play("Audio/SE/" + "悟空元气弹前摇") # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 5)
                 @ray_color = 0
@@ -22291,7 +23181,8 @@ module Scene_Db_Battle_Anime_pattern
 
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 気を溜める(超元気玉)")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 気を溜める(超元気玉)")
+                Audio.se_play("Audio/SE/" + "悟空特大元气弹") # 効果音を再生する
                 #@output_anime_type = 1
                 #battle_anime_change 0,5
                 @ray_color = 0
@@ -22395,7 +23286,8 @@ module Scene_Db_Battle_Anime_pattern
 
             when 351
                 Audio.se_stop
-                Audio.se_play("Audio/SE/" + "Z1 衝撃波")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 衝撃波")
+                # 効果音を再生する
                 @effect_anime_pattern = 0
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
@@ -22420,7 +23312,8 @@ module Scene_Db_Battle_Anime_pattern
             when 0 #初期化
 
 
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "悟空超龟波")  # 効果音を再生する
                 @ray_color = 3
 
                 @output_anime_type = 1
@@ -22542,6 +23435,8 @@ module Scene_Db_Battle_Anime_pattern
                 @tec_output_back_no = 0
                 @output_anime_type = 1
                 @chay = STANDARD_CHAY
+                Audio.se_play("Audio/SE/" + "悟空超龟波2")
+
             when 721..820
                 sframe = 721
                 @eney = -200
@@ -22844,7 +23739,9 @@ module Scene_Db_Battle_Anime_pattern
                 #battle_anime_change 0,4
                 when 90
                     Audio.se_stop
-                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                    Audio.se_play("Audio/SE/" + "短笛爆裂魔波")
+                    # 効果音を再生する
                     @chay = -120 #キャラ画面範囲外へ
                     back_anime_pattern(2)
                     #picture = Cache.picture("FC風_GBZ1 戦闘_ピッコロ_爆裂波") #ダメージ表示用
@@ -22943,6 +23840,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 if @battle_anime_frame == 160
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波3")
+                    Audio.se_play("Audio/SE/" + "短笛魔贯光杀炮")
                     @effect_anime_pattern = 254
                 end
             when 261
@@ -22964,82 +23862,161 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
-        when 2139 #激烈光弾
 
-            @ray_x = 350
-            @ray_y = 114
+	      when 2137 #FP魔貫光殺砲
+           back_x = 180
+           back_y = 0
+           @ray_x = (640-246-16)
+           @ray_y = 180
+           color = Color.new(255, 255, 255, 260)
+
+           case @battle_anime_frame
+           when 0 #初期化
+               Audio.se_play("Audio/SE/" + "Z1 気を溜める3")    # 効果音を再生する
+               @output_anime_type = 1
+               battle_anime_change(0, 7)
+               @ray_color = 1
+
+               @chr_cutin_flag = false
+
+             when 1..89
+                 back_anime_pattern(backhai_no, back_x, back_y)
+                 battle_anime_change(0, 7)
+                 back_anime_pattern(backhai_no, back_x, back_y)
+           when 90 #初期化
+               Audio.se_stop
+               Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+               Audio.se_play("Audio/SE/" + "全力魔贯光杀炮前摇") # 効果音を再生する
+               battle_anime_change(0, 7)
+               back_anime_pattern(backhai_no, back_x, back_y)
+               @chay = -130
+           when 91..230
+               battle_anime_change(0, 7)
+               back_anime_pattern(backhai_no, back_x, back_y)
+               shake_dot = 4
+               shake_x, shake_y= pic_shake_cal(shake_dot)
+               @back_window.contents.fill_rect(0, 0, 640, 378, color) if @battle_anime_frame >= 116
+               picture = Cache.picture("ZG_必殺技_魔貫光殺砲(ピッコロ)") #ダメージ表示用
+               rect = Rect.new(0, 0, 264, 172)
+
+               @back_window.contents.blt(-4+shake_x, 146+shake_y, picture, rect)
+
+               @back_window.contents.fill_rect(0, 0, 640, 478, color) if @battle_anime_frame >= 118
+               Audio.se_stop if @battle_anime_frame == 230
+               @tec_output_back = true if @battle_anime_frame == 230
+
+        when 231..360
+            #@back_window.contents.fill_rect(0,0,640,378,color) if @battle_anime_frame >= 200-14
+
+            @chay = -160
+            picture = Cache.picture("ZG_必殺技_魔貫光殺砲(ピッコロ)")
+            rect = Rect.new(-55, 0, 294, 172) #124  #184  264  172（0.0.294.172）
+            @back_window.contents.blt(60, 80, picture, rect)#260
+
+            #@back_window.contents.fill_rect(0,0,640,378,color) if @battle_anime_frame >= 200-10
+
+            if @battle_anime_frame == 260
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波3")
+                Audio.se_play("Audio/SE/" + "短笛魔贯光杀炮")
+                @effect_anime_pattern = 254
+            end
+           when 361
+               #Audio.se_stop
+               Audio.se_play("Audio/SE/" + "Z1 衝撃波")    # 効果音を再生する
+               @effect_anime_pattern = 0
+               @effect_anime_frame = 0
+               @effect_anime_type = 0
+               @chr_cutin = true
+               @chr_cutin_flag = true
+               set_chr_display_out
+               @tec_output_back_no = 0
+
+           #@chr_cutin = true
+           when 362..487
+               @ray_y = 134
+               @effect_anime_pattern = 255
+           when 488
+               anime_pattern_init
+               return @battle_anime_result + 1
+          end
+
+    when 2139 #激烈光弾
+        @ray_x = 350
+        @ray_y = 114
+        if $btl_progress == 2
+            backhai_no = 201
+            back_x = 228
+            back_y = 88
+        else
+            backhai_no = 101
+            back_x = 214
+            back_y = 32
+        end
+        case @battle_anime_frame
+        when 0 #初期化
             if $btl_progress == 2
-                backhai_no = 201
-                back_x = 228
-                back_y = 88
+                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
             else
-                backhai_no = 101
-                back_x = 214
-                back_y = 32
+                Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
             end
-            case @battle_anime_frame
-            when 0 #初期化
-                if $btl_progress == 2
-                    Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
-                else
-                    Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
-                end
-                @output_anime_type = 1
-                battle_anime_change(0, 13)
-                @ray_color = 1
-            when 1..89
-                back_anime_pattern(backhai_no, back_x, back_y)
-            when 90..250
+            @output_anime_type = 1
+            battle_anime_change(0, 13)
+            @ray_color = 1
+        when 1..89
+            back_anime_pattern(backhai_no, back_x, back_y)
+        when 90..250
 
-                picture = Cache.picture("Z3_必殺技_激烈光弾(ピッコロ)")
-                rect = Rect.new(0, 0, 218, 230)
-                @back_window.contents.blt(190, 66, picture, rect)
-                if @battle_anime_frame == 90
-                    @chay = -160
+            picture = Cache.picture("Z3_必殺技_激烈光弾(ピッコロ)")
+            rect = Rect.new(0, 0, 218, 230)
+            @back_window.contents.blt(190, 66, picture, rect)
+            if @battle_anime_frame == 90
+                @chay = -160
 
-                    @tec_back_small = true
-                    #@chr_cutin_flag = false
-                    Audio.se_stop
-
-                end
-                if @battle_anime_frame >= 180
-                    @effect_anime_pattern = 252
-                    @ray_x = 322-16
-                    @ray_y = 164-16
-                    @ray_anime_type = 0 if @battle_anime_frame == 180
-                #Audio.se_play("Audio/SE/" + "Z1 気を溜める2")    # 効果音を再生する
-                elsif @battle_anime_frame >= 120
-                    @effect_anime_pattern = 235
-                    @ray_x = 322
-                    @ray_y = 164
-                    Audio.se_play("Audio/SE/" + "Z1 気を溜める2") if @battle_anime_frame == 120   # 効果音を再生する
-                end
-
-            when 251
+                @tec_back_small = true
+                #@chr_cutin_flag = false
                 Audio.se_stop
-                @tec_back_small = false
-                #@chr_cutin_flag = true
-                @effect_anime_frame = 0
-                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
-                battle_anime_change(0, 14)
-                @effect_anime_pattern = 256
-                @chay = STANDARD_CHAY
-                back_anime_pattern(backhai_no, back_x, back_y)
 
-            when 279
-                #battle_anime_change 0,3
-                @effect_anime_pattern = 0
-                @effect_anime_frame = 0
-                @effect_anime_type = 0
-
-            when 289
-                set_chr_display_out
-            when 290..316
-                @effect_anime_pattern = 265
-            when 317
-                anime_pattern_init
-                return @battle_anime_result + 1
             end
+            if @battle_anime_frame >= 180
+                @effect_anime_pattern = 252
+                @ray_x = 322-16
+                @ray_y = 164-16
+                @ray_anime_type = 0 if @battle_anime_frame == 180
+            #Audio.se_play("Audio/SE/" + "Z1 気を溜める2")    # 効果音を再生する
+            elsif @battle_anime_frame >= 120
+                @effect_anime_pattern = 235
+                @ray_x = 322
+                @ray_y = 164
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める2") if @battle_anime_frame == 120   # 効果音を再生する
+            end
+
+        when 251
+            Audio.se_stop
+            @tec_back_small = false
+            #@chr_cutin_flag = true
+            @effect_anime_frame = 0
+            Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+            Audio.se_play("Audio/SE/" + "短笛激烈光弹")
+            # 効果音を再生する
+            battle_anime_change(0, 14)
+            @effect_anime_pattern = 256
+            @chay = STANDARD_CHAY
+            back_anime_pattern(backhai_no, back_x, back_y)
+
+        when 279
+            #battle_anime_change 0,3
+            @effect_anime_pattern = 0
+            @effect_anime_frame = 0
+            @effect_anime_type = 0
+
+        when 289
+            set_chr_display_out
+        when 290..316
+            @effect_anime_pattern = 265
+        when 317
+            anime_pattern_init
+            return @battle_anime_result + 1
+        end
         when 2140 #魔空包囲弾
 
             @ray_x = 340
@@ -23057,9 +24034,12 @@ module Scene_Db_Battle_Anime_pattern
             when 0 #初期化
                 @ray_spd_up_flag = true
                 if $btl_progress == 2
-                    Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z3 変身")
+                    Audio.se_play("Audio/SE/" + "短笛魔空包围弹")   # 効果音を再生する
                 else
-                    Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+                    Audio.se_play("Audio/SE/" + "短笛魔空包围弹")
+                    # 効果音を再生する
                 end
                 @output_anime_type = 1
                 battle_anime_change(0, 0)
@@ -23362,7 +24342,8 @@ module Scene_Db_Battle_Anime_pattern
             masenkou = 228
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "悟饭幼年魔闪光")# 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 2)
                 @ray_color = 0
@@ -23444,7 +24425,10 @@ module Scene_Db_Battle_Anime_pattern
 
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "Z3到Z4战斗小悟饭激烈闪光弹")
+
+                # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 0)
                 @ray_color = 1
@@ -23527,6 +24511,7 @@ module Scene_Db_Battle_Anime_pattern
                 @tec_output_back_no = 0
                 set_chr_display_out
                 Audio.se_play("Audio/SE/" + "ZG 光線1")
+                Audio.se_play("Audio/SE/" + "悟饭 哈")
             when 430..456
                 @effect_anime_pattern = 265
             when 457
@@ -23540,13 +24525,15 @@ module Scene_Db_Battle_Anime_pattern
             @ray_x = 230
             @ray_y = 118
 
-            backhai_no = 201
+            backhai_no = 202
             back_x = 228
             back_y = 88
 
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+
+                Audio.se_play("Audio/SE/" + "Z1到Z4战斗小悟饭龟派气功")
                 @output_anime_type = 1
                 battle_anime_change(0, 0)
                 @ray_color = 0
@@ -23763,7 +24750,8 @@ module Scene_Db_Battle_Anime_pattern
 
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "小林气元斩")   # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 0)
                 @ray_color = 0
@@ -23907,7 +24895,8 @@ module Scene_Db_Battle_Anime_pattern
             if @all_attack_count == 1
                 case @battle_anime_frame
                 when 0 #初期化
-                    Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z3 変身")
+                    Audio.se_play("Audio/SE/" + "小林气元烈斩1") # 効果音を再生する
                     @output_anime_type = 1
                     battle_anime_change(0, 0)
                     @ray_color = 0
@@ -24190,6 +25179,7 @@ module Scene_Db_Battle_Anime_pattern
                     @chr_cutin = true
                     set_chr_display_out
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                    Audio.se_play("Audio/SE/" + "小林大招前摇2")
                 when 562..592
                     @effect_anime_pattern = 260
                 when 593
@@ -24222,9 +25212,10 @@ module Scene_Db_Battle_Anime_pattern
 
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "乐平操气弹")  # 効果音を再生する
                 @output_anime_type = 1
-                battle_anime_change(0, 0)
+                battle_anime_change(0, 4)
                 @ray_color = 0
             when 1..128
                 back_anime_pattern(201, back_x, back_y)
@@ -24372,7 +25363,8 @@ module Scene_Db_Battle_Anime_pattern
             if @all_attack_count == 1
                 case @battle_anime_frame
                 when 0 #初期化
-                    Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z3 変身")
+                    Audio.se_play("Audio/SE/" + "乐平特大操气弹")   # 効果音を再生する
                     @output_anime_type = 1
                     battle_anime_change(0, 0)
                     @ray_color = 0
@@ -24547,6 +25539,8 @@ module Scene_Db_Battle_Anime_pattern
                 when 50
                     @effect_anime_pattern = 0
                     Audio.se_play("Audio/SE/" + "DB3 狼牙風風拳")
+
+                    Audio.se_play("Audio/SE/" + "乐平新狼牙风风拳")
                     battle_anime_change(0, 0)
                 when 51..120
                     if @battle_anime_frame % 2 == 0
@@ -24599,7 +25593,7 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 0)
                 @ray_color = 0
                 Audio.se_play("Audio/SE/" + "Z3 変身")
-
+                Audio.se_play("Audio/SE/" + "乐平狼牙风风拳龟波")
             when 381..508
                 sframe = 381
                 back_anime_pattern(201, back_x, back_y)
@@ -24728,7 +25722,8 @@ module Scene_Db_Battle_Anime_pattern
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "天津饭气功炮")# 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 0)
                 @ray_color = 0
@@ -24893,7 +25888,8 @@ module Scene_Db_Battle_Anime_pattern
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "天津饭新气功炮")  # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 0)
                 @ray_color = 0
@@ -24948,6 +25944,215 @@ module Scene_Db_Battle_Anime_pattern
                 return @battle_anime_result + 1
             end
 
+  when 2189 #太阳拳Z3 小林
+      back_x = 228
+      back_y = 88
+      @ray_x = 325
+      @ray_y = 138
+      color = Color.new(255, 255, 255, 260)
+      #@back_window.contents.fill_rect(0,0,640,378,color)
+      if @all_attack_count == 1
+          case @battle_anime_frame
+          when 0 #初期化
+              Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+              @output_anime_type = 1
+              battle_anime_change(0, 17)
+              @ray_color = 0
+          when 1..128
+              back_anime_pattern(201, back_x, back_y)
+          when 129
+              Audio.se_stop
+              #battle_anime_change 0,3
+              @effect_anime_pattern = 0
+              @effect_anime_frame = 0
+              @effect_anime_type = 0
+              @chay = -160
+          when 130..220
+
+
+              case @battle_anime_frame
+
+              when 140..143, 160..163, 180..183, 200..203
+                  @back_window.contents.fill_rect(0, 0, 640, FLASH_Y_SIZE_CUTIN_ON, color)
+
+              end
+
+              case @battle_anime_frame
+
+              when 140
+                  Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+                  Audio.se_play("Audio/SE/" + "小林太阳拳")
+
+              end
+          when 221
+
+              @tec_output_back_no = 1
+              set_chr_display_out
+          when 230
+
+
+          #@tec_output_back = false
+          #@chr_cutin_flag = false
+          when 231..257
+
+          #back_anime_pattern 9
+          when 258
+              anime_pattern_init
+              return @battle_anime_result + 1
+          end
+       elsif @all_attack_count >= 2
+
+           case @battle_anime_frame
+           when 0
+               set_chr_display_out
+           when 1..27
+
+           when 28
+               anime_pattern_init
+               return @battle_anime_result + 1
+           end
+      end
+
+    when 2190 #太阳拳Z3 GOKU S
+        back_x = 228
+        back_y = 88
+        @ray_x = 325
+        @ray_y = 138
+        color = Color.new(255, 255, 255, 260)
+        #@back_window.contents.fill_rect(0,0,640,378,color)
+        if @all_attack_count == 1
+            case @battle_anime_frame
+            when 0 #初期化
+                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                @output_anime_type = 1
+                battle_anime_change(0, 4)  #14
+                @ray_color = 0
+            when 1..128
+                back_anime_pattern(201, back_x, back_y)
+            when 129
+                Audio.se_stop
+                #battle_anime_change 0,3
+                @effect_anime_pattern = 0
+                @effect_anime_frame = 0
+                @effect_anime_type = 0
+                @chay = -160
+            when 130..220
+
+
+                case @battle_anime_frame
+
+                when 140..143, 160..163, 180..183, 200..203
+                    @back_window.contents.fill_rect(0, 0, 640, FLASH_Y_SIZE_CUTIN_ON, color)
+
+                end
+
+                case @battle_anime_frame
+
+                when 140
+                    Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+
+                end
+            when 221
+
+                @tec_output_back_no = 1
+                set_chr_display_out
+            when 230
+
+
+            #@tec_output_back = false
+            #@chr_cutin_flag = false
+            when 231..257
+            #back_anime_pattern 9
+            when 258
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
+         elsif @all_attack_count >= 2
+
+             case @battle_anime_frame
+             when 0
+                 set_chr_display_out
+             when 1..27
+
+             when 28
+                 anime_pattern_init
+                 return @battle_anime_result + 1
+             end
+        end
+
+          when 2191 #太阳拳Z3 天津饭
+              back_x = 228
+              back_y = 88
+              @ray_x = 325
+              @ray_y = 138
+              color = Color.new(255, 255, 255, 260)
+              #@back_window.contents.fill_rect(0,0,640,378,color)
+              if @all_attack_count == 1
+                  case @battle_anime_frame
+                  when 0 #初期化
+                      Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                      @output_anime_type = 1
+                      battle_anime_change(0, 8)
+                      @ray_color = 0
+                  when 1..128
+                      back_anime_pattern(201, back_x, back_y)
+                  when 129
+                      Audio.se_stop
+                      #battle_anime_change 0,3
+                      @effect_anime_pattern = 0
+                      @effect_anime_frame = 0
+                      @effect_anime_type = 0
+                      @chay = -160
+                  when 130..220
+
+
+                      case @battle_anime_frame
+
+                      when 140..143, 160..163, 180..183, 200..203
+                          @back_window.contents.fill_rect(0, 0, 640, FLASH_Y_SIZE_CUTIN_ON, color)
+
+                      end
+
+                      case @battle_anime_frame
+
+                      when 140
+                          Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+
+                          Audio.se_play("Audio/SE/" + "天津饭太阳拳")
+
+                      end
+                  when 221
+
+                      @tec_output_back_no = 1
+                      set_chr_display_out
+                  when 230
+
+
+                  #@tec_output_back = false
+                  #@chr_cutin_flag = false
+                  when 231..257
+
+                  #back_anime_pattern 9
+                  when 258
+                      anime_pattern_init
+                      return @battle_anime_result + 1
+                  end
+               elsif @all_attack_count >= 2
+
+                   case @battle_anime_frame
+                   when 0
+                       set_chr_display_out
+                   when 1..27
+
+                   when 28
+                       anime_pattern_init
+                       return @battle_anime_result + 1
+                   end
+              end
+
+
+
+
         when 2192 #超能力
             back_x = 228
             back_y = 88
@@ -24979,6 +26184,120 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+
+       when 2193 #太阳拳GOKUZ1
+           back_x = 228
+           back_y = 88
+           @ray_x = 325
+           @ray_y = 138
+           case @battle_anime_frame
+           when 0 #初期化
+               Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+               @output_anime_type = 1
+               battle_anime_change(0, 5)
+               @ray_color = 0
+           when 1..74
+           #back_anime_pattern 201,back_x,back_y
+           when 109
+               Audio.se_stop
+               #battle_anime_change 0,3
+               @effect_anime_pattern = 0
+               @effect_anime_frame = 0
+               @effect_anime_type = 0
+           when 119
+               set_chr_display_out
+               #@tec_output_back = false
+               #@chr_cutin_flag = false
+               @tec_output_back_no = 1
+           when 120..146
+             #back_anime_pattern 9
+             when 147
+                 anime_pattern_init
+                 return @battle_anime_result + 1
+           end
+
+
+     when 2196  #真太阳拳
+         back_x = 228
+         back_y = 88
+         @ray_x = 325
+         @ray_y = 138
+         color = Color.new(255, 255, 255, 260)
+         #@back_window.contents.fill_rect(0,0,640,378,color)
+         case @battle_anime_frame
+         when 0 #初期化
+             Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+             @output_anime_type = 1
+             battle_anime_change(0, 8)
+             @ray_color = 0
+         when 1..128
+             back_anime_pattern(201, back_x, back_y)
+         when 129
+             Audio.se_stop
+             #battle_anime_change 0,3
+             @effect_anime_pattern = 0
+             @effect_anime_frame = 0
+             @effect_anime_type = 0
+             @chay = -160
+         when 130..220
+
+
+             case @battle_anime_frame
+
+             when 140..143, 160..163, 180..183, 200..203
+                 @back_window.contents.fill_rect(0, 0, 640, FLASH_Y_SIZE_CUTIN_ON, color)
+
+             end
+
+             case @battle_anime_frame
+
+             when 140
+                 Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+                 Audio.se_play("Audio/SE/" + "天津饭前摇")
+             end
+
+         when 221
+             Audio.se_stop
+             @tec_output_back_no = 1
+             set_chr_display_out
+         when 230
+
+
+         #@tec_output_back = false
+         #@chr_cutin_flag = false
+         when 231..257
+
+         #back_anime_pattern 9
+         when 258..299
+
+
+       when 300
+           Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
+           @output_anime_type = 1
+           battle_anime_change(0, 8)
+           @ray_color = 0
+      when 301
+
+      when 302..345
+
+          @effect_anime_pattern = 225
+          @ray_x = 328
+          @ray_y = 148
+          @effect_anime_pattern = 0
+          @effect_anime_frame = 0
+          @effect_anime_type = 0
+          @battle_anime_frame == 45
+          set_chr_display_out
+       when 346..372
+           Audio.se_stop
+           @effect_anime_pattern = 226
+      when 373
+          anime_pattern_init
+          return @battle_anime_result + 1
+     end
+
+
+
         when 2194 #超能力(全体)
             back_x = 228
             back_y = 88
@@ -24989,7 +26308,8 @@ module Scene_Db_Battle_Anime_pattern
             if @all_attack_count == 1
                 case @battle_anime_frame
                 when 0 #初期化
-                    Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z3 変身")
+                    Audio.se_play("Audio/SE/" + "饺子大超能力")  # 効果音を再生する
                     @output_anime_type = 1
                     battle_anime_change(0, 2)
                     @ray_color = 0
@@ -25087,6 +26407,8 @@ module Scene_Db_Battle_Anime_pattern
                 @effect_anime_type = 0
                 @chay = -200
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "饺子大洞洞波")
+
             when 201..310
                 #@tec_output_back_no = 3
                 picture = Cache.picture("Z3_必殺技_どどん波(チャオズ1)")
@@ -25161,6 +26483,7 @@ module Scene_Db_Battle_Anime_pattern
                 when 240
                     @chay = -180
                     Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                    Audio.se_play("Audio/SE/" + "琪琪 芭蕉扇")
                 when 241..340
                     @chr_cutin_flag = false
                     @tec_output_back_no = 3
@@ -25331,9 +26654,11 @@ module Scene_Db_Battle_Anime_pattern
             #@back_window.contents.fill_rect(0,0,640,378,color)
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "贝吉塔 大爆炸攻击")
+                # 効果音を再生する
                 @output_anime_type = 1
-                battle_anime_change(0, 0)
+                battle_anime_change(0, 11)
                 @ray_color = 3
 
             when 1..128
@@ -25424,6 +26749,83 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+
+
+        when 2228 #ギガブラスター GIGA
+            @ray_x = 340
+
+            if $btl_progress == 2
+                backhai_no = 201
+                back_x = 224
+                back_y = 88
+                @ray_y = 96
+            else
+                backhai_no = 102
+                back_x = 194
+                back_y = 32
+                @ray_y = 90
+            end
+            case @battle_anime_frame
+            when 0 #初期化
+
+                if $btl_progress == 2
+                    Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                    @ray_color = 3
+                else
+                    Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                    @ray_color = 3
+                end
+                @output_anime_type = 1
+                battle_anime_change(0, 12)
+
+            when 1..89
+                back_anime_pattern(backhai_no, back_x, back_y)
+            when 90 #初期化
+                Audio.se_stop
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                battle_anime_change(0, 13)
+                back_anime_pattern(backhai_no, back_x, back_y)
+            when 91..140
+                back_anime_pattern(backhai_no, back_x, back_y)
+            when 141
+                Audio.se_stop
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")
+                Audio.se_play("Audio/SE/" + "贝吉塔 技能")
+                # 効果音を再生する
+                battle_anime_change(0, 13)
+                @effect_anime_pattern = 206
+                if $btl_progress == 2
+                    @ray_color = 3
+                else
+                    @ray_color = 3
+                end
+                back_anime_pattern(backhai_no, back_x, back_y)
+                @ray_color = 3
+            when 142..179
+                if $btl_progress == 2
+                    @ray_color = 3
+                else
+                    @ray_color = 3
+                end
+                back_anime_pattern(backhai_no, back_x, back_y)
+                @ray_color = 3
+                @ax = 2 if @battle_anime_frame == 142 && $btl_progress >= 2
+                @ax = -2 if @battle_anime_frame == 145 && $btl_progress >= 2
+                @ax = 0 if @battle_anime_frame == 148 && $btl_progress >= 2
+            when 180
+                battle_anime_change(0, 13)
+                @effect_anime_pattern = 0
+                @effect_anime_frame = 0
+                @effect_anime_type = 0
+            when 190
+                set_chr_display_out
+            when 191..217
+                @effect_anime_pattern = 207
+            when 218
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
+
         when 2230 #ファイナルフラッシュ
             back_x = 228
             back_y = 88
@@ -25434,6 +26836,7 @@ module Scene_Db_Battle_Anime_pattern
             case @battle_anime_frame
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "贝吉塔最后的闪光炮")
                 @output_anime_type = 1
                 battle_anime_change(0, 12)
                 @ray_color = 3
@@ -25713,7 +27116,8 @@ module Scene_Db_Battle_Anime_pattern
             barcut_y = 64
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "巴达克大波必杀") # 効果音を再生する
                 @output_anime_type = 1
                 @ray_color = 3
                 battle_anime_change(0, 4)
@@ -26037,7 +27441,9 @@ module Scene_Db_Battle_Anime_pattern
             end
         when 2272 #剣攻撃
             if @battle_anime_frame == 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 剣攻撃")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 剣攻撃")
+                Audio.se_play("Audio/SE/" + "Z3到Z4战斗大特兰克斯剑攻击")
+                # 効果音を再生する
                 @output_anime_type = 1
 
                 if @attackDir == 1 && @enedatenum == 144
@@ -26100,7 +27506,9 @@ module Scene_Db_Battle_Anime_pattern
                    @chr_cutin = false
                    @chax  += 16
                    Audio.se_stop
-                   Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                   Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                   Audio.se_play("Audio/SE/" + "特兰克斯大波")
+                   # 効果音を再生する
                    battle_anime_change(0, 9)
                    battle_anime_change(0, 2) if $game_variables[173] == 1 || $game_variables[173] == 2 || $game_variables[173] == 3
                #back_anime_pattern 2
@@ -26154,7 +27562,8 @@ module Scene_Db_Battle_Anime_pattern
             case @battle_anime_frame
             when 0 #初期化
                 if $btl_progress == 2
-                    Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z3 変身")
+                    Audio.se_play("Audio/SE/" + "Z3到Z4战斗大特兰克斯魔闪光") # 効果音を再生する
                 else
                     Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
                 end
@@ -26198,7 +27607,8 @@ module Scene_Db_Battle_Anime_pattern
                 #@back_window.contents.fill_rect(0,0,640,378,color)
                 case @battle_anime_frame
                 when 0 #初期化
-                    Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z3 変身")
+                    Audio.se_play("Audio/SE/" + "特兰克斯燃烧攻击")  # 効果音を再生する
                     @output_anime_type = 1
                     battle_anime_change(0, 0)
                     @ray_color = 3
@@ -26312,6 +27722,7 @@ module Scene_Db_Battle_Anime_pattern
                     @output_anime_type = 1
                     battle_anime_change(0, 0)
                     @ray_color = 3
+                    Audio.se_play("Audio/SE/" + "特兰克斯燃烧攻击")
 
                 when 1..128
                     back_anime_pattern(201, back_x, back_y)
@@ -26414,7 +27825,9 @@ module Scene_Db_Battle_Anime_pattern
             @battle_anime_frame = 1001 if @enedatenum != 102 && @battle_anime_frame == 0
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "特兰克斯超级剑")
+                # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 0)
                 @ray_color = 3
@@ -26781,6 +28194,7 @@ module Scene_Db_Battle_Anime_pattern
                 battle_anime_change(0, 0)
                 @ray_color = 0
                 Audio.se_play("Audio/SE/" + "Z1 飛ぶ")
+                Audio.se_play("Audio/SE/" + "Z3到Z4战斗大特兰克斯剑攻击")
             when 1..40
                 #back_anime_pattern 201,back_x,back_y
                 #Audio.se_stop if @battle_anime_frame == 128
@@ -26812,6 +28226,7 @@ module Scene_Db_Battle_Anime_pattern
                 @output_anime_type = 1
                 battle_anime_change(0, 0)
                 @ray_color = 3
+                Audio.se_play("Audio/SE/" + "特兰克斯 打沙鲁大招")
             when 101..228
                 back_anime_pattern(201, back_x, back_y)
                 #@tec_output_back = false if @battle_anime_frame == 228
@@ -26894,7 +28309,8 @@ module Scene_Db_Battle_Anime_pattern
              case @battle_anime_frame
              when 0 #初期化
                  if $btl_progress == 2
-                     Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                     Audio.se_play("Audio/SE/" + "Z3 変身")
+                     Audio.se_play("Audio/SE/" + "特兰克斯变身")  # 効果音を再生する
                  else
                      Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
                  end
@@ -26904,7 +28320,9 @@ module Scene_Db_Battle_Anime_pattern
              when 1..89
                  back_anime_pattern(backhai_no, back_x, back_y)
              when 90
-                 Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                 Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+
+                 # 効果音を再生する
                  battle_anime_change(0, 11)
                  battle_anime_change(0, 12) if $game_variables[173] == 1 || $game_variables[173] == 2 || $game_variables[173] == 3 #剣なしなら
                  back_anime_pattern(backhai_no, back_x, back_y)
@@ -27006,6 +28424,7 @@ module Scene_Db_Battle_Anime_pattern
                 #@ray_color = 3
                 Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "人造人18号技能3")
                 @ray_color = 3
                 #@ray_x = 338
                 #@ray_y = 156
@@ -27183,7 +28602,8 @@ module Scene_Db_Battle_Anime_pattern
                 @output_anime_type = 1
                 battle_anime_change(0, 2)
                 #@ray_color = 3
-                Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "DB3 気を溜める2")
+                Audio.se_play("Audio/SE/" + "Z3到Z4战斗人造人17号技能3") # 効果音を再生する
                 @ray_color = 3
                 @ray_x = 338
                 @ray_y = 156
@@ -27355,7 +28775,8 @@ module Scene_Db_Battle_Anime_pattern
 
             when 0 #初期化
                 Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
-                Audio.se_play("Audio/SE/" + "Z1 ゴー")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z1 ゴー")
+                Audio.se_play("Audio/SE/" + "Z416号火箭拳")  # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 3)
                 @ray_color = 0
@@ -27403,7 +28824,8 @@ module Scene_Db_Battle_Anime_pattern
                 @output_anime_type = 1
                 battle_anime_change(0, 4)
                 #@ray_color = 3
-                Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "DB3 気を溜める2")
+                Audio.se_play("Audio/SE/" + "Z416号地狱燃烧炮")  # 効果音を再生する
                 @ray_color = 3
                 @ray_x = 338
                 @ray_y = 156
@@ -27532,107 +28954,318 @@ module Scene_Db_Battle_Anime_pattern
 
                 case @battle_anime_frame
 
-                when 1
+        when 1
 
-                when 140..230
-                    Audio.se_play("Audio/SE/" + "Z1 気を溜める") if @battle_anime_frame == 140
+        when 140..230
+            Audio.se_play("Audio/SE/" + "Z1 気を溜める") if @battle_anime_frame == 140
 
-                    @ray_x = 362
-                    @ray_y = 244
-                    @effect_anime_pattern = 235
-                when 231
-                    Audio.se_stop
-                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
-                    #Audio.se_play("Audio/SE/" + "Z1 ザー")
-                    @ray_anime_type = 0
-                    @ray_anime_frame = 0
-                    #@effect_anime_pattern = 264
-                    @effect_anime_pattern = 275
-                end
-
-            when 301
-                @tec_output_back = true
-                @chr_cutin = true
-                @chr_cutin_flag = true
-                @effect_anime_pattern = 0
-                @effect_anime_frame = 0
-                @effect_anime_type = 0
-                @tec_output_back_no = 0
-                set_chr_display_out
+            @ray_x = 362
+            @ray_y = 244
+            @effect_anime_pattern = 235
+        when 231
+            Audio.se_stop
+            Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
             #Audio.se_play("Audio/SE/" + "Z1 ザー")
-            when 311..337
-                @ray_y = 114
-                @effect_anime_pattern = 265
+            @ray_anime_type = 0
+            @ray_anime_frame = 0
+            #@effect_anime_pattern = 264
+            @effect_anime_pattern = 275
+        end
 
-            when 338
-                anime_pattern_init
-                return @battle_anime_result + 1
-            end
+      when 301
+          @tec_output_back = true
+          @chr_cutin = true
+          @chr_cutin_flag = true
+          @effect_anime_pattern = 0
+          @effect_anime_frame = 0
+          @effect_anime_type = 0
+          @tec_output_back_no = 0
+          set_chr_display_out
+      #Audio.se_play("Audio/SE/" + "Z1 ザー")
+      when 311..337
+          @ray_y = 114
+          @effect_anime_pattern = 265
 
-        when 2317 #自爆
+      when 338
+          anime_pattern_init
+          return @battle_anime_result + 1
+      end
+
+
+        when 2316 #FP HELL BURNING FLASH  原始FP地狱燃烧炮
             back_x = 218
             back_y = 60
             @ray_x = 325
             @ray_y = 138
-            case @battle_anime_frame
-            when 0 #初期化
-                @output_anime_type = 1
-                battle_anime_change(0, 0)
-            when 30
-                Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
-                @chay = -120
-            when 31..90
-                if @battle_anime_frame % 4 == 0
-                    picture = Cache.picture("戦闘アニメ") #ダメージ表示用
-                    rect = Rect.new(0, 48, 64, 64)
+            if @all_attack_count == 1
+                case @battle_anime_frame
+                when 0 #初期化
+                    @output_anime_type = 1
+                    battle_anime_change(0, 8)
+                when 30
+                    Audio.se_play("Audio/SE/" + "Z1 高速移動")
+                    Audio.se_play("Audio/SE/" + "Z416号FP地狱燃烧")  # 効果音を再生する
 
-                    @back_window.contents.blt(@chax +10 , 140, picture, rect)
 
-                else
+                #@back_window.contents.fill_rect(0,0,640,378,color)
 
+
+                when 31
+                    Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
+                when 32..90 #初期化
+                    #Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                    @output_anime_type = 1
+                    battle_anime_change(0, 5)
+                    #@ray_color = 3
+
+                    @ray_color = 3
+                    @ray_x = 338
+                    @ray_y = 156
+                    @genkitama_kanri_frame = []
+                    @genkitama_kanri_maxflame = 15
+                    @genkitama_kanri_spdup = 10
+                    @genkityuushin_x = @ray_x -14
+                    @genkityuushin_y = @ray_y +2
+                    @genkitama_kanri_frame = [0, 0, 0, 0, 0, 0, 0, 0]
+                when 91..228
+
+                    @ray_x = 324
+                    @ray_y = 120
+
+                    tame_end = 128
+
+                    if @battle_anime_frame == tame_end
+
+                    elsif @battle_anime_frame >= tame_end
+
+                    else
+                        #picture = Cache.picture("Z3_戦闘_必殺技_超元気玉(元気)") #ダメージ表示用
+                        #rect = Rect.new(0, 0, 8, 10)
+                        #@back_window.contents.blt(@genkityuushin_x,@genkityuushin_y,picture,rect)
+                        for i in 0..(@genkitama_kanri_frame.size - 1)
+                            if @genkitama_kanri_frame[i] >= @genkitama_kanri_maxflame
+                                @genkitama_kanri_frame[i] = 0
+                            elsif @genkitama_kanri_frame[i] > 0
+                                picture = Cache.picture("Z3_戦闘_必殺技_超元気玉(元気)") #ダメージ表示用
+                                rect = Rect.new(0, 0, 8, 10)
+                                #idou_x_moto = 4
+                                #idou_y_moto = 2
+                                case i
+
+                                when 0 #上
+                                    idou_x = 0
+                                    idou_y = -2
+
+                                when 1 #左上
+                                    idou_x = 2
+                                    idou_y = -2
+
+                                when 2 #左
+                                    idou_x = 2
+                                    idou_y = 0
+
+                                when 3 #左下
+                                    idou_x = 2
+                                    idou_y = 2
+
+                                when 4 #下
+                                    idou_x = 0
+                                    idou_y = 2
+
+                                when 5 #右下
+                                    idou_x = -2
+                                    idou_y = 2
+
+                                when 6 #右
+                                    idou_x = -2
+                                    idou_y = 0
+
+                                when 7 #右上
+                                    idou_x = -2
+                                    idou_y = -2
+
+                                end
+
+                                idou_x_goukei = idou_x*@genkitama_kanri_spdup+idou_x*2*(@genkitama_kanri_maxflame-@genkitama_kanri_spdup-1)
+                                idou_y_goukei = idou_y*@genkitama_kanri_spdup+idou_y*2*(@genkitama_kanri_maxflame-@genkitama_kanri_spdup-1)
+
+                                if @genkitama_kanri_frame[i] <= @genkitama_kanri_spdup
+                                    @back_window.contents.blt((@genkityuushin_x-idou_x_goukei)+@genkitama_kanri_frame[i] * idou_x, (@genkityuushin_y+idou_y_goukei)-@genkitama_kanri_frame[i] * idou_y, picture, rect)
+                                else
+                                    @back_window.contents.blt((@genkityuushin_x-idou_x_goukei+@genkitama_kanri_spdup*idou_x)+(@genkitama_kanri_frame[i]-@genkitama_kanri_spdup) * (idou_x*2), (@genkityuushin_y+idou_y_goukei-@genkitama_kanri_spdup*idou_y)-(@genkitama_kanri_frame[i]-@genkitama_kanri_spdup) * (idou_y*2), picture, rect)
+                                end
+                                @genkitama_kanri_frame[i] += 1
+
+                            else
+                                if (tame_end - @battle_anime_frame) > @genkitama_kanri_maxflame
+                                    @genkitama_kanri_frame[i] = 1 if rand(7) == 0
+                                end
+
+                            end
+                        end
+                    end
+                    #back_anime_pattern 201,back_x,back_y
+                    #@tec_back_small = true if @battle_anime_frame == 128
+                    @tec_output_back = false if @battle_anime_frame == 228
+                    @chr_cutin = false if @battle_anime_frame == 228
+                    @chr_cutin_flag = false if @battle_anime_frame == 228
+                #@tec_output_back_no = 3 if @battle_anime_frame == 128
+                #@tec_back_color = 0 if @battle_anime_frame == 128
+                #@chr_cutin = false if @battle_anime_frame == 128
+                when 229..400
+                    #kien_x = 220
+                    #kien_y = 80
+                    back_anime_pattern(106)
+                    #Audio.se_stop if @battle_anime_frame == 129
+
+                    @chay = -160
+                    #kienkizyunframe = 175
+                    #kiptan = 0
+                    picture = Cache.picture("Z3_必殺技_ロケットパンチ(16号・左手)")
+                    bezikat_x = 56
+                    bezikat_y = 96
+                    rect = Rect.new(0, 0, 302, 220)
+
+                    if @battle_anime_frame == 231 || @battle_anime_frame == 232 || @battle_anime_frame == 233
+                        bezikat_x -= 2
+                        bezikat_y -= 2
+                    elsif @battle_anime_frame == 232
+                        bezikat_x -= 4
+                        bezikat_y -= 4
+                    elsif @battle_anime_frame == 233
+                        bezikat_x -= 6
+                        bezikat_y -= 6
+                    elsif @battle_anime_frame == 234
+                        bezikat_x -= 4
+                        bezikat_y -= 4
+                    elsif @battle_anime_frame == 235
+                        bezikat_x -= 2
+                        bezikat_y -= 2
+                    end
+                    @back_window.contents.blt(bezikat_x, bezikat_y, picture, rect)
+
+                    case @battle_anime_frame
+
+
+
+                    when 240..430
+                        # Audio.se_play("Audio/SE/" + "Z1 気を溜める") if @battle_anime_frame == 140
+
+                        @ray_x = 362
+                        @ray_y = 244
+                        @effect_anime_pattern = 235
+                    when 431
+                        Audio.se_stop
+                        Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                        #Audio.se_play("Audio/SE/" + "Z1 ザー")
+                        @ray_anime_type = 0
+                        @ray_anime_frame = 0
+                        #@effect_anime_pattern = 264
+                        @effect_anime_pattern = 275
+                            end
+
+                when 501
+                    Audio.se_play("Audio/SE/" + "DB3 気を溜める2")
+                    @tec_output_back = true
+                    @chr_cutin = true
+                    @chr_cutin_flag = true
+                    @effect_anime_pattern = 0
+                    @effect_anime_frame = 0
+                    @effect_anime_type = 0
+                    @tec_output_back_no = 0
+                    set_chr_display_out
+                #Audio.se_play("Audio/SE/" + "Z1 ザー")
+                when 511..537
+                    @ray_y = 114
+                    @effect_anime_pattern = 265
+
+                when 538
+                    anime_pattern_init
+                    return @battle_anime_result + 1
+                      end
+
+              elsif @all_attack_count >= 2
+                  case @battle_anime_frame
+                when 0
+                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+                    #@effect_anime_frame = 27
+                    @output_anime_type = 0
+                    @tec_back = false
+                    set_chr_display_out
+                when 1..60
+                    back_anime_pattern(1)
+                when 61
+                    anime_pattern_init
+                    return @battle_anime_result + 1
                 end
-            when 91
-                set_chr_display_out
-                @effect_anime_frame = 0
-                @tec_output_back = false
-                Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
-                @enex = CENTER_ENEX
-                @eney = STANDARD_ENEY
-            when 92..130
-                if @battle_anime_frame % 4 == 0
-                    picture = Cache.picture("戦闘アニメ") #ダメージ表示用
-                    rect = Rect.new(0, 48, 64, 64)
-                    @back_window.contents.blt(@chax +10+110 , 140, picture, rect)
-                else
+              end
 
-                end
-            when 131..190
-                back_anime_pattern(1)
-                @output_anime_type = 1
-                battle_anime_change(0, 6)
-                #back_anime_pattern 55
-                #@effect_anime_frame += 1
-                #@effect_anime_pattern = 88
-                Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == 133    # 効果音を再生する
-                @chay = STANDARD_CHAY if @battle_anime_frame == 133
-                @chax = CENTER_ENEX + 16
-                @gx = 2 if @battle_anime_frame == 133
-                @gx = -2 if @battle_anime_frame == 135
-                @gx = 0 if @battle_anime_frame == 137
-            when 191..270
-                back_anime_pattern(1)
-                battle_anime_change(0, 7)
-            when 271..330
-                back_anime_pattern(1)
-                battle_anime_change(0, 6)
-                Audio.se_play("Audio/SE/" + "Z1 吹っ飛ぶ") if @battle_anime_frame == 271
-                picture = Cache.picture("戦闘アニメ_ビックリマーク")
-                rect = Rect.new(0, 0, 16, 16)
-                @back_window.contents.blt(CENTER_ENEX+106, STANDARD_ENEY-0, picture, rect)
-            when 331
-                anime_pattern_init
-                return @battle_anime_result + 1
+
+
+    when 2317 #自爆16EV
+        back_x = 218
+        back_y = 60
+        @ray_x = 325
+        @ray_y = 138
+        case @battle_anime_frame
+        when 0 #初期化
+            @output_anime_type = 1
+            battle_anime_change(0, 0)
+        when 30
+            Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+            @chay = -120
+        when 31..90
+            if @battle_anime_frame % 4 == 0
+                picture = Cache.picture("戦闘アニメ") #ダメージ表示用
+                rect = Rect.new(0, 48, 64, 64)
+
+                @back_window.contents.blt(@chax +10 , 140, picture, rect)
+
+            else
+
             end
+        when 91
+            set_chr_display_out
+            @effect_anime_frame = 0
+            @tec_output_back = false
+            Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+            @enex = CENTER_ENEX
+            @eney = STANDARD_ENEY
+        when 92..130
+            if @battle_anime_frame % 4 == 0
+                picture = Cache.picture("戦闘アニメ") #ダメージ表示用
+                rect = Rect.new(0, 48, 64, 64)
+                @back_window.contents.blt(@chax +10+110 , 140, picture, rect)
+            else
+
+            end
+        when 131..190
+            back_anime_pattern(1)
+            @output_anime_type = 1
+            battle_anime_change(0, 6)
+            #back_anime_pattern 55
+            #@effect_anime_frame += 1
+            #@effect_anime_pattern = 88
+            Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == 133    # 効果音を再生する
+            @chay = STANDARD_CHAY if @battle_anime_frame == 133
+            @chax = CENTER_ENEX + 16
+            @gx = 2 if @battle_anime_frame == 133
+            @gx = -2 if @battle_anime_frame == 135
+            @gx = 0 if @battle_anime_frame == 137
+        when 191..270
+            back_anime_pattern(1)
+            battle_anime_change(0, 7)
+        when 271..330
+            back_anime_pattern(1)
+            battle_anime_change(0, 6)
+            Audio.se_play("Audio/SE/" + "Z1 吹っ飛ぶ") if @battle_anime_frame == 271
+            picture = Cache.picture("戦闘アニメ_ビックリマーク")
+            rect = Rect.new(0, 0, 16, 16)
+            @back_window.contents.blt(CENTER_ENEX+106, STANDARD_ENEY-0, picture, rect)
+        when 331
+            anime_pattern_init
+            return @battle_anime_result + 1
+        end
         when 2329 #MAXパワーカメハメ波
 
             @ray_x = 242
@@ -27718,7 +29351,8 @@ module Scene_Db_Battle_Anime_pattern
             color = Color.new(255, 255, 255, 260)
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                # 効果音を再生する
                 @ray_color = 0
 
                 @output_anime_type = 1
@@ -27742,7 +29376,8 @@ module Scene_Db_Battle_Anime_pattern
             when 90
 
                 battle_anime_change(0, 5)
-                Audio.se_play("Audio/SE/" + "DB3 SE041")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "DB3 SE041")
+                Audio.se_play("Audio/SE/" + "龟仙人魔封波")# 効果音を再生する
                 back_anime_pattern(backhai_no, back_x, back_y)
             when 91..119
                 back_anime_pattern(backhai_no, back_x, back_y)
@@ -27894,7 +29529,8 @@ module Scene_Db_Battle_Anime_pattern
             @ray_y = 130
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "Z4外传战斗未来悟饭魔闪光")  # 効果音を再生する
                 @output_anime_type = 1
                 battle_anime_change(0, 12)
                 @ray_color = 3
@@ -28069,6 +29705,7 @@ module Scene_Db_Battle_Anime_pattern
             @ray_y = back_y +90
             case @battle_anime_frame
             when 0 #初期化
+                Audio.se_play("Audio/SE/" + "Z4布欧篇战斗未来悟饭龟派气功合并")
                 if @attackDir == 0
                     @output_anime_type = 0
                     @chay = -120 #キャラ画面範囲外へ
@@ -29325,6 +30962,7 @@ module Scene_Db_Battle_Anime_pattern
                   #set_chr_display_out
                   #@tec_output_back = false
                     Audio.se_play("Audio/SE/" + "Z1 逃げる")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "人造人18号和克林合体技2")
                     #@enex = CENTER_ENEX
                     #@eney = STANDARD_ENEY
                     @output_anime_type = 1
@@ -33157,6 +34795,110 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+       when 3745 #拉蒂斯超赛
+
+           small_enenum = 0
+           big_enenum = 0
+
+           if $battleenemy[@enenum] == 288 #ZGスラッグ
+               small_enenum = 288
+               big_enenum = 289
+           else #Z2スラッグ
+               small_enenum = 60
+               big_enenum = 71
+           end
+           #p $battleenemy[@enenum]
+
+
+           color1 = Color.new(127, 127, 127, 260)
+           color2 = Color.new(188, 188, 188, 260)
+           color3 = Color.new(255, 255, 255, 260)
+           @ray_x = 230
+           @ray_y = 118
+
+           backhai_no = 202
+           back_x = 228
+           back_y = 88
+
+           case @battle_anime_frame
+
+           when 0 #初期化
+               #Audio.se_play("Audio/SE/" + "Z1 満月")    # 効果音を再生する
+               #Audio.se_play("Audio/SE/" + "Z1 ゴー")    # 効果音を再生する
+               @output_anime_type = 1
+               #battle_anime_change 0,0
+               @ray_color = 0
+           #@tec_output_back = false
+           #@chr_cutin = false
+
+           when 1..190
+               sframe = 1
+               #battle_anime_change 0,0
+               @eney = STANDARD_ENEY
+               if @battle_anime_frame == sframe
+                   #Audio.se_play("Audio/SE/" + "Z1 パワーアップ")    # 効果音を再生する
+                   Audio.se_play("Audio/SE/" + "Z1 気を溜める5")
+                   back_anime_pattern(backhai_no, back_x, back_y)
+               end
+               #picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_ゴハン") #ダメージ表示用
+               if @battle_anime_frame <= sframe
+                   #rect = Rect.new(0, 384,96,112)
+                   #@back_window.contents.blt(266,118,picture,rect)
+                   #@chay = -120 #キャラ画面範囲外へ
+
+                   @enedatenum = big_enenum
+                   @enex = TEC_CENTER_CHAX# + 48
+               elsif @battle_anime_frame <= sframe + 8
+                   @enedatenum = small_enenum
+                   @enex = TEC_CENTER_CHAX
+                   battle_anime_change(0, 0)
+               elsif @battle_anime_frame <= sframe + 16
+                   @enedatenum = big_enenum
+                   @enex = TEC_CENTER_CHAX# + 48
+                   battle_anime_change(0, 0)
+               elsif @battle_anime_frame <= sframe + 24
+                   @enedatenum = small_enenum
+                   @enex = TEC_CENTER_CHAX
+                   battle_anime_change(0, 0)
+               elsif @battle_anime_frame <= sframe + 32
+                   @enedatenum = big_enenum
+                   @enex = TEC_CENTER_CHAX# + 48
+                   battle_anime_change(0, 0)
+               elsif @battle_anime_frame <= sframe + 40
+                   @enedatenum = small_enenum
+                   @enex = TEC_CENTER_CHAX
+                   battle_anime_change(0, 0)
+               elsif @battle_anime_frame <= sframe + 48
+                   @enedatenum = big_enenum
+                   @enex = TEC_CENTER_CHAX# + 48
+                   battle_anime_change(0, 0)
+               elsif @battle_anime_frame <= sframe + 56
+                   @enedatenum = small_enenum
+                   @enex = TEC_CENTER_CHAX
+                   battle_anime_change(0, 0)
+               elsif @battle_anime_frame <= sframe + 64
+                   @enedatenum = big_enenum
+                   @enex = TEC_CENTER_CHAX# + 48
+                   battle_anime_change(0, 0)
+               elsif @battle_anime_frame <= sframe + 65
+                   #sframe = 266
+                   #if @battle_anime_frame == sframe
+                   Audio.se_play("Audio/SE/" + "Z1 パワーアップ")
+                   @enedatenum = big_enenum
+               #end
+
+               elsif @battle_anime_frame <= sframe + 129
+                   @enex = TEC_CENTER_CHAX# + 48
+                   battle_anime_change(0, 0)
+               elsif @battle_anime_frame <= sframe + 189
+                   @enex = TEC_CENTER_CHAX# + 48
+                   battle_anime_change(0, 0)
+               end
+           when 200
+               #@eney = -200
+               anime_pattern_init
+               return @battle_anime_result + 1
+           end
         when 2862 #ダブルスラッシュ
             back_x = 204
             back_y = -18
@@ -40702,6 +42444,554 @@ module Scene_Db_Battle_Anime_pattern
                @btl_ani_tokusyu_flag = true
                @battle_anime_frame = -1 # 効果音を再生する
            end
+
+
+       when 4101 #衝撃波(ベジータ)
+
+           if @battle_anime_frame == 0 #初期化
+               @ray_color = 0
+               Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+               @output_anime_type = 1
+               battle_anime_change(0, 10)
+           elsif @battle_anime_frame == 60
+               Audio.se_play("Audio/SE/" + "Z1 衝撃波")    # 効果音を再生する
+               if @attackDir == 0
+                   @output_anime_type = 0
+                   @chay = -120 #キャラ画面範囲外へ
+                   @enex = CENTER_ENEX
+                   @eney = STANDARD_ENEY
+               else
+                   @eney = -200 #キャラ画面範囲外へ
+                   @chax = CENTER_CHAX
+                   @chay = STANDARD_CHAY
+               end
+           elsif @battle_anime_frame >= 61 && @battle_anime_frame <= 119
+               back_anime_pattern(1)
+           elsif @battle_anime_frame == 120
+               anime_pattern_init
+               return @battle_anime_result + 1
+           end
+
+
+     when 4418 #気円斬(ベジータ)
+         back_x = 228
+         back_y = 88
+         @ray_x = 326
+         @ray_y = 196
+
+         case @battle_anime_frame
+         when 0 #初期化
+             Audio.se_play("Audio/SE/" + "DB3 気を溜める2")
+             Audio.se_play("Audio/SE/" + "贝吉塔气元斩") # 効果音を再生する
+             @output_anime_type = 1
+             battle_anime_change(0, 3)
+             @ray_color = 0
+         when 1..121
+             kien_x = 244
+             kien_y = 80
+
+             #
+             #@chay = -160
+             kienkizyunframe = 20
+             picture = Cache.picture("Z3_戦闘_必殺技_気円斬")
+             rect = Rect.new(0, 30*4, 126, 30)
+             if @battle_anime_frame >= kienkizyunframe
+
+
+                 kien_kizyun_x = 6
+                 kien_kizyun_y = 2
+                 kien_mawarikata = 0
+                 case @battle_anime_frame
+
+                 when kienkizyunframe +10, kienkizyunframe +26
+                     kien_mawarikata = 1
+                 when kienkizyunframe +11, kienkizyunframe +27
+                     kien_mawarikata = 2
+                 when kienkizyunframe +12, kienkizyunframe +28
+                     kien_mawarikata = 3
+                 when kienkizyunframe +13, kienkizyunframe +29
+                     kien_mawarikata = 4
+                 when kienkizyunframe +14, kienkizyunframe +30
+                     kien_mawarikata = 5
+                 when kienkizyunframe +15, kienkizyunframe +31
+                     kien_mawarikata = 6
+                 when kienkizyunframe +16, kienkizyunframe +32
+                     kien_mawarikata = 7
+                 when kienkizyunframe +17, kienkizyunframe +33
+                     kien_mawarikata = 8
+                 when kienkizyunframe +18, kienkizyunframe +34
+                     kien_mawarikata = 9
+                 when kienkizyunframe +19, kienkizyunframe +35
+                     kien_mawarikata = 10
+                 when kienkizyunframe +20, kienkizyunframe +36
+                     kien_mawarikata = 11
+                 when kienkizyunframe +21, kienkizyunframe +37
+                     kien_mawarikata = 12
+                 when kienkizyunframe +22, kienkizyunframe +38
+                     kien_mawarikata = 13
+                 when kienkizyunframe +23, kienkizyunframe +39
+                     kien_mawarikata = 14
+                 when kienkizyunframe +24, kienkizyunframe +40
+                     kien_mawarikata = 15
+                 else
+                     kien_mawarikata = 0
+                 end
+
+                 case kien_mawarikata
+
+                 when 0 #下
+                     kien_x += 0
+                     kien_y += 0
+                 when 1
+                     kien_x += kien_kizyun_x * 4
+                     kien_y += - kien_kizyun_y * 1
+                 when 2
+                     kien_x += kien_kizyun_x * 7
+                     kien_y += - kien_kizyun_y * 3
+                 when 3
+                     kien_x += kien_kizyun_x * 9
+                     kien_y += - kien_kizyun_y * 6
+                 when 4 #右
+                     kien_x += kien_kizyun_x * 10
+                     kien_y += - kien_kizyun_y * 10
+                 when 5
+                     kien_x += kien_kizyun_x * 9
+                     kien_y += - kien_kizyun_y * 14
+                 when 6
+                     kien_x += kien_kizyun_x * 7
+                     kien_y += - kien_kizyun_y * 17
+                 when 7
+                     kien_x += kien_kizyun_x * 4
+                     kien_y += - kien_kizyun_y * 19
+                 when 8 #上
+                     kien_x += kien_kizyun_x * 0
+                     kien_y += - kien_kizyun_y * 20
+                 when 9
+                     kien_x += - kien_kizyun_x * 4
+                     kien_y += - kien_kizyun_y * 19
+                 when 10
+                     kien_x += - kien_kizyun_x * 7
+                     kien_y += - kien_kizyun_y * 17
+                 when 11
+                     kien_x += - kien_kizyun_x * 9
+                     kien_y += - kien_kizyun_y * 14
+                 when 12 #左
+                     kien_x += - kien_kizyun_x * 10
+                     kien_y += - kien_kizyun_y * 10
+                 when 13
+                     kien_x += - kien_kizyun_x * 9
+                     kien_y += - kien_kizyun_y * 6
+                 when 14
+                     kien_x += - kien_kizyun_x * 7
+                     kien_y += - kien_kizyun_y * 3
+                 when 15
+                     kien_x += - kien_kizyun_x * 4
+                     kien_y += - kien_kizyun_y * 1
+                 end
+
+             end
+
+             if @battle_anime_frame >= kienkizyunframe + 50
+                 Audio.se_stop if @battle_anime_frame == kienkizyunframe + 50
+                 Audio.se_play("Audio/SE/" + "Z1 気円斬") if @battle_anime_frame == kienkizyunframe + 50
+                 kien_y += + 1 * (@battle_anime_frame-(kienkizyunframe + 50))
+                 kien_x += + 8 * (@battle_anime_frame-(kienkizyunframe + 50))
+                 battle_anime_change(0, 1)
+                 #p kien_x,kien_y
+             end
+
+             @back_window.contents.blt(kien_x, kien_y, picture, rect)
+         when 130
+             @effect_anime_pattern = 0
+             @effect_anime_frame = 0
+             @effect_anime_type = 0
+             @tec_output_back_no = 0
+             set_chr_display_out
+         when 141..165
+             @effect_anime_pattern = 260
+         when 166
+             anime_pattern_init
+             return @battle_anime_result + 1
+         end
+
+
+
+       when 4417#フォトンボンバー(ベジータ)
+
+           @ray_x = 242
+           @ray_y = 20
+           case @battle_anime_frame
+
+           when 0 #初期化
+               Audio.se_play("Audio/SE/" + "DB3 気を溜める2")
+
+               # 効果音を再生する
+               @output_anime_type = 1
+               battle_anime_change(0, 3)
+               #battle_anime_change 0,11 if @enedatenum == 120 || @enedatenum == 239 #クウラ
+               #battle_anime_change 0,4 if @enedatenum == 121 #クウラ(最終形態)
+               #battle_anime_change 0,5 if @enedatenum == 136
+               #battle_anime_change 0,5 if @enedatenum == 238 || @enedatenum == 252 #チルド
+               @ray_color = 3
+           when 1..130
+               @effect_anime_pattern = 10
+               # @effect_anime_frame += 1 if @battle_anime_frame % 3 == 0 && @enedatenum == 121
+               #@effect_anime_type -= 1 if @battle_anime_frame % 25 == 0
+
+               case @enedatenum
+
+               when 121
+                   @effect_anime_type = 4 if @effect_anime_type > 4
+               else
+                   @effect_anime_type = 3 if @effect_anime_type > 3
+               end
+           when 131..170
+               battle_anime_change(0, 4)
+               #battle_anime_change 0,6 if @enedatenum == 238 || @enedatenum == 252
+               @tec_output_back_no = 0 if @battle_anime_frame == 131
+               Audio.se_play("Audio/SE/" + "Z1 繰気弾") if @battle_anime_frame == 131
+               @ray_x += 0*(@battle_anime_frame - 131)
+               @ray_y += 12*(@battle_anime_frame - 131)
+           when 171
+               @effect_anime_pattern = 0
+               @effect_anime_frame = 0
+               @effect_anime_type = 0
+           when 180
+               set_chr_display_out
+
+
+           when 181..207
+               sframe = 181
+               #Audio.se_stop if @battle_anime_frame == sframe
+               Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == sframe
+               back_anime_pattern(9)
+               picture = Cache.picture("Z2_戦闘_必殺技_エネルギー弾(青)")
+               rect = Rect.new(128*3, 0, 128, 128)
+               @back_window.contents.blt(@enex-8, -128+6*(@battle_anime_frame-sframe), picture, rect)
+           when 208
+               anime_pattern_init
+               return @battle_anime_result + 1
+           end
+
+       when 4416 #ダブル操气弹 乐平
+
+
+           @ray_x = 340
+           @ray_y = 96
+           if $btl_progress == 2
+               backhai_no = 201
+               back_x = 228
+               back_y = 88
+           else
+               backhai_no = 101
+               back_x = 214
+               back_y = 32
+           end
+           case @battle_anime_frame
+           when 0 #初期化
+               @ray_spd_up_flag = true
+               if $btl_progress == 2
+                   Audio.se_play("Audio/SE/" + "Z3 変身")
+                   Audio.se_play("Audio/SE/" + "乐平百万操气弹")
+               # 効果音を再生する
+               else
+                   Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+                   Audio.se_play("Audio/SE/" + "乐平百万操气弹") # 効果音を再生する
+               end
+               @output_anime_type = 1
+               battle_anime_change(0, 6)
+               @ray_color = 0
+               @genkitama_kanri_frame = []
+               #@genkitama_kanri_maxflame = 40
+               #@genkitama_kanri_spdup = 25
+               @genkityuushin_x = []
+               @genkityuushin_y = []
+               @genkitama_kanri_x = [0, 0, 0, 0, 0, 0, 0, 0]
+               @genkitama_kanri_y = [0, 0, 0, 0, 0, 0, 0, 0]
+               @genkitama_kanri_frame = []
+           when 1..89
+               back_anime_pattern(backhai_no, back_x, back_y)
+           when 90
+               Audio.se_stop
+               #Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+               battle_anime_change(0, 5)
+           #@effect_anime_pattern = 206
+           when 121..135
+               Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 121 # 効果音を再生する
+               @effect_anime_frame = 0 if @battle_anime_frame == 121
+               battle_anime_change(0, 1)
+               @effect_anime_pattern = 201
+               @ray_x = 320
+               @ray_y = 80
+           when 136..150
+               Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 136
+               @effect_anime_frame = 0 if @battle_anime_frame == 136
+               @effect_anime_pattern = 201
+               @ray_x = 320
+               @ray_y = 104
+           when 151
+               #Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 160 # 効果音を再生する
+               #@effect_anime_frame = 0 if @battle_anime_frame == 160
+               battle_anime_change(0, 5)
+           #@effect_anime_pattern = 201
+           #@ray_x = 320
+           #@ray_y = 140
+           when 181..195
+               Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 181 # 効果音を再生する
+               @effect_anime_frame = 0 if @battle_anime_frame == 181
+               battle_anime_change(0, 6)
+               @effect_anime_pattern = 201
+               @ray_x = 320
+               @ray_y = 140
+           when 196..210
+               Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 196 # 効果音を再生する
+               @effect_anime_frame = 0 if @battle_anime_frame == 196
+               #battle_anime_change 0,11
+               @effect_anime_pattern = 201
+               @ray_x = 320
+               @ray_y = 116
+           when 211
+               Audio.se_stop
+               #Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+               battle_anime_change(0, 4)
+           #@effect_anime_pattern = 206
+           when 241..255
+               Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 241 # 効果音を再生する
+               @effect_anime_frame = 0 if @battle_anime_frame == 241
+               battle_anime_change(0, 7)
+               @effect_anime_pattern = 201
+               @ray_x = 320
+               @ray_y = 80
+           when 256..270
+               Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 256
+               @effect_anime_frame = 0 if @battle_anime_frame == 256
+               battle_anime_change(0, 6)
+               @effect_anime_pattern = 201
+               @ray_x = 320
+               @ray_y = 104
+           when 271
+               #Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 160 # 効果音を再生する
+               #@effect_anime_frame = 0 if @battle_anime_frame == 160
+               battle_anime_change(0, 9)
+           #@effect_anime_pattern = 201
+           #@ray_x = 320
+           #@ray_y = 140
+           when 301..315
+               Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 301 # 効果音を再生する
+               @effect_anime_frame = 0 if @battle_anime_frame == 301
+               battle_anime_change(0, 8)
+               @effect_anime_pattern = 201
+               @ray_x = 320
+               @ray_y = 140
+           when 316..330
+               Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == 316 # 効果音を再生する
+               @effect_anime_frame = 0 if @battle_anime_frame == 316
+               battle_anime_change(0, 1)
+               @effect_anime_pattern = 201
+               @ray_x = 320
+               @ray_y = 116
+
+           when 360
+
+               @effect_anime_pattern = 0
+               @effect_anime_frame = 0
+               @effect_anime_type = 0
+               set_chr_display_out
+               @tec_back_small = true
+               @tec_output_back = false
+               @chr_cutin_flag = false
+           #when 1091..1128
+           #  back_anime_pattern backhai_no,back_x,back_y
+           #  @ax = 2 if @battle_anime_frame == 91 && $btl_progress >= 2
+           #  @ax = -2 if @battle_anime_frame == 94 && $btl_progress >= 2
+           #  @ax = 0 if @battle_anime_frame == 97 && $btl_progress >= 2
+           #when 1129
+           #  battle_anime_change 0,3
+           #  @effect_anime_pattern = 0
+           #  @effect_anime_frame = 0
+           #  @effect_anime_type = 0
+
+           #when 1139
+           #  set_chr_display_out
+           when 401..671
+               @genkitama_kanri_maxflame = 28
+               tame_end = 300
+               for i in 0..(@genkitama_kanri_frame.size - 1)
+                   #if @genkitama_kanri_frame[i] >= @genkitama_kanri_maxflame
+                   #@genkitama_kanri_frame[i] = 0
+                   if @genkitama_kanri_frame[i] > 0
+                       picture = Cache.picture("ZG_戦闘_必殺技_乐平弹") #ダメージ表示用
+
+                       idou_moto = 8
+                       #idou_y_moto = 4
+                       case i
+
+                       when 0 #左上
+                           idou_x = idou_moto
+                           idou_y = -idou_moto
+
+                       when 1 #下
+                           idou_x = 0
+                           idou_y = idou_moto
+
+                       when 2 #右上
+                           idou_x = -idou_moto
+                           idou_y = -idou_moto
+
+                       when 3 #左
+                           idou_x = idou_moto
+                           idou_y = 0
+
+                       when 4 #右
+                           idou_x = -idou_moto
+                           idou_y = 0
+
+                       when 5 #左下
+                           idou_x = idou_moto
+                           idou_y = idou_moto
+
+                       when 6 #上
+                           idou_x = 0
+                           idou_y = -idou_moto
+
+                       when 7 #右下
+                           idou_x = -idou_moto
+                           idou_y = idou_moto
+                       end
+
+                       if @battle_anime_frame > 570 && @battle_anime_frame < 660
+                           Audio.se_play("Audio/SE/" + "Z1 怪しい気") if @battle_anime_frame == 571
+                           if @battle_anime_frame % 2 == 0
+                               #p i,@genkitama_kanri_y[i],@genkitama_kanri_x[i]
+                               if @genkitama_kanri_x[i] == 0 #揺れ方向チェック
+
+                                   if rand(2) == 1
+                                       @genkitama_kanri_y[i] = 2
+                                       @genkitama_kanri_x[i] = 1 #揺れ始め方向セット
+                                   else
+                                       @genkitama_kanri_y[i] = -2
+                                       @genkitama_kanri_x[i] = -1 #揺れ始め方向セット
+                                   end
+
+                               elsif @genkitama_kanri_y[i] == 0
+                                   @genkitama_kanri_y[i] = 2 if @genkitama_kanri_x[i] == 1
+                                   @genkitama_kanri_y[i] = -2 if @genkitama_kanri_x[i] == -1
+                               elsif @genkitama_kanri_y[i] == 2
+                                   @genkitama_kanri_y[i] = 4 if @genkitama_kanri_x[i] == 1
+                                   @genkitama_kanri_y[i] = 0 if @genkitama_kanri_x[i] == -1
+                               elsif @genkitama_kanri_y[i] == 4
+                                   @genkitama_kanri_y[i] = 2
+                                   @genkitama_kanri_x[i] = -@genkitama_kanri_x[i]
+                               elsif @genkitama_kanri_y[i] == -2
+                                   @genkitama_kanri_y[i] = 0 if @genkitama_kanri_x[i] == 1
+                                   @genkitama_kanri_y[i] = -4 if @genkitama_kanri_x[i] == -1
+                               elsif @genkitama_kanri_y[i] == -4
+                                   @genkitama_kanri_y[i] = -2
+                                   @genkitama_kanri_x[i] = -@genkitama_kanri_x[i]
+                               end
+                           end
+                       end
+
+                       idou_x_goukei = idou_x*@genkitama_kanri_maxflame
+                       idou_y_goukei = idou_y*@genkitama_kanri_maxflame
+                       kakechk = (@genkityuushin_y[i]+idou_y_goukei)-@genkitama_kanri_frame[i] * idou_y
+                       if kakechk < 356
+                           if 356-kakechk >= 32
+                               rect = Rect.new(0, 0, 32, 32)
+                           else
+                               rect = Rect.new(0, 0, 32, 356-kakechk)
+                           end
+
+                           if @battle_anime_frame < 660
+                               @back_window.contents.blt((@genkityuushin_x[i]-idou_x_goukei)+@genkitama_kanri_frame[i] * idou_x, ((@genkityuushin_y[i]+idou_y_goukei)-@genkitama_kanri_frame[i] * idou_y)+@genkitama_kanri_y[i], picture, rect)
+                           else
+
+                               center_frame = 16
+
+
+                               tyousei_x = ((@genkityuushin_x[i]-idou_x_goukei)+@genkitama_kanri_frame[i] * idou_x)
+
+                               #if tyousei_x >= CENTER_ENEX + 48
+                               #  tyousei_x = -tyousei_x
+                               #
+                               #end
+                               #p tyousei_x
+                               tyousei_x = ((CENTER_ENEX + 48) - tyousei_x)/ center_frame
+                               #p tyousei_x
+                               tyousei_x = tyousei_x*(@battle_anime_frame-660)
+                               #p tyousei_x
+                               tyousei_y = (((@genkityuushin_y[i]+idou_y_goukei)-@genkitama_kanri_frame[i] * idou_y)+@genkitama_kanri_y[i])
+
+                               #if tyousei_y >= STANDARD_ENEY + 48
+                               #  tyousei_y = -tyousei_y
+                               #end
+                               tyousei_y = (STANDARD_ENEY + 48 -(tyousei_y))/ center_frame
+                               tyousei_y = tyousei_y*(@battle_anime_frame-660)
+
+                               @back_window.contents.blt(((@genkityuushin_x[i]-idou_x_goukei)+@genkitama_kanri_frame[i] * idou_x)+tyousei_x, (((@genkityuushin_y[i]+idou_y_goukei)-@genkitama_kanri_frame[i] * idou_y)+@genkitama_kanri_y[i])+tyousei_y, picture, rect)
+                           end
+                       end
+                       if  @genkitama_kanri_maxflame > @genkitama_kanri_frame[i]
+                           @genkitama_kanri_frame[i] += 1
+                       end
+
+                   else
+
+                   end
+
+               end
+
+               case @battle_anime_frame
+
+               when 401 #左上
+                   Audio.se_play("Audio/SE/" + "ZG 打撃2")
+                   #p @genkitama_kanri_frame.size
+                   @genkitama_kanri_frame[0] = 1
+                   @genkityuushin_x[0] = 220
+                   @genkityuushin_y[0] = 90
+               when 421 #下
+                   Audio.se_play("Audio/SE/" + "ZG 打撃2")
+                   @genkitama_kanri_frame[@genkitama_kanri_frame.size] = 1
+                   @genkityuushin_x[@genkityuushin_x.size] = 360
+                   @genkityuushin_y[@genkityuushin_y.size] = 280
+               when 438 #右上
+                   Audio.se_play("Audio/SE/" + "ZG 打撃2")
+                   @genkitama_kanri_frame[@genkitama_kanri_frame.size] = 1
+                   @genkityuushin_x[@genkityuushin_x.size] = 472
+                   @genkityuushin_y[@genkityuushin_y.size] = 90
+               when 460 #左
+                   Audio.se_play("Audio/SE/" + "ZG 打撃2")
+                   @genkitama_kanri_frame[@genkitama_kanri_frame.size] = 1
+                   @genkityuushin_x[@genkityuushin_x.size] = 190
+                   @genkityuushin_y[@genkityuushin_y.size] = 164
+               when 482 #右
+                   Audio.se_play("Audio/SE/" + "ZG 打撃2")
+                   @genkitama_kanri_frame[@genkitama_kanri_frame.size] = 1
+                   @genkityuushin_x[@genkityuushin_x.size] = 520
+                   @genkityuushin_y[@genkityuushin_y.size] = 170
+               when 500 #左下
+                   Audio.se_play("Audio/SE/" + "ZG 打撃2")
+                   @genkitama_kanri_frame[@genkitama_kanri_frame.size] = 1
+                   @genkityuushin_x[@genkityuushin_x.size] = 224
+                   @genkityuushin_y[@genkityuushin_y.size] = 260
+               when 518 #上
+                   Audio.se_play("Audio/SE/" + "ZG 打撃2")
+                   @genkitama_kanri_frame[@genkitama_kanri_frame.size] = 1
+                   @genkityuushin_x[@genkityuushin_x.size] = 360
+                   @genkityuushin_y[@genkityuushin_y.size] = 60
+               when 540 #右下
+                   Audio.se_play("Audio/SE/" + "ZG 打撃2")
+                   @genkitama_kanri_frame[@genkitama_kanri_frame.size] = 1
+                   @genkityuushin_x[@genkityuushin_x.size] = 470
+                   @genkityuushin_y[@genkityuushin_y.size] = 274
+               end
+
+           #@effect_anime_pattern = 207
+           when 672
+               anime_pattern_init
+               return @battle_anime_result + 1
+           end
+
        when 2902 #ダブル魔封波(若者と亀仙人)
            back_x = 200
            back_y = 32
@@ -56191,6 +58481,56 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+
+
+      when 2506 #贝吉塔零距离 大爆炸攻击 大举进攻
+          back_x = 248
+          back_y = 88
+          @ray_x = 250
+          @ray_y = 116
+          case @battle_anime_frame
+          when 0 #初始化
+              Audio.se_play("Audio/SE/" + "Z3 变身")    # 播放音效
+              @output_anime_type = 0
+              @ray_color = 3
+              battle_anime_change(0, 0)
+          when 1..128
+              back_anime_pattern(201, back_x, back_y)
+          when 129
+              Audio.se_stop
+              Audio.se_play("Audio/SE/" + "Z1 飞行")    # 播放音效
+              battle_anime_change(0, 0)
+          when 140..169
+              @ax = 16
+              @chr_cutin_flag = false if @battle_anime_frame == 169
+          when 170
+              @ax = 0
+              set_chr_display_out
+              @enex = STANDARD_ENEX
+              @eney = STANDARD_ENEY
+          # ...... 其他帧的行为与原技能保持一致
+
+          when 469
+              #battle_anime_change 0,1
+              @effect_anime_pattern = 0
+              @effect_anime_frame = 0
+              @effect_anime_type = 0
+          when 479
+              set_chr_display_out
+              @chax = 600
+          when 480..504
+              @gx = -12
+              @effect_anime_pattern = 234  #255
+          when 505 #在结束前加入大波零距离攻击
+              Audio.se_play("Audio/SE/" + "贝吉塔 大爆炸攻击")    # 播放音效
+              battle_anime_change(0, 11)
+          when 506
+              anime_pattern_init
+              return @battle_anime_result + 1
+          end
+
+
+
         when 2510 #ドレインライフ
             @ray_x = 280
             @ray_y = 140
@@ -56715,9 +59055,11 @@ module Scene_Db_Battle_Anime_pattern
                 shake_x, shake_y= pic_shake_cal(shake_dot)
                 @back_window.contents.fill_rect(0, 0, 640, 378, color) if @battle_anime_frame >= 116
                 if @enedatenum == 127 || @enedatenum == 264
-                    picture = Cache.picture("Z3_必殺技_カットイン_魔貫光殺砲(セル第１形態)") #ダメージ表示用
-                else
-                    picture = Cache.picture("Z3_必殺技_カットイン_魔貫光殺砲(セルジュニア)") #ダメージ表示用
+                    picture = Cache.picture("Z3_必殺技_カットイン_魔貫光殺砲(セル第１形態)")
+    #ダメージ表示用
+    else  @enedatenum == 130
+          picture = Cache.picture("Z3_必殺技_カットイン_魔貫光殺砲(セルジュニア)")
+
                 end
                 rect = Rect.new(0, 0, 648, 64)
 
@@ -56771,56 +59113,70 @@ module Scene_Db_Battle_Anime_pattern
                     #@output_anime_type = 1
                     #battle_anime_change 0,3
                     @ray_color = 0
-                when 1
-                    #@chr_cutin = true
-                    #@tec_output_back = false
-                    #battle_anime_change 0,2
-                    @effect_anime_pattern = 0
-                    @effect_anime_frame = 0
-                    @effect_anime_type = 0
-                when 2..90
-                    if @enedatenum == 127 || @enedatenum == 264
-                        picture = Cache.picture("Z3_必殺技_カットイン_太陽拳(セル第１形態)")
-                    elsif @enedatenum == 128 || @enedatenum == 268
-                        picture = Cache.picture("Z3_必殺技_カットイン_太陽拳(セル第２形態)")
-                    elsif @enedatenum == 129 || @enedatenum == 135 || @enedatenum == 269
-                        picture = Cache.picture("Z3_必殺技_カットイン_太陽拳(セル完全体)")
-                    else
-                        picture = Cache.picture("Z3_必殺技_カットイン_太陽拳(セル第１形態)")
-                    end
-                    rect = Rect.new(0, 64*0, 640, 64)
-                    sisinkizyun = 2
-                    akizyouge = 146
-                    purasuryou = 20
-                    kat_haitiiti = akizyouge
-                    if @battle_anime_frame <= sisinkizyun + purasuryou
-                        @enex += 32
-                        @back_window.contents.blt(-640+32*(@battle_anime_frame-sisinkizyun), kat_haitiiti, picture, rect)
-                    else
-                        if @battle_anime_frame >= sisinkizyun + purasuryou
-                            Audio.se_play("Audio/SE/" + "Z2 吹っ飛ぶ") if @battle_anime_frame == sisinkizyun + purasuryou +1
-                            @back_window.contents.blt(0, kat_haitiiti, picture, rect)
-                        end
-                    end
+        when 1..89
+            #@chr_cutin = true
+            #@tec_output_back = false
+            @output_anime_type = 1
+            battle_anime_change(0, 14)
+            @effect_anime_pattern = 0
+            @effect_anime_frame = 0
+            @effect_anime_type = 0
 
-                    case @battle_anime_frame
 
-                    when sisinkizyun + purasuryou..sisinkizyun + purasuryou+2, sisinkizyun + purasuryou+10..sisinkizyun + purasuryou+10+2, sisinkizyun + purasuryou+20..sisinkizyun + purasuryou+20+2
-                        @back_window.contents.fill_rect(0, 0, 640, FLASH_Y_SIZE_CUTIN_OFF, color)
-                    end
-                when 101
-                    set_chr_display_out
-                when 111..151
-                    sisinkizyun = 101
-                    purasuryou = 10
-                    case @battle_anime_frame
 
-                    when sisinkizyun + purasuryou..sisinkizyun + purasuryou+2, sisinkizyun + purasuryou+10..sisinkizyun + purasuryou+10+2, sisinkizyun + purasuryou+20..sisinkizyun + purasuryou+20+2
-                        @back_window.contents.fill_rect(0, 0, 640, FLASH_Y_SIZE_CUTIN_OFF, color)
-                    end
-                when 152
-                    anime_pattern_init
-                    return @battle_anime_result + 1
+
+          when 90
+              Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+
+
+
+            when 92..95, 122..125, 152..155, 182..185
+                @back_window.contents.fill_rect(0, 0, 640, FLASH_Y_SIZE_CUTIN_ON, color)
+
+
+        when 91..190
+            @chay = -160
+            @eney = -200
+            if @enedatenum == 127
+                picture = Cache.picture("Z3_必殺技_カットイン_太陽拳(セル第１形態)")
+            elsif @enedatenum == 128
+                picture = Cache.picture("Z3_必殺技_カットイン_太陽拳(セル第２形態)")
+            elsif @enedatenum == 129 || @enedatenum == 135
+                picture = Cache.picture("Z3_必殺技_カットイン_太陽拳(セル完全体)")
+                      end
+            rect = Rect.new(0, 64*0, 640, 64)
+            sisinkizyun = 2
+            akizyouge = 146
+            purasuryou = 20
+            kat_haitiiti = akizyouge
+            if @battle_anime_frame <= sisinkizyun + purasuryou
+                @enex += 32
+                @back_window.contents.blt(-640+32*(@battle_anime_frame-sisinkizyun), kat_haitiiti, picture, rect)
+            else
+                if @battle_anime_frame >= sisinkizyun + purasuryou
+                    Audio.se_play("Audio/SE/" + "Z2 吹っ飛ぶ") if @battle_anime_frame == sisinkizyun + purasuryou +1
+                    @back_window.contents.blt(0, kat_haitiiti, picture, rect)
+                end
+            end
+
+            case @battle_anime_frame
+
+            when sisinkizyun + purasuryou..sisinkizyun + purasuryou+2, sisinkizyun + purasuryou+10..sisinkizyun + purasuryou+10+2, sisinkizyun + purasuryou+20..sisinkizyun + purasuryou+20+2
+                @back_window.contents.fill_rect(0, 0, 640, FLASH_Y_SIZE_CUTIN_OFF, color)
+            end
+        when 191
+            set_chr_display_out
+        when 201..251
+            sisinkizyun = 101
+            purasuryou = 10
+            case @battle_anime_frame
+
+            when sisinkizyun + purasuryou..sisinkizyun + purasuryou+2, sisinkizyun + purasuryou+10..sisinkizyun + purasuryou+10+2, sisinkizyun + purasuryou+20..sisinkizyun + purasuryou+20+2
+                @back_window.contents.fill_rect(0, 0, 640, FLASH_Y_SIZE_CUTIN_OFF, color)
+            end
+        when 252
+            anime_pattern_init
+            return @battle_anime_result + 1
                 end
             else
                 case @battle_anime_frame
@@ -56952,7 +59308,7 @@ module Scene_Db_Battle_Anime_pattern
 
                 back_x = 248
                 back_y = 88
-                back_anime_pattern(201, back_x, back_y)
+                back_anime_pattern(202, back_x, back_y)
                 @ray_x = 336
                 @ray_y = 154
                 @effect_anime_pattern = 237
@@ -56962,7 +59318,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 if @battle_anime_frame == 170
                     Audio.se_stop
-                    Audio.se_play("Audio/SE/" + "ZG 光線1")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "ZG 光線1")
+                    # 効果音を再生する
                     @effect_anime_frame = 0
                     @tec_output_back = false
                     @chr_cutin = false
@@ -56980,7 +59337,7 @@ module Scene_Db_Battle_Anime_pattern
                 end
             when 171..260
                 #@ray_y = 6
-                #@effect_anime_frame*RAY_SPEED
+                @effect_anime_frame*RAY_SPEED
                 back_x += (@battle_anime_frame-141)/2
                 @ray_x +=  (@battle_anime_frame-141)/2 - @effect_anime_frame*RAY_SPEED
                 picture = Cache.picture("Z3_必殺技_超カメハメ波(セル完全体)")
@@ -56989,6 +59346,7 @@ module Scene_Db_Battle_Anime_pattern
                 back_anime_pattern(106)
                 @effect_anime_pattern = 236
             when 261
+                Audio.se_play("Audio/SE/" + "沙鲁龟波")
                 @chr_cutin = true
                 @chr_cutin_flag = true
                 @tec_output_back = true
@@ -59256,6 +61614,8 @@ module Scene_Db_Battle_Anime_pattern
                 @ray_color = 0
                 battle_anime_change(0, 0)
                 Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+
+                Audio.se_play("Audio/SE/" + "布罗利必杀")
             #Audio.se_play("Audio/SE/" + "Z3 変身")
             when 1..128
                 sframe = 1
@@ -62558,7 +64918,8 @@ module Scene_Db_Battle_Anime_pattern
 
                 case @battle_anime_frame
                 when 0 #初期化
-                    Audio.se_play("Audio/SE/" + "Z1 気を溜める5(長い)")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "Z1 気を溜める5(長い)")
+                    Audio.se_play("Audio/SE/" + "克维拉大招") # 効果音を再生する
                     #@output_anime_type = 1
                     #battle_anime_change 0,5
                     @ray_color = 0
@@ -62715,7 +65076,8 @@ module Scene_Db_Battle_Anime_pattern
 
             case @battle_anime_frame
             when 0 #初期化
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "桃白白必杀技") # 効果音を再生する
                 @output_anime_type = 0
                 @ray_color = 3
                 battle_anime_change(0, 0)
@@ -63557,6 +65919,2657 @@ module Scene_Db_Battle_Anime_pattern
                 anime_pattern_init
                 return @battle_anime_result + 1
             end
+
+	    when 4655 #連続エネルギー波 GOKU
+         if @attackDir == 0
+             back_x = 228
+             back_y = 88
+             @ray_x = 304
+             @ray_y = 138
+         else
+             back_x = 228
+             back_y = 88
+             @ray_x = 180
+             @ray_y = 138
+         end
+         @ray_color = 0
+         if @all_attack_count == 1
+             case @battle_anime_frame
+             when 0 #初期化
+                 Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
+                 #@output_anime_type = 1
+
+
+                 battle_anime_change(0, 2)
+
+                 if $partyc[@chanum] == 27 && @attackDir == 0 || $partyc[@chanum] == 28 && @attackDir == 0 || $partyc[@chanum] == 29 && @attackDir == 0 || $partyc[@chanum] == 30 && @attackDir == 0
+                     @output_anime_type = 1
+                     battle_anime_change(0, 1)
+                 end
+                 if @enedatenum == 172 && @attackDir == 1
+                     @output_anime_type = 1
+                     battle_anime_change(0, 10)
+                 end
+                 @ray_color = 0
+                 @ray_spd_up_flag = true
+             when 1..69
+                 hatudoukaisi = 1
+                 hatudougofra = 15
+                 @effect_anime_pattern = 201
+
+                 if @battle_anime_frame <= hatudoukaisi + hatudougofra*1
+                     @ray_y = 138
+                     if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*0
+                         @ax = -2
+                     elsif @battle_anime_frame <= hatudoukaisi+5 + hatudougofra*0
+                         battle_anime_change(0, 0)
+                         @ax = 2
+                     elsif @battle_anime_frame <= hatudoukaisi+7 + hatudougofra*0
+                         @ax = 0
+                     end
+
+                 elsif @battle_anime_frame <= hatudoukaisi + hatudougofra*2
+                     @effect_anime_frame = 0 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1
+                     battle_anime_change(0, 1) if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1
+                     @effect_anime_frame = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1 && @enedatenum == 172 && @attackDir == 1
+                     battle_anime_change(0, 1) if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1 && @enedatenum == 172 && @attackDir == 1
+                     @ray_y = 78
+                     if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*1
+                         @ax = -2
+                     elsif @battle_anime_frame <= hatudoukaisi+5 + hatudougofra*1
+                         battle_anime_change(0, 0)
+                         @ax = 2
+                     elsif @battle_anime_frame <= hatudoukaisi+7 + hatudougofra*1
+                         @ax = 0
+                     end
+
+                 elsif @battle_anime_frame <= hatudoukaisi + hatudougofra*3
+                     @effect_anime_frame = 0 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2
+                     battle_anime_change(0, 2) if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2
+
+                     if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2
+                         if $partyc[@chanum] == 27 && @attackDir == 0 || $partyc[@chanum] == 28 && @attackDir == 0 || $partyc[@chanum] == 29 && @attackDir == 0 || $partyc[@chanum] == 30 && @attackDir == 0
+                             @output_anime_type = 1
+                             battle_anime_change(0, 1)
+                         end
+                     end
+                     @effect_anime_frame = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2 && @enedatenum == 172 && @attackDir == 1
+                     battle_anime_change(0, 10) if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2 && @enedatenum == 172 && @attackDir == 1
+                     @ray_y = 138
+                     if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*2
+                         @ax = -2
+                     elsif @battle_anime_frame <= hatudoukaisi+5 + hatudougofra*2
+                         battle_anime_change(0, 0)
+                         @ax = 2
+                     elsif @battle_anime_frame <= hatudoukaisi+7 + hatudougofra*2
+                         @ax = 0
+                     end
+
+                 elsif @battle_anime_frame <= hatudoukaisi + hatudougofra*4
+                     @effect_anime_frame = 0 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*3
+                     @output_anime_type = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*3
+                     battle_anime_change(0, 1) if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*3
+                     @ray_y = 98
+                     if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*3
+                         @ax = -2
+                     elsif @battle_anime_frame <= hatudoukaisi+5 + hatudougofra*3
+                         battle_anime_change(0, 0)
+                         @ax = 2
+                     elsif @battle_anime_frame <= hatudoukaisi+7 + hatudougofra*3
+                         @ax = 0
+                     end
+                     #@effect_anime_frame = 0 if @battle_anime_frame == hatudoukaisi + hatudougofra*4
+                 end
+
+             #back_anime_pattern 201,back_x,back_y
+             when 70
+                 Audio.se_stop
+                 #battle_anime_change 0,3
+                 @effect_anime_pattern = 0
+                 @effect_anime_frame = 0
+                 @effect_anime_type = 0
+             when 80
+                 set_chr_display_out
+                 @ray_spd_up_flag = false
+             #@tec_output_back = false
+             #@chr_cutin_flag = false
+             #@tec_output_back_no = 1
+             when 81..109
+                 #back_anime_pattern 9
+                 @effect_anime_pattern = 202
+             when 110
+                 anime_pattern_init
+                 return @battle_anime_result + 1
+             end
+         elsif @all_attack_count >= 2
+
+             case @battle_anime_frame
+             when 0
+                 set_chr_display_out
+             when 1..29
+                 @effect_anime_pattern = 202
+             when 30
+                 anime_pattern_init
+                 return @battle_anime_result + 1
+             end
+         end
+
+      when 4658 #連続エネルギー波 GOHAN PICCLO？
+          if @attackDir == 0
+              back_x = 228
+              back_y = 88
+              @ray_x = 304
+              @ray_y = 138
+        else
+            back_x = 228
+            back_y = 88
+            @ray_x = 180
+            @ray_y = 138
+        end
+          @ray_color = 1
+          if @all_attack_count == 1
+              case @battle_anime_frame
+              when 0 #初期化
+                  Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
+                  #@output_anime_type = 1
+
+
+                  battle_anime_change(0, 2)
+
+                  if $partyc[@chanum] == 27 && @attackDir == 0 || $partyc[@chanum] == 28 && @attackDir == 0 || $partyc[@chanum] == 29 && @attackDir == 0 || $partyc[@chanum] == 30 && @attackDir == 0
+                      @output_anime_type = 1
+                      battle_anime_change(0, 1)
+                  end
+                  if @enedatenum == 172 && @attackDir == 1
+                      @output_anime_type = 1
+                      battle_anime_change(0, 10)
+                  end
+                  @ray_color = 1
+                  @ray_spd_up_flag = true
+              when 1..69
+                  hatudoukaisi = 1
+                  hatudougofra = 15
+                  @effect_anime_pattern = 201
+
+                  if @battle_anime_frame <= hatudoukaisi + hatudougofra*1
+                      @ray_y = 138
+                      if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*0
+                          @ax = -2
+                      elsif @battle_anime_frame <= hatudoukaisi+5 + hatudougofra*0
+                          battle_anime_change(0, 0)
+                          @ax = 2
+                      elsif @battle_anime_frame <= hatudoukaisi+7 + hatudougofra*0
+                          @ax = 0
+                      end
+
+                  elsif @battle_anime_frame <= hatudoukaisi + hatudougofra*2
+                      @effect_anime_frame = 0 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1
+                      battle_anime_change(0, 1) if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1
+                      @effect_anime_frame = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1 && @enedatenum == 172 && @attackDir == 1
+                      battle_anime_change(0, 1) if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*1 && @enedatenum == 172 && @attackDir == 1
+                      @ray_y = 78
+                      if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*1
+                          @ax = -2
+                      elsif @battle_anime_frame <= hatudoukaisi+5 + hatudougofra*1
+                          battle_anime_change(0, 0)
+                          @ax = 2
+                      elsif @battle_anime_frame <= hatudoukaisi+7 + hatudougofra*1
+                          @ax = 0
+                      end
+
+                  elsif @battle_anime_frame <= hatudoukaisi + hatudougofra*3
+                      @effect_anime_frame = 0 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2
+                      battle_anime_change(0, 2) if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2
+
+                      if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2
+                          if $partyc[@chanum] == 27 && @attackDir == 0 || $partyc[@chanum] == 28 && @attackDir == 0 || $partyc[@chanum] == 29 && @attackDir == 0 || $partyc[@chanum] == 30 && @attackDir == 0
+                              @output_anime_type = 1
+                              battle_anime_change(0, 1)
+                          end
+                      end
+                      @effect_anime_frame = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2 && @enedatenum == 172 && @attackDir == 1
+                      battle_anime_change(0, 10) if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*2 && @enedatenum == 172 && @attackDir == 1
+                      @ray_y = 138
+                      if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*2
+                          @ax = -2
+                      elsif @battle_anime_frame <= hatudoukaisi+5 + hatudougofra*2
+                          battle_anime_change(0, 0)
+                          @ax = 2
+                      elsif @battle_anime_frame <= hatudoukaisi+7 + hatudougofra*2
+                          @ax = 0
+                      end
+
+                  elsif @battle_anime_frame <= hatudoukaisi + hatudougofra*4
+                      @effect_anime_frame = 0 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*3
+                      @output_anime_type = 1 if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*3
+                      battle_anime_change(0, 1) if @battle_anime_frame == hatudoukaisi+1 + hatudougofra*3
+                      @ray_y = 98
+                      if @battle_anime_frame <= hatudoukaisi+3 + hatudougofra*3
+                          @ax = -2
+                      elsif @battle_anime_frame <= hatudoukaisi+5 + hatudougofra*3
+                          battle_anime_change(0, 0)
+                          @ax = 2
+                      elsif @battle_anime_frame <= hatudoukaisi+7 + hatudougofra*3
+                          @ax = 0
+                      end
+                      #@effect_anime_frame = 0 if @battle_anime_frame == hatudoukaisi + hatudougofra*4
+                  end
+
+              #back_anime_pattern 201,back_x,back_y
+              when 70
+                  Audio.se_stop
+                  #battle_anime_change 0,3
+                  @effect_anime_pattern = 0
+                  @effect_anime_frame = 0
+                  @effect_anime_type = 0
+              when 80
+                  set_chr_display_out
+                  @ray_spd_up_flag = false
+              #@tec_output_back = false
+              #@chr_cutin_flag = false
+              #@tec_output_back_no = 1
+              when 81..109
+                  #back_anime_pattern 9
+                  @effect_anime_pattern = 202
+              when 110
+                  anime_pattern_init
+                  return @battle_anime_result + 1
+              end
+          elsif @all_attack_count >= 2
+
+              case @battle_anime_frame
+              when 0
+                  set_chr_display_out
+              when 1..29
+                  @effect_anime_pattern = 202
+              when 30
+                  anime_pattern_init
+                  return @battle_anime_result + 1
+              end
+          end
+
+     when 4163 #连气弹
+         @ray_x = 252
+         @ray_y = 90
+
+         case @battle_anime_frame
+         when 0 #初期化
+             Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+             @output_anime_type = 1
+             battle_anime_change(0, 5)
+             @ray_color = 0
+         when 1..60
+
+         when 61
+             #   battle_anime_change 0,4
+             Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
+         when 70..99
+             @effect_anime_pattern = 2
+         when 100
+             if @attackDir == 0
+                 @output_anime_type = 0
+                 @chay = -120 #キャラ画面範囲外へ
+                 @enex = CENTER_ENEX
+                 @eney = STANDARD_ENEY
+             else
+                 @eney = -200 #キャラ画面範囲外へ
+                 @chax = CENTER_CHAX
+                 @chay = STANDARD_CHAY
+             end
+         when 101..127
+             @effect_anime_pattern = 31
+         when 128
+             anime_pattern_init
+             return @battle_anime_result + 1
+         end
+
+        when 4201 #气合炮(悟空)
+            if @battle_anime_frame == 0 #初期化
+                @ray_color = 0
+                Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+                @output_anime_type = 1
+                battle_anime_change(0, 0)
+            elsif @battle_anime_frame == 60
+                # picture = Cache.picture("戦闘アニメ") #ダメージ表示用
+                # rect = Rect.new(0, 48,64,64)
+                Audio.se_play("Audio/SE/" + "Z1 吹っ飛ぶ")    # 効果音を再生する
+                set_chr_display_out
+                @tec_output_back = false
+                picture = Cache.picture("戦闘アニメ_ビックリマーク")
+                rect = Rect.new(0, 0, 16, 16)
+                @back_window.contents.blt(CENTER_ENEX+106, STANDARD_ENEY-0, picture, rect)
+            elsif @battle_anime_frame >= 61 && @battle_anime_frame <= 119
+            #back_anime_pattern 1
+            elsif @battle_anime_frame == 120
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
+
+
+
+
+
+
+       when 4675 #2675 #S GOKU 超气功波  ライチ)ビッグスマッシャー
+           back_x = 168  #198
+           back_y = 34
+           @ray_x = 354 #284
+           @ray_y = 114
+           @ray_color = 0
+           color = Color.new(255, 255, 255, 260)
+           case @battle_anime_frame
+
+           when 0 #初期化
+               Audio.se_play("Audio/SE/" + "Z1 気を溜める5")    # 効果音を再生する
+               @output_anime_type = 1
+               battle_anime_change(0, 0)
+               @ray_color = 0
+           when 1..89
+           #back_anime_pattern 101,back_x,back_y
+           when 90
+               Audio.se_stop
+               Audio.se_play("Audio/SE/" + "ZG 光線1")    # 効果音を再生する
+               battle_anime_change(0, 1)
+               @effect_anime_pattern = 256
+           # back_anime_pattern -101,back_x,back_y
+           when 169
+               @effect_anime_pattern = 0
+               @effect_anime_frame = 0
+               @effect_anime_type = 0
+               set_chr_display_out
+           when 170..193
+               @effect_anime_pattern = 265
+           when 197
+               anime_pattern_init
+               return @battle_anime_result + 1
+           end
+
+              when 4676 #GOHAN 超魔弹
+                  back_x = 168  #198
+                  back_y = 34   #34
+                  @ray_x = 354 #284
+                  @ray_y = 114 #114
+                  case @battle_anime_frame
+                  when 0  #初期化
+                      Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                      #Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
+                      @output_anime_type = 1
+                      battle_anime_change(0, 1)
+                      @ray_color = 1
+                  when 1..45
+                      battle_anime_change(0, 1)
+                  when 46
+                      Audio.se_stop
+                      Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
+                  when 47..75
+                      @effect_anime_pattern = 256
+                      @ray_x = 340
+                      @ray_y = 112  #142
+                      @ax = 2 if @battle_anime_frame == 47 && $btl_progress >= 2
+                      @ax = -2 if @battle_anime_frame == 50 && $btl_progress >= 2
+                      @ax = 0 if @battle_anime_frame == 53 && $btl_progress >= 2
+                  when 76..79
+                      @effect_anime_pattern = 0
+                      @effect_anime_frame = 0
+                      @effect_anime_type = 0
+                  when 80
+                      set_chr_display_out
+                  when 81..110
+                      @effect_anime_pattern = 265
+                  when 111
+                      anime_pattern_init
+                      return @battle_anime_result + 1
+                  end
+
+       when 4677 #2675 #小林 MAXPOWER KAMEHAMEHA
+           back_x = 168  #198
+           back_y = 34
+           @ray_x = 354 #284
+           @ray_y = 114
+           @ray_color = 0
+           color = Color.new(255, 255, 255, 260)
+           if @all_attack_count == 1
+               case @battle_anime_frame
+
+               when 0 #初期化
+                   Audio.se_play("Audio/SE/" + "Z1 気を溜める5")    # 効果音を再生する
+                   @output_anime_type = 1
+                   battle_anime_change(0, 2)
+                   @ray_color = 0
+               when 1..89
+               #back_anime_pattern 101,back_x,back_y
+               when 90
+                   Audio.se_stop
+                   Audio.se_play("Audio/SE/" + "ZG 光線1")    # 効果音を再生する
+                   battle_anime_change(0, 3)
+                   @effect_anime_pattern = 256
+               # back_anime_pattern -101,back_x,back_y
+               when 169
+                   @effect_anime_pattern = 0
+                   @effect_anime_frame = 0
+                   @effect_anime_type = 0
+                   set_chr_display_out
+               when 170..193
+                   @effect_anime_pattern = 265
+               when 197
+                   anime_pattern_init
+                   return @battle_anime_result + 1
+               end
+           elsif @all_attack_count >= 2
+               @ray_color = 0
+               @tec_output_back_no = 0
+               @tec_output_back = true
+               if @battle_anime_frame == 0
+                   sframe = 0
+                   Audio.se_play("Audio/SE/" + "ZG 光線1") if @battle_anime_frame == sframe
+                   #@effect_anime_frame = 27
+                   @effect_anime_pattern = 0
+                   @output_anime_type = 0
+                   if @attackDir == 0
+                       @enex = CENTER_ENEX
+                       @eney = STANDARD_ENEY
+                   else
+                       @chax = CENTER_CHAX
+                       @chay = STANDARD_CHAY
+                   end
+               elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
+                   @effect_anime_pattern = 265
+               elsif @battle_anime_frame == 26
+                   anime_pattern_init
+                   return @battle_anime_result + 1
+               end
+            end
+
+
+
+
+     when 4678 #2675 #天津饭 百万气功炮
+         back_x = 168  #198
+         back_y = 34
+         @ray_x = 354 #284
+         @ray_y = 114
+         @ray_color = 0
+         color = Color.new(255, 255, 255, 260)
+         if @all_attack_count == 1
+             case @battle_anime_frame
+             when 0 #初期化
+                 Audio.se_play("Audio/SE/" + "Z1 気を溜める5")    # 効果音を再生する
+                 @output_anime_type = 1
+                 battle_anime_change(0, 1)
+                 @ray_color = 0
+             when 1..89
+             #back_anime_pattern 101,back_x,back_y
+             when 90
+                 Audio.se_stop
+                 Audio.se_play("Audio/SE/" + "ZG 光線1")    # 効果音を再生する
+                 battle_anime_change(0, 2)
+                 @effect_anime_pattern = 256
+             #back_anime_pattern 101,back_x,back_y
+             when 169
+                 @effect_anime_pattern = 0
+                 @effect_anime_frame = 0
+                 @effect_anime_type = 0
+                 set_chr_display_out
+             when 170..193
+                 @effect_anime_pattern = 265
+             when 197
+                 anime_pattern_init
+                 return @battle_anime_result + 1
+             end
+           elsif @all_attack_count >= 2
+
+               if @battle_anime_frame == 0
+                   Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+                   if @attackDir == 0
+                       @output_anime_type = 0
+                       @chay = -120 #キャラ画面範囲外へ
+                       @enex = CENTER_ENEX
+                       @eney = STANDARD_ENEY
+                   else
+                       @eney = -200 #キャラ画面範囲外へ
+                       @chax = CENTER_CHAX
+                       @chay = STANDARD_CHAY
+                   end
+
+               elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 61
+                   back_anime_pattern(1)
+                   @chr_cutin = true
+                   @chr_cutin_mirror_flag = true
+               elsif @battle_anime_frame == 62
+                   anime_pattern_init
+                   return @battle_anime_result + 1
+               end
+         end
+
+        when 4679 #TRUAKS GOD BREAKER 190
+            back_x = 168  #198
+            back_y = 34
+            @ray_x = 354 #284
+            @ray_y = 114
+            @ray_color = 3
+            color = Color.new(255, 255, 255, 260)
+            case @battle_anime_frame
+
+            when 0 #初期化
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める5")    # 効果音を再生する
+                @output_anime_type = 1
+                battle_anime_change(0, 0)
+                @ray_color = 0
+            when 1..89
+            #back_anime_pattern 101,back_x,back_y
+            when 90
+                Audio.se_stop
+                Audio.se_play("Audio/SE/" + "ZG 光線1")    # 効果音を再生する
+                battle_anime_change(0, 1)
+                @effect_anime_pattern = 256
+            #back_anime_pattern 101,back_x,back_y
+            when 169
+                @effect_anime_pattern = 0
+                @effect_anime_frame = 0
+                @effect_anime_type = 0
+                set_chr_display_out
+            when 170..193
+                @effect_anime_pattern = 265
+            when 197
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
+
+      when 4680 #饺子 PSYCHO BEAM
+
+
+          back_x = 228
+          back_y = 88
+          @ray_x = 325
+          @ray_y = 138
+          case @battle_anime_frame
+          when 0 #初期化
+              Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+              @output_anime_type = 1
+              battle_anime_change(0, 3)
+              @ray_color = 0
+           when 1..179
+
+           when 180
+               Audio.se_stop
+               Audio.se_play("Audio/SE/" + "Z1 気を溜める4")    # 効果音を再生する
+               @back_anime_frame = 0
+               @ray_anime_type = 0
+               @ray_anime_frame = 0
+          when 181..217
+              back_anime_pattern(108)
+
+          when 218..299
+              back_anime_pattern(109)
+          when 300..300
+              back_anime_pattern(109)
+              Audio.se_play("Audio/SE/" + "Z1 エネルギー波2")    # 効果音を再生する
+          when 301..340
+              back_anime_pattern(109)
+              @effect_anime_pattern = 241
+              battle_anime_change(0, 6)
+          when 341..341
+              @effect_anime_pattern = 0
+              @effect_anime_frame = 0
+              @effect_anime_type = 0
+          when 345
+              set_chr_display_out
+          when 346..372
+              @effect_anime_pattern = 242
+          when 373
+              anime_pattern_init
+              return @battle_anime_result + 1
+          end
+
+        when 4681 #饺子 自爆
+            back_x = 218
+            back_y = 60
+            @ray_x = 325
+            @ray_y = 138
+            case @battle_anime_frame
+            when 0 #初期化
+                @output_anime_type = 1
+                battle_anime_change(0, 0)
+                $game_actors[9].mp = 0
+                $game_actors[9].hp = 0
+                $full_chadead[9] = true
+                $chadead[9] == true
+                $chadead.push(true)
+            when 30
+                Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+                @chay = -120
+            when 31..70
+                if @battle_anime_frame % 4 == 0
+                    picture = Cache.picture("戦闘アニメ") #ダメージ表示用
+                    rect = Rect.new(0, 48, 64, 64)
+                    if $btl_progress == 0
+                        @back_window.contents.blt(@chax + 20, 154, picture, rect)
+                    elsif $btl_progress == 1
+                        @back_window.contents.blt(@chax - 2, 148, picture, rect)
+                    else
+                        @back_window.contents.blt(@chax - 2, 148, picture, rect)
+                    end
+                else
+
+                end
+
+             when 71
+                 set_chr_display_out
+                 @effect_anime_frame = 0
+                 @tec_output_back = false
+                 Audio.se_play("Audio/SE/" + "Z1 逃げる")    # 効果音を再生する
+                 @enex = CENTER_ENEX
+                 @eney = STANDARD_ENEY
+            when 72..133
+                back_anime_pattern(1)
+                #back_anime_pattern 55
+                #@effect_anime_frame += 1
+                @effect_anime_pattern = 88
+                Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == 93    # 効果音を再生する
+                @gx = 2 if @battle_anime_frame == 93
+                @gx = -2 if @battle_anime_frame == 95
+                @gx = 0 if @battle_anime_frame == 97
+            when 134
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
+    when 202 #ビーム
+        @ray_x = 252
+        @ray_y = 90
+
+        case @battle_anime_frame
+        when 0 #初期化
+            Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+            Audio.se_play("Audio/SE/" + "饺子天哥别死")# 効果音を再生する
+            @output_anime_type = 1
+            battle_anime_change(0, 4)
+            @ray_color = 0
+        when 1..60
+
+        when 61
+            battle_anime_change(0, 4)
+            Audio.se_play("Audio/SE/" + "Z1 怪光線")
+        # 効果音を再生する
+        when 70..99
+            @effect_anime_pattern = 2
+        when 100
+            if @attackDir == 0
+                @output_anime_type = 0
+                @chay = -120 #キャラ画面範囲外へ
+                @enex = CENTER_ENEX
+                @eney = STANDARD_ENEY
+            else
+                @eney = -200 #キャラ画面範囲外へ
+                @chax = CENTER_CHAX
+                @chay = STANDARD_CHAY
+            end
+        when 101..127
+            @effect_anime_pattern = 31
+        when 128
+            anime_pattern_init
+            return @battle_anime_result + 1
+        end
+
+        when 4682 #魔空波 #ヘルズフラッシュ
+            #back_x = 228
+            #back_y = 88
+            back_x = 266
+            #back_x = 206
+            back_y = 0
+            @ray_x = back_x +82
+            @ray_y = back_y +60
+            color = Color.new(255, 255, 255, 260)
+            if @all_attack_count == 1
+                #@back_window.contents.fill_rect(0,0,640,378,color)
+                case @battle_anime_frame
+                when 0 #初期化
+                    #Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                    @output_anime_type = 1
+                    battle_anime_change(0, 12)
+                    #@ray_color = 3
+                    Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
+                    Audio.se_play("Audio/SE/" + "短笛魔空波")
+                    @ray_color = 1
+                    @ray_x = 338
+                    @ray_y = 156
+                    @genkitama_kanri_frame = []
+                    @genkitama_kanri_maxflame = 15
+                    @genkitama_kanri_spdup = 10
+                    @genkityuushin_x = @ray_x -14
+                    @genkityuushin_y = @ray_y +2
+                    @genkitama_kanri_frame = [0, 0, 0, 0, 0, 0, 0, 0]
+                 when 1..128
+
+                     @ray_x = 324
+                     @ray_y = 120
+
+                     tame_end = 128
+
+
+                     Audio.se_stop if @battle_anime_frame == sframe
+
+
+
+
+
+                     case @battle_anime_frame
+
+
+                   when 1..119
+
+                       #   itix = 280
+                       #  itiy = 72
+                       #  @back_window.contents.blt(itix,itiy,picture,rect)
+                       #  picture = Cache.picture("ZG_必殺技_光線_大(緑)")
+                       #  rect = Rect.new(0, 0,316,158)
+                       #  @back_window.contents.blt(162,itiy+126,picture,rect)
+                       sframe = 680
+                       itiy = 54
+                       Audio.se_stop if @battle_anime_frame == sframe
+                       Audio.se_play("Audio/SE/" + "ZG 光線1") if @battle_anime_frame == sframe
+
+                       picture = Cache.picture("NULL")
+                       rect = Rect.new(0, 0, 220, 126)
+                       @back_window.contents.blt(210, itiy, picture, rect)
+
+                       picture = Cache.picture("ZG_必殺技_光線_大(緑)2")
+                       rect = Rect.new(0, 0, 316, 188)
+                       @back_window.contents.blt(182, itiy+106, picture, rect)   #162 +126
+
+                    when 130..220
+
+
+                        case @battle_anime_frame
+
+                        when 140..143, 160..163, 180..183, 200..203
+                            @back_window.contents.fill_rect(0, 0, 640, FLASH_Y_SIZE_CUTIN_ON, color)
+
+                        end
+
+                   when 129..200
+                       Audio.se_play("Audio/SE/" + "Z1 気を溜める") if @battle_anime_frame == 140
+
+                       @ray_x = 362
+                       @ray_y = 244
+                       @effect_anime_pattern = 235
+                   when 201
+                       Audio.se_stop
+                       Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                       #Audio.se_play("Audio/SE/" + "Z1 ザー")
+                       @ray_anime_type = 0
+                       @ray_anime_frame = 0
+                       #@effect_anime_pattern = 264
+                       @effect_anime_pattern = 275
+                   end
+
+
+
+
+
+                when 231
+                    @tec_output_back = true
+                    @chr_cutin = true
+                    @chr_cutin_flag = true
+                    @effect_anime_pattern = 0
+                    @effect_anime_frame = 0
+                    @effect_anime_type = 0
+                    @tec_output_back_no = 0
+                    set_chr_display_out
+                #Audio.se_play("Audio/SE/" + "Z1 ザー")
+                when 232..287
+                    @ray_y = 114
+                    @effect_anime_pattern = 265
+
+                when 288
+                    anime_pattern_init
+                    return @battle_anime_result + 1
+                end
+
+        elsif @all_attack_count >= 2
+            @ray_color = 1
+            @tec_output_back_no = 0
+            @tec_output_back = true
+            if @battle_anime_frame == 0
+                sframe = 0
+                Audio.se_play("Audio/SE/" + "ZG 光線1") if @battle_anime_frame == sframe
+                #@effect_anime_frame = 27
+                @effect_anime_pattern = 0
+                @output_anime_type = 0
+                if @attackDir == 0
+                    @enex = CENTER_ENEX
+                    @eney = STANDARD_ENEY
+                else
+                    @chax = CENTER_CHAX
+                    @chay = STANDARD_CHAY
+                end
+            elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
+                @effect_anime_pattern = 265
+            elsif @battle_anime_frame == 26
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
+        end
+
+
+
+
+
+
+      when 4637 #达普拉 投枪攻撃
+
+          @ray_x = 328
+          @ray_y = 148
+          case @battle_anime_frame
+
+          when 0 #初期化
+              Audio.se_play("Audio/SE/" + "Z2 SE103")    # 効果音を再生する
+              @output_anime_type = 1
+              battle_anime_change(0, 3)
+              @ray_color = 0
+          when 1..29
+              sframe = 1
+              back_x = 292
+              back_y = -118 + 8 *(@battle_anime_frame-sframe)
+              battle_anime_change(0, 3) if @battle_anime_frame == 18
+              picture = Cache.picture("矛")
+              rect = Rect.new(0, 0, 80, 56)
+              @back_window.contents.blt(back_x, back_y, picture, rect)
+          #@effect_anime_pattern = 227
+          #104
+          when 30..120
+              sframe = 30
+              akifra = 4
+              zyougey = 6
+              back_x = 292
+              back_y = 106
+              Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == sframe
+              case @battle_anime_frame
+
+              when sframe
+                  @eney += zyougey
+              when sframe + akifra * 1
+                  @eney += 0
+              when sframe + akifra * 2
+                  @eney -= zyougey
+              end
+
+              case @battle_anime_frame
+
+              when sframe..sframe + akifra * 1 -1
+                  back_y += zyougey
+              when sframe + akifra * 1..sframe + akifra * 2 -1
+                  back_y += zyougey
+              when sframe + akifra * 2..sframe + akifra * 3 -1
+                  #back_y -= zyougey
+              end
+              picture = Cache.picture("矛")
+              rect = Rect.new(0, 0, 80, 56)
+              @back_window.contents.blt(back_x, back_y, picture, rect)
+          when 121..190
+              sframe = 121
+              battle_anime_change(0, 4)
+              @tec_output_back_no = 0
+              Audio.se_play("Audio/SE/" + "ZG エネルギー弾1") if @battle_anime_frame == sframe
+              #Audio.se_play("Audio/SE/" + "Z2 SE115") if @battle_anime_frame == sframe
+              back_x = 292 - 12 *(@battle_anime_frame-sframe+ 1)
+              back_y = 106
+              akifra = 4
+              zyougey = 2
+              case @battle_anime_frame
+
+              when sframe..sframe + akifra * 1 -1
+                  back_y += zyougey * 1
+              when sframe + akifra * 1..sframe + akifra * 2 -1
+                  back_y += zyougey * 2
+              when sframe + akifra * 2..sframe + akifra * 3 -1
+                  back_y += zyougey * 3
+              when sframe + akifra * 3..sframe + akifra * 4 -1
+                  back_y += zyougey * 4
+              when sframe + akifra * 4..sframe + akifra * 5 -1
+                  back_y += zyougey * 5
+              when sframe + akifra * 5..sframe + akifra * 6 -1
+                  back_y += zyougey * 6
+              when sframe + akifra * 6..sframe + akifra * 7 -1
+                  back_y += zyougey * 7
+              when sframe + akifra * 7..sframe + akifra * 8 -1
+                  back_y += zyougey * 8
+              when sframe + akifra * 8..sframe + akifra * 9 -1
+                  back_y += zyougey * 9
+              end
+
+              picture = Cache.picture("矛")
+              rect = Rect.new(0, 0, 80, 56)
+              @back_window.contents.blt(back_x, back_y, picture, rect)
+          when 191
+              @effect_anime_pattern = 0
+              @effect_anime_frame = 0
+              @effect_anime_type = 0
+          when 195
+              set_chr_display_out
+          when 196..225
+              sframe = 196
+              back_x = 656 - 12 *(@battle_anime_frame-sframe+ 1)
+              back_y = 136
+              picture = Cache.picture("矛")
+              rect = Rect.new(0, 0, 80, 56)
+              @back_window.contents.blt(back_x, back_y, picture, rect)
+          #@effect_anime_pattern = 228
+          when 226
+              anime_pattern_init
+              return @battle_anime_result + 1
+          end
+
+         when 4308 #大招 达普拉
+             back_x = 242
+             back_y = 88
+             @ray_x = 348
+             @ray_y = 134
+
+             color = Color.new(255, 255, 255, 260)
+             #@back_window.contents.fill_rect(0,0,640,378,color)
+             case @battle_anime_frame
+
+             when 0
+                 @output_anime_type = 1
+                 @ray_color = 0
+                 battle_anime_change(0, 0)
+                 Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+             #Audio.se_play("Audio/SE/" + "Z3 変身")
+             when 1..128
+                 sframe = 1
+
+                 @output_anime_type = 1
+                 battle_anime_change(0, 8)
+                 #@ray_color = 3
+
+                 @ray_x = 318
+                 @ray_y = 154
+                 @effect_anime_pattern = 237
+                 if sframe + 40 <= @battle_anime_frame
+                     battle_anime_change(0, 4)
+                     @ray_x = 348 - 8
+                     @ray_y = 136 - 8
+                     @effect_anime_pattern = 235
+                 end
+
+                 if sframe + 80 <= @battle_anime_frame
+                     @ray_anime_type = 0 if sframe + 80 == @battle_anime_frame
+                     @ray_x = 348 - 24
+                     @ray_y = 136 - 24
+                     @effect_anime_pattern = 252
+                 end
+                 #@ray_color = 3
+                 #back_anime_pattern 201,back_x,back_y
+                 @ray_color = 1
+             when 129..180
+                 @ray_x = 348 - 24
+                 @ray_y = 136 - 24
+                 @effect_anime_pattern = 252
+             when 181..222
+                 @ray_anime_type = 1
+                 sframe = 181
+                 Audio.se_stop if @battle_anime_frame == sframe
+                 #Audio.se_play("Audio/SE/" + "ZG 打撃4") if @battle_anime_frame == sframe
+                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == sframe
+                 @ray_x = 268 - 24 - 16*(@battle_anime_frame-sframe)
+                 @ray_y = 154 - 24
+                 battle_anime_change(0, 2)
+                 @effect_anime_pattern = 252 #261
+             when 223
+                 @effect_anime_pattern = 0
+             when 233
+                 set_chr_display_out
+                 @effect_anime_frame = 0
+                 @effect_anime_type = 0
+                 #@chax = STANDARD_ENEX
+                 #@chay = STANDARD_CHAY
+                 @eney = -200
+                 @output_anime_type = 1
+             #battle_anime_change 1,16
+             when 234..289#259
+                 sframe = 234
+                 @ray_y = 140
+                 #@ray_x = 268 - 24 - 16*(@battle_anime_frame-sframe)
+                 #@ray_anime_type = 1
+                 @ray_color = 1
+                 @effect_anime_pattern = 262
+                 if @battle_anime_frame == sframe + 24
+                     battle_anime_change(1, 16)
+                 end
+
+                 if @battle_anime_frame > 259
+                     @effect_anime_frame -= 1
+                 end
+             when 290..417
+                 @effect_anime_pattern = 0
+                 battle_anime_change(0, 2)
+                 sframe = 290
+                 Audio.se_stop if @battle_anime_frame == sframe
+                 @chay = -200
+                 @eney = STANDARD_ENEY
+                 Audio.se_play("Audio/SE/" + "Z3 変身") if @battle_anime_frame == sframe
+                 @ray_color = 3
+                 back_anime_pattern(201, back_x, back_y)
+
+             when 418..530
+                 sframe = 418
+                 back_x = 82
+                 back_y = 88
+                 Audio.se_stop if @battle_anime_frame == sframe
+                 @eney = -200
+                 @effect_anime_pattern = 0
+                 @tec_output_back = false
+                 @chr_cutin = false
+                 picture = Cache.picture("Z3达普拉必杀")
+                 rect = Rect.new(0, 0, 412, 208)
+                 @back_window.contents.blt(back_x, back_y, picture, rect)
+                 back_anime_pattern(106)
+
+                 Audio.se_play("Audio/SE/" + "Z1 気を溜める5") if @battle_anime_frame == sframe
+
+             when 531..630
+                 @ray_color = 1
+                 sframe = 531
+                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == sframe
+                 @ray_x = 268 + 22
+                 @ray_y = 140
+                 @chay = STANDARD_ENEY
+                 @effect_anime_pattern = 252
+                 @tec_output_back = true
+                 @chr_cutin = true
+                 if sframe + 60 && @battle_anime_frame % 12 == 0
+                     @back_window.contents.fill_rect(0, 0, 640, FLASH_Y_SIZE_CUTIN_ON, color)
+                 end
+             when 631
+                 @eney = - 200
+                 anime_pattern_init
+                 return @battle_anime_result + 1
+             end
+
+
+
+        when 4309 #比鲁斯大招
+            back_x = 228
+            back_y = 88
+            @ray_x = 346
+            @ray_y = 66
+            case @battle_anime_frame
+            when 0 #初期化
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "比鲁斯大招") # 効果音を再生する
+                @output_anime_type = 1
+                battle_anime_change(0, 4)
+                @ray_color = 3
+            when 1..128
+                back_anime_pattern(201, back_x, back_y)
+            when 129..303
+                sframe = 129
+                @ray_x = 372
+                @ray_y = 116
+                @eney = -200
+                @tec_output_back_no = 1
+                Audio.se_stop if @battle_anime_frame == sframe
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める3") if @battle_anime_frame == sframe
+                Audio.se_play("Audio/SE/" + "DB3 気を溜める2") if @battle_anime_frame == sframe
+                @chay = -260
+                picture = Cache.picture("Z3比鲁斯必杀")
+                rect = Rect.new(0, 0, 248, 254)
+                @back_window.contents.blt(208, 76, picture, rect)
+                @effect_anime_pattern = 289
+                @chr_cutin = false
+                @chr_cutin_flag = false
+
+                if @battle_anime_frame == 303
+                    @tec_output_back_no = 0
+                end
+            when 304..340
+                sframe = 304
+                @ray_x = 352
+                @ray_y = 98
+                #battle_anime_change 0,2 if @battle_anime_frame == sframe + 4
+                if @battle_anime_frame == sframe
+                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                    Audio.se_play("Audio/SE/" + "DB3 エネルギー波2")
+                    @chay = STANDARD_CHAY
+                    battle_anime_change(0, 2)
+
+                    @effect_anime_pattern = 293
+                    @effect_anime_frame = 0
+                    @effect_anime_type = 0
+                    @chr_cutin = true
+                    @chr_cutin_flag = true
+                end
+            when 350
+                @tec_back_small = true
+                @effect_anime_pattern = 0
+                @effect_anime_frame = 0
+                @effect_anime_type = 0
+                @tec_output_back_no = 0
+                set_chr_display_out
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                Audio.se_play("Audio/SE/" + "DB3 エネルギー波2")
+            when 351..375
+
+                #@ray_x = 346
+                #@ray_y = 136
+                @ray_y = 98
+                @effect_anime_pattern = 266
+            when 376
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
+
+
+      when 4475 #超级冲击波Z2 悟空
+          back_x = 206
+          back_y = 88
+          @ray_x = 316
+          @ray_y = 102
+          case @battle_anime_frame
+
+          when 0 #初期化
+              @output_anime_type = 1
+              battle_anime_change(0, 0)
+          when 30
+              Audio.se_play("Audio/SE/" + "Z1 高速移動")
+              Audio.se_play("Audio/SE/" + "Z3到英雄战斗悟空瞬间移动龟派气功发射前·") # 効果音を再生する
+              @chay = -200
+          when 31..70
+              if @battle_anime_frame % 4 == 0
+                  picture = Cache.picture("戦闘アニメ") #ダメージ表示用
+                  rect = Rect.new(0, 48, 64, 64)
+                  if $btl_progress == 0
+                      @back_window.contents.blt(@chax + 20, 144, picture, rect)
+                  elsif $btl_progress == 1
+                      @back_window.contents.blt(@chax + 4, 144, picture, rect)
+                  elsif $btl_progress >= 2
+                      @back_window.contents.blt(@chax + 16, 144, picture, rect)
+                  else
+                      @back_window.contents.blt(@chax + 4, 144, picture, rect)
+                  end
+              else
+
+              end
+          when 71
+              @chax -= 26
+              #set_chr_display_out
+              @tec_output_back = false
+              Audio.se_play("Audio/SE/" + "Z1 逃げる")    # 効果音を再生する
+              @enex = CENTER_ENEX
+              @eney = STANDARD_ENEY
+          when 72..163
+              back_anime_pattern(1)
+              @effect_anime_pattern = 39
+
+          when 164..379
+              sframe = 164
+              rframe = 124
+              akifra = 4
+              back_anime_pattern(1)
+              if @battle_anime_frame == sframe
+                  Audio.se_play("Audio/SE/" + "Z1 強打")
+
+                  battle_anime_change(1, 16)
+              end
+              case (@battle_anime_frame-sframe)
+
+              when 0..9
+                  @gx = -16
+              when 10..19
+                  @gx = 16
+              when 20
+                  @gx = 0
+                  battle_anime_change(1, 0)
+
+              when 50
+                  @effect_anime_pattern = 0
+                  Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+                  battle_anime_change(0, 0)
+                when 51..130
+                    if @battle_anime_frame % 2 == 0
+                        #        picture = Cache.picture("DB3_ヤムチャ")
+                        #     rect = Rect.new(0, 0, 64, 64)
+                        #         @back_window.contents.blt(@chax + 16,STANDARD_CHAY + 24,picture,rect)
+                        @chay = -200
+                   else
+                       @chay = STANDARD_CHAY
+                    end
+              when 119
+                  @chay = STANDARD_CHAY
+              when rframe + akifra*0, rframe + akifra*6, rframe + akifra*8
+                  @output_anime_type = 0
+                  battle_anime_change(1, 16)
+                  battle_anime_change(0, 1)
+                  Audio.se_play("Audio/SE/" + "悟空大招命中")
+                  Audio.se_play("Audio/SE/" + "Z1 打撃")
+
+              when rframe + akifra*1, rframe + akifra*5, rframe + akifra*10, rframe + akifra*12
+                  battle_anime_change(0, 4)
+                  Audio.se_play("Audio/SE/" + "Z1 打撃")
+
+              when rframe + akifra*2, rframe + akifra*4, rframe + akifra*9, rframe + akifra*13
+                  battle_anime_change(0, 3)
+                  Audio.se_play("Audio/SE/" + "Z1 打撃")
+
+              when rframe + akifra*3, rframe + akifra*7, rframe + akifra*11
+                  battle_anime_change(0, 2)
+                  Audio.se_play("Audio/SE/" + "Z1 打撃")
+      end
+              @ray_color = 3
+              back_x = 164
+              back_y = 122
+              @ray_x = back_x +82
+              @ray_y = back_y +60
+
+              if $game_variables[171] == 1 && $btl_progress == 2
+                  picture = Cache.picture("Z2_必殺技_超级冲击波(悟空)")
+              elsif $game_variables[171] == 2 && ($btl_progress == 2 || $btl_progress == 1)
+                  picture = Cache.picture("Z2_必殺技_超级冲击波(悟空)")
+              elsif $game_variables[171] == 3 && $btl_progress == 2
+                  picture = Cache.picture("Z2_必殺技_超级冲击波(悟空)")
+              else
+                  picture = Cache.picture("Z2_必殺技_超级冲击波(悟空)")
+              end
+              case @battle_anime_frame
+              when 0 #初期化
+                  if @attackDir == 0
+                      @output_anime_type = 0
+                      @chay = -120 #キャラ画面範囲外へ
+                  else
+                      @eney = -200 #キャラ画面範囲外へ
+                  end
+                  @tec_output_back = false
+                  @chr_cutin = false
+                  @chr_cutin_flag = false
+                  Audio.se_play("Audio/SE/" + "Z2到英雄战斗悟空超龟派气功")
+              when 1..30
+
+                  rect = Rect.new(0, 0, 104, 180)
+                  @back_window.contents.blt(back_x, back_y, picture, rect)
+                  back_anime_pattern(106)
+
+                  if @battle_anime_frame == 30
+                      Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                  end
+              when 31..120
+                  rect = Rect.new(0, 0, 104, 180)
+                  @back_window.contents.blt(back_x, back_y, picture, rect)
+                  back_anime_pattern(106)
+                  @effect_anime_pattern = 235
+                  if @battle_anime_frame == 120
+                      Audio.se_play("Audio/SE/" + "ZG 光線1")
+
+                      # 効果音を再生する
+                      @effect_anime_frame = 0
+                  end
+              when 121..210
+                  @ray_y = 6
+                  back_x -= (@battle_anime_frame-121)/2
+                  @ray_x -=  (@battle_anime_frame-121)/2
+                  rect = Rect.new(0, 0, 104, 180)
+                  @back_window.contents.blt(back_x, back_y, picture, rect)
+                  back_anime_pattern(106)
+                  @effect_anime_pattern = 236
+              when 211
+                  @chr_cutin = true
+                  @chr_cutin_flag = true
+                  @tec_output_back = true
+                  set_chr_display_out
+                  @effect_anime_type = 0
+                  @effect_anime_frame = 0
+                  @effect_anime_pattern = 0
+                  if @attackDir == 0
+                      @output_anime_type = 0
+                      @enex = CENTER_ENEX
+                      @eney = STANDARD_ENEY
+                  else
+                      @chax = CENTER_CHAX
+                      @chay = STANDARD_CHAY
+                  end
+                  #@chr_cutin_mirror_flag = true
+                  @tec_back_small = true if $btl_progress >= 2
+              when 212
+              #battle_anime_change 0,1
+              #@effect_anime_pattern = 0
+              #@effect_anime_frame = 0
+              #@effect_anime_type = 0
+
+              when 213..239
+                  #ここでエラーが発生する可能性がある
+
+                  @effect_anime_pattern = 48
+              when 240
+                  anime_pattern_init
+                  return @battle_anime_result + 1
+              end
+
+             end
+
+
+       when 4476 #超级穿击炮Z2 普通贝吉塔
+
+           if $game_variables[173] == 0 || $game_variables[173] == 4
+               back_x = 228
+               back_y = 88
+               @ray_x = 338
+               @ray_y = 156
+               color = Color.new(255, 255, 255, 260)
+               #@back_window.contents.fill_rect(0,0,640,378,color)
+               case @battle_anime_frame
+               when 0 #初期化
+                   Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                   @output_anime_type = 1
+                   battle_anime_change(0, 0)
+                   @ray_color = 3
+
+               when 1..128
+                   back_anime_pattern(201, back_x, back_y)
+                   @tec_output_back_no = 3 if @battle_anime_frame == 128
+                   #@tec_back_color = 0 if @battle_anime_frame == 128
+                   @chr_cutin = false if @battle_anime_frame == 128
+               when 129..300
+                   #kien_x = 220
+                   #kien_y = 80
+                   Audio.se_stop if @battle_anime_frame == 129
+
+                   @chay = -160
+                   #kienkizyunframe = 175
+                   #kiptan = 0
+
+                   if $game_variables[173] == 4
+                       if $super_saiyazin_flag[4] == true
+                           picture = Cache.picture("Z2_必殺技_超级穿击炮(贝吉塔)")
+                       else
+                           picture = Cache.picture("Z2_必殺技_超级穿击炮(贝吉塔)")
+                       end
+                   else
+                       if $super_saiyazin_flag[4] == true
+                           picture = Cache.picture("Z2_必殺技_超级穿击炮(贝吉塔)")
+                       else
+                           picture = Cache.picture("Z2_必殺技_超级穿击炮(贝吉塔)")
+                       end
+                   end
+                   bezikat_x = 272
+                   bezikat_y = 82
+                   rect = Rect.new(0, 0, 158, 184)
+
+                   if @battle_anime_frame == 231 || @battle_anime_frame == 232 || @battle_anime_frame == 233
+                       bezikat_x -= 2
+                       bezikat_y -= 2
+                   elsif @battle_anime_frame == 232
+                       bezikat_x -= 4
+                       bezikat_y -= 4
+                   elsif @battle_anime_frame == 233
+                       bezikat_x -= 6
+                       bezikat_y -= 6
+                   elsif @battle_anime_frame == 234
+                       bezikat_x -= 4
+                       bezikat_y -= 4
+                   elsif @battle_anime_frame == 235
+                       bezikat_x -= 2
+                       bezikat_y -= 2
+                   end
+                   @back_window.contents.blt(bezikat_x, bezikat_y, picture, rect)
+
+                   case @battle_anime_frame
+
+                   when 1
+
+                   when 140..230
+
+                       Audio.se_play("Audio/SE/" + "Z1 気を溜める") if @battle_anime_frame == 140
+                       if $super_saiyazin_flag[3] == true
+                           @ray_x = 368
+                           @ray_y = 220
+                       else
+                           @ray_x = 344
+                           @ray_y = 180
+                       end
+                       @effect_anime_pattern = 235
+                   when 231
+                       Audio.se_stop
+                       Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+
+                       Audio.se_play("Audio/SE/" + "贝吉塔 穿击炮")
+                       #Audio.se_play("Audio/SE/" + "Z1 ザー")
+                       @ray_anime_type = 0
+                       @ray_anime_frame = 0
+                       @effect_anime_pattern = 264
+                   end
+
+               when 301
+                   #@tec_output_back = false
+                   @chr_cutin = true
+                   @effect_anime_pattern = 0
+                   @effect_anime_frame = 0
+                   @effect_anime_type = 0
+                   @tec_output_back_no = 0
+                   set_chr_display_out
+               #Audio.se_play("Audio/SE/" + "Z1 ザー")
+               when 311..337
+                   @effect_anime_pattern = 211
+                   if $super_saiyazin_flag[4] == true
+                       #  @ray_y = 112
+                       @effect_anime_pattern = 211
+
+                   else
+                       #  @ray_y = 112
+                       @effect_anime_pattern = 209
+                   end
+
+               when 338
+                   anime_pattern_init
+                   return @battle_anime_result + 1
+               end
+           else
+               back_x = 228
+               back_y = 88
+               @ray_x = 348 #338
+               @ray_y = 166  #156
+               color = Color.new(255, 255, 255, 260)
+               #@back_window.contents.fill_rect(0,0,640,378,color)
+               case @battle_anime_frame
+               when 0 #初期化
+                   Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                   @output_anime_type = 1
+                   battle_anime_change(0, 0)
+                   @ray_color = 3
+
+               when 1..128
+                   back_anime_pattern(201, back_x, back_y)
+                   @tec_output_back_no = 6 if @battle_anime_frame == 128
+                   #@tec_back_color = 0 if @battle_anime_frame == 128
+                   @chr_cutin = false if @battle_anime_frame == 128
+               when 129..360
+                   #kien_x = 220
+                   #kien_y = 80
+                   Audio.se_stop if @battle_anime_frame == 129 || @battle_anime_frame == 290
+                   Audio.se_play("Audio/SE/" + "ZG 気をためる2") if @battle_anime_frame == 140
+                   Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == 290
+                   @chay = -160
+                   #kienkizyunframe = 175
+                   #kiptan = 0
+                   picno=1
+
+                   if $game_variables[173] == 1
+                       if $super_saiyazin_flag[4] == true
+                           picname = "Z2_必殺技_超级穿击炮(贝吉塔)"
+                       else
+                           picname = "Z2_必殺技_超级穿击炮(贝吉塔)"
+
+                       end
+                   elsif $game_variables[173] == 2
+                       if $super_saiyazin_flag[4] == true
+                           picname = "Z2_必殺技_超级穿击炮(贝吉塔)"
+                       else
+                           picname = "Z2_必殺技_超级穿击炮(贝吉塔)"
+
+                       end
+                   elsif $game_variables[173] == 3
+                       if $super_saiyazin_flag[4] == true
+                           picname = "Z2_必殺技_超级穿击炮(贝吉塔)"
+                       else
+                           picname = "Z2_必殺技_超级穿击炮(贝吉塔)"
+
+                       end
+
+                   end
+                   bezikat_x = 69  #64
+                   bezikat_y = 119   #114
+                   rect = Rect.new(0, 0, 512, 128)
+
+                   if @battle_anime_frame >= 290
+                       picno +=3
+                   elsif @battle_anime_frame >= 255
+                       picno +=1
+                   elsif @battle_anime_frame >= 245
+                       picno +=2
+                   elsif @battle_anime_frame >= 235
+                       picno +=0
+                   elsif @battle_anime_frame >= 190
+                       picno +=1
+                   end
+
+                   picture = Cache.picture(picname + picno.to_s)
+                   @back_window.contents.blt(bezikat_x, bezikat_y, picture, rect)
+
+                   if @battle_anime_frame >= 340
+                       color = Color.new(255, 255, 255, 15*(@battle_anime_frame-340)+160)
+                       #@back_window.contents.fill_rect(0,0,640,FLASH_Y_SIZE_CUTIN_ON,color)
+                       @back_window.contents.fill_rect(0, 0, 640, 378, color)
+                   end
+               when 361
+                   #@tec_output_back = false
+                   @chr_cutin = true
+                   @effect_anime_pattern = 0
+                   @effect_anime_frame = 0
+                   @effect_anime_type = 0
+                   @tec_output_back_no = 0
+                   set_chr_display_out
+               #Audio.se_play("Audio/SE/" + "Z1 ザー")
+               when 371..397
+                   @effect_anime_pattern = 209
+                   if $super_saiyazin_flag[4] == true
+                       #  @ray_y = 112
+                       @effect_anime_pattern = 209
+
+                   else
+                       #  @ray_y = 112
+                       @effect_anime_pattern = 209
+                   end
+
+               when 398
+                   anime_pattern_init
+                   return @battle_anime_result + 1
+               end
+           end
+
+
+          when 4431 #拉蒂斯 贯光线
+
+
+              back_x = 228
+              back_y = 88
+              @ray_x = 338
+              @ray_y = 156
+              color = Color.new(255, 255, 255, 260)
+
+
+              if @battle_anime_frame == 0 #初期化
+                  Audio.se_play("Audio/SE/" + "Z1 怪光線")    # 効果音を再生する
+                  @output_anime_type = 1
+                  battle_anime_change(0, 4)
+                  @ray_color = 3
+              elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 40
+                  @effect_anime_pattern = 45
+              elsif @battle_anime_frame == 41
+                  @effect_anime_pattern = 0
+                  @effect_anime_frame = 0
+                  @effect_anime_type = 0
+              elsif  @battle_anime_frame == 45
+                  set_chr_display_out
+              elsif @battle_anime_frame >= 46 && @battle_anime_frame <= 75
+                  @effect_anime_pattern = 45
+              elsif @battle_anime_frame == 76
+                  anime_pattern_init
+                  return @battle_anime_result + 1
+              end
+
+
+
+         when 4294 #気円斬 悟空
+
+             case @battle_anime_frame
+             when 0 #初期化
+                 Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
+                 #Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
+                 @output_anime_type = 1
+                 if $super_saiyazin_flag[1] != true
+                     battle_anime_change(0, 6)
+                 else
+                     battle_anime_change(0, 18)
+                 end
+                 @ray_color = 0
+
+             when 1..126
+                 @ray_x = 242
+                 @ray_y = 96
+                 @effect_anime_frame += 1
+
+                 if @effect_anime_frame == 5
+                     @effect_anime_type += 1 if @effect_anime_type < 4
+                     @effect_anime_frame = 1
+                 end
+                 picture = Cache.picture("Z3_戦闘_必殺技_気円斬")
+                 rect = Rect.new(0, 30*@effect_anime_type, 126, 30)
+                 @back_window.contents.blt(@ray_x, @ray_y, picture, rect)
+                 if @battle_anime_frame == 126
+                     @effect_anime_pattern = 0
+                     @effect_anime_frame = 0
+                     @effect_anime_type = 0
+                     Audio.se_stop
+                     battle_anime_change(0, 1)
+                     Audio.se_play("Audio/SE/" + "DB3 エネルギー波1")    # 効果音を再生する
+                 end
+             when 127..155
+                 @effect_anime_frame += 1
+                 #@effect_anime_pattern = 273
+                 @ray_x = 340
+                 @ray_y = 150
+                 picture = Cache.picture("Z3_戦闘_必殺技_気円斬")
+                 rect = Rect.new(0, 30*4, 126, 30)
+                 @back_window.contents.blt(@ray_x+@effect_anime_frame*RAY_SPEED, @ray_y, picture, rect)
+             when 156
+                 @effect_anime_pattern = 0
+                 @effect_anime_frame = 0
+                 @effect_anime_type = 0
+             when 160
+                 set_chr_display_out
+             when 161..191
+                 @effect_anime_pattern = 260
+             when 192
+                 anime_pattern_init
+                 return @battle_anime_result + 1
+             end
+
+      when 4688 #比鲁斯 死亡弹单体
+
+          @ray_x = 250
+          @ray_y = 100
+          case @battle_anime_frame
+          when 0 #初期化
+              Audio.se_play("Audio/SE/" + "Z1 気を溜める2")    # 効果音を再生する
+              @output_anime_type = 1
+              battle_anime_change(0, 6)
+              @ray_color = 4
+          when 1..100
+              @effect_anime_pattern = 16
+
+              @effect_anime_frame -= 1 if @battle_anime_frame % 2 == 0
+
+              if @effect_anime_type == 3
+                  @effect_anime_type = 2
+              end
+
+          when 101
+              Audio.se_play("Audio/SE/" + "Z1 エネルギー波")    # 効果音を再生する
+              @effect_anime_pattern = 16
+              battle_anime_change(0, 5)
+          when 141
+              @effect_anime_pattern = 0
+              @effect_anime_frame = 0
+              @effect_anime_type = 0
+          when 144
+              @tec_back_small = true
+              @tec_output_back_no = 0
+          when 145
+
+
+              @eney = -200 #キャラ画面範囲外へ
+              @chax = CENTER_CHAX
+              @chay = STANDARD_CHAY
+          when 146..172
+              sframe = 146
+              picture = Cache.picture("死亡弹")
+              rect = Rect.new(5*128, 0, 128, 128)
+              @back_window.contents.blt(640-16*(@battle_anime_frame-sframe), STANDARD_CHAY - 16, picture, rect)
+
+              case @battle_anime_frame
+              when 163
+                  @gy -= 24
+                  battle_anime_change(1, 16)
+                  Audio.se_play("Audio/SE/" + "Z1 飛ぶ")
+              end
+          when 173..180
+              picture = Cache.picture("死亡弹")
+              rect = Rect.new(5*128, 0, 128, 128)
+              @back_window.contents.blt(224, STANDARD_CHAY - 16, picture, rect)
+          when 181..189
+              @tec_output_back_no = 1
+              sframe = 181
+              picture = Cache.picture("死亡弹")
+              rect = Rect.new(5*128, 0, 128, 128)
+              @back_window.contents.blt(224, STANDARD_CHAY - 16-24*(@battle_anime_frame-sframe), picture, rect)
+          when 200
+              @chax = CENTER_CHAX
+              @chay = 480
+          when 201..259
+              sframe = 201
+              Audio.se_play("Audio/SE/" + "Z1 飛ぶ") if @battle_anime_frame == sframe
+              @gy = -24
+
+              case @battle_anime_frame
+              when 210..230
+                  picture = Cache.picture("死亡弹")
+                  rect = Rect.new(5*128, 0, 128, 128)
+                  @back_window.contents.blt(224, 480-24*(@battle_anime_frame-(sframe + 9)), picture, rect)
+              end
+          when 260
+              set_chr_display_out
+              @tec_output_back_no = 0
+              @chax = 640
+              @chay = STANDARD_CHAY
+              battle_anime_change(1, 0)
+              @gx = -16
+              @gy = 0
+
+          when 261..283
+              sframe = 261
+
+              case @battle_anime_frame
+              when sframe +10..sframe + 23
+                  picture = Cache.picture("死亡弹")
+                  rect = Rect.new(5*128, 0, 128, 128)
+                  @back_window.contents.blt(640-32*(@battle_anime_frame-(sframe+10)), STANDARD_CHAY - 16, picture, rect)
+              end
+
+              battle_anime_change(1, 16) if @battle_anime_frame == sframe + 19
+          when 284
+              anime_pattern_init
+              return @battle_anime_result + 1
+          end
+
+
+
+      when 4683 #剑气波
+          if $btl_progress >= 2
+              back_x = 248
+              back_y = 86
+              backhai_no = 201
+              se_name = "Z3 変身"
+          else
+              back_x = 232
+              back_y = 36
+              backhai_no = 101
+              se_name = "Z2 気を溜める"
+          end
+          @ray_x = 270
+          @ray_y = 96
+          if @all_attack_count == 1
+
+              case @battle_anime_frame
+              when 0 #初期化
+                  Audio.se_play("Audio/SE/" + se_name)    # 効果音を再生する
+                  @output_anime_type = 1
+                  battle_anime_change(0, 0)
+                  if $btl_progress >= 2
+                      @ray_color = 3
+                else
+                    @ray_color = 4
+                end
+              when 1..89
+                  back_anime_pattern(backhai_no, back_x, back_y)
+              when 90 #初期化
+                  Audio.se_stop
+                  #Audio.se_play("Audio/SE/" + "Z1 気を溜める")    # 効果音を再生する
+                  battle_anime_change(0, 0)
+                  back_anime_pattern(backhai_no, back_x, back_y)
+              when 91..140
+                  back_anime_pattern(backhai_no, back_x, back_y)
+              when 141
+                  Audio.se_stop
+                  Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+                  battle_anime_change(0, 4)
+                  @effect_anime_pattern = 229
+                  @ray_color = 4
+              #back_anime_pattern 101,back_x,back_y
+              when 142..179
+              #back_anime_pattern 101,back_x,back_y
+              when 180
+                  battle_anime_change(0, 3)
+                  @effect_anime_pattern = 0
+                  @effect_anime_frame = 0
+                  @effect_anime_type = 0
+              when 190
+                  set_chr_display_out
+              when 191..217
+                  @effect_anime_pattern = 230
+              when 218
+                  anime_pattern_init
+                  return @battle_anime_result + 1
+              end
+          elsif @all_attack_count >= 2
+
+              if @battle_anime_frame == 0
+                  Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+                  #@effect_anime_frame = 27
+                  @effect_anime_pattern = 230
+                  @output_anime_type = 0
+                  if @attackDir == 0
+                      @enex = CENTER_ENEX
+                      @eney = STANDARD_ENEY
+                  else
+                      @chax = CENTER_CHAX
+                      @chay = STANDARD_CHAY
+                  end
+              elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 25
+                  @effect_anime_pattern = 230
+              elsif @battle_anime_frame == 26
+                  anime_pattern_init
+                  return @battle_anime_result + 1
+              end
+          end
+
+
+     when 4689 #爆発波(弗利萨)
+         @ray_color = 3
+         if $btl_progress >= 2
+             back_x = 246
+             back_y = 86
+             backhai_no = 201
+             se_name = "Z3 変身"
+         else
+             back_x = 226
+             back_y = 32
+             backhai_no = 101
+             se_name = "Z2 気を溜める"
+         end
+
+         if @all_attack_count == 1
+             case @battle_anime_frame
+             when 0 #初期化
+                 Audio.se_play("Audio/SE/" + se_name)
+             #@ray_color = 0
+             when 1..100
+                 back_anime_pattern(backhai_no, back_x, back_y)
+             when 101
+                 @chr_cutin = false
+                 @tec_output_back = false
+                 Audio.se_stop
+                 Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+                 back_anime_pattern(2)
+             when 102..180
+                 back_anime_pattern(2)
+                 @output_anime_type = 1
+                 battle_anime_change(0, 12)
+             when 181
+                 if @attackDir == 0
+                     @output_anime_type = 0
+                     @chay = -120 #キャラ画面範囲外へ
+                     @enex = CENTER_ENEX
+                     @eney = STANDARD_ENEY
+                 else
+                     @eney = -200 #キャラ画面範囲外へ
+                     @chax = CENTER_CHAX
+                     @chay = STANDARD_CHAY
+                 end
+             when 182..242
+                 @chr_cutin = true
+                 @chr_cutin_mirror_flag = true
+                 back_anime_pattern(1)
+             when 243
+                 anime_pattern_init
+                 return @battle_anime_result + 1
+             end
+         elsif @all_attack_count >= 2
+
+             if @battle_anime_frame == 0
+                 Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+                 if @attackDir == 0
+                     @output_anime_type = 0
+                     @chay = -120 #キャラ画面範囲外へ
+                     @enex = CENTER_ENEX
+                     @eney = STANDARD_ENEY
+                 else
+                     @eney = -200 #キャラ画面範囲外へ
+                     @chax = CENTER_CHAX
+                     @chay = STANDARD_CHAY
+                 end
+
+             elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 61
+                 back_anime_pattern(1)
+                 @chr_cutin = true
+                 @chr_cutin_mirror_flag = true
+             elsif @battle_anime_frame == 62
+                 anime_pattern_init
+                 return @battle_anime_result + 1
+             end
+         end
+
+       when 4692 #陨石连击
+           #back_x = 198
+           #back_y = 34
+           #@ray_x = 280
+           #@ray_y = 138
+           @ray_x = 330
+           @ray_y = STANDARD_CHAY - 2
+
+
+           case @battle_anime_frame
+           when 0 #初期化
+               if $btl_progress == 2
+                   Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                   @ray_color = 3
+               else
+                   Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                   @ray_color = 0
+               end
+           #  @output_anime_type = 1
+           #  battle_anime_change 0,4
+
+           when 1..89
+               #back_x = 220
+               #back_y = 32
+               back_anime_pattern(backhai_no, back_x, back_y)
+
+           when 90
+               Audio.se_stop
+               Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+               @chay = -120
+               #back_x = 220
+               #back_y = 32
+               back_anime_pattern(backhai_no, back_x, back_y)
+           when 91..130
+               #back_x = 220
+               #back_y = 32
+               back_anime_pattern(backhai_no, back_x, back_y)
+               if @battle_anime_frame % 4 == 0
+                   picture = Cache.picture("戦闘アニメ") #ダメージ表示用
+                   rect = Rect.new(0, 48, 64, 64)
+                   @back_window.contents.blt(@chax-6, 144+2, picture, rect)
+
+               else
+
+               end
+
+           when 131
+               #set_chr_display_out
+               Audio.se_play("Audio/SE/" + "Z1 逃げる")    # 効果音を再生する
+               @enex = CENTER_ENEX
+               @eney = STANDARD_ENEY
+               @chax = -200
+               @chay = STANDARD_CHAY
+               @ray_color = 0
+               battle_anime_change(0, 16)
+               @ax = 20
+           #set_chr_display_out
+           when 140..1166
+               hit_efe_x = 346
+               hit_efe_y = 154
+               case @battle_anime_frame
+               when 156..157
+                   @ax = 0
+                   battle_anime_change(0, 3)
+                   Audio.se_stop if @battle_anime_frame == 156
+                   Audio.se_play("Audio/SE/" + "悟空大招前摇")
+                   Audio.se_play("Audio/SE/" + "ZG 打撃4") if @battle_anime_frame == 156
+                   @gx = -8
+                   battle_anime_change(1, 16)
+                   @effect_anime_pattern = 123
+                   @ray_x = hit_efe_x
+                   @ray_y = hit_efe_y
+               when 158..159
+                   @gx = 8
+                   @ray_x = hit_efe_x
+                   @ray_y = hit_efe_y
+               when 160..163
+                   @gx = 0
+                   @ray_x = hit_efe_x
+                   @ray_y = hit_efe_y
+               when 164
+                   @effect_anime_pattern = 0
+                   @effect_anime_frame = 0
+                   battle_anime_change(0, 0)
+                   @ax = -12
+                   @ay = 6
+               when 172
+                   @ax = 0
+                   @ay = 0
+                   battle_anime_change(0, 16)
+               when 180
+                   @ax = 24
+                   @ay = -12
+
+               when 184..200
+                   @gx = -24
+                   @gy = -6
+                   @ax = 0
+                   @ay = 0
+                   if $btl_progress >= 2
+                       battle_anime_change(0, 1)
+                   else
+                       battle_anime_change(0, 2)
+                   end
+                   battle_anime_change(1, 17)
+                   Audio.se_play("Audio/SE/" + "ZG 打撃2") if @battle_anime_frame == 184
+                   @effect_anime_pattern = 123 if @battle_anime_frame == 184
+                   @ray_x = hit_efe_x
+                   @ray_y = hit_efe_y
+                   #p @battle_anime_frame
+                   @effect_anime_pattern = 0 if @battle_anime_frame == 200
+               when 201..215
+                   @effect_anime_frame = 0
+                   battle_anime_change(0, 16)
+                   @ax = 24
+                   @ay = -6
+                   Audio.se_play("Audio/SE/" + "Z1 逃げる") if @battle_anime_frame == 201
+               when 216..225
+                   @enex = CENTER_ENEX - 24*10 if @battle_anime_frame == 216
+                   @eney = STANDARD_ENEY + 6*10 if @battle_anime_frame == 216
+                   battle_anime_change(1, 17) if @battle_anime_frame == 216
+                   battle_anime_change(1, 16) if @battle_anime_frame == 221
+                   @gx = -24
+                   @gy = -6
+               when 226
+                   @gx = 0
+                   @gy = 0
+                   @chax = CENTER_CHAX + 16 - 24*10 if @battle_anime_frame == 226
+                   @chay = STANDARD_CHAY + 6*10 if @battle_anime_frame == 226
+               when 227..236
+                   @ax = 24
+                   @ay = -6
+               when 237
+                   @ax = 0
+                   @ay = 0
+               when 241
+                   @ax = 0
+                   @gx = -4
+                   battle_anime_change(0, 15)
+                   Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
+               when 242..246
+                   @effect_anime_pattern = 123
+                   @ray_x = hit_efe_x
+                   @ray_y = hit_efe_y
+
+               when 247
+                   @effect_anime_frame = 0
+                   @effect_anime_pattern = 0
+                   #@gx = -4
+                   battle_anime_change(0, 16)
+                   Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
+               when 248..250
+                   @effect_anime_pattern = 123
+                   @ray_x = hit_efe_x
+                   @ray_y = hit_efe_y - 14
+               when 251
+                   #@gx = -4
+                   @effect_anime_frame = 0
+                   @effect_anime_pattern = 0
+                   battle_anime_change(0, 1)
+                   Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
+               when 252..254
+                   @effect_anime_pattern = 123
+                   @ray_x = hit_efe_x
+                   @ray_y = hit_efe_y
+               when 255
+                   @effect_anime_frame = 0
+                   @effect_anime_pattern = 0
+                   @gx = -4
+                   battle_anime_change(0, 2)
+                   Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
+               when 256..258
+                   @effect_anime_pattern = 123
+                   @ray_x = hit_efe_x
+                   @ray_y = hit_efe_y - 14
+               when 259
+                   @effect_anime_frame = 0
+                   @effect_anime_pattern = 0
+                   #@gx = -4
+                   battle_anime_change(0, 1)
+                   Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
+               when 260..262
+                   @effect_anime_pattern = 123
+                   @ray_x = hit_efe_x
+                   @ray_y = hit_efe_y
+               when 263
+                   @effect_anime_frame = 0
+                   @effect_anime_pattern = 0
+                   #@gx = -4
+                   battle_anime_change(0, 2)
+                   Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
+               when 264..266
+                   @effect_anime_pattern = 123
+                   @ray_x = hit_efe_x
+                   @ray_y = hit_efe_y - 14
+               when 267
+                   @effect_anime_frame = 0
+                   @effect_anime_pattern = 0
+                   #@gx = -4
+                   battle_anime_change(0, 1)
+                   Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
+               when 268..270
+                   @effect_anime_pattern = 123
+                   @ray_x = hit_efe_x
+                   @ray_y = hit_efe_y
+               when 271
+                   @effect_anime_frame = 0
+                   @effect_anime_pattern = 0
+                   #@gx = -4
+                   battle_anime_change(0, 2)
+                   Audio.se_play("Audio/SE/" + "Z1 打撃") #if @battle_anime_frame == 184
+               when 272..274
+                   @effect_anime_pattern = 123
+                   @ray_x = hit_efe_x
+                   @ray_y = hit_efe_y - 14
+                   @gx = 0
+                   battle_anime_change(0, 0)
+                   @ax = -24
+               when 275
+                   @effect_anime_pattern = 0
+                   @effect_anime_frame = 0
+               when 276
+                   @ax = 48
+               when 278
+                   @ax = 0
+                   battle_anime_change(0, 4)
+                   battle_anime_change(1, 17)
+                   Audio.se_play("Audio/SE/" + "Z1 強打")
+                   @effect_anime_pattern = 121
+               when 279..300
+                   @gx = -24
+                   if @battle_anime_frame == 289
+                       battle_anime_change(0, 16)
+                       @ay = -24
+                       Audio.se_play("Audio/SE/" + "Z1 逃げる")
+                       Audio.se_play("Audio/SE/" + "DB3 気を溜める2")
+                   end
+               when 301
+                   @effect_anime_frame = 0
+                   @effect_anime_pattern = 0
+                   @gx = 0
+                   @ay = -6
+                   @output_anime_type = 1
+                   battle_anime_change(0, 17)
+                   battle_anime_change(0, 18) if $game_switches[445] == true
+                   @tec_output_back_no = 1
+                   @chax = CENTER_CHAX + 74
+                   @chay = (STANDARD_CHAY + 142)
+                   @chr_cutin_flag = false
+               when 340
+                   Audio.se_stop
+                   Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                   Audio.se_play("Audio/SE/" + "悟空龟波")
+                   @effect_anime_pattern = 257
+                   battle_anime_change(0, 18)
+                   battle_anime_change(0, 19) if $game_switches[445] == true
+                   #短髪の場合は変更
+
+                   @ay = 0
+                   @ray_spd_up_flag = true
+               when 341..399
+                   @effect_anime_frame = 13 if @effect_anime_frame >= 13
+               when 400
+                   @effect_anime_pattern = 0
+                   @effect_anime_frame = 0
+                   @effect_anime_type = 0
+                   @output_anime_type = 0
+                   set_chr_display_out
+                   battle_anime_change(1, 16)
+               when 401..430
+                   @ray_x = 330
+                   @ray_y = -600
+                   @effect_anime_pattern = 258
+               when 431
+                   @battle_anime_frame = 1166
+               end
+           when 1167
+               anime_pattern_init
+               return @battle_anime_result + 1
+           end
+
+
+     when 4781 #敌人 自爆
+         back_x = 248
+         back_y = 88
+
+         @ray_x = 128
+         @ray_y = 92
+         case @battle_anime_frame
+
+
+         when 0
+             Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+             @eney = -120
+         when 1..38
+             if @battle_anime_frame % 4 == 0
+                 picture = Cache.picture("戦闘アニメ") #ダメージ表示用
+                 rect = Rect.new(0, 48, 64, 64)
+                 @back_window.contents.blt(@enex + 32, 144, picture, rect)
+             end
+         when 39
+             #set_chr_display_out
+             #@tec_output_back = false
+             #Audio.se_play("Audio/SE/" + "Z1 逃げる")    # 効果音を再生する
+             #@enex = CENTER_ENEX
+             #@eney = STANDARD_ENEY
+             @chax = CENTER_CHAX
+             @chay = STANDARD_CHAY
+         when 40..78
+             if @battle_anime_frame % 4 == 0
+                 picture = Cache.picture("戦闘アニメ") #ダメージ表示用
+                 rect = Rect.new(0, 48, 64, 64)
+
+                 @back_window.contents.blt(@enex + 48, 144, picture, rect)
+             end
+         when 79
+             @enex = CENTER_ENEX - 20
+             @eney = STANDARD_ENEY
+         when 100
+             @output_anime_type = 1
+             battle_anime_change(0, 5)
+             Audio.se_play("Audio/SE/" + "Z1 強打")
+             battle_anime_change(1, 16)
+             @enex -= 28
+         when 101..198
+             sframe = 101
+             akifra = 16
+             case @battle_anime_frame
+
+             when sframe + akifra * 0
+                 Audio.se_play("Audio/SE/" + "Z1 怪しい気")
+             when sframe + akifra * 1, sframe + akifra * 3, sframe + akifra * 5, sframe + akifra * 7
+                 battle_anime_change(0, 5)
+             when sframe + akifra * 2, sframe + akifra * 4, sframe + akifra * 6
+                 battle_anime_change(0, 5)
+             end
+         when 199
+             @effect_anime_pattern = 31
+             anime_pattern_init
+             return @battle_anime_result + 1
+         end
+
+
+      when 4531 #魔貫光殺砲(セル完美)
+          back_x = 180
+          back_y = 0
+          if @enedatenum == 127
+              @ray_x = 200
+              @ray_y = 128
+          else
+              @ray_x = 224
+              @ray_y = 142
+          end
+          color = Color.new(255, 255, 255, 260)
+
+          case @battle_anime_frame
+          when 0 #初期化
+              Audio.se_play("Audio/SE/" + "Z1 気を溜める3")    # 効果音を再生する
+              @output_anime_type = 1
+              battle_anime_change(0, 0)
+              @ray_color = 0
+              @eney = -160
+              @chr_cutin_flag = false
+
+          when 1..130
+              shake_dot = 4
+              shake_x, shake_y= pic_shake_cal(shake_dot)
+              @back_window.contents.fill_rect(0, 0, 640, 378, color) if @battle_anime_frame >= 116
+              if @enedatenum == 127
+                  picture = Cache.picture("Z3_必殺技_カットイン_魔貫光殺砲(セル第１形態)")
+          #ダメージ表示用
+          elsif  @enedatenum == 130
+              picture = Cache.picture("Z3_必殺技_カットイン_魔貫光殺砲(セルジュニア)")
+          elsif @enedatenum == 135
+              picture = Cache.picture("Z3_必殺技_カットイン_魔貫光殺砲(セル完全体)") #ダメージ表示用
+              end
+              rect = Rect.new(0, 0, 648, 64)
+
+              @back_window.contents.blt(-4+shake_x, 146+shake_y, picture, rect)
+
+              @back_window.contents.fill_rect(0, 0, 640, 378, color) if @battle_anime_frame >= 118
+              Audio.se_stop if @battle_anime_frame == 130
+              @tec_output_back = true if @battle_anime_frame == 130
+              @output_anime_type = 1
+              battle_anime_change(0, 0)
+          when 131..220
+              @chr_cutin = true
+              @chr_cutin_flag = true
+              #@back_window.contents.fill_rect(0,0,640,378,color) if @battle_anime_frame >= 200-14
+              @eney = STANDARD_CHAY
+              #@back_window.contents.fill_rect(0,0,640,378,color) if @battle_anime_frame >= 200-10
+
+              if @battle_anime_frame == 160
+                  battle_anime_change(0, 4)
+                  Audio.se_play("Audio/SE/" + "Z1 エネルギー波3")
+                  @effect_anime_pattern = 272
+              end
+          when 221
+              #Audio.se_stop
+              Audio.se_play("Audio/SE/" + "Z1 衝撃波")    # 効果音を再生する
+              @effect_anime_pattern = 0
+              @effect_anime_frame = 0
+              @effect_anime_type = 0
+              @chr_cutin = true
+              @chr_cutin_flag = true
+              set_chr_display_out
+              @tec_output_back_no = 0
+
+          #@chr_cutin = true
+          when 222..247
+              @ray_y = 134
+              @effect_anime_pattern = 255
+          when 248
+              anime_pattern_init
+              return @battle_anime_result + 1
+          end
+
+    when 4785  #紫色死亡弹 不追踪 #合体13号)SSデッドリィボンバー
+
+
+        @ray_x = 328
+        @ray_y = 148
+        case @battle_anime_frame
+
+        when 0 #初期化
+            Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+            @output_anime_type = 1
+            battle_anime_change(0, 0)
+            @ray_color = 0
+        when 1..120
+
+        #@effect_anime_pattern = 227
+        when 121..190
+            sframe = 121
+            battle_anime_change(0, 1)
+            Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == sframe
+            back_x = 298 - 12 *(@battle_anime_frame-sframe+ 1)
+            back_y = 162
+            picture = Cache.picture("Z3_戦闘_必殺技_エネルギー波(紫)")
+            rect = Rect.new(5*128, 0, 128, 128)
+            @back_window.contents.blt(back_x, back_y, picture, rect)
+        when 191
+            @effect_anime_pattern = 0
+            @effect_anime_frame = 0
+            @effect_anime_type = 0
+        when 195
+            set_chr_display_out
+        when 196..225
+            sframe = 196
+            back_x = 656 - 12 *(@battle_anime_frame-sframe+ 1)
+            back_y = 166
+            picture = Cache.picture("Z3_戦闘_必殺技_エネルギー波(紫)")
+            rect = Rect.new(5*128, 0, 128, 128)
+            @back_window.contents.blt(back_x, back_y, picture, rect)
+        #@effect_anime_pattern = 228
+        when 226
+            anime_pattern_init
+            return @battle_anime_result + 1
+        end
+
+    when 4537 #拉蒂斯大招
+
+        back_x = 248
+        back_y = 88
+        #@ray_x = 338
+        #@ray_y = 156
+        @ray_x = -52
+        @ray_y = 208
+        color = Color.new(255, 255, 255, 260)
+        #@back_window.contents.fill_rect(0,0,640,378,color)
+        if @all_attack_count == 1
+            case @battle_anime_frame
+            when 0 #初期化
+                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                @output_anime_type = 1
+                battle_anime_change(0, 0)
+                @ray_color = 3
+
+            when 1..128
+                back_anime_pattern(201, back_x, back_y)
+                @tec_output_back_no = 2 if @battle_anime_frame == 128
+                #@tec_back_color = 0 if @battle_anime_frame == 128
+                @chr_cutin = false if @battle_anime_frame == 128
+            when 129..300
+                Audio.se_stop if @battle_anime_frame == 129
+
+                @eney = -160
+                kienkizyunframe = 175
+                kiptan = 0
+                picture = Cache.picture("拉蒂斯必杀")
+                bezikat_x = 220
+                bezikat_y = 112
+                rect = Rect.new(0, 0, 232, 244)
+                if @battle_anime_frame == 231 || @battle_anime_frame == 232 || @battle_anime_frame == 233
+                    bezikat_x -= 2
+                    bezikat_y -= 2
+                elsif @battle_anime_frame == 232
+                    bezikat_x -= 4
+                    bezikat_y -= 4
+                elsif @battle_anime_frame == 233
+                    bezikat_x -= 6
+                    bezikat_y -= 6
+                elsif @battle_anime_frame == 234
+                    bezikat_x -= 4
+                    bezikat_y -= 4
+                elsif @battle_anime_frame == 235
+                    bezikat_x -= 2
+                    bezikat_y -= 2
+                end
+                @back_window.contents.blt(bezikat_x, bezikat_y, picture, rect)
+
+                case @battle_anime_frame
+
+                when 140..230
+                    Audio.se_play("Audio/SE/" + "DB3 気を溜める2") if @battle_anime_frame == 140
+                    @ray_x = 196
+                    @ray_y = 250
+                    @effect_anime_pattern = 235
+                when 231
+                    Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                    Audio.se_play("Audio/SE/" + "Z1 ゴー")
+                    @ray_anime_type = 0
+                    @ray_anime_frame = 0
+                    @effect_anime_pattern = 264
+                end
+
+            when 301
+                #@tec_output_back = false
+                @chr_cutin = true
+                @effect_anime_pattern = 0
+                @effect_anime_frame = 0
+                @effect_anime_type = 0
+                @tec_output_back_no = 0
+                set_chr_display_out
+            #Audio.se_play("Audio/SE/" + "Z1 ザー")
+            when 311..336
+
+                @ray_y = 112
+                @effect_anime_pattern = 265
+
+            when 337
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
+       elsif @all_attack_count >= 2
+
+           if @battle_anime_frame == 0
+               Audio.se_play("Audio/SE/" + "Z1 ザー")    # 効果音を再生する
+               if @attackDir == 0
+                   @output_anime_type = 0
+                   @chay = -120 #キャラ画面範囲外へ
+                   @enex = CENTER_ENEX
+                   @eney = STANDARD_ENEY
+               else
+                   @eney = -200 #キャラ画面範囲外へ
+                   @chax = CENTER_CHAX
+                   @chay = STANDARD_CHAY
+               end
+
+           elsif @battle_anime_frame >= 1 && @battle_anime_frame <= 61
+               back_anime_pattern(1)
+               @chr_cutin = true
+               @chr_cutin_mirror_flag = true
+           elsif @battle_anime_frame == 62
+               anime_pattern_init
+               return @battle_anime_result + 1
+           end
+    end
+
+
+
+
+        when 4580 #超拉蒂斯大招
+            back_x = 164
+            back_y = 112
+            color = Color.new(255, 255, 255, 260)
+            case @battle_anime_frame
+
+            when 0
+                @output_anime_type = 0
+                @ray_color = 3
+                battle_anime_change(0, 0)
+                Audio.se_play("Audio/SE/" + "Z1 飛ぶ")    # 効果音を再生する
+
+            when 1..41
+                @enex -= 24
+            when 42
+
+                @ax = 0
+                #set_chr_display_out
+                @chax = CENTER_CHAX
+                @chay = STANDARD_CHAY
+                @enex = STANDARD_ENEX
+                @eney = STANDARD_ENEY
+            when 43..55
+                @ax = 24
+                @output_anime_type = 0
+                #battle_anime_change 0,16
+
+                battle_anime_change(0, 16) if @battle_anime_frame == 51
+            when 56
+                @ax = 0
+                battle_anime_change(0, 1)
+                @gx = -16
+                battle_anime_change(1, 17)
+                @effect_anime_pattern = 0
+                Audio.se_play("Audio/SE/" + "ZG 打撃4")
+            when 57..70
+            when 71..99
+
+                sframe = 71
+                @eney = -200
+                Audio.se_play("Audio/SE/" + "Z1 飛ぶ")  if @battle_anime_frame == sframe
+                picture = Cache.picture("Z3_戦闘_必殺技_突進連打(超拉蒂斯)")
+                rect = Rect.new(0*140, 0, 140, 96)
+                @back_window.contents.blt(TEC_CENTER_CHAX-32*(@battle_anime_frame-sframe), STANDARD_CHAY - 16, picture, rect)
+            when 100
+                @chax = STANDARD_ENEX
+                @chay = STANDARD_CHAY
+            when 109..118
+                sframe = 109
+                picture = Cache.picture("Z3_戦闘_必殺技_突進連打(超拉蒂斯)")
+                rect = Rect.new(0*140, 0, 140, 96)
+                @back_window.contents.blt(STANDARD_ENEX+24-32*(@battle_anime_frame-sframe), STANDARD_CHAY - 16, picture, rect)
+            when 119..206
+                sframe = 119
+                picture = Cache.picture("Z3_戦闘_必殺技_突進連打(超拉蒂斯)")
+                @gx = -2
+                n = 0
+
+                raytyouseiy = 0
+                strfra = 119
+                akifra = 8
+                @ray_x = 316 -2*(@battle_anime_frame-sframe)
+                @ray_y = 160
+                @effect_anime_frame = 0
+                @effect_anime_pattern = 123 if @battle_anime_frame >= strfra + akifra * 2 && @battle_anime_frame <= strfra + akifra * 9
+                case @battle_anime_frame
+                when strfra + akifra * 0
+                    battle_anime_change(1, 16)
+                #Audio.se_play("Audio/SE/" + "ZG 打撃5") if @battle_anime_frame == strfra + akifra * 0
+                when strfra + akifra * 1
+                    n = 0
+                when strfra + akifra * 2..strfra + akifra * 3-1
+                    n = 1
+                    @ray_y += raytyouseiy
+                    Audio.se_play("Audio/SE/" + "ZG 打撃5") if @battle_anime_frame == strfra + akifra * 2
+                when strfra + akifra * 3
+                    n = 0
+                when strfra + akifra * 4..strfra + akifra * 5-1
+                    n = 2
+                    Audio.se_play("Audio/SE/" + "ZG 打撃5") if @battle_anime_frame == strfra + akifra * 4
+                when strfra + akifra * 5
+                    n = 0
+                when strfra + akifra * 6..strfra + akifra * 7-1
+                    n = 1
+                    Audio.se_play("Audio/SE/" + "ZG 打撃5") if @battle_anime_frame == strfra + akifra * 6
+                when strfra + akifra * 7
+                    n = 0
+                when strfra + akifra * 8..strfra + akifra * 9-1
+                    n = 2
+                    Audio.se_play("Audio/SE/" + "ZG 打撃5") if @battle_anime_frame == strfra + akifra * 8
+                when strfra + akifra * 9
+                    n = 0
+                when strfra + akifra * 10..strfra + akifra * 11-1
+                    n = 1
+                    Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == strfra + akifra * 10
+                    @gx = -16
+                    battle_anime_change(1, 17)
+                    @effect_anime_pattern = 0
+                when strfra + akifra * 11
+                    n = 0
+                    p(STANDARD_ENEX+24-288-2*(@battle_anime_frame-sframe))
+                else
+
+                end
+
+                rect = Rect.new(n*140, 0, 140, 96)
+                @back_window.contents.blt(STANDARD_ENEX+24-288-2*(@battle_anime_frame-sframe), STANDARD_CHAY - 16, picture, rect)
+
+            when 207..229
+                sframe = 207
+                picture = Cache.picture("Z3_戦闘_必殺技_突進連打(超拉蒂斯)")
+                rect = Rect.new(1*140, 0, 140, 96)
+                @back_window.contents.blt(162, STANDARD_CHAY - 16, picture, rect)
+            when 230
+                @eney = STANDARD_ENEY
+                @enex = 162+16
+                battle_anime_change(0, 0)
+            when 231..279
+                sframe = 231
+                Audio.se_play("Audio/SE/" + "Z1 飛ぶ") if @battle_anime_frame == sframe
+                @eney -= 16
+                battle_anime_change(0, 16)
+                @tec_output_back_no = 1 if @battle_anime_frame == 279
+            when 280
+                @enex = TEC_CENTER_CHAX
+                @eney = STANDARD_ENEY
+                Audio.se_play("Audio/SE/" + "Z1 気を溜める2")    # 効果音を再生する
+                @output_anime_type = 1
+                battle_anime_change(0, 2)
+                @ray_color = 4
+            when 281..380
+                @ray_x = 250
+                @ray_y = 100
+                @effect_anime_pattern = 16
+
+                @effect_anime_frame -= 1 if @battle_anime_frame % 2 == 0
+
+                if @effect_anime_type == 3
+                    @effect_anime_type = 2
+                end
+                if @battle_anime_frame == 380
+                    @effect_anime_type = 0
+                    @effect_anime_frame = 0
+                    @effect_anime_pattern = 0
+                    @chr_cutin = false
+                    @tec_output_back = false
+                end
+            when 381..520
+                sframe = 381
+                @eney = -200
+                @ray_x = -400 - (@battle_anime_frame-sframe) * 6
+                @ray_y = 0
+                back_x = 240
+                back_y = 90
+
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波") if @battle_anime_frame == sframe
+                #@effect_anime_frame*RAY_SPEED
+                #back_x += (@battle_anime_frame-sframe)/2
+                #@ray_x +=  (@battle_anime_frame-sframe)/2 - @effect_anime_frame*RAY_SPEED
+                picture = Cache.picture("拉蒂斯超必杀")
+                rect = Rect.new(0, 0, 312, 192)
+                @back_window.contents.blt(back_x, back_y, picture, rect)
+                back_anime_pattern(106)
+                #@effect_anime_pattern = 236
+                picture = Cache.picture("Z2_戦闘_必殺技_デスボール(極大玉)_反転")
+                rect = Rect.new(900-640, 78, 640, 356)
+                @back_window.contents.blt(@ray_x, @ray_y, picture, rect)
+            when 521
+                @gx = 0
+                @effect_anime_pattern = 0
+                @effect_anime_frame = 0
+                @effect_anime_type = 0
+            when 524
+                @tec_back_small = true
+                @tec_output_back_no = 0
+                battle_anime_change(1, 0)
+            when 525
+                @chr_cutin = true
+                @tec_output_back = true
+                set_chr_display_out
+                @eney = -200 #キャラ画面範囲外へ
+                @chax = CENTER_CHAX
+                @chay = STANDARD_CHAY
+            when 536..558
+                sframe = 536
+                picture = Cache.picture("Z3_戦闘_必殺技_エネルギー弾(赤)")
+                rect = Rect.new(5*128, 0, 128, 128)
+                @back_window.contents.blt(640-16*(@battle_anime_frame-sframe), STANDARD_CHAY - 16, picture, rect)
+            when 559
+                anime_pattern_init
+                return @battle_anime_result + 1
+            end
         when 2789 #イグナイトビジョン(オゾット／オゾット変身)
             #back_x = 222
             #back_y = 60
@@ -63660,6 +68673,819 @@ module Scene_Db_Battle_Anime_pattern
                     return @battle_anime_result + 1
                 end
             end
+
+    when 5000 #肮脏的火花
+        #back_x = 228
+        back_x = 216
+        back_y = 88
+        @ray_x = 320-90
+        @ray_y = 246-198
+        #@ray_x = 228
+        #@ray_y = 134
+        color = Color.new(255, 255, 255, 260)
+        #@back_window.contents.fill_rect(0,0,640,378,color)
+
+        case @battle_anime_frame
+        when 0 #初期化
+            #Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+            @output_anime_type = 1
+            battle_anime_change(0, 0)
+            @ray_color = 0
+            Audio.se_play("Audio/SE/" + "Z1 飛ぶ")
+
+        when 1..40
+            #back_anime_pattern 201,back_x,back_y
+            #Audio.se_stop if @battle_anime_frame == 128
+            @ax = 24
+            battle_anime_change(0, 8)
+        when 41..99
+            @chax = -120 if @battle_anime_frame == 41
+            @enex = CENTER_ENEX if @battle_anime_frame == 41
+            @eney = STANDARD_ENEY if @battle_anime_frame == 41
+            if @battle_anime_frame == 56
+                @ax = 0
+                @chax += 16
+                @output_anime_type = 0
+                battle_anime_change(0, 3)
+                Audio.se_play("Audio/SE/" + "Z1 強打")
+                battle_anime_change(1, 16)
+            end
+
+            if @battle_anime_frame >= 56
+                @enex += 24
+                @eney -= 12
+                @effect_anime_pattern = 123 if @battle_anime_frame == 56
+                @ray_x = 330
+                @ray_y = 150
+                @effect_anime_pattern = 0 if @battle_anime_frame == 64
+            end
+        when 100
+            Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+            @output_anime_type = 1
+            battle_anime_change(0, 0)
+            @ray_color = 3
+            Audio.se_play("Audio/SE/" + "贝吉塔肮脏的火花")
+        when 101..228
+            back_anime_pattern(201, back_x, back_y)
+            #@tec_output_back = false if @battle_anime_frame == 228
+            @tec_output_back_no = 1 if @battle_anime_frame == 228
+            #@tec_back_color = 0 if @battle_anime_frame == 128
+            @chr_cutin = false if @battle_anime_frame == 228 && $super_saiyazin_flag[4] == true
+            Audio.se_stop if @battle_anime_frame == 228
+            Audio.se_play("Audio/SE/" + "Z1 気を溜める") if @battle_anime_frame == 228
+
+
+          when 229..370
+
+              if $super_saiyazin_flag[4] == true #トランクスが超サイヤ人なら
+                  @chay = -100
+                  @tec_output_back_no = 4
+
+
+
+                  @tec_output_back_no = 1
+                  battle_anime_change(0, 2)
+                  @chay = STANDARD_ENEY + 72
+                  @chax = TEC_CENTER_CHAX
+              end
+        when 371..459
+            @ray_x = 320-114
+            @ray_y = 246-188
+            if @battle_anime_frame == 371
+                @ray_color = 0
+                @chay = STANDARD_ENEY + 72
+                @chax = TEC_CENTER_CHAX
+                @chr_cutin = true
+                battle_anime_change(0, 2)
+                @effect_anime_frame = 0
+                @effect_anime_type = 0
+                @effect_anime_pattern = 291
+                Audio.se_stop
+                Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+            end
+        when 460
+            set_chr_display_out
+            @effect_anime_frame = 0
+            @effect_anime_type = 0
+            @effect_anime_pattern = 0
+            @enex = TEC_CENTER_CHAX
+            battle_anime_change(1, 0)
+            battle_anime_change(1, 21) if @enedatenum == 127
+        when 461..494
+            @ray_x = 320-114
+            @ray_y = 640
+            @effect_anime_pattern = 292
+            if @enedatenum == 127 && @battle_anime_frame == 475
+                battle_anime_change(1, 19)
+            end
+        when 495
+            anime_pattern_init
+            return @battle_anime_result + 1
+        end
+
+
+
+
+when 5001 #小波打中后追击
+    case @battle_anime_frame
+    when 0 #初始化
+        Audio.se_play("Audio/SE/" + "Z1 衝撃波")
+        battle_anime_change(0, 1) #切换到发射能量波的动画
+    when 1..60 #能量波飞行
+    #在这个阶段，你可能需要一些代码来处理能量波飞向敌人的动画
+
+    when 61 #能量波命中
+        Audio.se_play("Audio/SE/" + "ZG 光線系ヒット2")
+        @enex = STANDARD_ENEX #敌人被击中，位置变化
+        @eney = STANDARD_ENEY
+    when 62 #瞬移到敌人面前
+        Audio.se_play("Audio/SE/" + "Z1 高速移動")
+        @chax = @enex - 10 #假设角色瞬移到敌人面前10个单位的位置
+        @chay = @eney
+        battle_anime_change(0, 2) #切换到瞬移后站立的动画
+    when 63 #给敌人一拳，击飞敌人
+        Audio.se_play("Audio/SE/" + "Z1 強打")
+        battle_anime_change(0, 3) #切换到打击的动画
+        @enex += 20 #假设敌人被打飞20个单位
+        @eney -= 10 #假设敌人被打飞上升10个单位
+    when 64
+        return @battle_anime_result + 1 #结束这个技能
+    end
+
+
+   when 5002 #16号摔投
+       back_x = 218
+       back_y = 60
+       @ray_x = 325
+       @ray_y = 138
+       case @battle_anime_frame
+       when 0 #初期化
+           @output_anime_type = 1
+           battle_anime_change(0, 0)
+       when 30
+           Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+           @chay = -120
+       when 31..90
+           if @battle_anime_frame % 4 == 0
+               picture = Cache.picture("戦闘アニメ") #ダメージ表示用
+               rect = Rect.new(0, 48, 64, 64)
+
+               @back_window.contents.blt(@chax +10 , 140, picture, rect)
+
+           else
+
+           end
+       when 91
+           set_chr_display_out
+           @effect_anime_frame = 0
+           @tec_output_back = false
+           Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+           @enex = CENTER_ENEX
+           @eney = STANDARD_ENEY
+       when 92..130
+           if @battle_anime_frame % 4 == 0
+               picture = Cache.picture("戦闘アニメ") #ダメージ表示用
+               rect = Rect.new(0, 48, 64, 64)
+               @back_window.contents.blt(@chax +10+20 , 140, picture, rect)
+           else
+
+           end
+       when 131..190
+           back_anime_pattern(1)
+           @output_anime_type = 1
+           battle_anime_change(0, 16)
+           #back_anime_pattern 55
+           #@effect_anime_frame += 1
+           #@effect_anime_pattern = 88
+           Audio.se_play("Audio/SE/" + "Z1 強打") if @battle_anime_frame == 133    # 効果音を再生する
+           @chay = STANDARD_CHAY if @battle_anime_frame == 133
+           @chax = CENTER_ENEX - 12
+           @gx = 2 if @battle_anime_frame == 133
+           @gx = -2 if @battle_anime_frame == 135
+           @gx = 0 if @battle_anime_frame == 137
+           @chax -= 4
+       when 191..230
+           back_anime_pattern(1)
+       when 231..241
+           Audio.se_play("Audio/SE/" + "Z1 ブン") if @battle_anime_frame == 236
+           back_anime_pattern(1)
+           battle_anime_change(0, 2)
+           @chax += 16
+       when 242..245
+           back_anime_pattern(1)
+           @chax += 2
+           battle_anime_change(0, 11)
+       when 242..270
+           back_anime_pattern(1)
+       #@chax += 2
+       #battle_anime_change 0,15
+       when 271..300
+           back_anime_pattern(1)
+           battle_anime_change(0, 17)
+           @chax -= 16
+           battle_anime_change(1, 16)
+           Audio.se_play("Audio/SE/" + "Z1 吹っ飛ぶ") if @battle_anime_frame == 271
+       when 301..315
+           Audio.se_play("Audio/SE/" + "Z1 飛ぶ") if @battle_anime_frame == 301
+           battle_anime_change(1, 16)
+           @eney -= 16
+       when 316
+           @chax = 640
+           @eney = -270
+           @enex = CENTER_CHAX - 8
+       when 330..353
+           back_anime_pattern(1)
+           battle_anime_change(0, 17)
+           @chax -= 16
+           @eney += 16
+       when 354
+           back_anime_pattern(1)
+           battle_anime_change(0, 16)
+           #@eney = -200
+           anime_pattern_init
+           return @battle_anime_result + 1
+       end
+
+when 5008 #贝吉塔特殊技能
+    back_x = 248
+    back_y = 88
+    @ray_x = 250
+    @ray_y = 116
+    case @battle_anime_frame
+    when 0 #初始化
+        Audio.se_play("Audio/SE/" + "Z3 変身")    # 播放音效
+        @output_anime_type = 0
+        @ray_color = 3
+        battle_anime_change(0, 0)
+    when 1..128
+        back_anime_pattern(201, back_x, back_y)
+    when 129
+        Audio.se_stop
+        Audio.se_play("Audio/SE/" + "Z1 飛ぶ")    # 播放音效
+        battle_anime_change(0, 0)
+    when 140..169
+        @ax = 16
+        @chr_cutin_flag = false if @battle_anime_frame == 169
+    when 170
+        @ax = 0
+        set_chr_display_out
+        @enex = STANDARD_ENEX
+        @eney = STANDARD_ENEY
+    # ...... 其他帧的行为与原技能保持一致
+
+    when 200 #瞬移到敌人后面
+        @gx = 0
+        @gy = 0
+        @eney = -160 if @battle_anime_frame == 200
+        Audio.se_play("Audio/SE/" + "Z1 高速移動") if @battle_anime_frame == 200
+        @chax = @enex - 16
+        @chay = @eney
+        battle_anime_change(0, 3)
+    when 230 #贝吉塔一拳，敌人横向往左飞
+        Audio.se_play("Audio/SE/" + "ZG 打撃3") if @battle_anime_frame == 230
+        @gx = 16
+        @gy = -16
+        @enex -= 96 if @battle_anime_frame == 330
+        battle_anime_change(0, 2)
+    when 260 #贝吉塔瞬移到敌人左面
+        @gx = 0
+        @gy = 0
+        @enex -= 16 if @battle_anime_frame == 360
+        @eney -= 32 if @battle_anime_frame == 360
+        Audio.se_play("Audio/SE/" + "Z1 高速移動") if @battle_anime_frame == 360
+        @chax = @enex - 16
+        @chay = @eney
+        battle_anime_change(0, 3)
+    when 290 #打飞敌人到下方
+        Audio.se_play("Audio/SE/" + "ZG 打撃2") if @battle_anime_frame == 390
+        @gx = 16
+        @gy = -16
+        @enex += 96 if @battle_anime_frame == 390
+        @eney += 96 if @battle_anime_frame == 390
+        battle_anime_change(0, 2)
+    when 300..320 #镜头保持在贝吉塔位置，发射8发能量弹
+        if @battle_anime_frame == 300
+            Audio.se_play("Audio/SE/" + "Z1 貫光線")    # 播放音效
+            @effect_anime_pattern = 0
+            @effect_anime_frame = 0
+            @effect_anime_type = 0
+            @enex = STANDARD_ENEX - 16
+            @eney = STANDARD_ENEY
+        end
+        @chax = @enex + (rand(9) - 4) * 8
+        @chay = @eney + (rand(9) - 4) * 8
+        battle_anime_change(0, 3)
+    when 321 #敌人被能量弹击中，往下方被炸飞
+        @gx = 0
+        @gy = 0
+        @eney += 160 if @battle_anime_frame == 421
+        @enex -= 16 if @battle_anime_frame == 421
+        battle_anime_change(0, 2)
+    when 322..352
+    #这里可以添加敌人被炸飞的效果
+    when 353
+        anime_pattern_init
+        return @battle_anime_result + 1
+    end
+
+
+
+when 5007 #贝吉塔连续攻击
+    back_x = 248
+    back_y = 88
+    @ray_x = 250
+    @ray_y = 116
+    case @battle_anime_frame
+    when 0 #初始化
+        Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 播放音效
+        @output_anime_type = 0
+        @ray_color = 3
+        battle_anime_change(0, 0)
+    when 1..128
+        back_anime_pattern(201, back_x, back_y)
+    when 129
+        Audio.se_stop
+        Audio.se_play("Audio/SE/" + "Z1 飛ぶ")    # 播放音效
+        battle_anime_change(0, 0)
+    when 140..169
+        @ax = 16
+        @chr_cutin_flag = false if @battle_anime_frame == 169
+    when 170
+        @ax = 0
+        set_chr_display_out
+        @enex = STANDARD_ENEX
+        @eney = STANDARD_ENEY
+    # ...... 其他帧的行为与原技能保持一致
+
+    when 340 #开始执行连续攻击，敌人横向被打飞
+        @gx = 16
+        @gy = -16
+        @enex -= 96
+        Audio.se_play("Audio/SE/" + "ZG 打撃1") if @battle_anime_frame == 340
+        @output_anime_type = 0
+        battle_anime_change(0, 2)
+    when 370 #瞬移到背后一击
+        @gx = 0
+        @gy = 0
+        @eney = -160 if @battle_anime_frame == 370
+        Audio.se_play("Audio/SE/" + "Z1 高速移動") if @battle_anime_frame == 370
+        @chax = @enex - 16
+        @chay = @eney
+        battle_anime_change(0, 3)
+    when 400 #瞬移到正面
+        @gx = 16
+        @gy = -16
+        @enex = STANDARD_ENEX if @battle_anime_frame == 400
+        @eney = STANDARD_ENEY if @battle_anime_frame == 400
+        Audio.se_play("Audio/SE/" + "Z1 高速移動") if @battle_anime_frame == 400
+        @chax = @enex + 16
+        @chay = @eney
+        battle_anime_change(0, 3)
+    when 430 #零距离贴着使用大爆炸攻击
+        Audio.se_play("Audio/SE/" + "贝吉塔 大爆炸攻击")    # 播放音效
+        battle_anime_change(0, 11)
+    when 431..468
+    #这里可以添加大爆炸攻击的具体效果
+    when 469
+        @effect_anime_pattern = 0
+        @effect_anime_frame = 0
+        @effect_anime_type = 0
+    when 479
+        set_chr_display_out
+        @chax = 600
+    when 480..504
+        @gx = -12
+        @effect_anime_pattern = 234
+    when 505
+        anime_pattern_init
+        return @battle_anime_result + 1
+    end
+
+when 5020 #0距离地狱燃烧炮
+    @ray_x = 340
+    @ray_y = 156
+    case @battle_anime_frame
+
+ when 0 #初期化
+     #Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+     @output_anime_type = 1
+     battle_anime_change(0, 5)
+     #@ray_color = 3
+     Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
+     @ray_color = 3
+     @ray_x = 338
+     @ray_y = 156
+     @genkitama_kanri_frame = []
+     @genkitama_kanri_maxflame = 15
+     @genkitama_kanri_spdup = 10
+     @genkityuushin_x = @ray_x -14
+     @genkityuushin_y = @ray_y +2
+     @genkitama_kanri_frame = [0, 0, 0, 0, 0, 0, 0, 0]
+    when 31..90
+
+        @ray_x = 324
+        @ray_y = 120
+
+        tame_end = 128
+
+        if @battle_anime_frame == tame_end
+
+        elsif @battle_anime_frame >= tame_end
+
+        else
+
+            for i in 0..(@genkitama_kanri_frame.size - 1)
+                if @genkitama_kanri_frame[i] >= @genkitama_kanri_maxflame
+                    @genkitama_kanri_frame[i] = 0
+                elsif @genkitama_kanri_frame[i] > 0
+                    picture = Cache.picture("Z3_戦闘_必殺技_超元気玉(元気)") #ダメージ表示用
+                    rect = Rect.new(0, 0, 8, 10)
+                    #idou_x_moto = 4
+                    #idou_y_moto = 2
+                    case i
+
+                    when 0 #上
+                        idou_x = 0
+                        idou_y = -2
+
+                    when 1 #左上
+                        idou_x = 2
+                        idou_y = -2
+
+                    when 2 #左
+                        idou_x = 2
+                        idou_y = 0
+
+                    when 3 #左下
+                        idou_x = 2
+                        idou_y = 2
+
+                    when 4 #下
+                        idou_x = 0
+                        idou_y = 2
+
+                    when 5 #右下
+                        idou_x = -2
+                        idou_y = 2
+
+                    when 6 #右
+                        idou_x = -2
+                        idou_y = 0
+
+                    when 7 #右上
+                        idou_x = -2
+                        idou_y = -2
+
+                    end
+
+                    idou_x_goukei = idou_x*@genkitama_kanri_spdup+idou_x*2*(@genkitama_kanri_maxflame-@genkitama_kanri_spdup-1)
+                    idou_y_goukei = idou_y*@genkitama_kanri_spdup+idou_y*2*(@genkitama_kanri_maxflame-@genkitama_kanri_spdup-1)
+
+                    if @genkitama_kanri_frame[i] <= @genkitama_kanri_spdup
+                        @back_window.contents.blt((@genkityuushin_x-idou_x_goukei)+@genkitama_kanri_frame[i] * idou_x, (@genkityuushin_y+idou_y_goukei)-@genkitama_kanri_frame[i] * idou_y, picture, rect)
+                    else
+                        @back_window.contents.blt((@genkityuushin_x-idou_x_goukei+@genkitama_kanri_spdup*idou_x)+(@genkitama_kanri_frame[i]-@genkitama_kanri_spdup) * (idou_x*2), (@genkityuushin_y+idou_y_goukei-@genkitama_kanri_spdup*idou_y)-(@genkitama_kanri_frame[i]-@genkitama_kanri_spdup) * (idou_y*2), picture, rect)
+                    end
+                    @genkitama_kanri_frame[i] += 1
+
+                else
+                    if (tame_end - @battle_anime_frame) > @genkitama_kanri_maxflame
+                        @genkitama_kanri_frame[i] = 1 if rand(7) == 0
+                    end
+
+                end
+            end
+        end
+
+        @tec_output_back = false if @battle_anime_frame == 58
+        @chr_cutin = false if @battle_anime_frame == 58
+        @chr_cutin_flag = false if @battle_anime_frame == 58
+
+    when 91..178
+
+        back_anime_pattern(106)
+        #Audio.se_stop if @battle_anime_frame == 129
+
+        @chay = -160
+
+        picture = Cache.picture("Z3_必殺技_ロケットパンチ(16号・左手)")
+        bezikat_x = 56
+        bezikat_y = 96
+        rect = Rect.new(0, 0, 302, 220)
+
+        if @battle_anime_frame == 231 || @battle_anime_frame == 232 || @battle_anime_frame == 233
+            bezikat_x -= 2
+            bezikat_y -= 2
+        elsif @battle_anime_frame == 232
+            bezikat_x -= 4
+            bezikat_y -= 4
+        elsif @battle_anime_frame == 233
+            bezikat_x -= 6
+            bezikat_y -= 6
+        elsif @battle_anime_frame == 234
+            bezikat_x -= 4
+            bezikat_y -= 4
+        elsif @battle_anime_frame == 235
+            bezikat_x -= 2
+            bezikat_y -= 2
+        end
+        @back_window.contents.blt(bezikat_x, bezikat_y, picture, rect)
+
+
+	  when 179  #初期化
+       Audio.se_play("Audio/SE/" + "DB3 気を溜める2")    # 効果音を再生する
+       Audio.se_play("Audio/SE/" + "Z1 ゴー")
+       Audio.se_play("Audio/SE/" + "Z416号火箭拳")  # 効果音を再生する
+       @output_anime_type = 1
+       battle_anime_change(0, 3)
+       @ray_color = 0
+       @effect_anime_pattern = 273
+       @effect_anime_frame = 0
+    when 180..210
+        @effect_anime_frame = 0
+    when 211..245
+        battle_anime_change(0, 3)
+    when 246
+        Audio.se_stop
+        Audio.se_play("Audio/SE/" + "DB3 エネルギー波1")    # 効果音を再生する
+    when 247..275
+        @ax = 2
+        @ax = -2
+        @ax = 0
+    #@effect_anime_pattern = 273
+    #@ray_x = 340
+    #@ray_y = 156
+    when 276
+        @effect_anime_pattern = 0
+        @effect_anime_frame = 0
+        @effect_anime_type = 0
+    when 280
+        set_chr_display_out
+    when 281..311
+        @effect_anime_pattern = 274
+
+		 when 312..322
+       back_x = 234
+       back_y = 60
+
+       case @battle_anime_frame
+       when 0
+           @output_anime_type = 1
+           battle_anime_change(0, 0)
+           @back_anime_frame = 0
+           @ray_color = 0
+       when 30
+           Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生する
+           @eney = -200
+       when 31..70
+           if @battle_anime_frame % 4 == 0
+               picture = Cache.picture("戦闘アニメ") #ダメージ表示用
+               rect = Rect.new(0, 48, 64, 64)
+               if $btl_progress == 0
+                   @back_window.contents.blt(@enex + 20, 134, picture, rect)
+               end
+           else
+
+           end
+       when 91
+           set_chr_display_out
+           @tec_output_back = false
+           Audio.se_play("Audio/SE/" + "Z1 高速移動")    # 効果音を再生するる
+           @enex = CENTER_ENEX
+           @eney = -180#STANDARD_ENEY
+           @output_anime_type = 0
+           battle_anime_change(0, 0)
+       when 92..130
+           back_anime_pattern(1)
+           if @battle_anime_frame % 4 == 0
+               picture = Cache.picture("戦闘アニメ") #ダメージ表示用
+               rect = Rect.new(0, 48, 64, 64)
+               if $btl_progress == 0
+                   @back_window.contents.blt(@enex + 20, 134+8, picture, rect)
+               end
+           else
+
+           end
+       when 131..180
+           back_anime_pattern(1)
+           @enex = CENTER_ENEX
+           @eney = STANDARD_ENEY
+       #when 161..180
+       #  back_anime_pattern 1
+
+       when 181..221
+           back_anime_pattern(1)
+           battle_anime_change(1, 16)
+           @chax -= 4
+       when 222..230
+           back_anime_pattern(1)
+       when 231..241
+           Audio.se_play("Audio/SE/" + "Z1 ブン") if @battle_anime_frame == 236
+           back_anime_pattern(1)
+           battle_anime_change(1, 3)
+           @chax += 16
+       when 242..245
+           back_anime_pattern(1)
+           @chax += 2
+           battle_anime_change(0, 15)
+       when 242..270
+           back_anime_pattern(1)
+       #@chax += 2
+       #battle_anime_change 0,15
+       when 271..300
+           back_anime_pattern(1)
+           battle_anime_change(0, 0)
+           @chax -= 16
+           battle_anime_change(1, 16)
+           Audio.se_play("Audio/SE/" + "Z1 吹っ飛ぶ") if @battle_anime_frame == 271
+       when 301..315
+           Audio.se_play("Audio/SE/" + "Z1 飛ぶ") if @battle_anime_frame == 301
+           battle_anime_change(0, 16)
+           @eney -= 16
+       when 316
+           @chax = 640
+           @eney = -270
+           @enex = CENTER_CHAX - 8
+       when 330..353
+           @chax -= 16
+           @eney += 16
+
+
+     	     case @battle_anime_frame
+           when 0 #初期化
+               #Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+               @output_anime_type = 1
+               battle_anime_change(0, 4)
+               #@ray_color = 3
+               Audio.se_play("Audio/SE/" + "DB3 気を溜める2")
+               Audio.se_play("Audio/SE/" + "Z416号地狱燃烧炮")  # 効果音を再生する
+               @ray_color = 3
+               @ray_x = 338
+               @ray_y = 156
+               @genkitama_kanri_frame = []
+               @genkitama_kanri_maxflame = 15
+               @genkitama_kanri_spdup = 10
+               @genkityuushin_x = @ray_x -14
+               @genkityuushin_y = @ray_y +2
+               @genkitama_kanri_frame = [0, 0, 0, 0, 0, 0, 0, 0]
+           when 1..128
+
+               @ray_x = 324
+               @ray_y = 120
+
+               tame_end = 128
+
+               if @battle_anime_frame == tame_end
+
+               elsif @battle_anime_frame >= tame_end
+
+               else
+                   #picture = Cache.picture("Z3_戦闘_必殺技_超元気玉(元気)") #ダメージ表示用
+                   #rect = Rect.new(0, 0, 8, 10)
+                   #@back_window.contents.blt(@genkityuushin_x,@genkityuushin_y,picture,rect)
+                   for i in 0..(@genkitama_kanri_frame.size - 1)
+                       if @genkitama_kanri_frame[i] >= @genkitama_kanri_maxflame
+                           @genkitama_kanri_frame[i] = 0
+                       elsif @genkitama_kanri_frame[i] > 0
+                           picture = Cache.picture("Z3_戦闘_必殺技_超元気玉(元気)") #ダメージ表示用
+                           rect = Rect.new(0, 0, 8, 10)
+                           #idou_x_moto = 4
+                           #idou_y_moto = 2
+                           case i
+
+                           when 0 #上
+                               idou_x = 0
+                               idou_y = -2
+
+                           when 1 #左上
+                               idou_x = 2
+                               idou_y = -2
+
+                           when 2 #左
+                               idou_x = 2
+                               idou_y = 0
+
+                           when 3 #左下
+                               idou_x = 2
+                               idou_y = 2
+
+                           when 4 #下
+                               idou_x = 0
+                               idou_y = 2
+
+                           when 5 #右下
+                               idou_x = -2
+                               idou_y = 2
+
+                           when 6 #右
+                               idou_x = -2
+                               idou_y = 0
+
+                           when 7 #右上
+                               idou_x = -2
+                               idou_y = -2
+
+                           end
+
+                           idou_x_goukei = idou_x*@genkitama_kanri_spdup+idou_x*2*(@genkitama_kanri_maxflame-@genkitama_kanri_spdup-1)
+                           idou_y_goukei = idou_y*@genkitama_kanri_spdup+idou_y*2*(@genkitama_kanri_maxflame-@genkitama_kanri_spdup-1)
+
+                           if @genkitama_kanri_frame[i] <= @genkitama_kanri_spdup
+                               @back_window.contents.blt((@genkityuushin_x-idou_x_goukei)+@genkitama_kanri_frame[i] * idou_x, (@genkityuushin_y+idou_y_goukei)-@genkitama_kanri_frame[i] * idou_y, picture, rect)
+                           else
+                               @back_window.contents.blt((@genkityuushin_x-idou_x_goukei+@genkitama_kanri_spdup*idou_x)+(@genkitama_kanri_frame[i]-@genkitama_kanri_spdup) * (idou_x*2), (@genkityuushin_y+idou_y_goukei-@genkitama_kanri_spdup*idou_y)-(@genkitama_kanri_frame[i]-@genkitama_kanri_spdup) * (idou_y*2), picture, rect)
+                           end
+                           @genkitama_kanri_frame[i] += 1
+
+                       else
+                           if (tame_end - @battle_anime_frame) > @genkitama_kanri_maxflame
+                               @genkitama_kanri_frame[i] = 1 if rand(7) == 0
+                           end
+
+                       end
+                   end
+               end
+               #back_anime_pattern 201,back_x,back_y
+               #@tec_back_small = true if @battle_anime_frame == 128
+               @tec_output_back = false if @battle_anime_frame == 128
+               @chr_cutin = false if @battle_anime_frame == 128
+               @chr_cutin_flag = false if @battle_anime_frame == 128
+           #@tec_output_back_no = 3 if @battle_anime_frame == 128
+           #@tec_back_color = 0 if @battle_anime_frame == 128
+           #@chr_cutin = false if @battle_anime_frame == 128
+           when 129..300
+               #kien_x = 220
+               #kien_y = 80
+               back_anime_pattern(106)
+               #Audio.se_stop if @battle_anime_frame == 129
+
+               @chay = -160
+               #kienkizyunframe = 175
+               #kiptan = 0
+               picture = Cache.picture("Z3_必殺技_ヘルズフラッシュ(16号)")
+               bezikat_x = 56
+               bezikat_y = 96
+               rect = Rect.new(0, 0, 302, 220)
+
+               if @battle_anime_frame == 231 || @battle_anime_frame == 232 || @battle_anime_frame == 233
+                   bezikat_x -= 2
+                   bezikat_y -= 2
+               elsif @battle_anime_frame == 232
+                   bezikat_x -= 4
+                   bezikat_y -= 4
+               elsif @battle_anime_frame == 233
+                   bezikat_x -= 6
+                   bezikat_y -= 6
+               elsif @battle_anime_frame == 234
+                   bezikat_x -= 4
+                   bezikat_y -= 4
+               elsif @battle_anime_frame == 235
+                   bezikat_x -= 2
+                   bezikat_y -= 2
+               end
+               @back_window.contents.blt(bezikat_x, bezikat_y, picture, rect)
+
+               case @battle_anime_frame
+
+               when 1
+
+               when 140..230
+                   Audio.se_play("Audio/SE/" + "Z1 気を溜める") if @battle_anime_frame == 140
+
+                   @ray_x = 362
+                   @ray_y = 244
+                   @effect_anime_pattern = 235
+               when 231
+                   Audio.se_stop
+                   Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+                   #Audio.se_play("Audio/SE/" + "Z1 ザー")
+                   @ray_anime_type = 0
+                   @ray_anime_frame = 0
+                   #@effect_anime_pattern = 264
+                   @effect_anime_pattern = 275
+               end
+
+           when 301
+               @tec_output_back = true
+               @chr_cutin = true
+               @chr_cutin_flag = true
+               @effect_anime_pattern = 0
+               @effect_anime_frame = 0
+               @effect_anime_type = 0
+               @tec_output_back_no = 0
+               set_chr_display_out
+           #Audio.se_play("Audio/SE/" + "Z1 ザー")
+           when 311..337
+               @ray_y = 114
+               @effect_anime_pattern = 265
+
+           when 338
+               anime_pattern_init
+               return @battle_anime_result + 1
+           end
+     end
+end
+
         when 2790 #オゾット変身(カオスバースト)
             @ray_color = 3
 
@@ -63905,6 +69731,6 @@ module Scene_Db_Battle_Anime_pattern
         end
         return @battle_anime_result
 
-    end  # end of func
+  end
 
 end  # end of module

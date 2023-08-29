@@ -2,16 +2,19 @@ module Scene_Db_Battle_Anime_pattern_11
 
     # カメハメ波(悟飯)
     def anime_pattern_1148()
-        if @battle_anime_frame == 0  # init
+        if @battle_anime_frame == 0 #初期化
             Audio.se_play("Audio/SE/" + "Z1 気を溜める")
+            Audio.se_play("Audio/SE/" + "悟饭幼年龟波")
+            # 効果音を再生する
+            #Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
             @output_anime_type = 1
             battle_anime_change(0, 11)
             @ray_color = 0
         elsif @battle_anime_frame >= 41 && @battle_anime_frame <= 45
             battle_anime_change(0, 12)
         elsif @battle_anime_frame == 46
-            Audio.se_stop()
-            Audio.se_play("Audio/SE/" + "Z3 エネルギー波")
+            Audio.se_stop
+            Audio.se_play("Audio/SE/" + "Z3 エネルギー波")    # 効果音を再生する
         elsif @battle_anime_frame >= 47 && @battle_anime_frame <= 75
             @effect_anime_pattern = 203
             @ray_x = 340
@@ -24,16 +27,17 @@ module Scene_Db_Battle_Anime_pattern_11
             @effect_anime_frame = 0
             @effect_anime_type = 0
         elsif  @battle_anime_frame == 80
-            set_chr_display_out()
+            set_chr_display_out
         elsif @battle_anime_frame >= 81 && @battle_anime_frame <= 110
             @effect_anime_pattern = 204
         elsif @battle_anime_frame == 111
-            anime_pattern_init()
+            anime_pattern_init
             return @battle_anime_result + 1
         end
 
         return nil
     end  # end of 1148
+
 
     def anime_pattern_1148_test()
         case @battle_anime_frame
@@ -106,8 +110,13 @@ module Scene_Db_Battle_Anime_pattern_11
         return nil
     end  # 1148 test
 
+
     # 爆裂ラッシュ
     def anime_pattern_1152()
+        #back_x = 198
+        #back_y = 34
+        #@ray_x = 280
+        #@ray_y = 138
         @ray_x = 330
         @ray_y = STANDARD_CHAY - 2
 
@@ -120,32 +129,50 @@ module Scene_Db_Battle_Anime_pattern_11
             back_x = 198
             back_y = 34
         end
-
         case @battle_anime_frame
-        when 0
+        when 0 #初期化
             if $btl_progress == 2
-                Audio.se_play("Audio/SE/" + "Z3 変身")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z3 変身")
+                Audio.se_play("Audio/SE/" + "Z1到Z4战斗小悟饭爆烈连击")     # 効果音を再生する
                 @ray_color = 3
             else
-                Audio.se_play("Audio/SE/" + "Z2 気を溜める")    # 効果音を再生する
+                Audio.se_play("Audio/SE/" + "Z2 気を溜める")
+                Audio.se_play("Audio/SE/" + "悟饭幼年必杀")
+                # 効果音を再生する
                 @ray_color = 0
             end
+        #@output_anime_type = 1
+        #battle_anime_change 0,4
+
         when 1..89
+            #back_x = 220
+            #back_y = 32
             back_anime_pattern(backhai_no, back_x, back_y)
         when 90
-            Audio.se_stop()
+            Audio.se_stop
             Audio.se_play("Audio/SE/" + "Z1 高速移動")
+            # 効果音を再生する
             @chay = -120
+            #back_x = 220
+            #back_y = 32
             back_anime_pattern(backhai_no, back_x, back_y)
         when 91..130
+            #back_x = 220
+            #back_y = 32
             back_anime_pattern(backhai_no, back_x, back_y)
             if @battle_anime_frame % 4 == 0
                 picture = Cache.picture("戦闘アニメ") #ダメージ表示用
                 rect = Rect.new(0, 48, 64, 64)
                 @back_window.contents.blt(@chax-6, 144+2, picture, rect)
+
+            else
+
             end
+
         when 131
+            #set_chr_display_out
             Audio.se_play("Audio/SE/" + "Z1 逃げる")
+            Audio.se_play("Audio/SE/" + "悟饭幼年必杀2")# 効果音を再生する
             @enex = CENTER_ENEX
             @eney = STANDARD_ENEY
             @chax = -200
@@ -153,6 +180,7 @@ module Scene_Db_Battle_Anime_pattern_11
             @ray_color = 0
             battle_anime_change(0, 16)
             @ax = 20
+        #set_chr_display_out
         when 140..1166
             hit_efe_x = 346
             hit_efe_y = 154
@@ -188,6 +216,7 @@ module Scene_Db_Battle_Anime_pattern_11
             when 180
                 @ax = 24
                 @ay = -12
+
             when 184..200
                 @gx = -24
                 @gy = -6
@@ -203,6 +232,7 @@ module Scene_Db_Battle_Anime_pattern_11
                 @effect_anime_pattern = 123 if @battle_anime_frame == 184
                 @ray_x = hit_efe_x
                 @ray_y = hit_efe_y
+                #p @battle_anime_frame
                 @effect_anime_pattern = 0 if @battle_anime_frame == 200
             when 201..215
                 @effect_anime_frame = 0
@@ -321,6 +351,7 @@ module Scene_Db_Battle_Anime_pattern_11
                 battle_anime_change(0, 4)
                 battle_anime_change(1, 17)
                 Audio.se_play("Audio/SE/" + "Z1 強打")
+                Audio.se_play("Audio/SE/" + "悟饭 全力必杀")
                 @effect_anime_pattern = 121
             when 279..300
                 @gx = -24
@@ -329,7 +360,7 @@ module Scene_Db_Battle_Anime_pattern_11
                     @ay = -24
                     Audio.se_play("Audio/SE/" + "Z1 逃げる")
                     Audio.se_play("Audio/SE/" + "DB3 気を溜める2")
-                end
+                  end
             when 301
                 @effect_anime_frame = 0
                 @effect_anime_pattern = 0
@@ -343,12 +374,14 @@ module Scene_Db_Battle_Anime_pattern_11
                 @chay = (STANDARD_CHAY + 142)
                 @chr_cutin_flag = false
             when 340
-                Audio.se_stop()
+                Audio.se_stop
                 Audio.se_play("Audio/SE/" + "Z1 エネルギー波")
+
                 @effect_anime_pattern = 257
                 battle_anime_change(0, 18)
                 battle_anime_change(0, 19) if $game_switches[445] == true
                 #短髪の場合は変更
+
                 @ay = 0
                 @ray_spd_up_flag = true
             when 341..399
@@ -358,7 +391,7 @@ module Scene_Db_Battle_Anime_pattern_11
                 @effect_anime_frame = 0
                 @effect_anime_type = 0
                 @output_anime_type = 0
-                set_chr_display_out()
+                set_chr_display_out
                 battle_anime_change(1, 16)
             when 401..430
                 @ray_x = 330
@@ -368,7 +401,7 @@ module Scene_Db_Battle_Anime_pattern_11
                 @battle_anime_frame = 1166
             end
         when 1167
-            anime_pattern_init()
+            anime_pattern_init
             return @battle_anime_result + 1
         end
 

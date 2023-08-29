@@ -368,6 +368,13 @@ module Scene_Db_Battle_Anime_effect_pattern
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー波") # ダメージ表示用
             elsif @ray_color == 1
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー波(緑)") # ダメージ表示用
+                elsif @ray_color == 2
+                    picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー波(青)") #ダメージ表示用
+       elsif @ray_color == 3
+           picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー波(桃)") #ダメージ表示用
+       elsif @ray_color == 5
+           picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー波(紫)") #ダメージ表示用
+
             end
 
             if @attackDir == 0
@@ -923,12 +930,10 @@ module Scene_Db_Battle_Anime_effect_pattern
 
                 if x == 0
                     @back_window.contents.blt(CENTER_CHAX - 120 + 8, STANDARD_CHAY, picture, rect) if $partyc[@chanum.to_i] == 3
-                    @back_window.contents.blt(TEC_CENTER_CHAX + 18, STANDARD_CHAY, picture,
-                                              rect) if $partyc[@chanum.to_i] == 6 || $partyc[@chanum.to_i] == 7
+                    @back_window.contents.blt(TEC_CENTER_CHAX + 18, STANDARD_CHAY, picture, rect) if $partyc[@chanum.to_i] == 6 || $partyc[@chanum.to_i] == 7
 
                 else
-                    @back_window.contents.blt(CENTER_CHAX + 180 + 38, STANDARD_CHAY, picture,
-                                              rect) if $partyc[@chanum.to_i] == 3 || $partyc[@chanum.to_i] == 6
+                    @back_window.contents.blt(CENTER_CHAX + 180 + 38, STANDARD_CHAY, picture, rect) if $partyc[@chanum.to_i] == 3 || $partyc[@chanum.to_i] == 6
                     @back_window.contents.blt(CENTER_CHAX - 120 + 8, STANDARD_CHAY, picture, rect) if $partyc[@chanum.to_i] == 7
                 end
             end
@@ -1006,16 +1011,12 @@ module Scene_Db_Battle_Anime_effect_pattern
                 ushirox = 0
                 idouryou = 8
                 if x == 0
-                    @back_window.contents.blt(STANDARD_CHAX - ushirox + @effect_anime_frame * idouryou, STANDARD_CHAY + 64, picture,
-                                              rect) if $partyc[@chanum.to_i] == 3 || $partyc[@chanum.to_i] == 14
-                    @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou + 30, STANDARD_CHAY, picture,
-                                              rect) if $partyc[@chanum.to_i] == 6 || $partyc[@chanum.to_i] == 7
+                    @back_window.contents.blt(STANDARD_CHAX - ushirox + @effect_anime_frame * idouryou, STANDARD_CHAY + 64, picture, rect) if $partyc[@chanum.to_i] == 3 || $partyc[@chanum.to_i] == 14
+                    @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou + 30, STANDARD_CHAY, picture, rect) if $partyc[@chanum.to_i] == 6 || $partyc[@chanum.to_i] == 7
                 # p STANDARD_CHAX+@effect_anime_frame*idouryou,TEC_CENTER_CHAX if $partyc[@chanum.to_i] == 6 || $partyc[@chanum.to_i] == 7
                 else
-                    @back_window.contents.blt(STANDARD_CHAX - ushirox + @effect_anime_frame * idouryou, STANDARD_CHAY - 64, picture,
-                                              rect) if $partyc[@chanum.to_i] == 3 || $partyc[@chanum.to_i] == 6 || $partyc[@chanum.to_i] == 14
-                    @back_window.contents.blt(STANDARD_CHAX - ushirox + @effect_anime_frame * idouryou, STANDARD_CHAY + 64, picture,
-                                              rect) if $partyc[@chanum.to_i] == 7
+                    @back_window.contents.blt(STANDARD_CHAX - ushirox + @effect_anime_frame * idouryou, STANDARD_CHAY - 64, picture, rect) if $partyc[@chanum.to_i] == 3 || $partyc[@chanum.to_i] == 6 || $partyc[@chanum.to_i] == 14
+                    @back_window.contents.blt(STANDARD_CHAX - ushirox + @effect_anime_frame * idouryou, STANDARD_CHAY + 64, picture, rect) if $partyc[@chanum.to_i] == 7
                 end
             end
         # p STANDARD_CHAX-ushirox+@effect_anime_frame*idouryou
@@ -1278,12 +1279,10 @@ module Scene_Db_Battle_Anime_effect_pattern
             ushirox = 0
             idouryou = 8
             if $partyc[@chanum.to_i] == 6
-                @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou + 30, STANDARD_CHAY - 50, picture,
-                                          rect)
+                @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou + 30, STANDARD_CHAY - 50, picture, rect)
             # p STANDARD_CHAX+@effect_anime_frame*idouryou,TEC_CENTER_CHAX if $partyc[@chanum.to_i] == 6 || $partyc[@chanum.to_i] == 7
             else
-                @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou + 30, STANDARD_CHAY + 50, picture,
-                                          rect)
+                @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou + 30, STANDARD_CHAY + 50, picture, rect)
             end
         when 79 # 操気円斬(Z2)_キャラ現れる(放置)
             picture = Cache.picture(get_fighter_name(6, 1))
@@ -1358,12 +1357,10 @@ module Scene_Db_Battle_Anime_effect_pattern
             ushirox = 0
             idouryou = 8
             if $partyc[@chanum.to_i] == 4
-                @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou + 30, STANDARD_CHAY - 50, picture,
-                                          rect)
+                @back_window.contents.blt(STANDARD_CHAX+@effect_anime_frame*idouryou+30, STANDARD_CHAY-50, picture, rect)
             # p STANDARD_CHAX+@effect_anime_frame*idouryou,TEC_CENTER_CHAX if $partyc[@chanum.to_i] == 6 || $partyc[@chanum.to_i] == 7
             else
-                @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou + 30, STANDARD_CHAY + 50, picture,
-                                          rect)
+                @back_window.contents.blt(STANDARD_CHAX+@effect_anime_frame*idouryou+30, STANDARD_CHAY+50, picture, rect)
             end
         when 85 # 師弟の絆(Z2)_キャラ現れる(放置)
             picture = Cache.picture(get_fighter_name(4, 1))
@@ -1446,8 +1443,7 @@ module Scene_Db_Battle_Anime_effect_pattern
 
             rect = Rect.new(0, 5 * 96, 96, 96) if @effect_anime_frame > 21
             if @effect_anime_frame <= 21
-                @back_window.contents.blt(STANDARD_ENEX + 60 - @effect_anime_frame * RAY_SPEED, STANDARD_CHAY - 24, picture,
-                                          rect)
+                @back_window.contents.blt(STANDARD_ENEX+60-@effect_anime_frame*RAY_SPEED, STANDARD_CHAY-24, picture, rect)
             else
                 @back_window.contents.blt(STANDARD_ENEX + 74 - 21 * RAY_SPEED, STANDARD_CHAY - 8, picture, rect)
             end
@@ -1458,8 +1454,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             rect = Rect.new(0, 0 * 96, 96, 96)
             ushirox = 0
             idouryou = 8
-            @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou + 30, STANDARD_CHAY - 50, picture,
-                                      rect)
+            @back_window.contents.blt(STANDARD_CHAX+@effect_anime_frame*idouryou+30, STANDARD_CHAY-50, picture, rect)
         when 90 # スパーキングコンボキャラ現れる2人目下
             picture = Cache.picture(get_fighter_name(@scombo_cha2, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_" + $data_actors[@scombo_cha2].name)
@@ -1467,8 +1462,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             rect = Rect.new(0, 0 * 96, 96, 96)
             ushirox = 0
             idouryou = 8
-            @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou + 30, STANDARD_CHAY + 50, picture,
-                                      rect)
+            @back_window.contents.blt(STANDARD_CHAX+@effect_anime_frame*idouryou+30, STANDARD_CHAY+50, picture, rect)
         when 91 # スパーキングコンボキャラ現れる2人目放置(上)
             picture = Cache.picture(get_fighter_name(@scombo_cha2, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_" + $data_actors[@scombo_cha2].name)
@@ -2286,10 +2280,8 @@ module Scene_Db_Battle_Anime_effect_pattern
 
             when 0..30
                 rect = Rect.new(0, 0 + (96 * 4), 96, 96)
-                @back_window.contents.blt(ray_x + 0.5 * @effect_anime_frame + 26, ray_y - 1 * @effect_anime_frame, picture,
-                                          rect)
-                @back_window.contents.blt(ray_x - 0.5 * @effect_anime_frame + 26, ray_y + 1 * @effect_anime_frame, picture,
-                                          rect)
+                @back_window.contents.blt(ray_x+0.5 * @effect_anime_frame+26, ray_y-1* @effect_anime_frame, picture, rect)
+                @back_window.contents.blt(ray_x-0.5 * @effect_anime_frame+26, ray_y+1* @effect_anime_frame, picture, rect)
             when 31..59
 
                 rect = Rect.new(0, 0 + (96 * 3), 96, 96)
@@ -2302,10 +2294,8 @@ module Scene_Db_Battle_Anime_effect_pattern
                 rect = Rect.new(0, 0 + (96 * 4), 96, 96)
                 @back_window.contents.blt(ray_x + 0.5 * 30 + 26, ray_y - 1 * 30, picture, rect)
                 @back_window.contents.blt(ray_x - 0.5 * 30 + 26, ray_y + 1 * 30, picture, rect)
-                @back_window.contents.blt(ray_x + 0.5 * (@effect_anime_frame - 30) + 26, ray_y - 1 * (@effect_anime_frame - 30), picture,
-                                          rect)
-                @back_window.contents.blt(ray_x - 0.5 * (@effect_anime_frame - 30) + 26, ray_y + 1 * (@effect_anime_frame - 30), picture,
-                                          rect)
+                @back_window.contents.blt(ray_x+0.5 * (@effect_anime_frame-30)+26, ray_y-1* (@effect_anime_frame-30), picture, rect)
+                @back_window.contents.blt(ray_x-0.5 * (@effect_anime_frame-30)+26, ray_y+1* (@effect_anime_frame-30), picture, rect)
             when 121..150
                 rect = Rect.new(0, 0 + (96 * 4), 96, 96)
                 @back_window.contents.blt(ray_x + 0.5 * 30 + 26, ray_y - 1 * 30, picture, rect)
@@ -2326,14 +2316,10 @@ module Scene_Db_Battle_Anime_effect_pattern
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾") # ダメージ表示用
                 rect = Rect.new(@effect_anime_type * 128, 0, 128, 128)
                 if @attackDir == 0
-                    @back_window.contents.blt(ray_x + 0.5 * 90 + 26 + (@effect_anime_frame - 150) * RAY_SPEED,
-                                              ray_y - 20 - 1 * 90, picture, rect)
-                    @back_window.contents.blt(ray_x + 0.5 * 30 + 26 + (@effect_anime_frame - 150) * RAY_SPEED,
-                                              ray_y - 20 - 1 * 30, picture, rect)
-                    @back_window.contents.blt(ray_x - 0.5 * 30 + 26 + (@effect_anime_frame - 150) * RAY_SPEED,
-                                              ray_y - 20 + 1 * 30, picture, rect)
-                    @back_window.contents.blt(ray_x - 0.5 * 90 + 26 + (@effect_anime_frame - 150) * RAY_SPEED,
-                                              ray_y - 20 + 1 * 90, picture, rect)
+                    @back_window.contents.blt(ray_x+0.5 * 90+26+(@effect_anime_frame-150)*RAY_SPEED, ray_y-20-1* 90, picture, rect)
+                    @back_window.contents.blt(ray_x+0.5 * 30+26+(@effect_anime_frame-150)*RAY_SPEED, ray_y-20-1*30, picture, rect)
+                    @back_window.contents.blt(ray_x-0.5 * 30+26+(@effect_anime_frame-150)*RAY_SPEED, ray_y-20+1*30, picture, rect)
+                    @back_window.contents.blt(ray_x-0.5 * 90+26+(@effect_anime_frame-150)*RAY_SPEED, ray_y-20+1* 90, picture, rect)
                 else
                     @back_window.contents.blt(ray_x - @effect_anime_frame - 150 * RAY_SPEED, ray_y, picture, rect)
                 end
@@ -2343,14 +2329,10 @@ module Scene_Db_Battle_Anime_effect_pattern
             picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾") # ダメージ表示用
             rect = Rect.new(@effect_anime_type * 128, 0, 128, 128)
             if @attackDir == 0
-                @back_window.contents.blt(-128 + @effect_anime_frame * RAY_SPEED, STANDARD_CHAY - 20 - 1 * 90 + @effect_anime_frame * 3,
-                                          picture, rect)
-                @back_window.contents.blt(-128 + @effect_anime_frame * RAY_SPEED, STANDARD_CHAY - 20 - 1 * 30 + @effect_anime_frame * 1,
-                                          picture, rect)
-                @back_window.contents.blt(-128 + @effect_anime_frame * RAY_SPEED, STANDARD_CHAY - 20 + 1 * 30 - @effect_anime_frame * 1,
-                                          picture, rect)
-                @back_window.contents.blt(-128 + @effect_anime_frame * RAY_SPEED, STANDARD_CHAY - 20 + 1 * 90 - @effect_anime_frame * 3,
-                                          picture, rect)
+                @back_window.contents.blt(-128+@effect_anime_frame*RAY_SPEED, STANDARD_CHAY-20-1* 90+@effect_anime_frame*3, picture, rect)
+                @back_window.contents.blt(-128+@effect_anime_frame*RAY_SPEED, STANDARD_CHAY-20-1*30+@effect_anime_frame*1, picture, rect)
+                @back_window.contents.blt(-128+@effect_anime_frame*RAY_SPEED, STANDARD_CHAY-20+1*30-@effect_anime_frame*1, picture, rect)
+                @back_window.contents.blt(-128+@effect_anime_frame*RAY_SPEED, STANDARD_CHAY-20+1* 90-@effect_anime_frame*3, picture, rect)
             else
                 @back_window.contents.blt(640 - @effect_anime_frame * RAY_SPEED, STANDARD_CHAY, picture, rect)
             end
@@ -2361,10 +2343,8 @@ module Scene_Db_Battle_Anime_effect_pattern
 
             when 0..30
                 rect = Rect.new(0, 0 + (96 * 4), 96, 96)
-                @back_window.contents.blt(ray_x + 0.5 * @effect_anime_frame + 26, ray_y - 1 * @effect_anime_frame, picture,
-                                          rect)
-                @back_window.contents.blt(ray_x - 0.5 * @effect_anime_frame + 26, ray_y + 1 * @effect_anime_frame, picture,
-                                          rect)
+                @back_window.contents.blt(ray_x+0.5 * @effect_anime_frame+26, ray_y-1* @effect_anime_frame, picture, rect)
+                @back_window.contents.blt(ray_x-0.5 * @effect_anime_frame+26, ray_y+1* @effect_anime_frame, picture, rect)
             when 31..59
 
                 rect = Rect.new(0, 0 + (96 * 3), 96, 96)
@@ -2377,10 +2357,8 @@ module Scene_Db_Battle_Anime_effect_pattern
                 rect = Rect.new(0, 0 + (96 * 4), 96, 96)
                 @back_window.contents.blt(ray_x + 0.5 * 30 + 26, ray_y - 1 * 30, picture, rect)
                 @back_window.contents.blt(ray_x - 0.5 * 30 + 26, ray_y + 1 * 30, picture, rect)
-                @back_window.contents.blt(ray_x + 0.5 * (@effect_anime_frame - 30) + 26, ray_y - 1 * (@effect_anime_frame - 30), picture,
-                                          rect)
-                @back_window.contents.blt(ray_x - 0.5 * (@effect_anime_frame - 30) + 26, ray_y + 1 * (@effect_anime_frame - 30), picture,
-                                          rect)
+                @back_window.contents.blt(ray_x+0.5 * (@effect_anime_frame-30)+26, ray_y-1* (@effect_anime_frame-30), picture, rect)
+                @back_window.contents.blt(ray_x-0.5 * (@effect_anime_frame-30)+26, ray_y+1* (@effect_anime_frame-30), picture, rect)
             when 121..150
                 rect = Rect.new(0, 0 + (96 * 4), 96, 96)
                 @back_window.contents.blt(ray_x + 0.5 * 30 + 26, ray_y - 1 * 30, picture, rect)
@@ -2458,6 +2436,10 @@ module Scene_Db_Battle_Anime_effect_pattern
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー波_小_敵_青") # ダメージ表示用
             elsif @ray_color == 4
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー波_小_敵_赤") # ダメージ表示用
+         elsif @ray_color == 5
+             picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー波(紫)") #ダメージ表示用
+
+
             end
 
             if @attackDir == 0
@@ -2611,8 +2593,7 @@ module Scene_Db_Battle_Anime_effect_pattern
                 @back_window.contents.blt(ray_x, ray_y, picture, rect)
             else
                 if 500 - 54 - @effect_anime_frame * RAY_SPEED <= 500
-                    rect = Rect.new(500 - 54 - @effect_anime_frame * RAY_SPEED, 0, 500 - 54 + @effect_anime_frame * RAY_SPEED,
-                                    350)
+                    rect = Rect.new(500-54-@effect_anime_frame*RAY_SPEED, 0, 500-54+@effect_anime_frame*RAY_SPEED, 350)
                 else
                     rect = Rect.new(0, 0, 500, 350)
                 end
@@ -2832,21 +2813,18 @@ module Scene_Db_Battle_Anime_effect_pattern
             if $btl_progress < 2
                 rect = Rect.new(0, 0, 192, 128)
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾3") # ダメージ表示用
-                @back_window.contents.blt(340 + @effect_anime_frame * RAY_SPEED, 96 - 46 + 1 * @effect_anime_frame, picture,
-                                          rect)
+                @back_window.contents.blt(340+@effect_anime_frame*RAY_SPEED, 96-46+1*@effect_anime_frame, picture, rect)
+
 
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾3(緑)") # ダメージ表示用
-                @back_window.contents.blt(340 + @effect_anime_frame * RAY_SPEED, 96 + 42 - 1 * @effect_anime_frame, picture,
-                                          rect)
+                @back_window.contents.blt(340+@effect_anime_frame*RAY_SPEED, 96+42-1*@effect_anime_frame, picture, rect)
 
             else
                 rect = Rect.new(0, 0, 190, 126)
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾4") # ダメージ表示用
-                @back_window.contents.blt(340 + @effect_anime_frame * RAY_SPEED, 98 - 46 + 1 * @effect_anime_frame, picture,
-                                          rect)
+                @back_window.contents.blt(340+@effect_anime_frame*RAY_SPEED, 98-46+1*@effect_anime_frame, picture, rect)
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾4(緑)") # ダメージ表示用
-                @back_window.contents.blt(340 + @effect_anime_frame * RAY_SPEED, 98 + 50 - 1 * @effect_anime_frame, picture,
-                                          rect)
+                @back_window.contents.blt(340+@effect_anime_frame*RAY_SPEED, 98+50-1*@effect_anime_frame, picture, rect)
 
             end
         when 247 # 師弟の絆(ヒット)
@@ -2883,8 +2861,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             # end
             if @attackDir == 0
                 rect = Rect.new(0, 0, 236, 122)
-                @back_window.contents.blt(-236 + @effect_anime_frame * RAY_SPEED * 3, 120 - 20 - @effect_anime_frame * 2,
-                                          picture, rect)
+                @back_window.contents.blt(-236+@effect_anime_frame*RAY_SPEED*3, 120-20-@effect_anime_frame*2, picture, rect)
             else
                 rect = Rect.new(0, 0, 236, 122)
                 @back_window.contents.blt(640 - @effect_anime_frame * RAY_SPEED, 120, picture, rect)
@@ -3089,25 +3066,21 @@ module Scene_Db_Battle_Anime_effect_pattern
                 @back_window.contents.blt(ray_x + 4 * 45 + 26, ray_y, picture, rect)
                 @back_window.contents.blt(ray_x - 4 * 45 + 26, ray_y, picture, rect)
                 rect = Rect.new(0, 0 + (96 * 6), 96, 96)
-                @back_window.contents.blt(ray_x - 4 * 15 + 26 - 2 * (@effect_anime_frame - 75), ray_y - 8 * (@effect_anime_frame - 75), picture,
-                                          rect)
+                @back_window.contents.blt(ray_x-4 * 15+26-2*(@effect_anime_frame-75) , ray_y-8*(@effect_anime_frame-75), picture, rect)
             when 111..145
                 rect = Rect.new(0, 0 + (96 * 4), 96, 96)
                 @back_window.contents.blt(ray_x + 4 * 45 + 26, ray_y, picture, rect)
                 @back_window.contents.blt(ray_x - 4 * 45 + 26, ray_y, picture, rect)
                 rect = Rect.new(0, 0 + (96 * 0), 96, 96)
-                @back_window.contents.blt(ray_x + 4 * 15 + 26 + 2 * (@effect_anime_frame - 111), ray_y - 8 * (@effect_anime_frame - 111), picture,
-                                          rect)
+                @back_window.contents.blt(ray_x+4 * 15+26+2*(@effect_anime_frame-111), ray_y-8*(@effect_anime_frame-111), picture, rect)
             when 146..180
                 rect = Rect.new(0, 0 + (96 * 4), 96, 96)
                 @back_window.contents.blt(ray_x + 4 * 45 + 26, ray_y, picture, rect)
                 rect = Rect.new(0, 0 + (96 * 6), 96, 96)
-                @back_window.contents.blt(ray_x - 4 * 45 + 26 - 2 * (@effect_anime_frame - 146), ray_y - 8 * (@effect_anime_frame - 146), picture,
-                                          rect)
+                @back_window.contents.blt(ray_x-4 * 45+26-2*(@effect_anime_frame-146), ray_y-8*(@effect_anime_frame-146), picture, rect)
             when 181..215
                 rect = Rect.new(0, 0 + (96 * 0), 96, 96)
-                @back_window.contents.blt(ray_x + 4 * 45 + 26 + 2 * (@effect_anime_frame - 181), ray_y - 8 * (@effect_anime_frame - 181), picture,
-                                          rect)
+                @back_window.contents.blt(ray_x+4 * 45+26+2*(@effect_anime_frame-181), ray_y-8*(@effect_anime_frame-181), picture, rect)
             end
         when 264 # ビッグバンアタック
             if @ray_color == 3
@@ -3258,8 +3231,7 @@ module Scene_Db_Battle_Anime_effect_pattern
                 rect = Rect.new(0, 64, 64 + @effect_anime_frame * RAY_SPEED, 64)
                 @back_window.contents.blt(ray_x, ray_y, picture, rect)
             else
-                rect = Rect.new((400 - 64) - @effect_anime_frame * RAY_SPEED, 0, (400 - 64) + @effect_anime_frame * RAY_SPEED,
-                                64)
+                rect = Rect.new((400-64)-@effect_anime_frame*RAY_SPEED, 0, (400-64)+@effect_anime_frame*RAY_SPEED, 64)
                 @back_window.contents.blt(ray_x - @effect_anime_frame * RAY_SPEED, ray_y, picture, rect)
             end
         when 273 # ロケットパンチ(発動)
@@ -3311,8 +3283,7 @@ module Scene_Db_Battle_Anime_effect_pattern
 
             else
                 if 500 - 54 - @effect_anime_frame * RAY_SPEED <= 500
-                    rect = Rect.new(500 - 54 - @effect_anime_frame * RAY_SPEED, 0, 500 - 54 + @effect_anime_frame * RAY_SPEED,
-                                    350)
+                    rect = Rect.new(500-54-@effect_anime_frame*RAY_SPEED, 0, 500-54+@effect_anime_frame*RAY_SPEED, 350)
                 else
                     rect = Rect.new(0, 0, 500, 350)
                 end
@@ -3365,8 +3336,7 @@ module Scene_Db_Battle_Anime_effect_pattern
                     @back_window.contents.blt(ray_x + @effect_anime_frame * RAY_SPEED, ray_y + 64, picture, rect)
                 else
                     @back_window.contents.blt(ray_x + @effect_anime_frame * (RAY_SPEED + @ray_spd_up_num), ray_y, picture, rect)
-                    @back_window.contents.blt(ray_x + @effect_anime_frame * (RAY_SPEED + @ray_spd_up_num), ray_y + 64, picture,
-                                              rect)
+                    @back_window.contents.blt(ray_x+@effect_anime_frame*(RAY_SPEED+@ray_spd_up_num), ray_y+64, picture, rect)
                 end
             else
                 if @ray_spd_up_flag == false
@@ -3599,8 +3569,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             else
                 # p @effect_anime_frame,400-192-@effect_anime_frame*RAY_SPEED
                 # rect = Rect.new(400-192-@effect_anime_frame*RAY_SPEED, 0,400-192-@effect_anime_frame*RAY_SPEED,192)
-                rect = Rect.new(400 - 192 - @effect_anime_frame * RAY_SPEED, 0, 400 - 192 + @effect_anime_frame * RAY_SPEED,
-                                192)
+                rect = Rect.new(400-192-@effect_anime_frame*RAY_SPEED, 0, 400-192+@effect_anime_frame*RAY_SPEED, 192)
                 @back_window.contents.blt(ray_x - @effect_anime_frame * RAY_SPEED, ray_y, picture, rect)
             end
         when 296 # エネルギー波_中Z2以降(発動)
@@ -3776,8 +3745,7 @@ module Scene_Db_Battle_Anime_effect_pattern
                 @back_window.contents.blt(ray_x + 20, ray_y - 132, picture, rect)
                 @back_window.contents.blt(ray_x + 18, ray_y - 28, picture, rect)
             else
-                rect = Rect.new((400 - 64) - @effect_anime_frame * RAY_SPEED, 0, (400 - 64) + @effect_anime_frame * RAY_SPEED,
-                                64)
+                rect = Rect.new((400-64)-@effect_anime_frame*RAY_SPEED, 0, (400-64)+@effect_anime_frame*RAY_SPEED, 64)
                 @back_window.contents.blt(ray_x - @effect_anime_frame * RAY_SPEED, ray_y, picture, rect)
             end
         when 308 # Z3まかんこうさっぽう(ヒット)
@@ -4027,10 +3995,8 @@ module Scene_Db_Battle_Anime_effect_pattern
 
             when 0..30
                 rect = Rect.new(0, 0 + (96 * 4), 96, 96)
-                @back_window.contents.blt(ray_x + 0.5 * @effect_anime_frame + 26, ray_y - 1 * @effect_anime_frame, picture,
-                                          rect)
-                @back_window.contents.blt(ray_x - 0.5 * @effect_anime_frame + 26, ray_y + 1 * @effect_anime_frame, picture,
-                                          rect)
+                @back_window.contents.blt(ray_x+0.5 * @effect_anime_frame+26, ray_y-1* @effect_anime_frame, picture, rect)
+                @back_window.contents.blt(ray_x-0.5 * @effect_anime_frame+26, ray_y+1* @effect_anime_frame, picture, rect)
 
                 rect = Rect.new(0, 0 + (96 * 0), 96, 96)
                 if @battle_anime_frame % 2 == 0
@@ -4057,10 +4023,9 @@ module Scene_Db_Battle_Anime_effect_pattern
                 rect = Rect.new(0, 0 + (96 * 4), 96, 96)
                 @back_window.contents.blt(ray_x + 0.5 * 30 + 26, ray_y - 1 * 30, picture, rect)
                 @back_window.contents.blt(ray_x - 0.5 * 30 + 26, ray_y + 1 * 30, picture, rect)
-                @back_window.contents.blt(ray_x + 0.5 * (@effect_anime_frame - 30) + 26, ray_y - 1 * (@effect_anime_frame - 30), picture,
-                                          rect)
-                @back_window.contents.blt(ray_x - 0.5 * (@effect_anime_frame - 30) + 26, ray_y + 1 * (@effect_anime_frame - 30), picture,
-                                          rect)
+                @back_window.contents.blt(ray_x+0.5 * (@effect_anime_frame-30)+26, ray_y-1* (@effect_anime_frame-30), picture, rect)
+                @back_window.contents.blt(ray_x-0.5 * (@effect_anime_frame-30)+26, ray_y+1* (@effect_anime_frame-30), picture, rect)
+
 
                 rect = Rect.new(0, 0 + (96 * 0), 96, 96)
                 if @battle_anime_frame % 4 == 0
@@ -4116,14 +4081,10 @@ module Scene_Db_Battle_Anime_effect_pattern
             picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾") # ダメージ表示用
             rect = Rect.new(@effect_anime_type * 128, 0, 128, 128)
             if @attackDir == 0
-                @back_window.contents.blt(-128 + @effect_anime_frame * RAY_SPEED, STANDARD_CHAY - 20 - 1 * 90 + @effect_anime_frame * 3,
-                                          picture, rect)
-                @back_window.contents.blt(-128 + @effect_anime_frame * RAY_SPEED, STANDARD_CHAY - 20 - 1 * 30 + @effect_anime_frame * 1,
-                                          picture, rect)
-                @back_window.contents.blt(-128 + @effect_anime_frame * RAY_SPEED, STANDARD_CHAY - 20 + 1 * 30 - @effect_anime_frame * 1,
-                                          picture, rect)
-                @back_window.contents.blt(-128 + @effect_anime_frame * RAY_SPEED, STANDARD_CHAY - 20 + 1 * 90 - @effect_anime_frame * 3,
-                                          picture, rect)
+                @back_window.contents.blt(-128+@effect_anime_frame*RAY_SPEED, STANDARD_CHAY-20-1* 90+@effect_anime_frame*3, picture, rect)
+                @back_window.contents.blt(-128+@effect_anime_frame*RAY_SPEED, STANDARD_CHAY-20-1*30+@effect_anime_frame*1, picture, rect)
+                @back_window.contents.blt(-128+@effect_anime_frame*RAY_SPEED, STANDARD_CHAY-20+1*30-@effect_anime_frame*1, picture, rect)
+                @back_window.contents.blt(-128+@effect_anime_frame*RAY_SPEED, STANDARD_CHAY-20+1* 90-@effect_anime_frame*3, picture, rect)
             else
                 @back_window.contents.blt(640 - @effect_anime_frame * RAY_SPEED, STANDARD_CHAY, picture, rect)
             end
@@ -4143,22 +4104,19 @@ module Scene_Db_Battle_Anime_effect_pattern
             if $btl_progress < 2
                 rect = Rect.new(0, 0, 222, 134)
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾3(緑)") # ダメージ表示用
-                @back_window.contents.blt(340 + @effect_anime_frame * RAY_SPEED, 96 - 58 + 1 * @effect_anime_frame, picture,
-                                          rect)
+                @back_window.contents.blt(340+@effect_anime_frame*RAY_SPEED, 96-58+1*@effect_anime_frame, picture, rect)
 
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾3") # ダメージ表示用
-                @back_window.contents.blt(340 + @effect_anime_frame * RAY_SPEED, 96 + 60 - 1 * @effect_anime_frame, picture,
-                                          rect)
+                @back_window.contents.blt(340+@effect_anime_frame*RAY_SPEED, 96+60-1*@effect_anime_frame, picture, rect)
 
             else
                 rect = Rect.new(0, 0, 190, 126)
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾4(緑)") # ダメージ表示用
-                @back_window.contents.blt(340 + @effect_anime_frame * RAY_SPEED, 98 - 56 + 1 * @effect_anime_frame, picture,
-                                          rect)
+                @back_window.contents.blt(340+@effect_anime_frame*RAY_SPEED, 98-56+1*@effect_anime_frame, picture, rect)
 
                 picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾4") # ダメージ表示用
-                @back_window.contents.blt(340 + @effect_anime_frame * RAY_SPEED, 98 + 60 - 1 * @effect_anime_frame, picture,
-                                          rect)
+                @back_window.contents.blt(340+@effect_anime_frame*RAY_SPEED, 98+60-1*@effect_anime_frame, picture, rect)
+
 
             end
         when 321 # アウトサイダーショット(ピ&ベ)(発動)
@@ -4377,13 +4335,10 @@ module Scene_Db_Battle_Anime_effect_pattern
 
             if @effect_anime_frame >= 61 && @effect_anime_frame <= 80
                 @back_window.contents.blt(CENTER_CHAX + yamux, STANDARD_CHAY - (@effect_anime_frame - 60) * 4, picture, rect)
-                @back_window.contents.blt(CENTER_CHAX + wakamonox, STANDARD_CHAY - (@effect_anime_frame - 60) * 4, picture2,
-                                          rect2)
+                @back_window.contents.blt(CENTER_CHAX + wakamonox, STANDARD_CHAY-(@effect_anime_frame-60)*4, picture2, rect2)
             elsif @effect_anime_frame >= 81 && @effect_anime_frame <= 85
-                @back_window.contents.blt(CENTER_CHAX + yamux, STANDARD_CHAY - 80 + (@effect_anime_frame - 80) * 16, picture,
-                                          rect)
-                @back_window.contents.blt(CENTER_CHAX + wakamonox, STANDARD_CHAY - 80 + (@effect_anime_frame - 80) * 16, picture2,
-                                          rect2)
+                @back_window.contents.blt(CENTER_CHAX + yamux, STANDARD_CHAY - 80 +(@effect_anime_frame-80)*16, picture, rect)
+                @back_window.contents.blt(CENTER_CHAX + wakamonox, STANDARD_CHAY - 80 +(@effect_anime_frame-80)*16, picture2, rect2)
             else # if @effect_anime_frame < 86
                 @back_window.contents.blt(CENTER_CHAX + yamux, STANDARD_CHAY, picture, rect)
                 @back_window.contents.blt(CENTER_CHAX + wakamonox, STANDARD_CHAY, picture2, rect2)
@@ -4482,8 +4437,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー波_小_敵_青") # ダメージ表示用
             rect = Rect.new(352 - @effect_anime_frame * RAY_SPEED, 0, 48 + @effect_anime_frame * RAY_SPEED, 48)
             @back_window.contents.blt(ray_x - 92 + 84 - @effect_anime_frame * RAY_SPEED, ray_y - 10 - 96 + 2, picture, rect)
-            @back_window.contents.blt(ray_x - 92 + 84 - @effect_anime_frame * RAY_SPEED, ray_y - 10 - 96 + 2 + 100, picture,
-                                      rect)
+            @back_window.contents.blt(ray_x-92+84-@effect_anime_frame*RAY_SPEED, ray_y-10-96+2+100, picture, rect)
         when 339 # ダブルエネルギー波_小系(ヒット)敵
             picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー波_小_敵_青") # ダメージ表示用
             rect = Rect.new(0, 48, 640, 48)
@@ -4527,8 +4481,7 @@ module Scene_Db_Battle_Anime_effect_pattern
                 @back_window.contents.blt(ray_x + 20, ray_y - 132, picture, rect)
                 @back_window.contents.blt(ray_x + 22, ray_y - 36, picture, rect)
             else
-                rect = Rect.new((400 - 64) - @effect_anime_frame * RAY_SPEED, 0, (400 - 64) + @effect_anime_frame * RAY_SPEED,
-                                64)
+                rect = Rect.new((400-64)-@effect_anime_frame*RAY_SPEED, 0, (400-64)+@effect_anime_frame*RAY_SPEED, 64)
                 @back_window.contents.blt(ray_x - @effect_anime_frame * RAY_SPEED, ray_y, picture, rect)
             end
         when 343 # Z3トリプル魔閃光(発動横)
@@ -4673,12 +4626,10 @@ module Scene_Db_Battle_Anime_effect_pattern
 
             rect = Rect.new(0, 0, 190, 126)
             picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾4") # ダメージ表示用
-            @back_window.contents.blt(340 + @effect_anime_frame * RAY_SPEED, 98 - 56 + 1 * @effect_anime_frame, picture,
-                                      rect)
+            @back_window.contents.blt(340+@effect_anime_frame*RAY_SPEED, 98-56+1*@effect_anime_frame, picture, rect)
 
             picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾4(青)") # ダメージ表示用
-            @back_window.contents.blt(340 + @effect_anime_frame * RAY_SPEED, 98 + 50 - 1 * @effect_anime_frame, picture,
-                                      rect)
+            @back_window.contents.blt(340+@effect_anime_frame*RAY_SPEED, 98+50-1*@effect_anime_frame, picture, rect)
 
         when 356 # ダブルアタック(天津飯とトランクス)(ヒット)
             if @ray_anime_type == 0
@@ -4701,12 +4652,10 @@ module Scene_Db_Battle_Anime_effect_pattern
 
             rect = Rect.new(0, 0, 190, 126)
             picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾4") # ダメージ表示用
-            @back_window.contents.blt(340 + @effect_anime_frame * RAY_SPEED, 98 - 46 + 1 * @effect_anime_frame, picture,
-                                      rect)
+            @back_window.contents.blt(340+@effect_anime_frame*RAY_SPEED, 98-46+1*@effect_anime_frame, picture, rect)
 
             picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_エネルギー弾4(青)") # ダメージ表示用
-            @back_window.contents.blt(340 + @effect_anime_frame * RAY_SPEED, 98 + 50 - 1 * @effect_anime_frame, picture,
-                                      rect)
+            @back_window.contents.blt(340+@effect_anime_frame*RAY_SPEED, 98+50-1*@effect_anime_frame, picture, rect)
         when 358 # かめはめ波系(特大_加工)横 発動
             if @ray_color == 0
                 picture = Cache.picture("Z3_戦闘_必殺技_エネルギー波_特大_加工") # ダメージ表示用
@@ -4775,8 +4724,7 @@ module Scene_Db_Battle_Anime_effect_pattern
             rect = Rect.new(0, 0 * 96, 96, 96)
             ushirox = 0
             idouryou = 12
-            @back_window.contents.blt(STANDARD_CHAX + @effect_anime_frame * idouryou - 30 + 12, STANDARD_CHAY, picture,
-                                      rect)
+            @back_window.contents.blt(STANDARD_CHAX+@effect_anime_frame*idouryou-30 + 12, STANDARD_CHAY, picture, rect)
         when 364 # スパーキングコンボキャラ現れる2人目左
             picture = Cache.picture(get_fighter_name(@scombo_cha2, 1))
             # picture = Cache.picture($btl_top_file_name + "戦闘_必殺技_" + $data_actors[@scombo_cha2].name)

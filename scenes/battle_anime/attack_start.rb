@@ -28,12 +28,10 @@ module Scene_Db_Battle_Anime_attack_start
         # 通常攻撃除外パターン用配列
         ok_normalattackpattern = []
 
-        if @attackDir == 0  # L -> R
-            if $cha_set_action[@chanum] < 11
-                # normal attack
-                attackPattern = $cha_set_action[@chanum]
-                # attackPattern = rand($attack_pattern_max) + 1 #味方通常攻撃
+        attackPattern = $cha_set_action[@chanum]
 
+        if @attackDir == 0  # L -> R
+            if attackPattern < 11  # normal attack
                 # 対象攻撃を格納
                 ok_normalattackpattern = set_ok_normalattackpattern
 
@@ -43,10 +41,7 @@ module Scene_Db_Battle_Anime_attack_start
                     # p not_normalattackpattern.index($normalattackpattern),$normalattackpattern
                 end until ok_normalattackpattern.index($normalattackpattern) != nil
 
-            # $normalattackpattern = rand($attack_pattern_max) + 1 #味方通常攻撃
-            else
-                # skill
-                attackPattern = $cha_set_action[@chanum] # 味方必殺
+            else  # skill
                 if @all_attack_count == 1
                     if $battle_test_flag == false # 戦闘テスト時は実行しない(なぜかSコンボ時にエラーになるため)
                         tec_mp_cost = get_mp_cost($partyc[@chanum], $data_skills[attackPattern - 10].id, 1)
@@ -604,10 +599,45 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
-                            when 13 # 複数エネルギー波
-
-                            when 14 # 太陽拳
-
+                            when 13 # 複数エネルギー波  (xsin)
+                                if @all_attack_count >= 2 && @battle_anime_result == 0
+                                    @tec_output_back = true
+                                    @chr_cutin = true
+                                    @chr_cutin_flag = true
+                                    @chr_cutin_mirror_flag = true
+                                    #@tec_output_back_no = 1
+                                    @battle_anime_result = 2
+                                end
+                                if @battle_anime_result == 0
+                                    #上から左下に移動
+                                    @battle_anime_result = anime_pattern(31)
+                                elsif @battle_anime_result == 1
+                                    #必殺技発動画面へ
+                                    @chr_cutin_flag = true
+                                    @battle_anime_result = anime_pattern(32)
+                                elsif @battle_anime_result == 2
+                                    #必殺技発動
+                                    @battle_anime_result = anime_pattern(2494)
+                                elsif @battle_anime_result == 3
+                                    #光線系ダメージ
+                                    damage_pattern = 23
+                                    attackAnimeEnd = true
+                                end
+                            when 14 # 太陽拳  (xsin)
+                                if @battle_anime_result == 0
+                                    #上から左下に移動
+                                    @battle_anime_result = anime_pattern(31)
+                                elsif @battle_anime_result == 1
+                                    #必殺技発動画面へ
+                                    @battle_anime_result = anime_pattern(32)
+                                elsif @battle_anime_result == 2
+                                    #必殺技発動
+                                    @battle_anime_result = anime_pattern(2193)
+                                elsif @battle_anime_result == 3
+                                    #光線系ダメージ
+                                    damage_pattern = 25
+                                    attackAnimeEnd = true
+                                end
                             when 15 # かめはめ波
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -653,6 +683,29 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
+               
+                            when 26 #陨石连击(悟空)  (xsin)
+                                if @battle_anime_result == 0
+                                    #上から左下に移動
+                                    @battle_anime_result = anime_pattern(31)
+                                elsif @battle_anime_result == 1
+                                    #必殺技発動画面へ
+                                    @chr_cutin_flag = true
+                                    @battle_anime_result = anime_pattern(32)
+                                elsif @battle_anime_result == 2
+                                    #必殺技発動
+                                    @battle_anime_result = anime_pattern(4692)
+                                elsif @battle_anime_result == 3
+                                    #光線系ダメージ
+                                
+                                    if $btl_progress >= 2
+                                        damage_pattern = 46
+                                    else
+                                        damage_pattern = 24
+                                    end
+                                    attackAnimeEnd = true
+                                end
+                 
                             when 28 # 元気弾
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -752,6 +805,22 @@ module Scene_Db_Battle_Anime_attack_start
                             when 49 # 激烈光弾
 
                             when 50 # 魔空包囲弾
+
+                            when 54  #カタナ攻撃(yajirobe) (xsin)
+                                if @battle_anime_result == 0
+                                    #上から左下に移動
+                                    @battle_anime_result = anime_pattern(31)
+                                elsif @battle_anime_result == 1
+                                    #必殺技発動画面へ
+                                    @battle_anime_result = anime_pattern(32)
+                                elsif @battle_anime_result == 2
+                                    #必殺技発動
+                                    @battle_anime_result = anime_pattern(2272)
+                                elsif @battle_anime_result == 3
+                                    #光線系ダメージ
+                                    damage_pattern = 22
+                                    attackAnimeEnd = true
+                                end
 
                             when 56 # 魔光砲(悟飯)
                                 if @battle_anime_result == 0
@@ -953,6 +1022,16 @@ module Scene_Db_Battle_Anime_attack_start
                                     attackAnimeEnd = true
                                 end
                             when 94 # 四身の拳気功砲(テンシンハン)
+                                #=== xsin
+                                if @all_attack_count >= 2 && @battle_anime_result == 0
+                                    @tec_output_back = true
+                                    @chr_cutin = true
+                                    @chr_cutin_flag = true
+                                    @chr_cutin_mirror_flag = true
+                                    @tec_output_back_no = 1
+                                    @battle_anime_result = 3
+                                end
+                                #===
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
                                     @battle_anime_result = anime_pattern(31)
@@ -983,6 +1062,14 @@ module Scene_Db_Battle_Anime_attack_start
                                     attackAnimeEnd = true
                                 end
                             when 102 # 超能力
+                                #=== xsin
+                                if @all_attack_count >= 2 && @battle_anime_result == 0
+                                    @tec_output_back = true
+                                    @chr_cutin_mirror_flag = true
+                                    @tec_output_back_no = 1
+                                    @battle_anime_result = 3
+                                end
+                                #===
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
                                     @battle_anime_result = anime_pattern(31)
@@ -1070,6 +1157,28 @@ module Scene_Db_Battle_Anime_attack_start
                                     @battle_anime_result = anime_pattern(204)
                                 elsif @battle_anime_result == 3
                                     # 光線系ダメージ
+                                    damage_pattern = 23
+                                    attackAnimeEnd = true
+                                end
+                            when 120 #剑气波 弥次郎兵卫 (xsin)
+                                if @all_attack_count >= 2 && @battle_anime_result == 0
+                                    @tec_output_back = true
+                                    @tec_back_small = true
+                                    @battle_anime_result = 2
+                                end
+                                if @battle_anime_result == 0
+                                    #上から左下に移動
+                                    @battle_anime_result = anime_pattern(31)
+                                elsif @battle_anime_result == 1
+                                    #必殺技発動画面へ
+                                    @chr_cutin_flag = true
+                                    @tec_back_small = true
+                                    @battle_anime_result = anime_pattern(32)
+                                elsif @battle_anime_result == 2
+                                    #必殺技発動
+                                    @battle_anime_result = anime_pattern(413)
+                                elsif @battle_anime_result == 3
+                                    #光線系ダメージ
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
@@ -1546,6 +1655,7 @@ module Scene_Db_Battle_Anime_attack_start
                                     @battle_anime_result = anime_pattern(32)
                                 elsif @battle_anime_result == 2
                                     # 必殺技発動
+                                    @chr_cutin_flag = true  # xsin
                                     @battle_anime_result = anime_pattern(404)
                                 elsif @battle_anime_result == 3
                                     # 光線系ダメージ
@@ -1995,6 +2105,28 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 22
                                     attackAnimeEnd = true
                                 end
+
+                            when 471 #エビ氷結攻撃(全体) (xsin)
+                                if @all_attack_count >= 2 && @battle_anime_result == 0
+                                    @chr_cutin_flag = true
+                                    @battle_anime_result = 2
+                                end
+                                if @battle_anime_result == 0
+                                    @chr_cutin_flag = true
+                                    #上から左下に移動
+                                    @battle_anime_result = anime_pattern(31)
+                                elsif @battle_anime_result == 1
+                                    #必殺技発動画面へ
+                                    @battle_anime_result = anime_pattern(32)
+                                elsif @battle_anime_result == 2
+                                    #必殺技発動
+                                    @battle_anime_result = anime_pattern(561)
+                                elsif @battle_anime_result == 3
+                                    #光線系ダメージ
+                                    damage_pattern = 70
+                                    attackAnimeEnd = true
+                                end
+                                
                             when 472 # エビ氷結攻撃
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -2122,6 +2254,48 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 43
                                     attackAnimeEnd = true
                                 end
+                                
+                            when 976 #蛇姬 撞击 (xsin)
+                                @ene_tec_oozaru = true
+                                @chr_cutin_flag = true
+                                if @battle_anime_result == 0
+                                    #上から左下に移動
+                                    @battle_anime_result = anime_pattern(31)
+                                elsif @battle_anime_result == 1
+                                    #必殺技発動画面へ
+                                    @battle_anime_result = anime_pattern(32)
+                                elsif @battle_anime_result == 2
+                                    #必殺技発動
+                                    @battle_anime_result = anime_pattern(976)
+                                elsif @battle_anime_result == 3
+                                    #光線系ダメージ
+                                    damage_pattern = 43
+                                    attackAnimeEnd = true
+                                end
+                            
+                            when 620 #連続強力エネルギー波(サンショ系) (xsin)
+                                #@tec_back_small = true
+                                if @all_attack_count >= 2 && @battle_anime_result == 0
+                                    @chr_cutin_flag = true
+                                    @battle_anime_result = 2
+                                end
+                                if @battle_anime_result == 0
+                                    @tec_output_back_no = 1
+                                    #上から左下に移動
+                                    @battle_anime_result = anime_pattern(31)
+                                elsif @battle_anime_result == 1
+                                    #必殺技発動画面へ
+                                    @chr_cutin_flag = true
+                                    @battle_anime_result = anime_pattern(32)
+                                elsif @battle_anime_result == 2
+                                    #必殺技発動
+                                    @battle_anime_result = anime_pattern(1710)
+                                elsif @battle_anime_result == 3
+                                    #光線系ダメージ
+                                    damage_pattern = 23
+                                    attackAnimeEnd = true
+                                end
+
                             when 600 # プラネットゲイザー(Drウィロー)
                                 @ene_tec_oozaru = true
                                 if @all_attack_count >= 2 && @battle_anime_result == 0
@@ -2205,6 +2379,25 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
+
+            when 14 #太陽拳（Z2天津饭）
+
+
+                if @battle_anime_result == 0
+                    #上から左下に移動
+                    @battle_anime_result = anime_pattern(31)
+       elsif @battle_anime_result == 1
+           #必殺技発動画面へ
+           @battle_anime_result = anime_pattern(32)
+       elsif @battle_anime_result == 2
+           #必殺技発動
+           @battle_anime_result = anime_pattern(1194)
+       elsif @battle_anime_result == 3
+           #光線系ダメージ
+           damage_pattern = 25
+           attackAnimeEnd = true
+       end
+
                             when 15 # カメハメ波(悟空)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -2253,6 +2446,24 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
+
+                 when 27 #超级冲击波Z2
+                     if @battle_anime_result == 0
+                         #上から左下に移動
+                         @battle_anime_result = anime_pattern(31)
+                     elsif @battle_anime_result == 1
+                         #必殺技発動画面へ
+                         @tec_back_small = true
+                         @chr_cutin_flag = true
+                         @battle_anime_result = anime_pattern(32)
+                     elsif @battle_anime_result == 2
+                         #必殺技発動
+                         @battle_anime_result = anime_pattern(4475)
+                     elsif @battle_anime_result == 3
+                         #光線系ダメージ
+                         damage_pattern = 43
+                         attackAnimeEnd = true
+                     end
                             when 28 # 元気弾
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -2398,6 +2609,24 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
+
+		      when 52 #强力魔光砲(ピッコロ)
+            if @battle_anime_result == 0
+                #上から左下に移動
+                @battle_anime_result = anime_pattern(31)
+            elsif @battle_anime_result == 1
+                #必殺技発動画面へ
+                @chr_cutin_flag = true
+                @tec_back_small = true if $btl_progress >= 2
+                @battle_anime_result = anime_pattern(32)
+            elsif @battle_anime_result == 2
+                #必殺技発動
+                @battle_anime_result = anime_pattern(1137)
+            elsif @battle_anime_result == 3
+                #光線系ダメージ
+                damage_pattern = 23
+                attackAnimeEnd = true
+            end
                             when 56 # 魔光砲(悟飯)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -2429,6 +2658,25 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
+
+          when 60 #超魔弹
+              if @battle_anime_result == 0
+                  #上から左下に移動
+                  @battle_anime_result = anime_pattern(31)
+               elsif @battle_anime_result == 1
+                   #必殺技発動画面へ
+                   @chr_cutin_flag = true
+                   @tec_back_small = true
+                   @battle_anime_result = anime_pattern(32)
+               elsif @battle_anime_result == 2
+                   #必殺技発動
+                   @battle_anime_result = anime_pattern(4676)
+               elsif @battle_anime_result == 3
+                   #光線系ダメージ
+                   damage_pattern = 23
+                   attackAnimeEnd = true
+               end
+
                             when 62 # 爆裂ラッシュ(悟飯)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -2450,6 +2698,32 @@ module Scene_Db_Battle_Anime_attack_start
                                     end
                                     attackAnimeEnd = true
                                 end
+
+       when 66 #複数エネルギー波  SGOHAN
+           if @all_attack_count >= 2 && @battle_anime_result == 0
+               @tec_output_back = true
+               @chr_cutin = true
+               @chr_cutin_flag = true
+               @chr_cutin_mirror_flag = true
+               #@tec_output_back_no = 1
+               @battle_anime_result = 2
+           end
+           if @battle_anime_result == 0
+               #上から左下に移動
+               @battle_anime_result = anime_pattern(31)
+           elsif @battle_anime_result == 1
+               #必殺技発動画面へ
+               @chr_cutin_flag = true
+               @battle_anime_result = anime_pattern(32)
+           elsif @battle_anime_result == 2
+               #必殺技発動
+               @battle_anime_result = anime_pattern(4658)
+           elsif @battle_anime_result == 3
+               #光線系ダメージ
+               damage_pattern = 23
+               attackAnimeEnd = true
+           end
+
                             when 71 # エネルギー波(クリリン)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -2520,6 +2794,24 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
+              when 77 #太陽拳（Z2小林）
+
+
+                  if @battle_anime_result == 0
+                      #上から左下に移動
+                      @battle_anime_result = anime_pattern(31)
+         elsif @battle_anime_result == 1
+             #必殺技発動画面へ
+             @battle_anime_result = anime_pattern(32)
+         elsif @battle_anime_result == 2
+             #必殺技発動
+             @battle_anime_result = anime_pattern(1195)
+         elsif @battle_anime_result == 3
+             #光線系ダメージ
+             damage_pattern = 25
+             attackAnimeEnd = true
+         end
+
                             when 81 # 狼牙風風拳
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -2614,6 +2906,14 @@ module Scene_Db_Battle_Anime_attack_start
                                     attackAnimeEnd = true
                                 end
                             when 94 # 四身の拳気功砲(テンシンハン)
+                                if @all_attack_count >= 2 && @battle_anime_result == 0
+                                    @tec_output_back = true
+                                    @chr_cutin = true
+                                    @chr_cutin_flag = true
+                                    @chr_cutin_mirror_flag = true
+                                    @tec_output_back_no = 1
+                                    @battle_anime_result = 3
+                          end
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
                                     @battle_anime_result = anime_pattern(31)
@@ -2646,6 +2946,14 @@ module Scene_Db_Battle_Anime_attack_start
                                     attackAnimeEnd = true
                                 end
                             when 102 # 超能力
+                                if @all_attack_count >= 2 && @battle_anime_result == 0
+                                    @tec_output_back = true
+                                    @chr_cutin = true
+                                    @chr_cutin_flag = true
+                                    @chr_cutin_mirror_flag = true
+                                    @tec_output_back_no = 1
+                                    @battle_anime_result = 3
+                          end
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
                                     @battle_anime_result = anime_pattern(31)
@@ -2739,6 +3047,31 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 41
                                     attackAnimeEnd = true
                                 end
+               when 120 #剑气波 弥次郎兵卫
+                   if @all_attack_count >= 2 && @battle_anime_result == 0
+                       @tec_output_back = true
+                       @chr_cutin = true
+                       @chr_cutin_flag = true
+                       @chr_cutin_mirror_flag = true
+                       @tec_back_small = true
+                       @battle_anime_result = 2
+                 end
+                   if @battle_anime_result == 0
+                       #上から左下に移動
+                       @battle_anime_result = anime_pattern(31)
+                   elsif @battle_anime_result == 1
+                       #必殺技発動画面へ
+                       @chr_cutin_flag = true
+                       @tec_back_small = true
+                       @battle_anime_result = anime_pattern(32)
+                   elsif @battle_anime_result == 2
+                       #必殺技発動
+                       @battle_anime_result = anime_pattern(4683)
+                   elsif @battle_anime_result == 3
+                       #光線系ダメージ
+                       damage_pattern = 23
+                       attackAnimeEnd = true
+                   end
                             when 131 # エネルギーは
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -2793,6 +3126,24 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
+               when 142 #超级ギャリック砲
+                   if @battle_anime_result == 0
+                       #上から左下に移動
+                       @battle_anime_result = anime_pattern(31)
+                   elsif @battle_anime_result == 1
+                       #必殺技発動画面へ
+                       @chr_cutin_flag = true
+                       @tec_back_color = 1
+                       @battle_anime_result = anime_pattern(32)
+                   elsif @battle_anime_result == 2
+                       #必殺技発動
+                       @battle_anime_result = anime_pattern(4476)
+                   elsif @battle_anime_result == 3
+                       #光線系ダメージ
+                       damage_pattern = 41
+                       attackAnimeEnd = true
+                   end
+
                             when 151 # エネルギー波(若者)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -3194,6 +3545,96 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 22
                                     attackAnimeEnd = true
                                 end
+
+
+                    when 405, 410, 675 #デスボール
+                        if @battle_anime_result == 0
+                            #上から左下に移動
+                            @battle_anime_result = anime_pattern(31)
+                        elsif @battle_anime_result == 1
+                            #必殺技発動画面へ
+                            @tec_output_back_no = 1
+                            @chr_cutin_flag = true
+                            @battle_anime_result = anime_pattern(32)
+                        elsif @battle_anime_result == 2
+                            #必殺技発動
+                            @battle_anime_result = anime_pattern(2495)
+                        elsif @battle_anime_result == 3
+                            #光線系ダメージ
+                            damage_pattern = 41
+                            attackAnimeEnd = true
+                        end
+
+        #連続エネルギー波(全体)
+        when 13, 202, 212, 222, 337, 404, 412, 414, 416, 421, 425, 427, 431, 435, 439, 445, 450, 456, 466, 498, 503, 508, 513, 519, 525, 532, 537, 553, 561, 564, 566, 572, 578, 582, 590, 602, 606, 610, 614, 628, 629, 630, 682, 688, 696
+            if @all_attack_count >= 2 && @battle_anime_result == 0
+                @tec_output_back = true
+                @chr_cutin = true
+                @chr_cutin_flag = true
+                @chr_cutin_mirror_flag = true
+                #@tec_output_back_no = 1
+                @battle_anime_result = 2
+            end
+            if @battle_anime_result == 0
+                #上から左下に移動
+                @battle_anime_result = anime_pattern(31)
+            elsif @battle_anime_result == 1
+                #必殺技発動画面へ
+                @chr_cutin_flag = true
+                @battle_anime_result = anime_pattern(32)
+            elsif @battle_anime_result == 2
+                #必殺技発動
+                @battle_anime_result = anime_pattern(2494)
+            elsif @battle_anime_result == 3
+                #光線系ダメージ
+                damage_pattern = 23
+                attackAnimeEnd = true
+            end
+
+   when 403, 576, 584 #フリーザカッター
+       if @battle_anime_result == 0
+           #上から左下に移動
+           @battle_anime_result = anime_pattern(31)
+       elsif @battle_anime_result == 1
+           #必殺技発動画面へ
+           @tec_output_back_no = 3
+           @chr_cutin_flag = true
+           @battle_anime_result = anime_pattern(32)
+       elsif @battle_anime_result == 2
+           #必殺技発動
+           @battle_anime_result = anime_pattern(2493)
+       elsif @battle_anime_result == 3
+           #光線系ダメージ
+           damage_pattern = 23
+           attackAnimeEnd = true
+       end
+
+    when 402, 407, 575, 587 #フリーザ超能力(全体),ライチー
+        if @all_attack_count >= 2 && @battle_anime_result == 0
+            @tec_output_back = true
+            @chr_cutin = true
+            @chr_cutin_flag = true
+            @chr_cutin_mirror_flag = true
+            @tec_output_back_no = 1
+            @battle_anime_result = 2
+        end
+        if @battle_anime_result == 0
+            #上から左下に移動
+            @battle_anime_result = anime_pattern(31)
+        elsif @battle_anime_result == 1
+            #必殺技発動画面へ
+            @tec_output_back_no = 1
+            @chr_cutin_flag = true
+            @battle_anime_result = anime_pattern(32)
+        elsif @battle_anime_result == 2
+            #必殺技発動
+            @battle_anime_result = anime_pattern(2492)
+        elsif @battle_anime_result == 3
+            #光線系ダメージ
+            damage_pattern = 25
+            attackAnimeEnd = true
+        end
+
                             when 711 # 師弟の絆(ピッコロとゴハン)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -4588,22 +5029,45 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 42
                                     attackAnimeEnd = true
                                 end
-                            when 704 # (フリーザ3)殺されるべきなんだ
-                                if @battle_anime_result == 0
-                                    # 上から左下に移動
-                                    @battle_anime_result = anime_pattern(31)
-                                elsif @battle_anime_result == 1
-                                    # 必殺技発動画面へ
-                                    @chr_cutin_flag = true
-                                    @battle_anime_result = anime_pattern(32)
-                                elsif @battle_anime_result == 2
-                                    # 必殺技発動
-                                    @battle_anime_result = anime_pattern(1794)
-                                elsif @battle_anime_result == 3
-                                    # 光線系ダメージ
-                                    damage_pattern = 44
-                                    attackAnimeEnd = true
-                                end
+
+
+                   when 694 #(フリーザ3)殺されるべきなんだ
+                       if @battle_anime_result == 0
+                           # 上から左下に移動
+                           @battle_anime_result = anime_pattern(31)
+                       elsif @battle_anime_result == 1
+                           # 必殺技発動画面へ
+                           @chr_cutin_flag = true
+                           @battle_anime_result = anime_pattern(32)
+                       elsif @battle_anime_result == 2
+                           # 必殺技発動
+                           @battle_anime_result = anime_pattern(1794)
+                       elsif @battle_anime_result == 3
+                           # 光線系ダメージ
+                           damage_pattern = 44
+                           attackAnimeEnd = true
+                       end
+
+
+
+
+
+             when 468  #(フリーザG 弗利萨G)エネルギー波
+                 if @battle_anime_result == 0
+                     #上から左下に移動
+                     @battle_anime_result = anime_pattern(31)
+                 elsif @battle_anime_result == 1
+                     #必殺技発動画面へ
+                     @battle_anime_result = anime_pattern(32)
+                 elsif @battle_anime_result == 2
+                     #必殺技発動
+                     @battle_anime_result = anime_pattern(4338)
+                 elsif @battle_anime_result == 3
+                     #光線系ダメージ
+                     damage_pattern = 23
+                     attackAnimeEnd = true
+                 end
+
                             when 380 # (超ベジータ)エネルギー波
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -4658,22 +5122,7 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 41
                                     attackAnimeEnd = true
                                 end
-                            when 705 # (超ベジータ)スーパーギャリック砲
-                                if @battle_anime_result == 0
-                                    # 上から左下に移動
-                                    @battle_anime_result = anime_pattern(31)
-                                elsif @battle_anime_result == 1
-                                    # 必殺技発動画面へ
-                                    @chr_cutin_flag = true
-                                    @battle_anime_result = anime_pattern(32)
-                                elsif @battle_anime_result == 2
-                                    # 必殺技発動
-                                    @battle_anime_result = anime_pattern(1795)
-                                elsif @battle_anime_result == 3
-                                    # 光線系ダメージ
-                                    damage_pattern = 44
-                                    attackAnimeEnd = true
-                                end
+
                             when 384 # エネルギーは(ターレス
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -5169,6 +5618,23 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 22
                                     attackAnimeEnd = true
                                 end
+                when 979   #(超ベジータ)スーパーギャリック砲超级穿击炮
+                    if @battle_anime_result == 0
+                        #上から左下に移動
+                        @battle_anime_result = anime_pattern(31)
+                    elsif @battle_anime_result == 1
+                        #必殺技発動画面へ
+                        @chr_cutin_flag = true
+                        @battle_anime_result = anime_pattern(32)
+                    elsif @battle_anime_result == 2
+                        #必殺技発動
+                        @battle_anime_result = anime_pattern(1795)
+                    elsif @battle_anime_result == 3
+                        #光線系ダメージ
+                        damage_pattern = 44
+                        attackAnimeEnd = true
+                    end
+
                             when 671 # アンギラとメダマッチャ腕伸びるカエル攻撃
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -5231,6 +5697,48 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
+
+		   when 13 #複数エネルギー波
+         if @all_attack_count >= 2 && @battle_anime_result == 0
+             @tec_output_back = true
+             @chr_cutin = true
+             @chr_cutin_flag = true
+             @chr_cutin_mirror_flag = true
+             #@tec_output_back_no = 1
+             @battle_anime_result = 2
+         end
+         if @battle_anime_result == 0
+             #上から左下に移動
+             @battle_anime_result = anime_pattern(31)
+         elsif @battle_anime_result == 1
+             #必殺技発動画面へ
+             @chr_cutin_flag = true
+             @battle_anime_result = anime_pattern(32)
+         elsif @battle_anime_result == 2
+             #必殺技発動
+             @battle_anime_result = anime_pattern(2494)
+         elsif @battle_anime_result == 3
+             #光線系ダメージ
+             damage_pattern = 23
+             attackAnimeEnd = true
+         end
+
+
+             when 14 #太陽拳(Z3テンシンハン)太阳拳Z3 天津饭
+                 if @battle_anime_result == 0
+                     #上から左下に移動
+                     @battle_anime_result = anime_pattern(31)
+          elsif @battle_anime_result == 1
+              #必殺技発動画面へ
+              @battle_anime_result = anime_pattern(32)
+          elsif @battle_anime_result == 2
+              #必殺技発動
+              @battle_anime_result = anime_pattern(2191)
+          elsif @battle_anime_result == 3
+              #光線系ダメージ
+              damage_pattern = 76
+              attackAnimeEnd = true
+          end
                             when 15 # カメハメ波(悟空)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -5281,6 +5789,23 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
+                when 24 #気円斬
+                    if @battle_anime_result == 0
+                        #上から左下に移動
+                        @battle_anime_result = anime_pattern(31)
+                    elsif @battle_anime_result == 1
+                        #必殺技発動画面へ
+                        @chr_cutin_flag = true
+                        @tec_back_small = true
+                        @battle_anime_result = anime_pattern(32)
+                    elsif @battle_anime_result == 2
+                        #必殺技発動
+                        @battle_anime_result = anime_pattern(4294)
+                    elsif @battle_anime_result == 3
+                        #光線系ダメージ
+                        damage_pattern = 41
+                        attackAnimeEnd = true
+                    end
                             when 28 # 元気弾
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -5319,6 +5844,57 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 42
                                     attackAnimeEnd = true
                                 end
+              when 32 #气合炮S GOKU
+                  if @battle_anime_result == 0
+                      #上から左下に移動
+                      @battle_anime_result = anime_pattern(31)
+                  elsif @battle_anime_result == 1
+                      #必殺技発動画面へ
+                      @battle_anime_result = anime_pattern(32)
+                  elsif @battle_anime_result == 2
+                      #必殺技発動
+                      @battle_anime_result = anime_pattern(4201)
+                  elsif @battle_anime_result == 3
+                      #衝撃波系ダメージ
+                      damage_pattern = 22
+                      attackAnimeEnd = true
+                  end
+
+                when 33 #超气功波S GOKU
+                    if @battle_anime_result == 0
+                        #上から左下に移動
+                        @battle_anime_result = anime_pattern(31)
+                    elsif @battle_anime_result == 1
+                        #必殺技発動画面へ
+                        #@tec_back_small = true
+                        @chr_cutin_flag = true
+                        @battle_anime_result = anime_pattern(32)
+                    elsif @battle_anime_result == 2
+                        #必殺技発動
+                        @battle_anime_result = anime_pattern(4675)
+                    elsif @battle_anime_result == 3
+                        #光線系ダメージ
+                        damage_pattern = 41
+                        attackAnimeEnd = true
+                    end
+
+          when 34 #连气弹
+
+              if @battle_anime_result == 0
+                  #上から左下に移動
+                  @battle_anime_result = anime_pattern(31)
+              elsif @battle_anime_result == 1
+                  #必殺技発動画面へ
+                  @chr_cutin_flag = true
+                  @battle_anime_result = anime_pattern(32)
+              elsif @battle_anime_result == 2
+                  #必殺技発動
+                  @battle_anime_result = anime_pattern(4163)
+              elsif @battle_anime_result == 3
+                  #光線系ダメージ
+                  damage_pattern = 24
+                  attackAnimeEnd = true
+              end
                             when 36 # スーパーカメハメ波
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -5354,6 +5930,22 @@ module Scene_Db_Battle_Anime_attack_start
                                     # damage_pattern = 44
                                     attackAnimeEnd = true
                                 end
+
+	    when 38 #太陽拳(Z3)S GOKU
+         if @battle_anime_result == 0
+             #上から左下に移動
+             @battle_anime_result = anime_pattern(31)
+  elsif @battle_anime_result == 1
+      #必殺技発動画面へ
+      @battle_anime_result = anime_pattern(32)
+  elsif @battle_anime_result == 2
+      #必殺技発動
+      @battle_anime_result = anime_pattern(2190)
+  elsif @battle_anime_result == 3
+      #光線系ダメージ
+      damage_pattern = 76
+      attackAnimeEnd = true
+  end
                             when 39, 69, 143, 168, 195, 255 # 超サイヤ人変身
                                 @tec_tyousaiya = true
                                 if @battle_anime_result == 0
@@ -5475,6 +6067,74 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 41
                                     attackAnimeEnd = true
                                 end
+
+
+		   when 47 #魔激砲
+         if @battle_anime_result == 0
+             #上から左下に移動
+             @battle_anime_result = anime_pattern(31)
+             elsif @battle_anime_result == 1
+                 #必殺技発動画面へ
+                 @tec_back_small = true
+                 @chr_cutin_flag = true
+                 @battle_anime_result = anime_pattern(32)
+             elsif @battle_anime_result == 2
+                 #必殺技発動
+                 @battle_anime_result = anime_pattern(1208)  #1204
+             elsif @battle_anime_result == 3
+                 #光線系ダメージ
+                 damage_pattern = 41
+                 attackAnimeEnd = true
+             end
+
+      when 48 #魔空波
+          if @all_attack_count >= 2 && @battle_anime_result == 0
+              #@tec_output_back = false
+              @chr_cutin = true
+              @chr_cutin_flag = true
+              @chr_cutin_mirror_flag = true
+              @battle_anime_result = 2
+           end
+
+          if @battle_anime_result == 0
+              #上から左下に移動
+              @battle_anime_result = anime_pattern(31)
+          elsif @battle_anime_result == 1
+              #必殺技発動画面へ
+              @chr_cutin_flag = true
+              @tec_back_color = 1
+              @tec_output_back_no = 3
+              @battle_anime_result = anime_pattern(32)
+              @tec_output_back = false
+          elsif @battle_anime_result == 2
+              #必殺技発動
+              @battle_anime_result = anime_pattern(4682)
+          elsif @battle_anime_result == 3
+              #光線系ダメージ
+              damage_pattern = 41
+              attackAnimeEnd = true
+          end
+
+
+      when 51 #FP魔貫光殺砲(ピッコロ)
+          if @battle_anime_result == 0
+              #上から左下に移動
+              @battle_anime_result = anime_pattern(31)
+          elsif @battle_anime_result == 1
+              #必殺技発動画面へ
+              @chr_cutin_flag = true
+              @tec_back_color = 1
+              @tec_output_back_no = 3
+              @battle_anime_result = anime_pattern(32)
+              @tec_output_back = false
+          elsif @battle_anime_result == 2
+              #必殺技発動
+              @battle_anime_result = anime_pattern(2137)
+          elsif @battle_anime_result == 3
+              #光線系ダメージ
+              damage_pattern = 41
+              attackAnimeEnd = true
+          end
                             when 49 # 激烈光弾(ピッコロ)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -5525,6 +6185,24 @@ module Scene_Db_Battle_Anime_attack_start
                                         attackAnimeEnd = true
                                     end
                                 end
+
+		     when 52 #强力魔光砲(ピッコロ)
+           if @battle_anime_result == 0
+               #上から左下に移動
+               @battle_anime_result = anime_pattern(31)
+           elsif @battle_anime_result == 1
+               #必殺技発動画面へ
+               @chr_cutin_flag = true
+               @tec_back_small = true if $btl_progress >= 2
+               @battle_anime_result = anime_pattern(32)
+           elsif @battle_anime_result == 2
+               #必殺技発動
+               @battle_anime_result = anime_pattern(1137)
+           elsif @battle_anime_result == 3
+               #光線系ダメージ
+               damage_pattern = 23
+               attackAnimeEnd = true
+           end
                             when 56 # 魔光砲(悟飯)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -5571,6 +6249,42 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
+             when 59 #爆砕魔弾(悟飯)
+                 if @battle_anime_result == 0
+                     #上から左下に移動
+                     @battle_anime_result = anime_pattern(31)
+          elsif @battle_anime_result == 1
+              #必殺技発動画面へ
+              @tec_back_small = true
+              @chr_cutin_flag = true
+              @battle_anime_result = anime_pattern(32)
+          elsif @battle_anime_result == 2
+              #必殺技発動
+              @battle_anime_result = anime_pattern(1210) #1208  #1204
+          elsif @battle_anime_result == 3
+              #光線系ダメージ
+              damage_pattern = 41
+              attackAnimeEnd = true
+          end
+
+          when 60 #超魔弹
+              if @battle_anime_result == 0
+                  #上から左下に移動
+                  @battle_anime_result = anime_pattern(31)
+               elsif @battle_anime_result == 1
+                   #必殺技発動画面へ
+                   @chr_cutin_flag = true
+                   @tec_back_small = true
+                   @battle_anime_result = anime_pattern(32)
+               elsif @battle_anime_result == 2
+                   #必殺技発動
+                   @battle_anime_result = anime_pattern(4676)
+               elsif @battle_anime_result == 3
+                   #光線系ダメージ
+                   damage_pattern = 23
+                   attackAnimeEnd = true
+               end
+
                             when 62 # 爆裂ラッシュ(悟飯)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -5722,6 +6436,46 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 43
                                     attackAnimeEnd = true
                                 end
+               when 76 #MAXPOWER カメハメ波(クリリン)
+                   if @all_attack_count >= 2 && @battle_anime_result == 0
+                       @tec_output_back = true
+                       @chr_cutin = true
+                       @chr_cutin_flag = true
+                       @chr_cutin_mirror_flag = true
+                       @tec_output_back_no = 1
+                       @battle_anime_result = 2
+              end
+                   if @battle_anime_result == 0
+                       #上から左下に移動
+                       @battle_anime_result = anime_pattern(31)
+                   elsif @battle_anime_result == 1
+                       #必殺技発動画面へ
+                       @chr_cutin_flag = true
+                       @battle_anime_result = anime_pattern(32)
+                   elsif @battle_anime_result == 2
+                       #必殺技発動
+                       @battle_anime_result = anime_pattern(4677) #2163
+                   elsif @battle_anime_result == 3
+                       #光線系ダメージ
+                       damage_pattern = 24
+                       attackAnimeEnd = true
+                   end
+
+        when 77 #太阳拳 Z3小林
+            if @battle_anime_result == 0
+                #上から左下に移動
+                @battle_anime_result = anime_pattern(31)
+          elsif @battle_anime_result == 1
+              #必殺技発動画面へ
+              @battle_anime_result = anime_pattern(32)
+          elsif @battle_anime_result == 2
+              #必殺技発動
+              @battle_anime_result = anime_pattern(2189)
+          elsif @battle_anime_result == 3
+              #光線系ダメージ
+              damage_pattern = 76
+              attackAnimeEnd = true
+          end
                             when 81 # 狼牙風風拳
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -5747,7 +6501,7 @@ module Scene_Db_Battle_Anime_attack_start
                                     @battle_anime_result = anime_pattern(32)
                                 elsif @battle_anime_result == 2
                                     # 必殺技発動
-                                    @battle_anime_result = anime_pattern(1105)
+                                    @battle_anime_result = anime_pattern(1175)
                                 elsif @battle_anime_result == 3
                                     # 光線系ダメージ
                                     damage_pattern = 23
@@ -5811,6 +6565,42 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 43
                                     attackAnimeEnd = true
                                 end
+               when 86 #究极狼牙風風拳(ヤムチャ)
+                   if @battle_anime_result == 0
+                       #上から左下に移動
+                       @battle_anime_result = anime_pattern(31)
+                   elsif @battle_anime_result == 1
+                       #必殺技発動画面へ
+                       @tec_back_small = true
+                       @chr_cutin_flag = true
+                       @battle_anime_result = anime_pattern(32)
+                   elsif @battle_anime_result == 2
+                       #必殺技発動
+                       @battle_anime_result = anime_pattern(4342)
+                   elsif @battle_anime_result == 3
+                       #光線系ダメージ
+                       damage_pattern = 43
+                       attackAnimeEnd = true
+                   end
+
+         when 87 #ダブル繰気弾 DOUBLE  (ヤムチャ)
+             if @battle_anime_result == 0
+                 #上から左下に移動
+                 @battle_anime_result = anime_pattern(31)
+             elsif @battle_anime_result == 1
+                 #必殺技発動画面へ
+                 @chr_cutin_flag = true
+                 @tec_back_small = true
+                 @battle_anime_result = anime_pattern(32)
+             elsif @battle_anime_result == 2
+                 #必殺技発動
+                 @battle_anime_result = anime_pattern(4416)
+             elsif @battle_anime_result == 3
+                 #光線系ダメージ
+                 damage_pattern = 23
+                 attackAnimeEnd = true
+             end
+
                             when 91 # エネルギー波(テンシンハン)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -5858,6 +6648,14 @@ module Scene_Db_Battle_Anime_attack_start
                                     attackAnimeEnd = true
                                 end
                             when 94 # 四身の拳気功砲(テンシンハン)
+                                if @all_attack_count >= 2 && @battle_anime_result == 0
+                                    @tec_output_back = true
+                                    @chr_cutin = true
+                                    @chr_cutin_flag = true
+                                    @chr_cutin_mirror_flag = true
+                                    @tec_output_back_no = 1
+                                    @battle_anime_result = 3
+                              end
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
                                     @battle_anime_result = anime_pattern(31)
@@ -5889,6 +6687,56 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 47
                                     attackAnimeEnd = true
                                 end
+                 when 96 #真太阳拳(テンシンハン)
+                     if @all_attack_count >= 2 && @battle_anime_result == 0
+                         @tec_output_back = true
+                         @chr_cutin = true
+                         @chr_cutin_flag = true
+                         @chr_cutin_mirror_flag = true
+                         @tec_output_back_no = 1
+                         @battle_anime_result = 3
+                     end
+                     if @battle_anime_result == 0
+                         #上から左下に移動
+                         @battle_anime_result = anime_pattern(31)
+                     elsif @battle_anime_result == 1
+                         #必殺技発動画面へ
+                         @chr_cutin_flag = true
+                         @battle_anime_result = anime_pattern(32)
+                     elsif @battle_anime_result == 2
+                         #必殺技発動
+                         @battle_anime_result = anime_pattern(2196)
+                     elsif @battle_anime_result == 3
+                         #光線系ダメージ
+                         damage_pattern = 47
+                         attackAnimeEnd = true
+                     end
+
+          when 97 #百万気功砲(テンシンハン)
+              if @all_attack_count >= 2 && @battle_anime_result == 0
+                  @tec_output_back = true
+                  @chr_cutin = true
+                  @chr_cutin_flag = true
+                  @chr_cutin_mirror_flag = true
+                  @tec_output_back_no = 1
+                  @battle_anime_result = 3
+                 end
+
+              if @battle_anime_result == 0
+                  #上から左下に移動
+                  @battle_anime_result = anime_pattern(31)
+              elsif @battle_anime_result == 1
+                  #必殺技発動画面へ
+                  @chr_cutin_flag = true
+                  @battle_anime_result = anime_pattern(32)
+              elsif @battle_anime_result == 2
+                  #必殺技発動
+                  @battle_anime_result = anime_pattern(4678) #2163
+              elsif @battle_anime_result == 3
+                  #光線系ダメージ
+                  damage_pattern = 24
+                  attackAnimeEnd = true
+              end
                             when 101 # どどんぱ
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -5978,6 +6826,52 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 41
                                     attackAnimeEnd = true
                                 end
+
+          when 106 #PSYCHO BEAM
+              if @all_attack_count >= 2 && @battle_anime_result == 0
+                  @tec_output_back = true
+                  @chr_cutin = true
+                  @chr_cutin_flag = true
+                  @chr_cutin_mirror_flag = true
+                  @tec_output_back_no = 1
+                  @battle_anime_result = 3
+               end
+
+              if @battle_anime_result == 0
+                  #上から左下に移動
+                  @battle_anime_result = anime_pattern(31)
+              elsif @battle_anime_result == 1
+                  #必殺技発動画面へ
+                  @chr_cutin_flag = true
+                  @battle_anime_result = anime_pattern(32)
+              elsif @battle_anime_result == 2
+                  #必殺技発動
+                  @battle_anime_result = anime_pattern(4680)
+              elsif @battle_anime_result == 3
+                  #光線系ダメージ
+                  damage_pattern = 23
+                  attackAnimeEnd = true
+              end
+
+           when 107 #自爆 饺子
+               if @battle_anime_result == 0
+                   #上から左下に移動
+                   @battle_anime_result = anime_pattern(31)
+               elsif @battle_anime_result == 1
+                   #必殺技発動画面へ
+                   @battle_anime_result = anime_pattern(32)
+               elsif @battle_anime_result == 2
+                   #必殺技発動
+                   @chr_cutin_flag = true
+                   @battle_anime_result = anime_pattern(4681) #193
+               elsif @battle_anime_result == 3
+                   #光線系ダメージ
+                   damage_pattern = 23
+                   attackAnimeEnd = true
+                end
+
+
+
                             when 111 # 衝撃波
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -6065,6 +6959,32 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 22
                                     attackAnimeEnd = true
                                 end
+               when 120 #剑气波 弥次郎兵卫
+                   if @all_attack_count >= 2 && @battle_anime_result == 0
+                       @tec_output_back = true
+                       @chr_cutin = true
+                       @chr_cutin_flag = true
+                       @chr_cutin_mirror_flag = true
+                       @tec_back_small = true
+                       @battle_anime_result = 2
+                 end
+                   if @battle_anime_result == 0
+                       #上から左下に移動
+                       @battle_anime_result = anime_pattern(31)
+                   elsif @battle_anime_result == 1
+                       #必殺技発動画面へ
+                       @chr_cutin_flag = true
+                       @tec_back_small = true
+                       @battle_anime_result = anime_pattern(32)
+                   elsif @battle_anime_result == 2
+                       #必殺技発動
+                       @battle_anime_result = anime_pattern(4683)
+                   elsif @battle_anime_result == 3
+                       #光線系ダメージ
+                       damage_pattern = 23
+                       attackAnimeEnd = true
+                   end
+
                             when 131 # エネルギーは
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -6080,6 +7000,31 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 23
                                     attackAnimeEnd = true
                                 end
+                 when 132 #複数エネルギー波(ベジータ)
+                     if @all_attack_count >= 2 && @battle_anime_result == 0
+                         @tec_output_back = true
+                         @chr_cutin = true
+                         @chr_cutin_flag = true
+                         @chr_cutin_mirror_flag = true
+                         #@tec_output_back_no = 1
+                         @battle_anime_result = 2
+                     end
+                     if @battle_anime_result == 0
+                         #上から左下に移動
+                         @battle_anime_result = anime_pattern(31)
+                     elsif @battle_anime_result == 1
+                         #必殺技発動画面へ
+                         @chr_cutin_flag = true
+                         @battle_anime_result = anime_pattern(32)
+                     elsif @battle_anime_result == 2
+                         #必殺技発動
+                         @battle_anime_result = anime_pattern(2494)
+                     elsif @battle_anime_result == 3
+                         #光線系ダメージ
+                         damage_pattern = 23
+                         attackAnimeEnd = true
+                     end
+
                             when 133 # 爆発波(ベジータ)
                                 if @all_attack_count >= 2 && @battle_anime_result == 0
                                     @tec_output_back = false
@@ -6136,6 +7081,75 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 41
                                     attackAnimeEnd = true
                                 end
+               when 136 #衝撃波(ベジータ) 粉碎指
+                   if @battle_anime_result == 0
+                       #上から左下に移動
+                       @battle_anime_result = anime_pattern(31)
+                   elsif @battle_anime_result == 1
+                       #必殺技発動画面へ
+                       @battle_anime_result = anime_pattern(32)
+                   elsif @battle_anime_result == 2
+                       #必殺技発動
+                       @battle_anime_result = anime_pattern(4101)
+                   elsif @battle_anime_result == 3
+                       #衝撃波系ダメージ
+                       damage_pattern = 22
+                       attackAnimeEnd = true
+                   end
+
+            when 137 #ギガブラスター(ベジータ)
+                if @battle_anime_result == 0
+                    #上から左下に移動
+                    @battle_anime_result = anime_pattern(31)
+                elsif @battle_anime_result == 1
+                    #必殺技発動画面へ
+                    @chr_cutin_flag = true
+                    @tec_back_color = 1
+                    @battle_anime_result = anime_pattern(32)
+                elsif @battle_anime_result == 2
+                    #必殺技発動
+                    @battle_anime_result = anime_pattern(2228)
+                elsif @battle_anime_result == 3
+                    #光線系ダメージ
+                    damage_pattern = 42
+                    attackAnimeEnd = true
+                end
+
+
+
+               when 138 #フォトンボンバー(ベジータ)
+
+                   if @battle_anime_result == 0
+                       #上から左下に移動
+                       @battle_anime_result = anime_pattern(31)
+                   elsif @battle_anime_result == 1
+                       #必殺技発動画面へ
+                       @battle_anime_result = anime_pattern(32)
+                   elsif @battle_anime_result == 2
+                       #必殺技発動
+                       @battle_anime_result = anime_pattern(4417)
+                   elsif @battle_anime_result == 3
+                       #光線系ダメージ
+                       damage_pattern = 23
+                       attackAnimeEnd = true
+                    end
+
+             when 139 #気円斬(ベジータ)
+
+                 if @battle_anime_result == 0
+                     #上から左下に移動
+                     @battle_anime_result = anime_pattern(31)
+                 elsif @battle_anime_result == 1
+                     #必殺技発動画面へ
+                     @battle_anime_result = anime_pattern(32)
+                 elsif @battle_anime_result == 2
+                     #必殺技発動
+                     @battle_anime_result = anime_pattern(4418)
+                 elsif @battle_anime_result == 3
+                     #光線系ダメージ
+                     damage_pattern = 23
+                     attackAnimeEnd = true
+                 end
                             when 140 # ファイナルフラッシュ
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -6381,21 +7395,21 @@ module Scene_Db_Battle_Anime_attack_start
                                     attackAnimeEnd = true
                                 end
 
-                            when 182, 417, 510 # カタナ攻撃(トランクス、サウザー、ゴクア)
-                                if @battle_anime_result == 0
-                                    # 上から左下に移動
-                                    @battle_anime_result = anime_pattern(31)
-                                elsif @battle_anime_result == 1
-                                    # 必殺技発動画面へ
-                                    @battle_anime_result = anime_pattern(32)
-                                elsif @battle_anime_result == 2
-                                    # 必殺技発動
-                                    @battle_anime_result = anime_pattern(2272)
-                                elsif @battle_anime_result == 3
-                                    # 光線系ダメージ
-                                    damage_pattern = 22
-                                    attackAnimeEnd = true
-                                end
+          when 54, 182, 417, 510 #カタナ攻撃(トランクス、サウザー、ゴクア)
+              if @battle_anime_result == 0
+                  # 上から左下に移動
+                  @battle_anime_result = anime_pattern(31)
+              elsif @battle_anime_result == 1
+                  # 必殺技発動画面へ
+                  @battle_anime_result = anime_pattern(32)
+              elsif @battle_anime_result == 2
+                  # 必殺技発動
+                  @battle_anime_result = anime_pattern(2272)
+              elsif @battle_anime_result == 3
+                  # 光線系ダメージ
+                  damage_pattern = 22
+                  attackAnimeEnd = true
+              end
                             when 183 # 爆発波(トランクス)
                                 if @all_attack_count >= 2 && @battle_anime_result == 0
                                     @tec_output_back = false
@@ -6491,6 +7505,24 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 72
                                     attackAnimeEnd = true
                                 end
+              when 190    #ゴッドブレイカー GOD BREAKER
+
+                  if @battle_anime_result == 0
+                      #上から左下に移動
+                      @battle_anime_result = anime_pattern(31)
+                elsif @battle_anime_result == 1
+                    #必殺技発動画面へ
+                    #@tec_back_small = true
+                    @chr_cutin_flag = true
+                    @battle_anime_result = anime_pattern(32)
+                elsif @battle_anime_result == 2
+                    #必殺技発動
+                    @battle_anime_result = anime_pattern(4679)
+                elsif @battle_anime_result == 3
+                    #光線系ダメージ
+                    damage_pattern = 41
+                    attackAnimeEnd = true
+                end
                             when 191 # フィニッシュバスター
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -6592,6 +7624,30 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 42
                                     attackAnimeEnd = true
                                 end
+              when 226 #FPヘルズフラッシュ(16号 HELL  地狱燃烧炮
+                  if @all_attack_count >= 2 && @battle_anime_result == 0
+                      @tec_output_back = false
+                      @chr_cutin = true
+                      @chr_cutin_flag = true
+                      @chr_cutin_mirror_flag = true
+                      @battle_anime_result = 2
+                 end
+                  if @battle_anime_result == 0
+                      #上から左下に移動
+                      @battle_anime_result = anime_pattern(31)
+                  elsif @battle_anime_result == 1
+                      #必殺技発動画面へ
+                      @chr_cutin_flag = true
+                      @battle_anime_result = anime_pattern(32)
+                  elsif @battle_anime_result == 2
+                      #必殺技発動
+                      @battle_anime_result = anime_pattern(2316)  #2316
+                  elsif @battle_anime_result == 3
+                      #光線系ダメージ
+                      damage_pattern = 42
+                      attackAnimeEnd = true
+                  end
+
                             when 227 # 自爆(16号
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -6608,6 +7664,25 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 0
                                     attackAnimeEnd = true
                                 end
+
+
+         when 228 #16号摔投
+             if @battle_anime_result == 0
+                 #上から左下に移動
+                 @battle_anime_result = anime_pattern(31)
+             elsif @battle_anime_result == 1
+                 #必殺技発動画面へ
+                 @battle_anime_result = anime_pattern(32)
+             elsif @battle_anime_result == 2
+                 #必殺技発動
+                 @battle_anime_result = anime_pattern(5002)
+             elsif @battle_anime_result == 3
+                 #光線系ダメージ
+                 damage_pattern = 71
+                 attackAnimeEnd = true
+             end
+
+
                             when 235 # 残像拳
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -10067,6 +11142,72 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 44
                                     attackAnimeEnd = true
                                 end
+
+
+
+         when 977 #拉蒂斯 贯光线 貫光線
+             if @battle_anime_result == 0
+                 #上から左下に移動
+                 @battle_anime_result = anime_pattern(31)
+             elsif @battle_anime_result == 1
+                 #必殺技発動画面へ
+                 @battle_anime_result = anime_pattern(32)
+             elsif @battle_anime_result == 2
+                 #必殺技発動
+                 @battle_anime_result = anime_pattern(4431)
+             elsif @battle_anime_result == 3
+                 #光線系ダメージ
+
+                 damage_pattern = 23
+                 attackAnimeEnd = true
+             end
+
+            when 982 # 拉蒂斯大招 ビッグバンアタック
+
+                if @all_attack_count >= 2 && @battle_anime_result == 0
+                    @tec_output_back = true
+                    @chr_cutin = true
+                    @chr_cutin_flag = true
+                    @chr_cutin_mirror_flag = true
+                    #@tec_output_back_no = 1
+                    @battle_anime_result = 2
+        end
+                if @battle_anime_result == 0
+                    #上から左下に移動
+                    @battle_anime_result = anime_pattern(31)
+                elsif @battle_anime_result == 1
+                    #必殺技発動画面へ
+                    @tec_output_back_no = 0
+                    @tec_back_color = 1
+                    @chr_cutin_flag = true
+                    @battle_anime_result = anime_pattern(32)
+                elsif @battle_anime_result == 2
+                    #必殺技発動
+                    @battle_anime_result = anime_pattern(4537)
+                elsif @battle_anime_result == 3
+                    #光線系ダメージ
+                    damage_pattern = 41
+                    attackAnimeEnd = true
+                end
+
+            when 983 #超级拉蒂斯大招
+                if @battle_anime_result == 0
+                    #上から左下に移動
+                    @battle_anime_result = anime_pattern(31)
+                elsif @battle_anime_result == 1
+                    #必殺技発動画面へ
+                    @chr_cutin_flag = true
+                    #@tec_output_back_no = 1
+                    @battle_anime_result = anime_pattern(32)
+                elsif @battle_anime_result == 2
+                    #必殺技発動
+                    @battle_anime_result = anime_pattern(4580)
+                elsif @battle_anime_result == 3
+                    #光線系ダメージ
+                    damage_pattern = 42
+                    attackAnimeEnd = true
+                end
+
                             when 311 # 痺れ液(カイワレマン)
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -11247,23 +12388,23 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 42
                                     attackAnimeEnd = true
                                 end
-                            when 704 # (フリーザ3)殺されるべきなんだ
-                                if @battle_anime_result == 0
-                                    # 上から左下に移動
-                                    @battle_anime_result = anime_pattern(31)
-                                elsif @battle_anime_result == 1
-                                    # 必殺技発動画面へ
-                                    @tec_back_small = true
-                                    @chr_cutin_flag = true
-                                    @battle_anime_result = anime_pattern(32)
-                                elsif @battle_anime_result == 2
-                                    # 必殺技発動
-                                    @battle_anime_result = anime_pattern(1794)
-                                elsif @battle_anime_result == 3
-                                    # 光線系ダメージ
-                                    damage_pattern = 44
-                                    attackAnimeEnd = true
-                                end
+          when 694 #(フリーザ3)殺されるべきなんだ
+              if @battle_anime_result == 0
+                  # 上から左下に移動
+                  @battle_anime_result = anime_pattern(31)
+              elsif @battle_anime_result == 1
+                  # 必殺技発動画面へ
+                  @tec_back_small = true
+                  @chr_cutin_flag = true
+                  @battle_anime_result = anime_pattern(32)
+              elsif @battle_anime_result == 2
+                  # 必殺技発動
+                  @battle_anime_result = anime_pattern(1794)
+              elsif @battle_anime_result == 3
+                  # 光線系ダメージ
+                  damage_pattern = 44
+                  attackAnimeEnd = true
+              end
                             when 380 # (超ベジータ)エネルギー波
                                 if @battle_anime_result == 0
                                     # 上から左下に移動
@@ -11318,22 +12459,107 @@ module Scene_Db_Battle_Anime_attack_start
                                     damage_pattern = 41
                                     attackAnimeEnd = true
                                 end
-                            when 705 # (超ベジータ)スーパーギャリック砲
-                                if @battle_anime_result == 0
-                                    # 上から左下に移動
-                                    @battle_anime_result = anime_pattern(31)
-                                elsif @battle_anime_result == 1
-                                    # 必殺技発動画面へ
-                                    @chr_cutin_flag = true
-                                    @battle_anime_result = anime_pattern(32)
-                                elsif @battle_anime_result == 2
-                                    # 必殺技発動
-                                    @battle_anime_result = anime_pattern(1795)
-                                elsif @battle_anime_result == 3
-                                    # 光線系ダメージ
-                                    damage_pattern = 44
-                                    attackAnimeEnd = true
-                                end
+          when 979 #(超ベジータ)スーパーギャリック砲
+              if @battle_anime_result == 0
+                  #上から左下に移動
+                  @battle_anime_result = anime_pattern(31)
+              elsif @battle_anime_result == 1
+                  #必殺技発動画面へ
+                  @chr_cutin_flag = true
+                  @battle_anime_result = anime_pattern(32)
+              elsif @battle_anime_result == 2
+                  #必殺技発動
+                  @battle_anime_result = anime_pattern(1795)
+              elsif @battle_anime_result == 3
+                  #光線系ダメージ
+                  damage_pattern = 44
+                  attackAnimeEnd = true
+              end
+
+                when 978 #拉蒂斯超赛
+                    @ene_tec_oozaru = true
+
+                    if @battle_anime_result == 0
+                        #上から左下に移動
+                        @battle_anime_result = anime_pattern(31)
+                    elsif @battle_anime_result == 1
+                        #必殺技発動画面へ
+                        @chr_cutin_flag = true
+                        @tec_back_small = true
+                        @battle_anime_result = anime_pattern(32)
+                    elsif @battle_anime_result == 2
+                        #必殺技発動
+                        @battle_anime_result = anime_pattern(3745)
+                    elsif @battle_anime_result == 3
+                        #光線系ダメージ
+                        #damage_pattern = 26
+                        attackAnimeEnd = true
+                    end
+
+          when 979   #(超ベジータ)スーパーギャリック砲超级穿击炮
+              if @battle_anime_result == 0
+                  # 上から左下に移動
+                  @battle_anime_result = anime_pattern(31)
+              elsif @battle_anime_result == 1
+                  # 必殺技発動画面へ
+                  @chr_cutin_flag = true
+                  @battle_anime_result = anime_pattern(32)
+              elsif @battle_anime_result == 2
+                  # 必殺技発動
+                  @battle_anime_result = anime_pattern(1795)
+              elsif @battle_anime_result == 3
+                  # 光線系ダメージ
+                  damage_pattern = 44
+                  attackAnimeEnd = true
+              end
+
+
+           when 980 #死亡弹 通用合体13号)SSデッドリィボンバー
+               if @battle_anime_result == 0
+                   #上から左下に移動
+                   @battle_anime_result = anime_pattern(31)
+               elsif @battle_anime_result == 1
+                   #必殺技発動画面へ
+                   @chr_cutin_flag = true
+                   @tec_output_back_no = 1
+                   @battle_anime_result = anime_pattern(32)
+               elsif @battle_anime_result == 2
+                   #必殺技発動
+                   @battle_anime_result = anime_pattern(4785)
+               elsif @battle_anime_result == 3
+                   #光線系ダメージ
+                   damage_pattern = 41
+                   attackAnimeEnd = true
+               end
+          when 981 #爆発波(弗利萨
+              if @all_attack_count >= 2 && @battle_anime_result == 0
+                  @tec_output_back = false
+                  @chr_cutin = true
+                  @chr_cutin_flag = true
+                  @chr_cutin_mirror_flag = true
+                  @tec_back_small = true
+                  @battle_anime_result = 2
+              end
+              if @battle_anime_result == 0
+                  #上から左下に移動
+                  @battle_anime_result = anime_pattern(31)
+              elsif @battle_anime_result == 1
+                  #必殺技発動画面へ
+                  @chr_cutin_flag = true
+                  @tec_back_small = true
+                  @battle_anime_result = anime_pattern(32)
+              elsif @battle_anime_result == 2
+                  #必殺技発動
+                  @battle_anime_result = anime_pattern(4689)
+              elsif @battle_anime_result == 3
+                  #光線系ダメージ
+                  damage_pattern = 23
+                  attackAnimeEnd = true
+              end
+
+
+
+
                             when 408, 452, 488, 539, 568, 570, 573, 586, 591 # 爆発波(クウラ,セル完全体,合体13号,ブロリー,ターレス系,スラッグ系,ゴーストライチー,ハッチヒャック
                                 if @all_attack_count >= 2 && @battle_anime_result == 0
                                     @tec_output_back = false
@@ -12937,20 +14163,17 @@ module Scene_Db_Battle_Anime_attack_start
             # output_runskill 1 #引数1で攻撃と判断
 
             output_cutin(attackPattern)
-            # if @battle_anime_frame == attackAnimeEnd + 30
-            #  attackAnimeEnd = true
-            # end
             # output_back attackPattern                       # 背景更新
             # @back_window.update
             # Graphics.update                   # ゲーム画面を更新
-            if attackAnimeEnd != true
 
+            if attackAnimeEnd != true
                 if $battle_test_flag == true
                     text = "フレーム数：" + @battle_anime_frame.to_s
                     @back_window.contents.draw_text(15, 25, 300, 28, text)
                 end
 
-                Graphics.update # ゲーム画面を更新
+                Graphics.update()  # ゲーム画面を更新
 
                 if @anime_frame_format == false
                     @battle_anime_frame += 1
@@ -12990,28 +14213,28 @@ module Scene_Db_Battle_Anime_attack_start
             attackAnimeEnd = true
         end
 
+        # hit or miss
         # ヒットか回避か
         begin
-            input_fast_fps
-            input_battle_fast_fps if $game_variables[96] == 0
-            @back_window.contents.clear
-            output_back(attackPattern) # 背景更新
+            input_fast_fps()
+            input_battle_fast_fps() if $game_variables[96] == 0
+            @back_window.contents.clear()
+            output_back(attackPattern)  # 背景更新
+
             # 戦闘途中終了
-            Input.update
+            Input.update()
             # 周回プレイ時はイベント戦闘や初回閃きも回避できるように
             if (Input.trigger?(Input::B) || (Input.press?(Input::R) and Input.press?(Input::B))) && $game_variables[96] == 0 && @new_tecspark_flag == false && scombo_new_flag == false || ($game_switches[860] == true && $game_switches[883] == true && scombo_new_flag == false) && (Input.trigger?(Input::B) || (Input.press?(Input::R) and Input.press?(Input::B)))
                 func_attack_anime_end()
                 attackAnimeEnd = true
                 return
             end
+
             if @battle_anime_result == 0
                 if @attack_hit == true
-
                     # 爆発変化させる場合(仮)
                     # if @anime_event == false && $game_switches[463] == true
-
                     # end
-
                     @battle_anime_result = anime_pattern(damage_pattern)
                 else
                     @battle_anime_result = anime_pattern(avoid_anime_no)
@@ -13019,8 +14242,9 @@ module Scene_Db_Battle_Anime_attack_start
             else
                 attackAnimeEnd = true
             end
+
             if @output_battle_damage_flag == true
-                output_battle_damage if $game_variables[96] == 0
+                output_battle_damage() if $game_variables[96] == 0
             end
             # output_back attackPattern                       # 背景更新
 
